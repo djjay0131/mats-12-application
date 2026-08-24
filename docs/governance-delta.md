@@ -109,18 +109,28 @@ deny docs/application/**
 
 ## Platform Enforcement Reality
 
-- Branch protection on `main`: **not yet configured** — no GitHub remote
-  exists at time of establishment. To be recorded honestly once the remote
-  is created.
-- Required status checks: unavailable (no remote).
-- Token/identity model: single owner (`djjay0131`); all agent sessions
-  authenticate as the owner. Steward/auditor/architect are procedural
-  roles, not distinct identities.
-- Hardening path: create the remote, then apply
-  `agentic-governance/docs/branch-protection.md`. Blocked only on the
-  remote existing. **Given the 13-day deadline, convention-only enforcement
-  is accepted deliberately for this repo** — the cost of a blocked merge
-  during the sprint exceeds the benefit.
+Verified against the live API on 2026-08-24, not assumed.
+
+- **Branch protection on `main`: UNAVAILABLE.**
+  `GET /repos/djjay0131/mats-12-application/branches/main/protection` returns
+  **403** — *"Upgrade to GitHub Pro or make this repository public to enable
+  this feature."* Branch protection cannot be configured on a private repo
+  on this plan. This is the case ADR-0001 anticipated, and it is recorded
+  here rather than left aspirational.
+- **Required status checks: UNAVAILABLE** — same 403, same cause.
+- **Token/identity model:** single owner (`djjay0131`). Pushes during this
+  project may originate from a fine-grained PAT scoped to this repo alone.
+  Chief Architect, Chief Reviewer, Repository Steward and Chief Product
+  Officer are **procedural roles, not distinct identities** — nothing at the
+  platform layer distinguishes them.
+- **What is actually enforced:** nothing. Every control in this repo is
+  convention, held by the operator and by `scripts/conformance-check.mjs`.
+  The Issue → branch → PR → review → merge flow is honoured, not imposed.
+- **Hardening path:** make the repo public, or upgrade to GitHub Pro. Both
+  are rejected for this project — public would expose an in-flight
+  application in a process where originality is graded, and a paid upgrade
+  buys enforcement that is theatre on a single-reviewer repo. Revisit after
+  2026-09-04.
 
 ## Steward Activation Status
 
