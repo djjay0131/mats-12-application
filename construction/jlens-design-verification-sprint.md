@@ -17,6 +17,17 @@ This sprint must answer three questions:
 
 This is a **verification sprint**, not the main experiment. Do not scale the dataset, tune for positive results, or draft application claims.
 
+## Research-process interpretation
+
+Use `construction/neel-research-process-learning-overlay.md` as an operative companion to this document. In Neel Nanda's framework, this is an **Explore → Understand transition sprint**, not verification of the scientific hypothesis:
+
+- V1 explores the tool, positive control, and practical failure modes.
+- V2 explores the operational meaning of J-space and rival explanations for apparent effects.
+- V3 determines whether we now have explicit competing hypotheses and a tractable experiment that distinguishes them.
+- GO means the project is ready to enter Understanding. It does not mean relational binding has been found in J-space.
+
+For each counted hour, use `llm/memory_bank/research-learning-log-template.md`: Jason records the stage, prediction, strongest alternative, and expected agent/mentor advice before execution; Jason interprets the result before the agent gives feedback. Reserve the last five minutes for CONTINUE, CHANGE LOOP, RETURN TO EXPLORE, or PIVOT CANDIDATE. Only the last option changes the candidate, and it requires a failed load-bearing assumption with no bounded same-question fallback.
+
 ## Time accounting
 
 Conservative interpretation of Neel's rules:
@@ -239,4 +250,3 @@ Jason must personally verify before accepting GO:
 - [ ] At least four paired prompts were read in both variants.
 - [ ] The final claim is not stronger than the observation design.
 - [ ] Counted time is recorded.
-
