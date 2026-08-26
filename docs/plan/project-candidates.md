@@ -199,27 +199,191 @@ with C1** (same harness, same rollouts).
 
 ---
 
+## C6 — Does J-Lens recover relational binding, or only a bag of concepts?
+
+**Origin.** Jason's own idea, developed 2026-08-24. Full specification in
+`docs/adr/0004-proposed-jlens-relational-binding-candidate.md`,
+`docs/plan/jlens-relational-binding-experiment-design.md`, and
+`docs/research/jlens-project-research-and-positioning.md`.
+
+**Question.** When two prompts contain the same entities and concepts but
+assign them different relational roles, does J-Lens identify the correct
+hidden intermediate — and does changing that representation causally change
+the model's answer?
+
+**Why it's open.** The J-Lens paper names the limitation itself: a readout
+listing `spider`, `legs`, `eight` shows the right concepts without showing
+which entity fills which role. Nobody has quantified how bad that is against
+a matched alternative.
+
+**Neel's doc, Improved Interpretability Methods §5, verbatim:** *"From a
+scientific perspective, what is J-Lens actually doing? How much better is it
+really than logit lens and tuned lens and why? How much does it hallucinate?"*
+and *"Being single token is a crippling limitation."* He also names J-Lens in
+his summary of what his interests have become: *"building and better
+understanding generally useful interp techniques (e.g. J-Lens)."* Three of his
+four stated J-Lens questions are tested in one controlled setting.
+
+**Experiment.** Synthetic paired two-hop prompts — identical vocabulary,
+swapped bindings (`Arin lives in Luma` / `Arin lives in Nori`). Score the
+correct intermediate against the *pair's own alternative*, not against
+arbitrary tokens. 10 development pairs, 40 held-out, ≥4 relation templates.
+Primary metric: pairwise binding success, requiring the ordering to reverse
+correctly in both variants. Causal arm: swap the J-space coordinate toward
+the counterfactual intermediate, versus a norm-matched random direction.
+
+**Baselines/controls — eight of them.** Logit lens through the same code path
+(Jacobian disabled); direct prompting; pair-alternative comparison; relation
+deletion; question truncation; label permutation; norm-matched random causal
+direction; prompt-template robustness. This is the strongest control
+structure of any candidate here.
+
+**✅ ARC environment verified 2026-08-24 — the substrate risk is retired.**
+Job 550088 on `falcon1`, L40S: `Qwen/Qwen3.5-4B` and the
+`neuronpedia/jacobian-lens` lens (`qwen-n1000`, commit `16a01f3`, 406 MB)
+both staged to scratch. `COMPAT_ASSERTIONS: PASS`, `LAYOUT_ASSERTIONS: PASS`,
+reference suite 32/32 passing, model load 13.6 s, **peak GPU 8.51 GB of
+47.7 GB**. Lens fit against exactly this model; `d_model` 2560 and
+`max(source_layers)=30 < 32` both check out. Compute is not a constraint.
+
+| Fit | Orig | Feas | Base | Neg | Total |
+|---|---|---|---|---|---|
+| 5 | 5 | 4 | 5 | 5 | **24/25** |
+
+**Risks.**
+
+- ⚠️ **B2 — the reference implementation ships no sparse non-negative J-space
+  reconstruction.** The pinned commit exposes `fit`/`apply`/`transport`/
+  visualisation only; no NNLS, sparse coding, dictionary or reconstruction
+  routine. The causal arm (H3) depends on it. Implementing the paper's
+  decomposition is exactly the open-ended work the sprint forbids, and
+  faking it invites the design's own FAIL condition — *"'J-space' is
+  implemented as an arbitrary top-token projection with no correspondence to
+  the paper's sparse construction."* **This is the most likely cause of a
+  NO-GO on the causal arm.** It degrades gracefully: Hour 11 freezes causal
+  work as unavailable and reallocates to stronger passive controls. A scope
+  reduction, not a topic pivot.
+- ⚠️ **B3 — no published shuffled-corpus control lens exists.** All 40+
+  Neuronpedia lenses are fit on `Salesforce/wikitext`. The negative control
+  falls back to label permutation plus norm-matched random directions —
+  defensible, and it matches Controls 6 and 7, but weaker than hoped.
+- ⚠️ **B4 — tokenizer/vocab width mismatch.** `len(tokenizer)=248077` against
+  a 248320-wide unembedding: ~243 ids have no tokenizer string. Rank metrics
+  must state which width they rank over.
+- ⚠️ **Crowding.** Neel gave J-Lens a full section, six sub-questions, and a
+  bolded **"Key resource"** link to the open-source lenses. Expect many
+  J-Lens applications. The relational-binding framing with matched
+  counterfactual pairs is specific enough to stand apart from generic "what
+  can you do with J-Lens" exploration — but the framing has to do that work.
+- Queue latency ~23 min on L40S with 17/20 nodes draining; `a30_normal_q` is
+  an unrestricted fallback. Setup time, not counted time.
+
+**What a null looks like.** J-Lens retrieves both entities but ranks the
+correctly-bound intermediate no better than the logit lens, with controls
+ruling out a broken pipeline. That is a quantified confirmation of the
+paper's own stated limitation — directly useful to the person who wants to
+know how much his flagship new method hallucinates.
+
+---
+
 ## Recommendation
 
-**Primary: C2 — now the clear leader at 24/25.** Neel names the exact model
-in the doc, nobody has used the Olmo 3 lineage this way, the experiment is
-inference-only and cheap, and the 98 intermediate checkpoints turn the
-headline figure into a continuous curve — legible in one glance, which is
-exactly what a 1-page executive summary needs.
+**Updated 2026-08-26. 9 days to the deadline.**
 
-**Backup: C1.** Still strong, still named in the doc. Now a genuine backup
-rather than a coin-flip, since C2's gating risk has been retired.
+| # | Candidate | Fit | Orig | Feas | Base | Neg | Total |
+|---|---|---|---|---|---|---|---|
+| **C6** | J-Lens relational binding | 5 | 5 | 4 | 5 | 5 | **24** |
+| **C2** | CoT unfaithfulness across the Olmo 3 lineage | 5 | 5 | 5 | 4 | 5 | **24** |
+| C1 | Eval-awareness contaminating faithfulness measurement | 5 | 4 | 4 | 5 | 5 | 23 |
+| C3 | Positive controls for model forensics | 5 | 5 | 2 | 4 | 5 | 21 |
+| C4 | CoT/refusal steering entanglement | 4 | 3 | 5 | 5 | 4 | 21 |
+| C5 | Thinking-vs-answer channel divergence | 4 | 3 | 5 | 4 | 5 | 21 |
 
-**Fallback if the Aug 24 de-risk gate fails on both: C4.** Cheapest,
-safest, still real.
+C6 and C2 tie on the rubric. The rubric does not break it. These do.
 
-**Do not attempt C3** under a 13-day clock. Note it as future work.
+### Recommendation: C6
 
-### On combining C1 + C2
+**1. The head start is large and it cost nothing.** C6 has a verified ARC
+environment, a staged model and lens with `COMPAT_ASSERTIONS: PASS`, 32/32
+reference tests green, an hour-by-hour plan with a named fallback per hour,
+pre-registered hypotheses, and eight controls. All of it is setup and
+ideation — uncounted under Neel's rules, and the manifest correctly logs
+**0.0 counted hours**. C2 has a verified checkpoint list and nothing else.
+With 9 days left that gap is the single biggest practical difference.
 
-Tempting: *"does CoT unfaithfulness emerge at the same post-training stage
-as eval-awareness — are they the same phenomenon?"* One harness, two
-metrics, genuinely original. **But** it doubles the scope, and Neel's doc
-is explicit that spreading thin is a common failure. Decide at the Aug 24
-gate only if the C2 harness comes up fast, and treat the eval-awareness
-axis as a stretch goal that can be cut without harming the narrative.
+**2. The open risks are not comparable in severity.** C6's B2 threatens the
+*causal arm*; the design already routes around it at Hour 11 and the passive
+result still stands on its own. C2's open risk — `Think-SFT` shipping a
+different tokenizer and no chat template — threatens the *primary
+comparison*. If `<think>` tokenizes differently across stages, every
+cross-stage number is confounded and there is no graceful degradation. C6
+degrades; C2 breaks.
+
+**3. C6 has the better control structure.** Eight controls, including three
+that specifically distinguish *entity presence* from *correct binding* —
+relation deletion, question truncation, label permutation. Neel lists
+"failing to compare to baselines" among the disqualifying mistakes and
+rewards discovering that an objection was already checked. C6 scores 5 on
+baselines; C2 scores 4.
+
+**4. It teaches him more.** His ideal application "teaches me something new."
+A quantified answer to *how much does J-Lens hallucinate* informs whether his
+flagship new method does what readers will assume it does. C2's result — "it
+appears at RL" — is interesting but more descriptive.
+
+**5. It is authentically Jason's.** The relational-binding intuition comes
+from his knowledge-graph work, and the positioning note handles the "pet
+interest" trap correctly by making J-Lens evaluation primary and the KG
+intuition the source of the question rather than the subject. Neel weights
+curiosity and says applications that are fun to read get bonus points.
+
+### The argument for C2, honestly stated
+
+C2 is the safer project. It is inference-only, the checkpoints are verified
+public, and its headline figure — a continuous faithfulness curve across 55
+RLVR checkpoints — is more immediately legible than a binding-accuracy bar
+chart. J-Lens is also the more crowded field: Neel promoted it with a bolded
+"Key resource" link, so he will see many J-Lens applications and few Olmo-3
+post-training ones. If the B2 blocker turns out to sink the causal arm *and*
+the passive result comes back flat, C6 ends as a single negative finding with
+no causal counterweight. That is still publishable, but it is thinner than
+C2's likely outcome.
+
+**If Jason wants the lower-variance path, C2 is defensible and this note
+should not be read as ruling it out.** The recommendation is C6 on the
+strength of the head start and the graceful-degradation asymmetry.
+
+### Do not attempt
+
+C3 under a 9-day clock. Note as future work.
+
+### Before ADR-0004 can be accepted
+
+ADR-0004 sets four conditions. Status as of 2026-08-26:
+
+| # | Condition | Status |
+|---|---|---|
+| 1 | Smoke test of J-Lens **and its logit-lens baseline** on a current allowed model | ⚠️ **Partial.** Compat and layout assertions pass, 32/32 tests green — but the setup log does not show the logit-lens switch being exercised. Close this in V1. |
+| 2 | Confirm causal interventions can run, **or** declare explicit passive-only scope | ❌ **Open — B2.** This is the decision that most changes the project's shape. Decide it before counting an hour. |
+| 3 | Comparison against the accepted candidate using the selection rubric | ✅ **This document.** |
+| 4 | Clock ruling: what counts, and whether a pivot resets the timer | ❌ **Open.** See below. |
+
+### Proposed clock ruling
+
+Neel's rules: setup, general prep, and time waiting are not counted;
+"writing code for your project", "thinking and planning time", and
+project-specific reading are. And: *"If you decide your project is doomed,
+you're welcome to give up and start a new one, and reset the timer"* — a
+genuine pivot resets.
+
+- Everything through 2026-08-26 — ARC access, environment build, model and
+  lens staging, compatibility assertions, the design documents themselves —
+  is **ideation and setup. Not counted.** The manifest's 0.0 h is correct.
+- V1, V2 and V3 are **project-specific verification: 1 counted hour each**,
+  as the sprint already declares. Log them.
+- ADR-0002 was never executed against — no code, no data, no findings. So
+  moving from C2 to C6 is not a mid-project pivot; it is the Gate 1 selection
+  decision arriving late. **No reset is needed because no clock has started.**
+- Record this ruling in the ADR that accepts C6, so the write-up can state
+  the accounting plainly if asked.
+
