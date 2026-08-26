@@ -3,7 +3,7 @@
 Status: **Setup complete (local + ARC). No counted work performed.**
 Date: 2026-08-26
 Issue: #3 · Branch: `exp/jlens-design-verification` · Governance level: **L1**
-Authoritative spec: `construction/jlens-design-verification-sprint.md`
+Authoritative spec: `llm/construction/jlens-design-verification-sprint.md`
 
 > **All measurements in this file are `agent-unverified`.** No number here has been
 > independently re-derived by a human. Nothing in this file is a research result;
@@ -255,7 +255,7 @@ fallback if L40S congests.
 | This manifest | `results/design-verification/environment-manifest.md` |
 | Scripts and unit tests | `experiments/design-verification/` |
 | Dev binding pairs (V3) | `experiments/design-verification/dev-binding-pairs.jsonl` |
-| Decision record (V3) | `docs/plan/jlens-design-verification-decision.md` |
+| Decision record (V3) | `llm/plan/jlens-design-verification-decision.md` |
 | ARC job scripts / logs | `~/mats12-arc-smoke/` on ARC; transcripts staged back into `results/design-verification/raw/` |
 
 `.gitignore` excludes `results/raw/**` and `*.pt`, but **not**

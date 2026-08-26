@@ -147,7 +147,7 @@ node scripts/conformance-check.mjs --gate <SELECT|EXECUTE|WRITEUP|SUBMIT>
 or, for all three layers (checker + 15-criterion rubric + adversarial
 `neel-reviewer` read), invoke the `conformance-audit` skill. **No gate
 advances with an open blocker.** Requirements and their source quotes:
-`docs/application/conformance-register.md` — 121 requirements, 38 of them
+`llm/application/conformance-register.md` — 121 requirements, 38 of them
 individually disqualifying. Rationale: ADR-0003.
 
 ### GATE 1 — Aug 24, end of the 2h pilot

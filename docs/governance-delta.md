@@ -23,7 +23,7 @@ infrastructure, anything that does not land in the Sept 4 submission.
 
 ## Design-Authority Document
 
-`docs/plan/PLAN.md` — the phased plan, time budget, and gates. Candidate
+`llm/plan/PLAN.md` — the phased plan, time budget, and gates. Candidate
 selection is authorized by `docs/adr/0002-project-selection.md` once
 written.
 
@@ -50,13 +50,13 @@ Added to the canonical review checklist's Alignment Review section.
 
 - Does this change consume counted hours, and is the log updated?
 - Does every reported number have a control or baseline alongside it, and
-  is that control in `docs/application/controls-ledger.md` with its result?
+  is that control in `llm/application/controls-ledger.md` with its result?
 - Is every claim typed `existence-proof` or `method-claim` in
-  `docs/application/claims-register.md`? An untagged cherry-pick carrying a
+  `llm/application/claims-register.md`? An untagged cherry-pick carrying a
   general claim is the red flag he names by name.
 - Has a human **independently re-derived** every number this change adds,
   by a path that does not share the original pipeline's code, and recorded
-  it in `docs/application/verification-ledger.md`?
+  it in `llm/application/verification-ledger.md`?
 - Has a human read raw examples supporting this claim, selected randomly
   with a recorded seed?
 - Is any LLM-judge step validated against hand labels?
@@ -70,7 +70,7 @@ Path: `llm/memory_bank/`
 
 ## Roadmap
 
-Path: `docs/plan/PLAN.md`
+Path: `llm/plan/PLAN.md`
 
 ## Governance Check Command
 
@@ -83,7 +83,7 @@ node scripts/conformance-check.mjs --gate <SELECT|EXECUTE|WRITEUP|SUBMIT>
 
 The first is the canonical portfolio check. The second is project-specific
 and asserts the mechanically-checkable subset of the 121 requirements in
-`docs/application/conformance-register.md` — the register extracted verbatim
+`llm/application/conformance-register.md` — the register extracted verbatim
 from Neel's application doc, of which 38 are individually disqualifying.
 Rationale: ADR-0003. No gate advances with an open blocker; an accepted risk
 requires an ADR, not a shrug.
@@ -94,7 +94,8 @@ requires an ADR, not a shrug.
 allow llm/memory_bank/** path-only
 allow docs/adr/README.md index-table-rows
 allow docs/adr/[0-9][0-9][0-9][0-9]-*.md status-line-only
-allow docs/plan/PLAN.md checkbox-only
+allow llm/plan/PLAN.md checkbox-only
+allow llm/** link-target-only
 allow docs/** link-target-only
 deny src/**
 deny scripts/**
@@ -104,8 +105,35 @@ deny docs/governance-delta.md
 deny writeup/**
 deny results/**
 deny scripts/conformance-check.mjs
-deny docs/application/**
+deny llm/application/**
+deny llm/plan/jlens-relational-binding-experiment-design.md
+deny experiments/**
 ```
+
+## Repository Layout
+
+Adopted 2026-08-26 to match the portfolio convention in `soa-agentic-se` and
+`reliable-trustworthy-se`: **all project-management and research material
+lives under `llm/`**; `docs/` carries only what governance fixes in place.
+
+| Path | Holds | Why here |
+|---|---|---|
+| `docs/adr/` | Decision records | agentic-governance and `governance-checks.mjs` hard-code this path |
+| `docs/governance-delta.md` | This file | Same |
+| `llm/memory_bank/` | Living state: active context, progress, time ledger, discussion history | Declared memory-bank path |
+| `llm/plan/` | PLAN.md, candidate scoring, the experiment design | Roadmap and design authority |
+| `llm/research/` | Literature scan, positioning notes | Research inputs |
+| `llm/application/` | Neel's instructions (raw + distilled), conformance register, rubric, and the three ledgers | Application-facing governance |
+| `llm/construction/` | Verification sprints, prompts, process overlays | Design-first workspace |
+| `llm/features/` | BACKLOG.md | Work index |
+| `experiments/` | Slurm batch scripts, run definitions | Execution, not planning |
+| `results/` | Raw outputs, manifests, figures | Evidence |
+| `writeup/` | The report and executive summary | Deliverable |
+| `src/`, `notebooks/` | Experiment code | Execution |
+| `scripts/` | `conformance-check.mjs`, repo tooling | Tooling |
+
+Rule of thumb: if it describes **what we will do or why**, it belongs under
+`llm/`. If it **is the work or its output**, it belongs at the root.
 
 ## Platform Enforcement Reality
 

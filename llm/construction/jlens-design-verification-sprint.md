@@ -19,7 +19,7 @@ This is a **verification sprint**, not the main experiment. Do not scale the dat
 
 ## Research-process interpretation
 
-Use `construction/neel-research-process-learning-overlay.md` as an operative companion to this document. In Neel Nanda's framework, this is an **Explore → Understand transition sprint**, not verification of the scientific hypothesis:
+Use `llm/construction/neel-research-process-learning-overlay.md` as an operative companion to this document. In Neel Nanda's framework, this is an **Explore → Understand transition sprint**, not verification of the scientific hypothesis:
 
 - V1 explores the tool, positive control, and practical failure modes.
 - V2 explores the operational meaning of J-space and rival explanations for apparent effects.
@@ -221,7 +221,7 @@ All are true:
 
 - `results/design-verification/v3-binding-identifiability.md`
 - `experiments/design-verification/dev-binding-pairs.jsonl`
-- `docs/plan/jlens-design-verification-decision.md`
+- `llm/plan/jlens-design-verification-decision.md`
 
 ## Final decision record
 

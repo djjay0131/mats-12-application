@@ -104,7 +104,7 @@ Every hour ends with a saved artifact: a note, dataset, passing test, result tab
 
 ## Research-process stage map
 
-This plan follows Neel Nanda's Ideation → Exploration → Understanding → Distillation process. The operative coaching and transition rules are in `construction/neel-research-process-learning-overlay.md`.
+This plan follows Neel Nanda's Ideation → Exploration → Understanding → Distillation process. The operative coaching and transition rules are in `llm/construction/neel-research-process-learning-overlay.md`.
 
 - **Hour 1 — Ideation exit:** verify the open gap, importance, literature fit, and tractability.
 - **Hours 2–6 — Exploration:** hypotheses remain provisional while we gain surface area, visualize outputs, and collect anomalies. Hour 2 creates a hypothesis-and-prediction memo, not a final preregistration.

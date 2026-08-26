@@ -3,7 +3,7 @@
  * conformance-check.mjs — gate the MATS 12.0 submission against every
  * mechanically-checkable requirement in Neel Nanda's application doc.
  *
- * Requirement IDs refer to docs/application/conformance-register.md.
+ * Requirement IDs refer to llm/application/conformance-register.md.
  *
  *   node scripts/conformance-check.mjs [--gate SELECT|EXECUTE|WRITEUP|SUBMIT]
  *
@@ -14,7 +14,7 @@
  * It exists to make the *mechanical* failures impossible, so that human
  * review time goes entirely to the parts that need judgement. Anything it
  * cannot check is routed to the neel-reviewer agent and the human gate in
- * docs/application/selection-rubric.md.
+ * llm/application/selection-rubric.md.
  */
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
@@ -31,12 +31,12 @@ const GATE_IDX = GATES.indexOf(GATE);
 const P = {
   exec:     'writeup/exec-summary.md',
   main:     'writeup/main.md',
-  claims:   'docs/application/claims-register.md',
-  verify:   'docs/application/verification-ledger.md',
-  controls: 'docs/application/controls-ledger.md',
+  claims:   'llm/application/claims-register.md',
+  verify:   'llm/application/verification-ledger.md',
+  controls: 'llm/application/controls-ledger.md',
   time:     'llm/memory_bank/time-log.md',
   canon:    'results/canonical.json',
-  adr2:     'docs/adr/0002-project-selection.md',
+  adr2:     'docs/adr/0005-accept-jlens-relational-binding.md',
 };
 
 const results = [];
@@ -158,17 +158,21 @@ const BASELINE_WORDS = /random|baseline|control|probe|shuffl|ablat|just ask|prom
 check('BLK-11', 'WRITEUP', 'Every results table carries a baseline/control column', () => {
   const s = read(P.main);
   if (!s) return na('write-up not started');
-  const t = tables(s);
-  if (!t.length) return warn('no results tables found');
+  // Only tables under a Results heading count. Method/environment tables are
+  // not results and do not need a baseline column.
+  const sections = s.split(/^#{1,3}\s+/m).filter(sec => /^[\d.\s]*results?\b/i.test(sec));
+  if (!sections.length) return warn('no Results section found yet');
+  const t = sections.flatMap(sec => tables(sec));
+  if (!t.length) return warn('Results section has no tables yet');
   const bad = t.filter(b => !BASELINE_WORDS.test(b.split('\n')[0]));
   return bad.length
-    ? fail(`${bad.length}/${t.length} table(s) have no baseline column — "Failing to compare to baselines" is on his disqualifying list`)
-    : pass(`${t.length}/${t.length} tables have a baseline column`);
+    ? fail(`${bad.length}/${t.length} results table(s) have no baseline column — "Failing to compare to baselines" is on his disqualifying list`)
+    : pass(`${t.length}/${t.length} results tables have a baseline column`);
 });
 
 check('BLK-12', 'WRITEUP', 'Controls ledger records a cheap control per method claim', () => {
   const s = read(P.controls);
-  if (!s) return fail('docs/application/controls-ledger.md missing');
+  if (!s) return fail('llm/application/controls-ledger.md missing');
   const r = rows(s);
   if (!r.length) return fail('controls ledger has no rows');
   const empty = r.filter(l => !BASELINE_WORDS.test(l));
@@ -178,7 +182,7 @@ check('BLK-12', 'WRITEUP', 'Controls ledger records a cheap control per method c
 // ── SCR-22 — claim typing ──────────────────────────────────────────────────
 check('SCR-22', 'WRITEUP', 'Every claim is tagged existence-proof or method-claim', () => {
   const s = read(P.claims);
-  if (!s) return fail('docs/application/claims-register.md missing');
+  if (!s) return fail('llm/application/claims-register.md missing');
   const r = rows(s);
   if (!r.length) return fail('claims register has no rows');
   const untagged = r.filter(l => !/existence[- ]proof|method[- ]claim|general[- ]claim/i.test(l));
@@ -206,7 +210,7 @@ check('BLK-24', 'SUBMIT', 'Every number in the write-up traces to canonical resu
 // ── BLK-01 / SCR-19 / SCR-20 — verification ledger ─────────────────────────
 check('BLK-01', 'SUBMIT', 'Every headline claim has a human verification row', () => {
   const v = read(P.verify), c = read(P.claims);
-  if (!v) return fail('docs/application/verification-ledger.md missing — "if your write-up contains key results you clearly never verified … that\'s disqualifying"');
+  if (!v) return fail('llm/application/verification-ledger.md missing — "if your write-up contains key results you clearly never verified … that\'s disqualifying"');
   const vr = rows(v), cr = rows(c || '');
   const unverified = vr.filter(l => !/\b(verified|re-?derived|confirmed)\b/i.test(l) || /\bTODO\b|\bpending\b/i.test(l));
   if (unverified.length) return fail(`${unverified.length} ledger row(s) not marked verified`);
@@ -315,12 +319,13 @@ check('MEC-02', 'SUBMIT', 'Before the deadline', () => {
 });
 
 // ── ADR-0002 gate ──────────────────────────────────────────────────────────
-check('GATE-1', 'EXECUTE', 'ADR-0002 accepted before counted execution begins', () => {
+check('GATE-1', 'EXECUTE', 'Project ADR accepted before counted execution begins', () => {
   const s = read(P.adr2);
-  if (!s) return fail('docs/adr/0002-project-selection.md missing');
-  return /^status:\s*accepted/im.test(s)
-    ? pass('project locked')
-    : fail('ADR-0002 still Proposed — do not start counted experiment hours until Gate 1 is cleared');
+  if (!s) return fail(`${P.adr2} missing — no accepted project`);
+  if (!/^status:\s*accepted/im.test(s))
+    return fail('project ADR is not Accepted — do not start counted hours until Gate 1 clears');
+  const scope = /passive-primary|passive only|causal arm is contingent/i.test(s);
+  return pass(`project locked${scope ? '; scope declared' : ''}`);
 });
 
 // ── report ─────────────────────────────────────────────────────────────────
@@ -337,8 +342,8 @@ console.log(`${results.filter(r => r.status === 'PASS').length} pass · ${w.leng
 if (f.length) {
   console.log(`\n${C.FAIL}BLOCKED${C.r} — ${f.length} failure(s) at gate ${GATE}:`);
   f.forEach(r => console.log(`  · ${r.id} ${r.label}`));
-  console.log(`\nFull requirement text: docs/application/conformance-register.md`);
-  console.log(`Judgement-based criteria this script cannot check: docs/application/selection-rubric.md`);
+  console.log(`\nFull requirement text: llm/application/conformance-register.md`);
+  console.log(`Judgement-based criteria this script cannot check: llm/application/selection-rubric.md`);
   console.log(`Adversarial read: run the neel-reviewer agent.`);
 }
 process.exit(f.length ? 1 : 0);

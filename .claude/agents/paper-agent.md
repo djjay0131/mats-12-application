@@ -16,7 +16,7 @@ Use this agent for:
 
 ## Workflow
 
-1. **Outline** → Create a detailed outline with section-level plans in `construction/design/`
+1. **Outline** → Create a detailed outline with section-level plans in `llm/construction/design/`
 2. **Related Work Survey** → Build a literature map before writing
 3. **Draft** → Write each section following the outline
 4. **Internal Review** → Self-review for technical correctness and narrative flow
@@ -26,7 +26,7 @@ Use this agent for:
 ## Commands
 
 ### `outline <title>`
-Create a paper outline in `construction/design/`.
+Create a paper outline in `llm/construction/design/`.
 - Section-by-section plan with key points for each
 - Figure/table plan (what visuals are needed, where they go)
 - Argument flow map (how sections connect logically)
@@ -35,7 +35,7 @@ Create a paper outline in `construction/design/`.
 Build a related work survey:
 - Organize papers by theme/approach
 - Identify gaps the paper fills
-- Update `construction/requirements/citation-matrix.md`
+- Update `llm/construction/requirements/citation-matrix.md`
 
 ### `draft <section>`
 Draft a specific section following the outline.
@@ -48,7 +48,7 @@ Revise a section based on feedback or self-review.
 - Document revision rationale
 
 ### `create-sprint <name>`
-Create a sprint plan for the writing process in `construction/sprints/`.
+Create a sprint plan for the writing process in `llm/construction/sprints/`.
 
 ### `validate`
 Check paper against:

@@ -1,10 +1,25 @@
 # mats-12-application — Agent Instructions
 
+## The project
+
+**J-Lens relational binding** — ADR-0005. When two prompts contain the same
+entities but swap their relational roles, does J-Lens identify the correct
+hidden intermediate? Design of record:
+`llm/plan/jlens-relational-binding-experiment-design.md`.
+
+**Scope is passive-primary.** H1/H2/H4 are the deliverable. The causal arm
+(H3) is contingent on V2 clearing blocker B2 — the reference implementation
+ships no sparse non-negative J-space reconstruction. Do not approximate it
+with a top-token projection; that is the design's own FAIL condition.
+
+**Substrate:** `Qwen/Qwen3.5-4B` + `neuronpedia/jacobian-lens` rev
+`qwen-n1000`, verified on ARC L40S (8.51 GB peak). Do not fit a lens.
+
 ## What this is
 
-A 13-day sprint to produce a MATS 12.0 application for Neel Nanda's mech
-interp stream. Hard deadline **2026-09-04 23:59 PT**. Read
-`docs/plan/PLAN.md` first, then `llm/memory_bank/activeContext.md`.
+A sprint to produce a MATS 12.0 application for Neel Nanda's mech interp
+stream. Hard deadline **2026-09-04 23:59 PT**. Read
+`llm/plan/PLAN.md` first, then `llm/memory_bank/activeContext.md`.
 
 ## Before anything ships
 
@@ -12,19 +27,19 @@ interp stream. Hard deadline **2026-09-04 23:59 PT**. Read
 node scripts/conformance-check.mjs --gate SELECT|EXECUTE|WRITEUP|SUBMIT
 ```
 
-`docs/application/conformance-register.md` holds all 121 requirements from
+`llm/application/conformance-register.md` holds all 121 requirements from
 Neel's doc with source quotes — **38 are individually disqualifying**. The
 `conformance-audit` skill runs the checker, the 15-criterion rubric, and the
 adversarial `neel-reviewer` agent, and emits GO/NO-GO. No gate advances with
 an open blocker (ADR-0003).
 
 Three ledgers are how the blockers stay closed, and they are not optional:
-- `docs/application/claims-register.md` — every claim typed
+- `llm/application/claims-register.md` — every claim typed
   `existence-proof` vs `method-claim`. Cherry-picking is permitted **only**
   under an explicit existence-proof tag.
-- `docs/application/controls-ledger.md` — the cheap control actually run,
+- `llm/application/controls-ledger.md` — the cheap control actually run,
   and its result.
-- `docs/application/verification-ledger.md` — every headline number
+- `llm/application/verification-ledger.md` — every headline number
   re-derived by a human, via a path that does **not** share the original
   pipeline's code. Re-running the same script is not verification.
 
@@ -54,6 +69,12 @@ Three ledgers are how the blockers stay closed, and they are not optional:
    baseline required).
 9. **Check replication first.** Never build on a phenomenon without
    confirming it exists in this model, these prompts, this dataset.
+
+## Layout
+
+PM and research material under `llm/`; execution and outputs at the root.
+`docs/` holds only ADRs and the governance delta. See
+`docs/governance-delta.md` §Repository Layout.
 
 ## Models
 

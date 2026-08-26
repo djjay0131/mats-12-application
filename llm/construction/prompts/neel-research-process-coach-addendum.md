@@ -7,9 +7,9 @@ Add Neel Nanda's research-process framework to the J-Lens design-verification sp
 
 At the next safe boundary:
 1. Pull/read the latest `docs/jlens-relational-binding-history` branch versions of:
-   - construction/neel-research-process-learning-overlay.md
+   - llm/construction/neel-research-process-learning-overlay.md
    - llm/memory_bank/research-learning-log-template.md
-   - construction/jlens-design-verification-sprint.md
+   - llm/construction/jlens-design-verification-sprint.md
 2. Treat the sprint as an Explore → Understand transition sprint:
    - V1 explores tooling and failure modes.
    - V2 explores the meaning of J-space and rival explanations.

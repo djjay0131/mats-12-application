@@ -1,12 +1,12 @@
 # ADR-0002: Project selection for the 20-hour application task
 
-Status: Proposed
-Date: 2026-08-24 (due — decide at Gate 1)
+Status: Superseded by ADR-0005
+Date: 2026-08-24 (superseded 2026-08-26)
 Deciders: Jason
 
 ## Context
 
-Five candidates are scored in `docs/plan/project-candidates.md` against
+Five candidates are scored in `llm/plan/project-candidates.md` against
 fit to Neel's stated interests, originality, 20-hour feasibility, baseline
 availability, and whether a null result is still interesting.
 
@@ -55,3 +55,14 @@ If any fails: switch to the backup candidate and **reset the 20-hour
 clock** (explicitly permitted — *"If you decide your project is doomed,
 you're welcome to give up and start a new one, and reset the timer"*).
 Record the reset here.
+
+## Outcome (2026-08-26)
+
+Never accepted, never executed against. Superseded by
+[ADR-0005](0005-accept-jlens-relational-binding.md), which selects the
+J-Lens relational-binding project (C6). Candidate C2 remains the strongest
+fallback: its checkpoints are verified public and it requires no lens.
+
+The C2 gating fact (Olmo 3 Think stage checkpoints public — verified GO,
+plus 98 intermediate checkpoints as git branches) stands and is preserved in
+`llm/plan/project-candidates.md` should the fallback ever be needed.

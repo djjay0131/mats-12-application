@@ -1,7 +1,7 @@
 # ADR-0004: Consider J-Lens Relational-Binding Evaluation
 
-Status: Proposed
-Date: 2026-08-24
+Status: Superseded by ADR-0005
+Date: 2026-08-24 (resolved 2026-08-26)
 Issue: #1
 
 ## Context
@@ -32,7 +32,19 @@ Before acceptance, require:
 
 ## Related artifacts
 
-- `docs/plan/jlens-relational-binding-experiment-design.md`
-- `docs/research/jlens-project-research-and-positioning.md`
+- `llm/plan/jlens-relational-binding-experiment-design.md`
+- `llm/research/jlens-project-research-and-positioning.md`
 - `llm/memory_bank/jlens-discussion-history-2026-08-24.md`
 
+
+## Resolution (2026-08-26)
+
+Accepted by [ADR-0005](0005-accept-jlens-relational-binding.md), which
+supersedes ADR-0002. Status of the four conditions this ADR required:
+
+| # | Condition | Outcome |
+|---|---|---|
+| 1 | Smoke test of J-Lens and its logit-lens baseline on a current allowed model | **Partial.** Compatibility and layout assertions pass; 32/32 reference tests green. The logit-lens switch was not exercised in setup — it closes in V1. |
+| 2 | Confirm causal interventions can run, or declare explicit passive-only scope | **Decided.** ADR-0005 §2 declares passive-primary; the causal arm is contingent on V2. |
+| 3 | Comparison against the accepted candidate using the selection rubric | **Done.** `llm/plan/project-candidates.md` — both score 24/25; tie broken on preparation and failure-mode asymmetry. |
+| 4 | Clock ruling | **Decided.** ADR-0005 §3: nothing counted through 2026-08-26; V1/V2/V3 one hour each; no reset required. |

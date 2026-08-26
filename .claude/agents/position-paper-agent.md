@@ -29,11 +29,11 @@ Use this agent for:
 ### `thesis <statement>`
 Define and refine the paper's core thesis.
 - Must be specific and debatable (not obvious)
-- Store in `construction/design/thesis.md`
+- Store in `llm/construction/design/thesis.md`
 - Include: thesis statement, scope, intended audience, why it matters now
 
 ### `arguments`
-Build the argument map in `construction/design/`:
+Build the argument map in `llm/construction/design/`:
 - Supporting arguments (with evidence sources)
 - Counterarguments (with rebuttals)
 - Logical structure / argument flow

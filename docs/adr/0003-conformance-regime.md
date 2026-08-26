@@ -27,7 +27,7 @@ waste.
 Treat the instructions as a requirements specification and govern against
 it in three layers.
 
-**Layer 1 — the register.** `docs/application/conformance-register.md`
+**Layer 1 — the register.** `llm/application/conformance-register.md`
 extracts all 121 requirements verbatim, each with a source quote, a class
 (BLOCKER / SCORED / MECHANIC / ADVICE), a verification method, an
 automatable flag, and the gate at which it must clear. 38 are blockers.
@@ -43,7 +43,7 @@ table, claim typing, numeric traceability to `results/canonical.json`, the
 verification ledger, replication-before-building, limitations sections,
 narrative-vs-chronological structure, and the hour budget.
 
-**Layer 3 — judgement.** `docs/application/selection-rubric.md` (15 scored
+**Layer 3 — judgement.** `llm/application/selection-rubric.md` (15 scored
 criteria, 28+/30 to submit) and the `neel-reviewer` agent, which reviews
 adversarially in five passes and is instructed to reject. The
 `conformance-audit` skill runs all three layers and emits a GO/NO-GO.

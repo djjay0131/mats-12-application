@@ -1,6 +1,6 @@
 # Spec Builder — Design Document Template
 
-Use this template when creating new design documents in `construction/design/`.
+Use this template when creating new design documents in `llm/construction/design/`.
 
 ---
 
@@ -48,7 +48,7 @@ _Key papers and resources._
 
 ## Usage
 
-1. Copy template to `construction/design/<name>.md`
+1. Copy template to `llm/construction/design/<name>.md`
 2. Fill in all sections
 3. Review against submission requirements
 4. Get approval before drafting content

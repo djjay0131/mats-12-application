@@ -75,7 +75,7 @@ The no-spin rules are:
 5. Development prompts are used for debugging; held-out prompts are not tuned on.
 6. A clean null after positive implementation checks is a substantive result.
 
-The full schedule is stored in `docs/plan/jlens-relational-binding-experiment-design.md`.
+The full schedule is stored in `llm/plan/jlens-relational-binding-experiment-design.md`.
 
 ## Topic classification
 
@@ -102,8 +102,8 @@ Accepting it would require:
 
 ## Artifacts created from the discussion
 
-- `docs/plan/jlens-relational-binding-experiment-design.md`
-- `docs/research/jlens-project-research-and-positioning.md`
+- `llm/plan/jlens-relational-binding-experiment-design.md`
+- `llm/research/jlens-project-research-and-positioning.md`
 - `llm/memory_bank/jlens-discussion-history-2026-08-24.md`
 - `docs/adr/0004-proposed-jlens-relational-binding-candidate.md`
 
