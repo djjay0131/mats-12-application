@@ -1,0 +1,75 @@
+### sacct
+JobID|State|Submit|Start|End|Elapsed|ExitCode|NodeList|ReqTRES
+550088|COMPLETED|2026-08-26T15:25:44|2026-08-26T15:48:39|2026-08-26T15:55:07|00:06:28|0:0|fal045|billing=91,cpu=8,gres/gpu=1,mem=64G,node=1
+550088.batch|COMPLETED|2026-08-26T15:48:39|2026-08-26T15:48:39|2026-08-26T15:55:07|00:06:28|0:0|fal045|
+550088.extern|COMPLETED|2026-08-26T15:48:39|2026-08-26T15:48:39|2026-08-26T15:55:07|00:06:28|0:0|fal045|
+
+### STDOUT
+=== MATS12 ARC SETUP ===
+date_utc:   2026-08-26T19:48:39Z
+host:       fal045
+job:        550088
+account:    agents4research
+partition:  l40s_normal_q
+base:       /scratch/djjay/mats12
+HF_HOME:    /scratch/djjay/mats12/hf-cache
+--- GPU ---
+NVIDIA L40S, 46068 MiB, 595.71.05
+--- module load ---
+  loaded module: Python/3.12.3-GCCcore-13.3.0
+  python3: Python 3.12.3 at /apps/arch/software/Python/3.12.3-GCCcore-13.3.0/bin/python3
+  python_version_ok: 3.12.3
+--- network reachability from compute node ---
+  pypi=200
+  hf=200
+  gh=200
+  NET_OK=1
+--- venv ---
+  pip: pip 26.2.1 from /scratch/djjay/mats12/venv/lib/python3.12/site-packages/pip (python 3.12)
+--- install stack (CUDA torch) ---
+--- vendor jlens @ pinned commit ---
+  jlens HEAD: 581d398613e5602a5af361e1c34d3a92ea82ba8e
+--- reference test suite ---
+................................                                         [100%]
+32 passed in 9.48s
+--- stage model + lens into scratch ---
+  MODEL_PATH: /scratch/djjay/mats12/hf-cache/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  model_stage_secs: 13.9
+  LENS_PATH: /scratch/djjay/mats12/hf-cache/hub/models--neuronpedia--jacobian-lens/snapshots/16a01f309fcec900fdcec3f4cd5b64f3d00e4d5a
+  lens_stage_secs: 3.4
+--- EXACT COMPATIBILITY VERIFICATION ---
+torch:             2.13.0+cu130
+torch.version.cuda: 13.0
+cuda_available:    True
+device_name:       NVIDIA L40S
+device_capability: (8, 9)
+device_mem_GB:    47.7
+transformers:      5.16.1
+lens_sha256:       1f9a8f8fd593f0ffec1a9640993257ca4560f8ae3e5602315643d5cc6818534e
+lens_bytes:        406332644
+lens_d_model:      2560
+lens_n_prompts:    1000
+lens_source_layers: 0 .. 30 (n=31)
+lens_fit_against:  Qwen/Qwen3.5-4B
+model_arch:        ['Qwen3_5ForConditionalGeneration']
+model_layers:      32
+model_hidden:      2560
+model_vocab:       248320
+tokenizer_class:   Qwen2Tokenizer
+tokenizer_vocab:   248044 len: 248077
+COMPAT_ASSERTIONS: PASS
+model_load_secs:  13.6
+lens_model:        HFLensModel(Qwen3_5ForCausalLM, n_layers=32, d_model=2560)
+peak_gpu_alloc_GB: 8.51
+LAYOUT_ASSERTIONS: PASS
+--- disk usage ---
+15G	/scratch/djjay/mats12
+=== SETUP COMPLETE ===
+
+### STDERR (tail 20)
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 11 files:   9%|▉         | 1/11 [00:00<00:03,  3.22it/s]Fetching 11 files:  73%|███████▎  | 8/11 [00:00<00:00, 21.11it/s]Fetching 11 files: 100%|██████████| 11/11 [00:13<00:00,  1.62s/it]Fetching 11 files: 100%|██████████| 11/11 [00:13<00:00,  1.25s/it]
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:00,  8.60it/s]Fetching 4 files:  75%|███████▌  | 3/4 [00:02<00:00,  1.10it/s]Fetching 4 files: 100%|██████████| 4/4 [00:03<00:00,  1.16it/s]Fetching 4 files: 100%|██████████| 4/4 [00:03<00:00,  1.23it/s]
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files:  73%|███████▎  | 8/11 [00:00<00:00, 20.45it/s]Fetching 11 files: 100%|██████████| 11/11 [00:01<00:00,  9.08it/s]Fetching 11 files: 100%|██████████| 11/11 [00:01<00:00, 10.33it/s]
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1792.25it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   7%|▋         | 28/426 [00:00<00:01, 244.87it/s]Loading weights:  31%|███       | 130/426 [00:00<00:00, 657.08it/s]Loading weights:  57%|█████▋    | 241/426 [00:00<00:00, 849.39it/s]Loading weights:  83%|████████▎ | 352/426 [00:00<00:00, 948.32it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 894.17it/s]
