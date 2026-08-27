@@ -128,3 +128,88 @@ recorded, which inverts the intended order. The job had not started when the
 entry was written, so no result influenced any field above — but the sequence
 was wrong and is recorded rather than tidied away. From here, the entry is
 written before the work is submitted.
+
+---
+
+## Hour 2 — Stage 1: passive J-Lens readout, dev split
+
+- Date/time: 2026-08-27, entered **before** submission. The job had not been
+  queued when this was written.
+- Research stage: **Exploration → first measurement**
+- Stage north star: find out whether J-Lens identifies the correct hidden
+  intermediate when the same entities appear with their roles swapped — and,
+  in the same pass, whether that readout is anything more than reading a
+  selection the model has already made.
+- Concrete objective: paired intermediate margin at two readout positions,
+  three arms, on the 10 dev pairs (40 records). Held-out is not touched.
+- Expected artifact:
+  `results/runs/<UTC>-stage1-passive-readout/outputs/stage1-passive-readout.json`
+
+### Pre-registered before submission
+
+- **Layer-selection rule:** the reported layer is the argmax of mean paired
+  intermediate margin **on the dev split**, then frozen. Held-out is evaluated
+  at the frozen layer and nowhere else. There is deliberately no fixed 40–80%
+  band: V1's coverage control put the optimum at layer 30, the *last* fitted
+  source layer, so a band chosen by convention would already have been wrong.
+- **Primary metric:** continuous paired margin, `logit[correct] −
+  logit[incorrect]`, computed within a single forward pass so per-prompt scale
+  cancels. Ranks are reported alongside because a rank is interpretable and a
+  logit difference is not.
+- **Positions:** `final` (last prompt token, post-selection) and `prequery`
+  (last token of the facts block, before the query names a subject).
+- **Controls:** label permutation (derangement, seed 20260827 — no record keeps
+  its own labels) and norm-matched random transport (every `J_l` replaced by a
+  Gaussian of matched Frobenius norm, identical code path). B3 stands: no
+  shuffled-corpus control lens is published, and these two are the declared
+  fallback.
+- **Baseline arm:** logit lens through the identical extraction path
+  (`use_jacobian=False`), verified live at V1 (argmax differs at 29/31 layers).
+
+### Before execution — Jason
+
+- **Prediction: none. Recorded as "no prior", deliberately.** Same as Hour 1.
+- Agent's prediction, flagged as the agent's and not Jason's: the correct
+  intermediate outranks the swapped-partner intermediate at some layer in the
+  20–30 band, mean margin positive but with wide spread, most of the signal
+  from a minority of pairs, best layer at or near 30.
+- Strongest alternative explanation (agent-supplied, flagged as such): the
+  `final` readout is post-selection. By the last prompt token the model has
+  already chosen the subject, so a positive margin may show only that the
+  *selected* intermediate is readable — not that the binding is. This is V3's
+  weak-vs-strong distinction and it arrives here whether or not V3 has run.
+- Predicted observation under that alternative: the margin holds at `final`
+  and **collapses at `prequery`**.
+- Result that would most change our minds: a positive margin at `prequery`.
+  That would be the strong claim. The agent does not expect it.
+- Kill condition: J-Lens margin indistinguishable from the label-permutation
+  control. If the control matches, the number is not about J-Lens.
+- Why this action has high information gain per unit time: both positions and
+  all three arms come out of one allocation, and the pairing means the weak and
+  strong claims are separated by the same run that produces either.
+
+### Scope change carried into this stage
+
+The causal arm (H3) is **declared unavailable**, not deferred. See
+`results/design-verification/v2-decomposition-verification.md`. Decision taken
+by Jason on 2026-08-27 after the vendor audit; the audit re-runs as step 0 of
+this job so its evidence sits inside a job log rather than a login shell.
+
+### Execution record
+
+- Start/stop time: **pending** — not yet submitted at time of writing
+- Commands / run IDs: `sbatch experiments/stage1/run_stage1.sbatch`
+- Raw artifact paths: `results/runs/` (written by `src/runlog.py`)
+- Anomalies noticed without interpretation: **pending**
+
+### First interpretation — Jason
+
+*(to be filled after the run, before the agent comments)*
+
+### Coach feedback — agent
+
+*(withheld until Jason's first interpretation is recorded)*
+
+### Hour gate — Jason confirms
+
+- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
