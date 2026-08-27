@@ -6,8 +6,8 @@
 #SBATCH --mem=32G
 #SBATCH -t 00:30:00
 #SBATCH -J mats12-elig
-#SBATCH -o /scratch/djjay/mats12/repo/results/runs/slurm/elig-%j.out
-#SBATCH -e /scratch/djjay/mats12/repo/results/runs/slurm/elig-%j.out
+#SBATCH -o /scratch/djjay/mats12/repo/results/slurm-logs/elig-%j.out
+#SBATCH -e /scratch/djjay/mats12/repo/results/slurm-logs/elig-%j.out
 set -euo pipefail
 module reset
 source /scratch/djjay/mats12/venv/bin/activate
