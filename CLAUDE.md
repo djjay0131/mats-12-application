@@ -70,6 +70,44 @@ Three ledgers are how the blockers stay closed, and they are not optional:
 9. **Check replication first.** Never build on a phenomenon without
    confirming it exists in this model, these prompts, this dataset.
 
+## Context to load first (ADV-11)
+
+Neel recommends putting his compiled 600k-token mech-interp context file in
+the agent's context window:
+
+> "**Context is crucial**: LLMs are much more useful when they have the
+> relevant information in the context window... By default, just **put this
+> 600k token file** in the context window."
+
+It lives at **`context/default_600k.md`** (gitignored — 637 KB, not ours to
+redistribute). If it is missing, get it from the Drive folder linked in
+`llm/application/mats12-instructions-raw.txt` before starting work.
+
+Also load, in this order: `llm/plan/PLAN.md`,
+`docs/adr/0005-accept-jlens-relational-binding.md`,
+`llm/plan/jlens-relational-binding-experiment-design.md`,
+`results/design-verification/environment-manifest.md`.
+
+## Persistent kernel discipline (ADV-17 / ADV-18)
+
+Exploratory interp work wants a **persistent Python process** — load the
+model once, keep weights and activations in memory while iterating. Cold-start
+scripts that reload a 4B model every call waste the budget.
+
+This project uses the tmux + IPython pattern (Neel's "simple and unbreakable"
+option). Session name: **`mats-12-application`**.
+
+- Send code with `tmux send-keys`, read results with `tmux capture-pane`.
+- **Load models and data in dedicated cells at the top.**
+- **Never restart the kernel without asking.**
+- **Always save plots to disk as PNGs** as well as displaying them — you can
+  read PNGs natively, and they belong in `results/figures/` via
+  `src/figstyle.py::save_figure` anyway.
+- **Checkpoint expensive artifacts to disk** — activations, datasets, any
+  fitted object — so a crashed kernel is an annoyance, not a lost hour.
+- Run anything long as a background script with a log, not a kernel cell.
+- Prefer plain `.py` over `.ipynb`.
+
 ## Layout
 
 PM and research material under `llm/`; execution and outputs at the root.
