@@ -344,14 +344,15 @@ learned transport and nothing else.
 **Arm 3 — supervised difference-in-means reference.** This arm is new relative
 to the design of record and it is not optional.
 
-*Why it exists.* Logit lens is documented as sometimes being close to
-non-functional outside GPT-2. So a two-arm comparison is uninformative in either
-direction: if J-Lens beats logit lens, that may only say logit lens does not
-work on Qwen3.5; if both sit at floor, "J-Lens cannot read binding" and "binding
-is not linearly present in the residual at this layer at all" produce identical
-numbers. Without a third arm there is no way to tell those apart, and therefore
-no way to interpret any J-Lens number that comes back. The supervised arm is the
-cheapest instrument that separates them.
+*Why it exists.* Logit lens is documented in prior work as sometimes being
+close to non-functional outside GPT-2, which is not used here. So a two-arm
+comparison is uninformative in either direction: if J-Lens beats logit lens,
+that may only say logit lens does not work on Qwen3.5; if both sit at floor,
+"J-Lens cannot read binding" and "binding is not linearly present in the
+residual at this layer at all" produce identical numbers. Without a third arm
+there is no way to tell those apart, and therefore no way to interpret any
+J-Lens number that comes back. The supervised arm is the cheapest instrument
+that separates them.
 
 *What it is.* A nearest-centroid (equivalently, isotropic-covariance LDA)
 readout over the closed set `V` of intermediate tokens used across the dataset.
@@ -469,7 +470,8 @@ output ids have no tokenizer string. Any rank metric must state its width, so:
 | 5 | Direct prompting ("just ask the model for the intermediate") | The task being legible without any internal method | Held-out |
 | 6 | Pair alternative, not arbitrary distractor tokens | An easy comparison against irrelevant vocabulary | Built into the metric |
 | 7 | Label permutation | Attractive-looking token lists that do not depend on the learned label mapping | Held-out |
-| 8 | Norm-matched random direction | Effects any perturbation of that magnitude would produce | Causal arm only |
+| 8a | Norm-matched random *transport*, passive | Margins that any matrix of that Frobenius norm would produce, whatever `J_l` learned | Runs in Stage 1 |
+| 8b | Norm-matched random *direction*, causal intervention | Effects any perturbation of that magnitude would produce | Unavailable with the causal arm |
 | 9 | Prompt-template robustness | A result specific to one phrasing | Fixed subset, wording fixed before held-out results are seen |
 | 10 | Relation deletion | The readout tracking co-occurrence rather than binding | **See note below** |
 | 11 | Question truncation | Selectivity that does not depend on knowing the target entity | **See note below** |
@@ -502,11 +504,21 @@ method section. `[DECISION PENDING — Jason]`
 
 **Negative control, and what is not available.** No published shuffled-corpus or
 control J-Lens checkpoint exists — all 40+ lenses in `neuronpedia/jacobian-lens`
-are fit on `Salesforce/wikitext`. The negative control therefore falls back to
-label permutation (control 7) plus norm-matched random directions (control 8),
-implemented locally. This is defensible but it is weaker than the published
-control the design hoped for, and it is listed as a limitation rather than
-presented as equivalent.
+are fit on `Salesforce/wikitext`. The fallback is therefore label permutation
+(control 7) plus norm-matched random *transport* (control 8a), implemented
+locally. Both are passive and both are live: the Stage 1 passive readout
+(`experiments/stage1/passive_readout.py`) ships a `jlens_random_transport` arm
+that replaces every `J_l` with a Gaussian matrix of matched Frobenius norm and
+re-runs the readout through the identical extraction path, so the comparison
+isolates the fitted transport against a norm-equivalent random one. This is
+weaker than the published control the design hoped for, and it is listed as a
+limitation rather than presented as equivalent — but it is reachable rather than
+hypothetical.
+
+Norm-matched random *direction* as an intervention (control 8b) is a different
+control for a different question. It belonged to the causal arm and is
+unavailable along with it; nothing in the passive fallback above depends on it.
+`[RESULT PENDING — the Stage 1 randomised-transport arm has not run]`
 
 ### The causal arm is unavailable, and this is itself a method-evaluation finding
 
@@ -564,7 +576,7 @@ conditions, with a norm-preservation check reported.
 
 ## 4.2 Primary result: binding recovery
 
-![Pairwise binding accuracy by method, with bootstrap 95% CIs. Chance is 50%.](results/figures/binding-accuracy-by-method.png)
+![Pairwise binding accuracy by method, with bootstrap 95% CIs. On this conjunctive metric a presence-only (bag-of-concepts) readout scores 0% and independent unbiased guessing on each variant scores 25%; 50% is the per-prompt figure, not the chance level for this metric.](results/figures/binding-accuracy-by-method.png)
 
 ## 4.3 Layerwise structure
 
