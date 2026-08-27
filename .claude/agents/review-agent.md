@@ -12,7 +12,7 @@ For every PR, run the following checks and produce a structured report.
 
 ### 1. Citation Verification
 
-Cross-reference every citation against the **Citation Matrix** (`construction/requirements/citation-matrix.md`).
+Cross-reference every citation against the **Citation Matrix** (`llm/construction/requirements/citation-matrix.md`).
 
 For each citation, verify:
 - [ ] **Exists**: The reference entry exists in the bibliography

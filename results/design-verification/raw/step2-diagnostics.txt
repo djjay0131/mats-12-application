@@ -1,0 +1,18 @@
+### hostname
+falcon1
+### whoami
+djjay
+### groups
+djjay arc.users
+### sacctmgr assoc
+agents4research||fal_a30_normal_base,fal_a30_normal_int,fal_a30_normal_long,fal_a30_normal_short,fal_a30_preemptable_base,fal_l40s_normal_base,fal_l40s_normal_int,fal_l40s_normal_long,fal_l40s_normal_short,fal_l40s_preemptable_base,fal_t4_normal_base,fal_t4_normal_int,fal_t4_normal_long,fal_t4_normal_short,fal_t4_preemptable_base,fal_v100_normal_base,fal_v100_normal_int,fal_v100_normal_long,fal_v100_normal_short,fal_v100_preemptable_base,normal
+### sinfo
+PARTITION|AVAIL|TIMELIMIT|GRES
+a30_normal_q*|up|infinite|gpu:a30:4
+a30_preemptable_q|up|infinite|gpu:a30:4
+l40s_normal_q|up|infinite|gpu:l40s:4
+l40s_preemptable_q|up|infinite|gpu:l40s:4
+v100_normal_q|up|infinite|gpu:v100:2
+v100_preemptable_q|up|infinite|gpu:v100:2
+t4_normal_q|up|infinite|gpu:t4:1(S:0)
+t4_preemptable_q|up|infinite|gpu:t4:1(S:0)

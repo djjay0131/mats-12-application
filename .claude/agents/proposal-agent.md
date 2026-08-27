@@ -17,9 +17,9 @@ Use this agent for:
 ## Workflow
 
 1. **Analyze CFP** → Parse the call for proposals, extract requirements, topics, and evaluation criteria
-2. **Design** → Create a design doc in `construction/design/` before any writing
+2. **Design** → Create a design doc in `llm/construction/design/` before any writing
 3. **Review** → Validate design against CFP requirements and topic alignment
-4. **Sprint** → Break approved designs into sprint tasks in `construction/sprints/`
+4. **Sprint** → Break approved designs into sprint tasks in `llm/construction/sprints/`
 5. **Execute** → Write proposal content following the approved design
 6. **Validate** → Check output against submission requirements
 
@@ -31,18 +31,18 @@ Parse a CFP document and extract:
 - Submission requirements (page limits, format, deadlines)
 - Evaluation criteria
 - Eligibility requirements
-Store results in `construction/requirements/cfp-analysis.md`.
+Store results in `llm/construction/requirements/cfp-analysis.md`.
 
 ### `design <topic>`
-Create a new design document in `construction/design/`.
+Create a new design document in `llm/construction/design/`.
 - Must include: objective, approach, topic alignment, key references
-- Template: `construction/spec_builder.md`
+- Template: `llm/construction/spec_builder.md`
 
 ### `update-design <filename>`
 Update an existing design document with new information or revisions.
 
 ### `create-sprint <name>`
-Create a new sprint plan in `construction/sprints/`.
+Create a new sprint plan in `llm/construction/sprints/`.
 - Break design into actionable tasks with clear deliverables
 - Include acceptance criteria for each task
 

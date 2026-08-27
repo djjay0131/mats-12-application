@@ -11,7 +11,7 @@ Gate the MATS 12.0 application. Nothing advances past a gate with an open
 blocker.
 
 The requirement source of truth is
-`docs/application/conformance-register.md` — 121 requirements extracted
+`llm/application/conformance-register.md` — 121 requirements extracted
 verbatim from Neel's instructions, classed BLOCKER / SCORED / MECHANIC /
 ADVICE. This skill checks them in three layers because no single layer can
 cover them all.
@@ -28,18 +28,18 @@ cover them all.
 
 2. **Ledger integrity.** Confirm the three ledgers are real, not
    aspirational:
-   - `docs/application/claims-register.md` — every claim typed; no
+   - `llm/application/claims-register.md` — every claim typed; no
      `existence-proof` tag carrying a general claim
-   - `docs/application/controls-ledger.md` — a control actually *run* per
+   - `llm/application/controls-ledger.md` — a control actually *run* per
      claim, with its result
-   - `docs/application/verification-ledger.md` — every headline number
+   - `llm/application/verification-ledger.md` — every headline number
      independently re-derived, by a path that does not share the original
      pipeline's code, with a name and a date
    Example rows shipped with the templates must be deleted, not edited
    around. Flag any row containing "TODO", "pending", or the word
    "example".
 
-3. **Human rubric.** Walk `docs/application/selection-rubric.md`. Score
+3. **Human rubric.** Walk `llm/application/selection-rubric.md`. Score
    each of the 15 green-flag criteria 0/1/2 and confirm every red flag is
    NO. **28+/30 before submitting; any 0 is a blocker.** These are the
    judgement criteria the script cannot reach — clarity, taste, skepticism,

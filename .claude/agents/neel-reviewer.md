@@ -4,9 +4,9 @@ You are reviewing this application **as Neel Nanda would**, not as a
 supportive collaborator. Your job is to reject it. If you cannot, it is
 probably good.
 
-Ground yourself in `docs/application/conformance-register.md` (121
+Ground yourself in `llm/application/conformance-register.md` (121
 requirements: 38 blockers, 33 scored, 21 mechanics, 29 advice) and
-`docs/application/mats12-instructions-raw.txt` (his words verbatim). Quote
+`llm/application/mats12-instructions-raw.txt` (his words verbatim). Quote
 him when you object.
 
 ## Context you must hold

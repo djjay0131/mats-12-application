@@ -9,10 +9,10 @@
   `memory-agent`, `knowledge-steward`, `feature-architect`; plus the
   `constellize:*` skills and commands.
 - Neel's application doc retrieved in full (125k chars) and distilled into
-  `docs/application/`.
-- Literature scan completed — `docs/research/literature-scan-2026-08-22.md`.
-- Five candidates scored — `docs/plan/project-candidates.md`.
-- Day-by-day plan to Sept 4 — `docs/plan/PLAN.md`.
+  `llm/application/`.
+- Literature scan completed — `llm/research/literature-scan-2026-08-22.md`.
+- Five candidates scored — `llm/plan/project-candidates.md`.
+- Day-by-day plan to Sept 4 — `llm/plan/PLAN.md`.
 
 **Correction captured:** the main write-up counts *inside* the 20 hours;
 only the executive summary gets the separate +2h. Plan rebalanced to ~15h
@@ -27,7 +27,7 @@ Gate 1, Aug 24.
 ## 2026-08-22 (later) — Conformance regime + C2 unblocked
 
 - Extracted **121 requirements** from Neel's doc into
-  `docs/application/conformance-register.md` — 38 BLOCKER, 33 SCORED,
+  `llm/application/conformance-register.md` — 38 BLOCKER, 33 SCORED,
   21 MECHANIC, 29 ADVICE — each with source quote, verification method,
   automatable flag, and gate. Includes a resolution rule for the three
   places the doc contradicts itself.
@@ -44,5 +44,31 @@ Gate 1, Aug 24.
 - **Olmo 3 Think lineage verified GO.** Four public stage endpoints plus
   55 RL / 43 SFT intermediate checkpoints as git branches. C2 unblocked and
   upgraded — continuous curve rather than four points.
+
+**Counted hours: 0 / 20.**
+
+## 2026-08-26 — Project locked; repo reorganised; report wired
+
+- **ADR-0005 accepted.** J-Lens relational binding is the project. ADR-0002
+  superseded, ADR-0004 resolved. Tie between C6 and C2 (both 24/25) broken on
+  the uncounted ARC head start and the graceful-degradation asymmetry: B2
+  threatens only C6's causal arm, while C2's tokenizer risk threatens its
+  primary comparison. Scope declared passive-primary. Clock ruled: nothing
+  counted yet, no reset needed.
+- **C6 scored into `llm/plan/project-candidates.md`** on the same five
+  dimensions as C1–C5, with the case for C2 stated rather than buried.
+- **Repo reorganised** to the portfolio convention: all planning and research
+  material under `llm/`; `docs/` keeps only ADRs and the governance delta.
+  Layout documented in the delta. All cross-references updated;
+  `governance-links` and `adr-index` pass.
+- **Conformance checker fixed twice by its own findings:** GATE-1 still
+  pointed at the superseded ADR-0002, and BLK-11 treated every markdown table
+  as a results table. Both corrected.
+- **Report pipeline built.** `writeup/{exec-summary,main}.md` →
+  `scripts/build-report.sh` → `writeup/mats12-report.docx` (pandoc), with
+  exec-summary word-count and figure-presence gates in the build. Figures go
+  through `src/figstyle.py` onto a validated 3-slot palette and register
+  themselves in `results/figures/FIGURE-REGISTRY.md`. Three watermarked
+  placeholders prove the pipeline end to end.
 
 **Counted hours: 0 / 20.**
