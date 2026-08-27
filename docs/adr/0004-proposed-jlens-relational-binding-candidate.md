@@ -34,7 +34,7 @@ Before acceptance, require:
 
 - `llm/plan/jlens-relational-binding-experiment-design.md`
 - `llm/research/jlens-project-research-and-positioning.md`
-- `llm/memory_bank/jlens-discussion-history-2026-08-24.md`
+- `llm/research/jlens-discussion-history-2026-08-24.md`
 
 
 ## Resolution (2026-08-26)

@@ -112,7 +112,7 @@ This plan follows Neel Nanda's Ideation → Exploration → Understanding → Di
 - **Hours 8–14 — Understanding:** seek evidence for and against the frozen hypotheses with held-out tests, strong baselines, bug checks, and alternative explanations.
 - **Hours 15–16 — Distillation:** compress the evidence into scoped claims, red-team them, and communicate limitations.
 
-Every counted hour uses a 5-minute prediction, a bounded execution loop, Jason's first interpretation, then agent/mentor feedback. Use `llm/memory_bank/research-learning-log-template.md`. A GO from design verification means the candidate is ready to enter Understanding; it does not mean the scientific claim has been verified.
+Every counted hour uses a 5-minute prediction, a bounded execution loop, Jason's first interpretation, then agent/mentor feedback. Use `llm/construction/research-learning-log-template.md`. A GO from design verification means the candidate is ready to enter Understanding; it does not mean the scientific claim has been verified.
 
 ## Hour-by-hour plan
 

@@ -72,3 +72,30 @@ Gate 1, Aug 24.
   placeholders prove the pipeline end to end.
 
 **Counted hours: 0 / 20.**
+
+## 2026-08-26 (later) — Merge, cleanup, memory bank restructured
+
+- **Merged to main** (`13734ec`) — server-side via the GitHub API, because
+  local git deadlocked: every write leaves a `.lock` the bridge cannot
+  unlink, and each leftover blocks the next command. Verified by cloning main
+  fresh: governance checks green, conformance clean, report builds.
+- **Finished the cleanup the reorg had left half-done** (`e65fed0`).
+  `llm/plan/PLAN.md` still described the superseded C2/Olmo project — and it
+  is the roadmap path declared in the governance delta, so a stale one broke
+  the design-authority chain. Rewritten around the J-Lens experiment, the
+  passive-primary scope, the nine-day schedule and the V1/V2/V3 gates.
+  `CLAUDE.md` carried both substrates at once; replaced with Qwen3.5-4B plus
+  the pinned lens. Dropped three redundant `.gitkeep` files.
+- Deleted the merged `docs/candidate-c6-scoring` branch. Kept
+  `docs/jlens-relational-binding-history` and `exp/jlens-design-verification`
+  as work history, by decision.
+- **Memory bank restructured** (`memory:revise`). Created the two canonical
+  files that never existed — `techContext.md` and `systemPatterns.md` — and
+  moved the environment and convention material out of `activeContext.md`,
+  which had been carrying durable facts in a transient file. Relocated the
+  discussion history to `llm/research/` and the learning-log template to
+  `llm/construction/`; neither is living memory. Rewrote `projectbrief.md`,
+  which still described the project generically. Added `docs/README.md` to
+  explain why that directory holds only ADRs and the delta.
+
+**Counted hours: 0 / 20.**

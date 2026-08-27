@@ -26,7 +26,7 @@ Use `llm/construction/neel-research-process-learning-overlay.md` as an operative
 - V3 determines whether we now have explicit competing hypotheses and a tractable experiment that distinguishes them.
 - GO means the project is ready to enter Understanding. It does not mean relational binding has been found in J-space.
 
-For each counted hour, use `llm/memory_bank/research-learning-log-template.md`: Jason records the stage, prediction, strongest alternative, and expected agent/mentor advice before execution; Jason interprets the result before the agent gives feedback. Reserve the last five minutes for CONTINUE, CHANGE LOOP, RETURN TO EXPLORE, or PIVOT CANDIDATE. Only the last option changes the candidate, and it requires a failed load-bearing assumption with no bounded same-question fallback.
+For each counted hour, use `llm/construction/research-learning-log-template.md`: Jason records the stage, prediction, strongest alternative, and expected agent/mentor advice before execution; Jason interprets the result before the agent gives feedback. Reserve the last five minutes for CONTINUE, CHANGE LOOP, RETURN TO EXPLORE, or PIVOT CANDIDATE. Only the last option changes the candidate, and it requires a failed load-bearing assumption with no bounded same-question fallback.
 
 ## Time accounting
 

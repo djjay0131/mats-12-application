@@ -1,6 +1,11 @@
 # Backlog
 
+Last updated: 2026-08-26
 Project: J-Lens relational binding (ADR-0005). Passive-primary scope.
+
+No feature specs exist in `llm/features/` yet — this project is a research
+sprint, so the catalog below indexes sprint tasks rather than specs. Add spec
+rows here if any are written.
 
 | # | Item | Phase | Status |
 |---|---|---|---|
@@ -20,6 +25,9 @@ Project: J-Lens relational binding (ADR-0005). Passive-primary scope.
 | 14 | Causal arm, **only if V2 cleared** | phase-1-execute | Contingent |
 | 15 | Robustness and seeded error analysis | phase-1-execute | Blocked on 13 |
 | 16 | Delete example rows from the three ledgers; fill with real entries | phase-1-execute | Open |
+| 16b | ~~Repo cleanup: reorg under `llm/`, retarget PLAN.md and CLAUDE.md~~ | phase-0-select | **Done — e65fed0** |
+| 16c | ~~Memory bank: add techContext/systemPatterns, relocate non-memory files~~ | phase-0-select | **Done** |
+| 16d | Clear the local git lock deadlock (Jason's terminal) | phase-0-select | Open |
 | 17 | Write-up: methods and results first, negatives included | phase-2-writeup | Blocked on 15 |
 | 18 | Introduction, discussion, limitations; audit against preregistration | phase-2-writeup | Blocked on 17 |
 | 19 | Executive summary (+2h budget) — **Jason writes the prose** | phase-3-submit | Blocked on 18 |

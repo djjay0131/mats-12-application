@@ -5,10 +5,16 @@ source of truth for where the project stands right now.
 
 | File | Holds |
 |---|---|
-| `projectbrief.md` | The goal and the constraints. Rarely changes. |
-| `activeContext.md` | Current state, next actions, open decisions, live risks. Updated every session. |
-| `progress.md` | Append-only log of what happened and when. Includes the counted-hours ledger. |
-| `time-log.md` | The 20-hour ledger in detail. |
+| `projectbrief.md` | Goal, the selected project, scope, success criteria, constraints. Changes rarely. |
+| `techContext.md` | Model, lens, compute, tooling versions, known environment issues. |
+| `systemPatterns.md` | Repository layout and the conventions: conformance layers, the three ledgers, the figure registry, the report build, governance flow. |
+| `activeContext.md` | Current focus, next actions, open decisions, live risks. Updated every session. |
+| `progress.md` | Append-only log of what happened and when. |
+| `time-log.md` | The 20-hour counted-time ledger. |
 
-Memory-bank updates are L0 under `docs/governance-delta.md`, but the L0
-fast track is not activated in this repo — they still go through a human.
+Placement rule: goals and constraints → `projectbrief`; tooling and setup →
+`techContext`; architecture and patterns → `systemPatterns`; current state →
+`activeContext`; completed work → `progress`.
+
+Keep every file under 150 lines. Extract detail into `details/` and leave a
+one-line summary with a link.

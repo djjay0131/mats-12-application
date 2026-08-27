@@ -104,6 +104,6 @@ Accepting it would require:
 
 - `llm/plan/jlens-relational-binding-experiment-design.md`
 - `llm/research/jlens-project-research-and-positioning.md`
-- `llm/memory_bank/jlens-discussion-history-2026-08-24.md`
+- `llm/research/jlens-discussion-history-2026-08-24.md`
 - `docs/adr/0004-proposed-jlens-relational-binding-candidate.md`
 

@@ -8,7 +8,7 @@ Add Neel Nanda's research-process framework to the J-Lens design-verification sp
 At the next safe boundary:
 1. Pull/read the latest `docs/jlens-relational-binding-history` branch versions of:
    - llm/construction/neel-research-process-learning-overlay.md
-   - llm/memory_bank/research-learning-log-template.md
+   - llm/construction/research-learning-log-template.md
    - llm/construction/jlens-design-verification-sprint.md
 2. Treat the sprint as an Explore → Understand transition sprint:
    - V1 explores tooling and failure modes.
@@ -29,7 +29,7 @@ At the next safe boundary:
    - name one strong research-taste move and one missed consideration;
    - compare Jason's update with the competing hypotheses;
    - recommend exactly one next action by information gain per unit time.
-7. Append the completed entry to a working copy based on `llm/memory_bank/research-learning-log-template.md`.
+7. Append the completed entry to a working copy based on `llm/construction/research-learning-log-template.md`.
 8. End each hour with exactly one decision: CONTINUE, CHANGE LOOP, RETURN TO EXPLORE, or PIVOT CANDIDATE. Only recommend PIVOT CANDIDATE when a load-bearing assumption failed and no bounded same-question fallback remains.
 
 Do not let coaching dialogue consume counted research time while waiting for Jason; ask him to stop/pause the timer at the boundary according to the repository's time-accounting rules. Do not begin the main experiment.

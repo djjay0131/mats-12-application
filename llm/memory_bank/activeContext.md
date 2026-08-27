@@ -2,6 +2,10 @@
 
 Last updated: 2026-08-26
 
+Current focus, next actions and live risks only. Durable environment facts
+are in `techContext.md`; conventions in `systemPatterns.md`; scope in
+`projectbrief.md`.
+
 ## Where we are
 
 **Project selected and locked: the J-Lens relational-binding experiment**
@@ -23,14 +27,6 @@ ADR-0002 was never executed against. V1/V2/V3 count one hour each.
 
 **9 days to the deadline** (Fri 2026-09-04, 23:59 PT).
 
-## Substrate — verified, not assumed
-
-ARC job 550088, `falcon1`, NVIDIA L40S. `Qwen/Qwen3.5-4B` +
-`neuronpedia/jacobian-lens` rev `qwen-n1000` (commit `16a01f3`).
-`COMPAT_ASSERTIONS: PASS`, `LAYOUT_ASSERTIONS: PASS`, 32/32 reference tests,
-model load 13.6 s, peak GPU 8.51 GB of 47.7 GB. Details:
-`results/design-verification/environment-manifest.md`.
-
 ## Immediate next actions
 
 1. **V1 (1 counted hour).** Reproduce an official J-Lens example and
@@ -44,31 +40,27 @@ model load 13.6 s, peak GPU 8.51 GB of 47.7 GB. Details:
    pairs — does the metric test binding, or only whether the model already
    picked the right intermediate?
 
-## Reporting is wired
-
-- Author in `writeup/exec-summary.md` and `writeup/main.md`; build with
-  `./scripts/build-report.sh [--pdf]` → `writeup/mats12-report.docx`.
-- Figures go through `src/figstyle.py::save_figure`, which registers each one
-  in `results/figures/FIGURE-REGISTRY.md` with a claim id, n, seed, sha and
-  commit. **A figure with no claim id has no reason to be in the report.**
-- Three placeholder figures exist, watermarked "NOT A RESULT". Replace them
-  as real results land; the registry Notes column flags them.
-
 ## Live risks
 
 - ⚠️ **B2** — no sparse non-negative J-space reconstruction in the reference
   code. Scoped by ADR-0005, settled at V2.
-- ⚠️ **B3** — no published shuffled-corpus control lens. Negative control
-  falls back to label permutation + norm-matched random directions.
-- ⚠️ **B4** — `len(tokenizer)=248077` vs a 248320-wide unembedding. Rank
-  metrics must state which width they rank over.
 - ⚠️ **Crowding** — J-Lens was promoted with a bolded "Key resource" link.
   The relational-binding framing has to carry the differentiation, and it
   must be obvious in the first paragraph.
-- Queue latency ~23 min on L40S (17/20 nodes draining); `a30_normal_q` is an
-  unrestricted fallback. Setup time, not counted.
+- Schedule — 20 counted hours across 9 days with no slack for a second false
+  start. A V2 that runs long is the most likely way to lose a day.
+
+B3, B4 and queue latency are environment facts, not live decisions:
+`techContext.md` §Known environment issues.
 
 ## Open
 
-- The three ledgers still contain their example rows. Delete them before the
-  first real entry — `conformance-audit` flags rows containing "example".
+- The three ledgers still carry their example rows. Delete them before the
+  first real entry — `conformance-audit` flags any row containing "example".
+- Local git is deadlocked on lock files the bridge cannot unlink; commits are
+  going in server-side via the GitHub API. Jason clears it with
+  `rm -f .git/*.lock && git fetch && git reset --hard origin/main && git gc --prune=now`.
+- `origin/docs/jlens-relational-binding-history` and
+  `origin/exp/jlens-design-verification` are kept deliberately as work history.
+- `latex-agent`, `proposal-agent` and `position-paper-agent` are dead weight
+  for a pandoc/Word project. Kept for now by decision.
