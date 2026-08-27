@@ -47,7 +47,19 @@ MODEL_REV = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 WORD_RE = re.compile(r"[A-Za-z]+")
 
 
+THINK_CLOSE = "</think>"
+
+
 def first_word(text: str) -> str:
+    """First alphabetic word of the ANSWER.
+
+    Qwen3.5 is a hybrid-thinking model and will open a <think> block on
+    zero-shot raw-completion prompts. Everything up to and including the
+    closing tag is reasoning, not the answer, so it is skipped. A model that
+    thinks and then answers correctly is scored correct.
+    """
+    if THINK_CLOSE in text:
+        text = text.split(THINK_CLOSE)[-1]
     m = WORD_RE.search(text)
     return m.group(0).lower() if m else ""
 
@@ -74,7 +86,7 @@ def load(device: str):
 
 
 @torch.no_grad()
-def generate(tok, model, prompts, *, max_new_tokens=4, batch_size=16,
+def generate(tok, model, prompts, *, max_new_tokens=48, batch_size=1,
              device="cuda"):
     out = []
     for i in range(0, len(prompts), batch_size):
@@ -157,6 +169,9 @@ def run_cell(tok, model, *, lexicon, shot, n_pairs, seed, device):
         "fact_order_gap": elig["AB"] - elig["BA"],
         "variant_accuracy": sum(r["text_match"] for r in per_variant) / len(per_variant),
         "alt_answer_rate": sum(r["chose_alternative"] for r in per_variant) / len(per_variant),
+        # The confound that invalidated the first run. Kept as a reported
+        # metric so it can never silently return.
+        "think_mode_rate": sum("think" in r["generated"] for r in per_variant) / len(per_variant),
         "first_token_agreement": sum(
             r["text_match"] == r["first_token_match"] for r in per_variant
         ) / len(per_variant),
@@ -225,7 +240,7 @@ def main() -> int:
                    "not circuit discovery",
         "model": MODEL_ID, "model_revision": MODEL_REV,
         "seed": args.seed, "n_pairs_per_cell": args.n_pairs,
-        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": 4},
+        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": 48, "batch_size": 1},
         "templates": [t.tid for t in TEMPLATES],
         "thresholds": {"pass": 0.80, "marginal_low": 0.60},
         "primary_metric": "pair_eligibility_AB (both bindings correct, "

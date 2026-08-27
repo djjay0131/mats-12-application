@@ -1,0 +1,73 @@
+{
+  "slug": "eligibility-screen",
+  "started_utc": "2026-08-27T05:53:18.493898+00:00",
+  "argv": [
+    "experiments/design-verification/eligibility_screen.py",
+    "--n-pairs",
+    "30"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "b138b8862c905acbb17b09084bafc6df9e8e7240",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "M .gitignore",
+      " M scripts/conformance-check.mjs",
+      "?? experiments/design-verification/eligibility_screen.py",
+      "?? experiments/design-verification/run_eligibility.sbatch",
+      "?? experiments/design-verification/run_gate1.sbatch",
+      "?? experiments/design-verification/v1_tooling_verification.py",
+      "?? llm/memory_bank/research-learning-log.md",
+      "?? results/datasets/",
+      "?? results/design-verification/working-copy-decision.md",
+      "?? results/runs/",
+      "?? results/slurm-logs/",
+      "?? scripts/reproduce.sh",
+      "?? src/make_dataset.py",
+      "?? src/runlog.py",
+      "?? src/task_templates.py"
+    ],
+    "note": null
+  },
+  "hostname": "fal045",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "550510",
+    "SLURM_JOB_NAME": "mats12-gate1",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal045",
+    "SLURM_JOB_GPUS": "3"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "n_pairs": 30,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "thresholds": {
+      "pass": 0.8,
+      "marginal_low": 0.6
+    }
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-27T05:53:41.398360+00:00",
+  "outputs": [
+    "eligibility-screen.json"
+  ]
+}
