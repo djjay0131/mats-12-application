@@ -20,11 +20,11 @@
 # `set -e` is deliberately NOT used: the audit must not be able to stop the
 # readout, and the readout's own exit code is reported explicitly.
 #SBATCH -A agents4research
-#SBATCH -p a30_normal_q
+#SBATCH -p a30_normal_q,l40s_normal_q
 #SBATCH --gres=gpu:1
 #SBATCH -c 2
 #SBATCH --mem=24G
-#SBATCH -t 00:45:00
+#SBATCH -t 00:25:00
 #SBATCH -J mats12-stage1
 #SBATCH -o /scratch/djjay/mats12/repo/results/slurm-logs/stage1-%j.out
 #SBATCH -e /scratch/djjay/mats12/repo/results/slurm-logs/stage1-%j.out
