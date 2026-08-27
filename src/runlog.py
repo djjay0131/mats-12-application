@@ -160,6 +160,10 @@ def start_run(slug: str, *, root: Path | None = None, **params: Any) -> Run:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     rdir = repo / "results" / "runs" / f"{ts}-{slug}"
     outputs = rdir / "outputs"
+    # Snapshot git state BEFORE creating the run directory. Otherwise the run
+    # dirties the tree with its own output paths and every manifest reports
+    # dirty=true, which makes the flag useless as a warning.
+    git = _git(repo)
     outputs.mkdir(parents=True, exist_ok=True)
 
     with open(rdir / "command.txt", "w") as f:
@@ -171,7 +175,7 @@ def start_run(slug: str, *, root: Path | None = None, **params: Any) -> Run:
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "argv": sys.argv,
         "cwd": str(Path.cwd()),
-        "git": _git(repo),
+        "git": git,
         "hostname": socket.gethostname(),
         "platform": platform.platform(),
         "slurm": {
