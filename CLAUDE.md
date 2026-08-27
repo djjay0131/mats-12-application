@@ -78,28 +78,22 @@ PM and research material under `llm/`; execution and outputs at the root.
 
 ## Models
 
-Do **not** use GPT-2, Pythia, Gemma 2, and prefer not to use Qwen2.5 or
-Llama-3 as the primary model — all read as "old" to this reviewer. Current
-substrates: `allenai/Olmo-3-7B-Think` (best interp tractability, full
-post-training lineage), `openai/gpt-oss-20b`, `Qwen/Qwen3.5-9B` (⚠️ hybrid
-linear attention — residual-stream methods fine, attention-head analysis
-not). See the literature scan for the verified table.
+Subject model: **`Qwen/Qwen3.5-4B`** with **`neuronpedia/jacobian-lens`**
+rev `qwen-n1000` (commit `16a01f3`), verified compatible on ARC L40S —
+`d_model` 2560 matching on both axes, `max(source_layers)=30 < 32`, peak GPU
+8.51 GB. **Do not fit a lens**; use the pre-fitted public checkpoint.
 
-### Olmo 3 Think lineage — verified 2026-08-22
-`allenai/Olmo-3-1025-7B` (base) → `allenai/Olmo-3-7B-Think-SFT` →
-`allenai/Olmo-3-7B-Think-DPO` → `allenai/Olmo-3-7B-Think` (RLVR).
-Intermediate checkpoints are **git branches**: 55 on Think
-(`step_0025`…`step_1375`), 43 on Think-SFT (`step1000`…`step43000`).
-`from_pretrained(..., revision="step_0700")`.
+Do **not** use GPT-2, Pythia, or Gemma 2 — all read as old to this reviewer.
+Neel names the Qwen 3.5/3.6 dense family (4B, 9B, 27B) as good defaults, and
+`deepseek-v4-flash-0731` for a highly capable model with J-Lenses published.
 
-Three traps: (1) `Think-SFT` has a **different tokenizer and no chat
-template** — verify `<think>` tokenizes identically at all four stages
-before comparing anything; (2) branch naming differs between repos
-(`step_0700` vs `step20000`) and the SFT card's own example 404s;
-(3) `Think-DPO` duplicates weights as `.bin` — pass
-`allow_patterns=["*.safetensors*","*.json","*.txt","*.jinja"]` or you pull
-29 GB instead of 14.6. OlmoTrace is hosted-only on the 32B — do not make it
-load-bearing.
+⚠️ Known issue **B4**: `len(tokenizer)=248077` against a 248320-wide
+unembedding — ~243 ids have no tokenizer string. Rank metrics must state
+which width they rank over.
+
+The Olmo 3 post-training lineage belonged to candidate C2, superseded by
+ADR-0005. Its verified details are preserved in
+`llm/plan/project-candidates.md` should the fallback ever be needed.
 
 ## Tooling
 
