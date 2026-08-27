@@ -63,6 +63,8 @@ const words = s => (s.replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')      // drop images
 const images = s => (s.match(/!\[[^\]]*\]\([^)]*\)|<img\s/gi) || []).length;
 const tables = s => s.split('\n\n').filter(b => /^\|.*\|/m.test(b) && /\|\s*-{2,}/.test(b));
 const numbersIn = s => (s.replace(/```[\s\S]*?```/g, ' ')
+                         .replace(/^#{1,6}\s.*$/gm, ' ')            // section numbers are not results
+                         .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')   // figure captions are not results
                          .match(/(?<![\w.])-?\d+(?:\.\d+)?%?(?![\w])/g) || [])
                        .map(n => n.replace('%', ''))
                        .filter(n => Math.abs(parseFloat(n)) > 1); // ignore 0/1/small ordinals
@@ -412,7 +414,10 @@ check('BLK-36d', 'WRITEUP', 'Every results subsection reporting a number cites a
   for (const sec of resultsSecs) {
     for (const sub of sec.split(/^#{3,4}\s+/m)) {
       const title = (sub.split('\n')[0] || '').trim().slice(0, 48);
-      const body = sub.replace(/\[(RESULT|STATUS|DECISION) PENDING[^\]]*\]/gi, ' ');
+      // drop the subsection heading line: split() already ate its '#' marks, so the
+      // ordinal would otherwise read as a reported number.
+      const body = sub.split('\n').slice(1).join('\n')
+        .replace(/\[(RESULT|STATUS|DECISION) PENDING[^\]]*\]/gi, ' ');
       if (!numbersIn(body).length) continue;          // no numbers, nothing to trace
       RUN_ID_RE.lastIndex = 0;
       if (!RUN_ID_RE.test(body)) offenders.push(title || '(untitled)');
