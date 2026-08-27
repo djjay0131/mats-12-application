@@ -11,7 +11,7 @@
 #   ./scripts/reproduce.sh --list     # show the dependency order and exit
 #
 # GPU steps refuse to run on a login node. On ARC, run this inside an
-# allocation or via sbatch -- never on falcon1.
+# allocation or via sbatch -- never on falcon1, where Python is prohibited.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -23,8 +23,9 @@ export PYTHONPATH="$ROOT/src:${PYTHONPATH:-}"
 
 # step id | needs GPU | description | command
 STEPS=(
-  "01-dataset|no |Generate dev + held-out paired datasets (deterministic, seeded)|python src/make_dataset.py --out results/datasets"
-  "02-eligibility|yes|Behavioural eligibility screen on the unmodified model|python experiments/design-verification/eligibility_screen.py"
+  "01-dataset|no|Generate dev + held-out paired datasets (deterministic, seeded)|python src/make_dataset.py"
+  "02-eligibility|yes|Behavioural eligibility screen on the unmodified model|python experiments/design-verification/eligibility_screen.py --n-pairs 30"
+  "03-v1-tooling|yes|V1 tooling verification: official positive control, logit-lens switch, coverage control|python experiments/design-verification/v1_tooling_verification.py"
 )
 
 if [[ "${1:-}" == "--list" ]]; then
@@ -53,7 +54,7 @@ fi
 
 for s in "${STEPS[@]}"; do
   IFS='|' read -r id gpu desc cmd <<< "$s"
-  if [[ "$gpu" == "yes " || "$gpu" == "yes" ]] && ! have_gpu; then
+  if [[ "$gpu" == "yes" ]] && ! have_gpu; then
     echo "SKIP  $id  ($desc) -- no CUDA device visible" >&2
     continue
   fi
