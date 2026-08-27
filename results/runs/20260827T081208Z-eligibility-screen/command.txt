@@ -1,0 +1,2 @@
+/scratch/djjay/mats12/venv/bin/python experiments/design-verification/eligibility_screen.py --n-pairs 30
+# cwd: /scratch/djjay/mats12/repo

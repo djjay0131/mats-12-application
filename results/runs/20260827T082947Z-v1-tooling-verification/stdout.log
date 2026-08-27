@@ -1,0 +1,19 @@
+[runlog] results/runs/20260827T082947Z-v1-tooling-verification  git=c5bba02daf2d4378681f5559523fcdf94864acd2 DIRTY  slurm=550548
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1845.27it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 39079.08it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 142.65it/s]
+[v1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.6s
+
+==============================================================
+V1 VERDICT: PASS
+  ok   official_positive_control_reproduces
+  ok   both_paths_run
+  ok   logit_lens_switch_is_live
+  ok   deterministic
+  ok   negative_control_available
+  ok   no_transformerlens_in_path
+  ok   coverage_positive_control
+  ok   headroom_for_20_pairs_plus_controls
+  jlens pass@10      = 0.350
+  logitlens pass@10  = 0.200
+==============================================================

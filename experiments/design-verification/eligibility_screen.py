@@ -64,6 +64,49 @@ def first_word(text: str) -> str:
     return m.group(0).lower() if m else ""
 
 
+BOLD_RE = re.compile(r"\*\*([^*]+)\*\*")
+
+
+def answer_span(text: str) -> str:
+    """The model's own final answer, as best it can be located.
+
+    Zero-shot this model answers verbosely and puts its conclusion in the
+    LAST bolded span. Fall back to the last alphabetic word.
+    """
+    if THINK_CLOSE in text:
+        text = text.split(THINK_CLOSE)[-1]
+    bolds = BOLD_RE.findall(text)
+    if bolds:
+        m = WORD_RE.search(bolds[-1])
+        if m:
+            return m.group(0).lower()
+    words = WORD_RE.findall(text)
+    return words[-1].lower() if words else ""
+
+
+def score_generation(text: str, answer: str, alt: str) -> dict:
+    """Score by CONTENT, not by position.
+
+    The behavioural question is whether the model resolved the binding, not
+    whether its answer happened to land in the first token slot.
+    """
+    body = text.split(THINK_CLOSE)[-1] if THINK_CLOSE in text else text
+    low = body.lower()
+    a, b = answer.lower(), alt.lower()
+    present, alt_present = a in low, b in low
+    return {
+        # Primary: names the correct object and not the paired alternative.
+        # Robust to verbosity, which the first-word rule was not.
+        "correct": present and not alt_present,
+        "answer_present": present,
+        "alt_present": alt_present,
+        "strict": answer_span(text) == a,
+        "first_word": first_word(text) == a,
+        # The informative error: read the concepts, bound them wrongly.
+        "chose_alternative": alt_present and not present,
+    }
+
+
 def load(device: str):
     tok = AutoTokenizer.from_pretrained(MODEL_ID, revision=MODEL_REV)
     # jlens's HFLensModel uses force_bos=True; match it so the behavioural
@@ -86,7 +129,7 @@ def load(device: str):
 
 
 @torch.no_grad()
-def generate(tok, model, prompts, *, max_new_tokens=48, batch_size=1,
+def generate(tok, model, prompts, *, max_new_tokens=96, batch_size=1,
              device="cuda"):
     out = []
     for i in range(0, len(prompts), batch_size):
@@ -127,16 +170,16 @@ def run_cell(tok, model, *, lexicon, shot, n_pairs, seed, device):
 
     per_variant = []
     for (p, v), g in zip(flat, gens):
-        ok = first_word(g["text"]) == v.answer.lower()
+        sc = score_generation(g["text"], v.answer, v.alt_answer)
         per_variant.append({
             "pair_id": p.pair_id, "template_id": p.template_id,
             "cell": v.cell, "variant": v.variant, "fact_order": v.fact_order,
             "prompt": v.prompt, "expected": v.answer, "alt": v.alt_answer,
-            "generated": g["text"], "text_match": ok,
+            "generated": g["text"], "text_match": sc["correct"],
+            "strict_match": sc["strict"], "first_word_match": sc["first_word"],
+            "answer_present": sc["answer_present"], "alt_present": sc["alt_present"],
             "first_token_match": g["first_id"] == single_token_id(tok, v.answer),
-            # The informative error: the model read the concepts but bound
-            # them wrongly. That is the failure this project is about.
-            "chose_alternative": first_word(g["text"]) == v.alt_answer.lower(),
+            "chose_alternative": sc["chose_alternative"],
         })
 
     by_pair = defaultdict(dict)
@@ -172,6 +215,12 @@ def run_cell(tok, model, *, lexicon, shot, n_pairs, seed, device):
         # The confound that invalidated the first run. Kept as a reported
         # metric so it can never silently return.
         "think_mode_rate": sum("think" in r["generated"] for r in per_variant) / len(per_variant),
+        # Report all three criteria. If they disagree sharply, the metric is
+        # measuring the parser rather than the model -- which is exactly what
+        # happened on the first two runs.
+        "strict_accuracy": sum(r["strict_match"] for r in per_variant) / len(per_variant),
+        "first_word_accuracy": sum(r["first_word_match"] for r in per_variant) / len(per_variant),
+        "answer_present_rate": sum(r["answer_present"] for r in per_variant) / len(per_variant),
         "first_token_agreement": sum(
             r["text_match"] == r["first_token_match"] for r in per_variant
         ) / len(per_variant),
@@ -240,7 +289,7 @@ def main() -> int:
                    "not circuit discovery",
         "model": MODEL_ID, "model_revision": MODEL_REV,
         "seed": args.seed, "n_pairs_per_cell": args.n_pairs,
-        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": 48, "batch_size": 1},
+        "decoding": {"do_sample": False, "num_beams": 1, "max_new_tokens": 96, "batch_size": 1},
         "templates": [t.tid for t in TEMPLATES],
         "thresholds": {"pass": 0.80, "marginal_low": 0.60},
         "primary_metric": "pair_eligibility_AB (both bindings correct, "
