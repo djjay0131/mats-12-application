@@ -1,0 +1,45 @@
+djjay@agents4research:~/code/mats-12-application$ export SSH_AUTH_SOCK=/home/djj
+ay/.ssh/agent.sock; ssh -A -t falcon1
++------------------------------------------------------------------------------+
+| This computer is the property of Virginia Polytechnic Institute and State    |
+| University. Use of this equipment implies agreement to the university        |
+| Acceptable Use Policy (Policy 7000). For more information, please visit:     |
+| https://vt.edu/acceptable-use.html                                           |
++------------------------------------------------------------------------------+
++------------------------------------------------------------------------------+
+| By accessing and using this system, you acknowledge and agree to comply with |
+| all applicable institutional policies, terms of service, and usage           |
+| guidelines. This system provides access to a wide range of software, each of |
+| which is subject to its own license agreements and terms of use. By using    |
+| any software or service available on this system, you accept and agree to    |
+| the terms and conditions set forth by the respective software providers and  |
+| licensors. Unauthorized use of this system is strictly prohibited. All       |
+| activity may be monitored and recorded to ensure compliance with             |
+| institutional policies and applicable laws. If you do not agree to these     |
+| terms, you must disconnect immediately.                                      |
++------------------------------------------------------------------------------+
++------------------------------------------------------------------------------+
+| NOTE: VT Enterprise Directory Password authentication requires a DUO second  |
+|       factor challenge.  After your password is provided, you will receive a |
+|       DUO challenge.                                                         |
++------------------------------------------------------------------------------+
+
+Last failed login: Wed Aug 26 14:34:47 EDT 2026 from 2607:b400:c:a180:3e9a:5af9:
+703f:9831 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Wed Aug 26 14:25:09 2026 from 2607:b400:90:ef00::192
+[djjay@falcon1 ~]$ sinfo -p l40s_normal_q -o %l+%L+%D+%T | head -6
+TIMELIMIT+DEFAULTTIME+NODES+STATE
+infinite+1:00:00+18+mixed-
+infinite+1:00:00+2+mixed
+[djjay@falcon1 ~]$ salloc -A agents4research -p l40s_normal_q --gres=gpu:1 -c 8
+--mem=64G -t 08:00:00 --job-name=mats12-kernel
+salloc: Pending job allocation 550451
+salloc: job 550451 queued and waiting for resources
+^Csalloc: Job allocation 550451 has been revoked.
+salloc: Job aborted due to signal
+[djjay@falcon1 ~]$ scancel 550451; salloc -A agents4research -p a30_normal_q --g
+res=gpu:1 -c 8 --mem=48G -t 08:00:00 --job-name=mats12-kernel
+salloc: Pending job allocation 550487
+salloc: job 550487 queued and waiting for resources
+
