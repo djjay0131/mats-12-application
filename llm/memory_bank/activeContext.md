@@ -65,6 +65,25 @@ clone on the VM with results pulled back, or a clone on ARC with the VM as a
 pure orchestration shell. The second is simpler — jobs and data are already
 on ARC at `/scratch/$USER/mats12` — but confirm before building on it.
 
+## Design deltas from the 600k audit
+
+`llm/research/context-audit-2026-08-26.md`. Eight changes folded into the
+execution prompt; two are Jason's call:
+
+- **Open — promote H3 out of contingency.** ADR-0005 §2 deferred the causal arm
+  because the reference implementation has no J-space reconstruction. The audit
+  shows causal validity does not require intervening *in J-space*: a 1-D
+  activation-space intervention on a difference-in-means direction, patched on
+  the residual stream, is a few lines. That converts a predicted negative from
+  a number into a mechanism, which is what the novelty squeeze (L764) demands.
+  Would need an ADR-0006.
+- **Open — cut two redundant controls** (pair-alternative / relation deletion /
+  question truncation are mutually predictive) to pay for the coverage control,
+  the supervised ceiling and the order-reversed variant.
+
+**Headline:** the 600k file predates J-Lens — zero mentions. It is background,
+not requirements, and the write-up must define J-Lens from first principles.
+
 ## Open
 
 - The three ledgers still carry their example rows. Delete them before the
