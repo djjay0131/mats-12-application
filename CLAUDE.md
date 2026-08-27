@@ -97,7 +97,20 @@ model once, keep weights and activations in memory while iterating. Cold-start
 scripts that reload a 4B model every call waste the budget.
 
 This project uses the tmux + IPython pattern (Neel's "simple and unbreakable"
-option). Session name: **`mats-12-application`**.
+option), across two hops. See `llm/memory_bank/techContext.md` §Topology.
+
+- **`agents4research`** — an Ubuntu VM inside the VT network. The durable
+  orchestration shell lives here, in tmux session **`mats-12-application`**.
+  It survives the Mac sleeping or dropping its connection; that is the entire
+  reason for the hop.
+- **`djjay@falcon1.arc.vt.edu`** — the ARC login node, reached with a key
+  stored on the VM. Login node only: **never run compute here.**
+- **GPU compute node** — reached via `salloc`/`sbatch`. This is where the
+  model and lens load. `agents4research` is *also* the Slurm account name;
+  do not confuse the two.
+
+Run the persistent IPython kernel on the compute node, in tmux, nested inside
+the VM's session. Nothing long-lived runs on the Mac side.
 
 - Send code with `tmux send-keys`, read results with `tmux capture-pane`.
 - **Load models and data in dedicated cells at the top.**

@@ -53,6 +53,18 @@ ADR-0002 was never executed against. V1/V2/V3 count one hour each.
 B3, B4 and queue latency are environment facts, not live decisions:
 `techContext.md` §Known environment issues.
 
+## Where the work runs
+
+Mac → `agents4research` (Ubuntu VM, durable tmux `mats-12-application`) →
+`djjay@falcon1.arc.vt.edu` (ARC login) → `salloc` GPU node. The VM hop exists
+so the session survives the Mac sleeping. `agents4research` is also the Slurm
+account name — do not conflate. Detail: `techContext.md` §Topology.
+
+**Open question for V1:** where the repo working copy lives. Options are a
+clone on the VM with results pulled back, or a clone on ARC with the VM as a
+pure orchestration shell. The second is simpler — jobs and data are already
+on ARC at `/scratch/$USER/mats12` — but confirm before building on it.
+
 ## Open
 
 - The three ledgers still carry their example rows. Delete them before the

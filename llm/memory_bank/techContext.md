@@ -26,10 +26,45 @@ Verified 2026-08-24, ARC job 550088: `COMPAT_ASSERTIONS: PASS`,
 allocation 8.51 GB. Full detail:
 `results/design-verification/environment-manifest.md`.
 
+## Topology — where work actually runs
+
+**`agents4research` is two different things.** It is the name of an Ubuntu VM
+inside the VT network, *and* the name of the Slurm account on ARC. Do not
+conflate them; the distinction decides where a command runs.
+
+```
+Mac (Claude Desktop)
+  └─ ssh ──> agents4research          Ubuntu VM, inside the VT network
+               │                      • the durable orchestration shell
+               │                      • tmux session: mats-12-application
+               │                      • survives the Mac sleeping or
+               │                        losing its connection
+               │
+               └─ ssh ──> djjay@falcon1.arc.vt.edu    ARC login node
+                            │                          • key stored on the VM
+                            │                          • Slurm account:
+                            │                            agents4research
+                            │
+                            └─ salloc / sbatch ──> GPU compute node
+                                                    • L40S, where the model
+                                                      and lens actually load
+```
+
+The outer tmux on the VM is what makes the session durable — that is the
+whole reason for the extra hop. **Never run the long-lived kernel on the Mac
+side of that boundary.** Nothing that matters should die because a laptop lid
+closed.
+
+GPUs live only on ARC compute nodes; `falcon1` is a login node and must not be
+used for compute. A persistent kernel therefore needs an interactive
+allocation (`salloc`) with tmux running on the compute node, nested inside the
+VM's tmux session.
+
 ## Compute — Virginia Tech ARC
 
-Account `agents4research`, user `djjay`, login `falcon1`. Partitions
-available: `l40s`, `a30`, `v100`, `t4` (normal and preemptable).
+Slurm account `agents4research`, user `djjay`, login node
+`falcon1.arc.vt.edu`. Partitions available: `l40s`, `a30`, `v100`, `t4`
+(normal and preemptable).
 
 | | |
 |---|---|
