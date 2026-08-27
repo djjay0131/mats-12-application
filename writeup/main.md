@@ -396,6 +396,15 @@ about the model or the layer, not about J-Lens. If arm 3 is high and both lenses
 are at floor, the conclusion is about the readouts.
 `[RESULT PENDING]`
 
+*Reading this section against the run manifest.* The Stage 1 passive readout
+emits three arm strings — `jlens`, `logitlens` and `jlens_random_transport` —
+and they do not map one-to-one onto the three arms above. `jlens` and
+`logitlens` are arms 1 and 2. `jlens_random_transport` is not a fourth arm: it
+is control 8a, executed through the same harness so that it shares the
+extraction and scoring path exactly, and it is reported as a control rather than
+as a comparison of interest. The supervised reference (arm 3) is not among them;
+it is not part of the Stage 1 passive script.
+
 ### Metrics
 
 Two primary metrics are reported together: the pre-registered binary one, and a
