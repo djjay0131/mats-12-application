@@ -79,9 +79,11 @@ the agent's context window:
 > relevant information in the context window... By default, just **put this
 > 600k token file** in the context window."
 
-It lives at **`context/default_600k.md`** (gitignored — 637 KB, not ours to
-redistribute). If it is missing, get it from the Drive folder linked in
-`llm/application/mats12-instructions-raw.txt` before starting work.
+It is committed at **`context/default_600k.md`** (2.24 MB, 41,360 lines), so a
+fresh clone has it. Load it before doing research work.
+
+⚠️ It is Neel's compilation, kept here because this repository is **private**.
+Do not make this repository public without removing it first.
 
 Also load, in this order: `llm/plan/PLAN.md`,
 `docs/adr/0005-accept-jlens-relational-binding.md`,

@@ -19,5 +19,3 @@ _to_delete/
 # report build artifacts
 writeup/.build/
 
-# Neel's compiled context file — 637 KB, not ours to redistribute
-context/default_600k.md

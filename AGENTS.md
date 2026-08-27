@@ -6,8 +6,7 @@ that file first — it is authoritative for every agent, not only Claude Code.
 The three things most often got wrong here:
 
 1. **Load `context/default_600k.md`** into your context window before
-   starting work (ADV-11). It is gitignored; if absent, fetch it from the
-   Drive folder linked in `llm/application/mats12-instructions-raw.txt`.
+   starting work (ADV-11). It is committed, so a fresh clone has it.
 2. **Use the persistent IPython kernel in the `mats-12-application` tmux
    session.** Never restart it without asking. Save every plot as a PNG.
 3. **Never present your own output as a verified result.** Every number that
