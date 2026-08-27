@@ -163,15 +163,20 @@ def main() -> int:
         out = []
         for i in test_idx:
             h = captured[i]["H"][layer][position]
+            base = {"record_id": captured[i]["rec"]["record_id"],
+                    "pair_id": captured[i]["rec"]["pair_id"]}
             if h is None:
+                # No activation at this position -- resolve_positions found no
+                # index. Recorded as unscorable WITH a reason rather than
+                # dropped, so `n` stays comparable between final and prequery.
+                out.append({**base, "margin": None, "scored": False,
+                            "success": None, "reason": "no_position"})
                 continue
             m = margin_of(h, h_bar, mu, captured[i]["rec"]["intermediate_id"],
                           captured[i]["rec"]["alt_intermediate_id"])
-            out.append({"record_id": captured[i]["rec"]["record_id"],
-                        "pair_id": captured[i]["rec"]["pair_id"],
-                        "margin": m,
-                        "scored": m is not None,
-                        "success": None if m is None else bool(m > 0)})
+            out.append({**base, "margin": m, "scored": m is not None,
+                        "success": None if m is None else bool(m > 0),
+                        "reason": None if m is not None else "class_unseen_in_fit"})
         return out
 
     pair_ids = sorted({c["rec"]["pair_id"] for c in captured})
@@ -183,10 +188,16 @@ def main() -> int:
         scored = [s for s in scores if s["scored"]]
         if not scored:
             return {"n": 0, "n_unscorable": len(scores),
+                    "unscorable_reasons": {s["reason"]: 1 for s in scores},
                     "mean_margin": None, "success_rate": None}
+        reasons = {}
+        for s in scores:
+            if not s["scored"]:
+                reasons[s["reason"]] = reasons.get(s["reason"], 0) + 1
         return {
             "n": len(scored),
             "n_unscorable": len(scores) - len(scored),
+            "unscorable_reasons": reasons,
             "mean_margin": sum(s["margin"] for s in scored) / len(scored),
             "success_rate": sum(s["success"] for s in scored) / len(scored),
         }
@@ -218,6 +229,27 @@ def main() -> int:
                               "selected on LOO, not in-sample, on purpose",
             "at_selected_layer": per_layer[best],
         }
+
+    # Persist the fitted parameters. Section 2.5 says h_bar and mu are
+    # estimated on development prompts and applied UNCHANGED to held-out. If
+    # they are only ever computed inside evaluate() and thrown away, that
+    # promise cannot be checked by a reader and any drift in the capture path
+    # between now and then would change them silently.
+    fitted = {}
+    for position in ("final", "prequery"):
+        sel = results[position].get("selected_layer")
+        if sel is None:
+            continue
+        items = [(c["rec"]["intermediate_id"], c["H"][sel][position])
+                 for c in captured if c["H"][sel][position] is not None]
+        if len(items) < 2:
+            continue
+        h_bar, mu, counts = fit_centroids(items)
+        fitted[position] = {"layer": sel, "h_bar": h_bar,
+                            "mu": mu, "counts": counts,
+                            "fitted_on": "dev, all records, no holdout"}
+    if fitted:
+        torch.save(fitted, run.outputs / "centroids-dev.pt")
 
     counts_example = None
     for l in layers[:1]:
@@ -251,6 +283,11 @@ def main() -> int:
                               "leave-one-pair-out number, not the in-sample one",
         "seconds": {"model_load": round(load_s, 2),
                     "capture": round(cap_s, 2)},
+        "fitted_parameters_file": ("outputs/centroids-dev.pt" if fitted
+                                   else None),
+        "fitted_parameters_note": "h_bar and mu at the selected layer, fitted "
+                                  "on all dev records. Held-out scoring must "
+                                  "LOAD these, not refit.",
         "results": results,
     }
     out = run.outputs / "stage1-supervised-reference.json"
