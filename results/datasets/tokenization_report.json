@@ -1,0 +1,341 @@
+{
+  "framing": "method evaluation, not circuit discovery",
+  "len_tokenizer": 248077,
+  "model": "Qwen/Qwen3.5-4B",
+  "padding_side_default": "right",
+  "prompt_n_tokens": [
+    30
+  ],
+  "provenance": "agent-unverified",
+  "registered_lexicons": {
+    "pseudo": {
+      "lexicon": "pseudo",
+      "objects": {
+        "died": [],
+        "n_candidates": 30,
+        "n_survived": 30,
+        "survivors": [
+          "quil",
+          "kalt",
+          "mev",
+          "urn",
+          "yarn",
+          "cade",
+          "dorm",
+          "vond",
+          "jorn",
+          "klim",
+          "rond",
+          "blat",
+          "emp",
+          "mund",
+          "perk",
+          "risp",
+          "sull",
+          "tund",
+          "gilt",
+          "tarv",
+          "welt",
+          "brac",
+          "frit",
+          "sled",
+          "twig",
+          "barn",
+          "ferry",
+          "depot",
+          "lodge",
+          "vault"
+        ]
+      },
+      "people": {
+        "died": [],
+        "n_candidates": 39,
+        "n_survived": 39,
+        "survivors": [
+          "Mira",
+          "Pell",
+          "Tor",
+          "Mal",
+          "Vin",
+          "Kar",
+          "Den",
+          "Sol",
+          "Bran",
+          "Cor",
+          "Dar",
+          "Eld",
+          "Fal",
+          "Gan",
+          "Hal",
+          "Jan",
+          "Kel",
+          "Lem",
+          "Mor",
+          "Nol",
+          "Ost",
+          "Pav",
+          "Rin",
+          "Sem",
+          "Tal",
+          "Uri",
+          "Vel",
+          "Wal",
+          "Yan",
+          "Ade",
+          "Bel",
+          "Cad",
+          "Dov",
+          "Esk",
+          "Gil",
+          "Hob",
+          "Lars",
+          "Otto",
+          "Urs"
+        ]
+      },
+      "places": {
+        "died": [],
+        "n_candidates": 32,
+        "n_survived": 32,
+        "survivors": [
+          "Vald",
+          "Kron",
+          "Lund",
+          "Sund",
+          "Halo",
+          "Alba",
+          "Mora",
+          "Umb",
+          "Zar",
+          "Kali",
+          "Kara",
+          "Gala",
+          "Lana",
+          "Mana",
+          "Pala",
+          "Sara",
+          "Belo",
+          "Cala",
+          "Lima",
+          "Mala",
+          "Nova",
+          "Pola",
+          "Tara",
+          "Vera",
+          "Aria",
+          "Fora",
+          "Hera",
+          "Maia",
+          "Nora",
+          "Odin",
+          "Pisa",
+          "Vida"
+        ]
+      }
+    },
+    "rare": {
+      "lexicon": "rare",
+      "objects": {
+        "died": [],
+        "n_candidates": 19,
+        "n_survived": 19,
+        "survivors": [
+          "gypsum",
+          "quartz",
+          "cedar",
+          "hemp",
+          "velvet",
+          "satin",
+          "denim",
+          "brass",
+          "nickel",
+          "zinc",
+          "platinum",
+          "enamel",
+          "porcelain",
+          "slate",
+          "limestone",
+          "tar",
+          "wax",
+          "ash",
+          "mortar"
+        ]
+      },
+      "people": {
+        "died": [],
+        "n_candidates": 16,
+        "n_survived": 16,
+        "survivors": [
+          "Cornel",
+          "Cecil",
+          "Clement",
+          "Ernest",
+          "Gilbert",
+          "Irving",
+          "Kenneth",
+          "Neville",
+          "Quentin",
+          "Vernon",
+          "Xavier",
+          "Zelda",
+          "Clifford",
+          "Hugo",
+          "Rupert",
+          "Marcus"
+        ]
+      },
+      "places": {
+        "died": [],
+        "n_candidates": 12,
+        "n_survived": 12,
+        "survivors": [
+          "Utrecht",
+          "Aarhus",
+          "Bilbao",
+          "Salerno",
+          "Verona",
+          "Siena",
+          "Parma",
+          "Modena",
+          "Rimini",
+          "Trieste",
+          "Bremen",
+          "Graz"
+        ]
+      }
+    },
+    "real": {
+      "lexicon": "real",
+      "objects": {
+        "died": [],
+        "n_candidates": 21,
+        "n_survived": 21,
+        "survivors": [
+          "copper",
+          "silver",
+          "cotton",
+          "rubber",
+          "marble",
+          "bronze",
+          "timber",
+          "granite",
+          "leather",
+          "linen",
+          "paper",
+          "glass",
+          "iron",
+          "wool",
+          "clay",
+          "salt",
+          "amber",
+          "coral",
+          "jade",
+          "resin",
+          "chalk"
+        ]
+      },
+      "people": {
+        "died": [],
+        "n_candidates": 24,
+        "n_survived": 24,
+        "survivors": [
+          "Anna",
+          "David",
+          "Sarah",
+          "Michael",
+          "Laura",
+          "Peter",
+          "Emma",
+          "Thomas",
+          "Julia",
+          "Robert",
+          "Clara",
+          "Daniel",
+          "Nina",
+          "Simon",
+          "Alice",
+          "Martin",
+          "Helen",
+          "Oscar",
+          "Ruth",
+          "Victor",
+          "Grace",
+          "Leo",
+          "Iris",
+          "Felix"
+        ]
+      },
+      "places": {
+        "died": [],
+        "n_candidates": 21,
+        "n_survived": 21,
+        "survivors": [
+          "Paris",
+          "Tokyo",
+          "Berlin",
+          "Madrid",
+          "Cairo",
+          "Boston",
+          "Dublin",
+          "Oslo",
+          "Lisbon",
+          "Vienna",
+          "Athens",
+          "Prague",
+          "Munich",
+          "Bristol",
+          "Denver",
+          "Seattle",
+          "Milan",
+          "Bergen",
+          "Perth",
+          "Quebec",
+          "Leeds"
+        ]
+      }
+    }
+  },
+  "removed_nonce_lists": {
+    "NONCE_OBJECTS": {
+      "n_candidates": 24,
+      "n_survived": 7,
+      "survivors": [
+        "quil",
+        "kalt",
+        "mev",
+        "urn",
+        "yarn",
+        "cade",
+        "dorm"
+      ]
+    },
+    "NONCE_PEOPLE": {
+      "n_candidates": 26,
+      "n_survived": 2,
+      "survivors": [
+        "Mira",
+        "Pell"
+      ]
+    },
+    "NONCE_PLACES": {
+      "n_candidates": 24,
+      "n_survived": 2,
+      "survivors": [
+        "Sund",
+        "Halo"
+      ]
+    }
+  },
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "space_prefix_demo": {
+    " Ralph": [
+      "ĠRalph"
+    ],
+    "Ralph": [
+      "R",
+      "alph"
+    ]
+  },
+  "tokenizer_class": "Qwen2Tokenizer",
+  "vocab_size": 248044
+}

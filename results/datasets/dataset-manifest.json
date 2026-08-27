@@ -1,0 +1,30 @@
+{
+  "framing": "method evaluation, not circuit discovery",
+  "heldout_policy": "HELD-OUT split. Method evaluation, not circuit discovery. This file is never tuned on and must not be inspected during development: no threshold, template, vocabulary item or hyperparameter may be chosen by looking at it. Read it once, at evaluation time, after the method is frozen.",
+  "lexicons": [
+    "real"
+  ],
+  "model": "Qwen/Qwen3.5-4B",
+  "n_dev_pairs": 10,
+  "n_dev_records": 40,
+  "n_heldout_pairs": 40,
+  "n_heldout_records": 160,
+  "preamble": "Facts:",
+  "provenance": "agent-unverified",
+  "records_per_pair": 4,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260827,
+  "sha256": {
+    "dev.jsonl": "b94fde5368cb2606e6b04a2dbc9dbfc8a90293319b26cec37658f00be2e27f85",
+    "heldout.jsonl": "036eb2af050d7c56bced360a3c8c863d37898828f99819393e878cd517309e82"
+  },
+  "shot": "zero",
+  "templates": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6"
+  ]
+}
