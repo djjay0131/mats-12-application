@@ -245,7 +245,7 @@ def main() -> int:
                 prompt = r["prompt"]
                 # One apply() per record with BOTH positions requested, so the
                 # two readouts come from the same forward pass by construction.
-                probe_ll, _, input_ids = lens.apply(
+                probe_ll, model_logits, input_ids = lens.apply(
                     lm, prompt, positions=[-1], use_jacobian=use_j)
                 align = resolve_positions(tok, prompt, input_ids)
                 pos_order = {"final": align["final_idx"],
@@ -267,6 +267,23 @@ def main() -> int:
                 }
                 if VOCAB_W is None:
                     VOCAB_W = int(next(iter(lens_logits.values())).shape[-1])
+                # The model's OWN distribution at the readout position, kept
+                # rather than discarded. Without it, comparing where the readout
+                # succeeds against where the MODEL succeeds needs a join across
+                # two separately generated stimulus sets -- which, when tried,
+                # overlapped on 4 of 40 records and produced zero discriminating
+                # cases. See results/design-verification/xref-readout-vs-behaviour.md
+                beh = None
+                if model_logits is not None:
+                    row = model_logits[0][-1].float()
+                    beh = {
+                        "answer_margin": float(row[r["answer_id"]]
+                                               - row[r["alt_answer_id"]]),
+                        "intermediate_margin": float(row[r["intermediate_id"]]
+                                                     - row[r["alt_intermediate_id"]]),
+                        "rank_answer": ranks_of(row, r["answer_id"]),
+                        "argmax_is_answer": bool(int(row.argmax()) == r["answer_id"]),
+                    }
                 scored = score_positions(lens_logits, pos_slots, targets)
                 results.append({
                     "arm": arm_name, "record_id": r["record_id"],
@@ -274,6 +291,7 @@ def main() -> int:
                     "template_id": r["template_id"],
                     "permuted_from": other["record_id"],
                     "alignment": align, "scores": scored,
+                    "model_behaviour": beh,
                 })
                 if i == 0 and arm_name == "jlens":
                     print(f"[stage1] positions -> final={align['final_idx']} "
