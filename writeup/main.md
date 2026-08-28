@@ -482,8 +482,8 @@ output ids have no tokenizer string. Any rank metric must state its width, so:
 | 8a | Norm-matched random *transport*, passive | Margins that any matrix of that Frobenius norm would produce, whatever `J_l` learned | Runs in Stage 1 |
 | 8b | Norm-matched random *direction*, causal intervention | Effects any perturbation of that magnitude would produce | Unavailable with the causal arm |
 | 9 | Prompt-template robustness | A result specific to one phrasing | Fixed subset, wording fixed before held-out results are seen |
-| 10 | Relation deletion | The readout tracking co-occurrence rather than binding | **See note below** |
-| 11 | Question truncation | Selectivity that does not depend on knowing the target entity | **See note below** |
+| 10 | Relation deletion | The readout tracking co-occurrence rather than binding | **Cut** — off-distribution; a resample variant is offered instead, see note |
+| 11 | Question truncation | Selectivity that does not depend on knowing the target entity | **Cut** — superseded by the pre-query readout position, see note |
 
 **Control 4, the coverage positive control, in detail.** Before any negative
 result is reported, J-Lens must be shown to recover *something* unambiguous
@@ -499,17 +499,44 @@ distinguish "Jacobian readouts do not carry binding" from "the n1000 wikitext
 lens has no useful coverage of these tokens".
 `[RESULT PENDING — coverage control not yet run]`
 
-**Note on controls 10 and 11 — an open design decision, not a silent cut.**
-Controls 6, 10 and 11 are all "perturb the prompt and see whether the readout
-moves", so they are mutually predictive rather than independent lines of
-evidence. Worse, deletion and truncation take the model off-distribution: a
-readout that moves under relation deletion may only be reporting that the prompt
-has become ungrammatical, and zero-ablation-style perturbation is arguably
-unprincipled for exactly this reason. Control 6 (pair alternative) is already a
-resample-style control and does not have this problem. The open proposal is to
-demote 10 and 11 to secondary and spend the time on controls 2, 3 and 4 instead.
-That call has not been made and is flagged here rather than decided in the
-method section. `[DECISION PENDING — Jason]`
+**Note on controls 10 and 11 — cut, with the reasoning stated.** Decision taken
+2026-08-27. Both were planned and neither was run; they are cut on methodology,
+not dropped after an inconvenient number.
+
+Three reasons.
+
+*They are not independent evidence.* Controls 6, 10 and 11 are the same move —
+perturb the prompt, see whether the readout follows. They largely predict one
+another, so running all three buys far less than three controls' worth of
+confidence.
+
+*Deletion and truncation take the model off-distribution.* Remove a fact
+sentence and the prompt becomes incoherent. A readout that moves may only be
+reporting that the prompt is now broken, not that the binding is gone. This is
+the standard objection to zero-ablation-style perturbation and it applies
+directly here. Control 6 scores against the pair's own alternative — a
+resample-style control on an in-distribution token — and does not have the
+problem.
+
+*Control 11's question is already answered, better.* The pre-query readout in
+§2.4 reads at the last token **before the query names a subject**. That is
+question truncation performed positionally rather than by mutilating the prompt,
+and it is fully in-distribution. Running control 11 as designed would be a
+worse-instrumented rerun of a measurement already in hand.
+
+**The honest objection, stated rather than avoided.** Control 10 is the one
+control here that directly threatens the headline: if the readout tracked mere
+co-occurrence of the entities rather than their binding, control 10 is what
+would expose it, and cutting it removes a live threat to a positive result.
+That is a real cost and it is not offset by the redundancy argument alone. What
+is offered in its place is a **resample** variant rather than a deletion: swap
+`Perth uses granite` for `Perth uses basalt` and require the readout to follow
+the swap. Grammatical, in-distribution, and a sharper test of binding versus
+co-occurrence than deletion would have been. It is listed as a limitation until
+it runs, and the paired margin should not be read as excluding a co-occurrence
+account until it does.
+
+The time released goes to controls 2, 3 and 4.
 
 **Negative control, and what is not available.** No published shuffled-corpus or
 control J-Lens checkpoint exists — all 40+ lenses in `neuronpedia/jacobian-lens`
