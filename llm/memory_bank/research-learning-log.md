@@ -270,11 +270,79 @@ All numbers `agent-unverified`.
 
 ### First interpretation — Jason
 
-*(to be filled after the run, before the agent comments)*
+**No read offered.** Recorded rather than left blank, on the same principle as
+the "no prior" entries: an honest absence is data about calibration, a blank
+field is not.
 
 ### Coach feedback — agent
 
-*(withheld until Jason's first interpretation is recorded)*
+**1. The result is real, and the rank gap is the honest way to state it.**
+J-Lens beats label permutation (-0.202), norm-matched random transport (frac
+exactly 0.500, median rank 153149 of 248320) and the logit lens through the
+identical path. But margins from different readouts sit on different logit
+scales, so "+4.251 versus +2.957" is a weaker comparison than it looks. **Median
+rank 30 versus 1290 is the number to lead with** — it is scale-free and it is a
+43x difference on the same prompts at the same layer.
+
+**2. The paired design is doing more work than the caveat gives it credit for.**
+The obvious objection to a final-position readout is that it just reports
+whatever is currently active, and `Perth` is active because it was recently
+attended to. That objection does not survive the design: the **alternative**
+intermediate is also in the prompt and equally recent. Preferring the correct
+one over the swapped partner is not explained by mere presence. This is exactly
+what the matched-pair construction was for, and it worked.
+
+**3. The threat that does survive is the answer shadow.** The answer margin
+(+8.406) is about double the intermediate margin (+4.251). At the final token
+the model has computed its answer, and the answer is bound to the correct
+intermediate. So the intermediate may be favoured as a *downstream consequence*
+of the answer having been computed — a backwards shadow — rather than because
+the readout sees the binding on the way through. The pre-query null does not
+rule this out. **The resample control (control 10's replacement) is what would**,
+and until it runs the paired margin should not be read as excluding it.
+
+**4. The pre-query result is "no evidence", not "evidence of absence".**
+frac 0.450 on n=40 is about 18 of 40 and is not distinguishable from chance. At
+this sample size we cannot separate "bindings are not linearly readable before
+the query" from "this readout is too weak to see them". Stating it as the
+stronger claim would be the single easiest way to overclaim in this project.
+Supporting detail worth keeping: at pre-query the logit lens's own control
+(+0.064) **exceeds its signal** (+0.015) — the control beating the thing it
+controls is what a noise floor looks like, and it is reassuring that the metric
+says so rather than manufacturing a small positive.
+
+**5. Arm 3's failure is the most consequential thing in this run.** It was the
+instrument that would have told us whether point 4 is about the model or about
+the readout, and whether the point-1 positive sits near a ceiling or far below
+one. Scoring 12 of 40 records means it answered neither. Both the strongest
+negative claim and the calibration of the positive claim are currently
+unsupported. The fix is structural rather than a code bug — the closed set `V`
+has to be shared across pairs by construction — and it should be the next GPU
+job.
+
+**6. Layer 27 is probably a property of the model, not of the metric.** Both
+real readouts select it independently; only the randomised arm drifts to 30. V1's
+coverage control peaked at 30, the *last fitted source layer* — the edge of the
+lens's range. The binding readout peaking at 27, inside that range rather than
+at its boundary, is mild evidence that we are measuring something about the
+computation and not an artefact of where the lens stops.
+
+**7. The cheapest high-value analysis needs no GPU at all.** frac 0.950 is 38 of
+40, and behavioural eligibility was 0.900. **Cross-reference which records the
+readout gets right against which ones the model answers correctly.** The two
+outcomes are sharply diagnostic:
+
+- If J-Lens recovers the correct intermediate on pairs the model *answers
+  wrongly*, the readout is seeing something behaviour does not — a considerably
+  stronger and more interesting claim than the current headline.
+- If it fails exactly where the model fails, that is direct support for the
+  answer-shadow account in point 3.
+
+Both run off data already on disk. This should happen before any further compute.
+
+**Recommended gate: CONTINUE**, with the order: (i) the free cross-reference in
+point 7, (ii) rebuild the dataset vocabulary so arm 3 can run, (iii) the
+resample control. Held-out stays untouched until the layer is frozen.
 
 ### Hour gate — Jason confirms
 
