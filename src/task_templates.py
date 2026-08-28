@@ -48,6 +48,28 @@ familiarity contrast is therefore realised as a frequency gradient over real
 words (``real`` vs ``rare``) plus an explicitly-labelled ``pseudo`` lexicon,
 rather than as a true nonce condition.
 
+SHARED CLOSED VOCABULARY (``vocab_pool``)
+----------------------------------------
+``build_pairs(..., vocab_pool=N)`` draws the intermediates (places) and the
+answer objects for EVERY pair from one shared pool of N words instead of giving
+each pair fresh words. The place indices for pair *i* come from
+``round_robin_schedule(N)[i % ...]``, a 1-factorization of the complete graph on
+N indices, so short prefixes of the schedule are as balanced as the arithmetic
+allows: with N=6, ten pairs give every intermediate class at least three pairs
+of support.
+
+Why it matters is a property of the ARM-3 fit, not of the stimuli. A
+leave-one-pair-out reference needs every held-out record's class to survive in
+the training fold; when each pair carries its own private cities, holding a pair
+out deletes the only support for its classes and the record scores
+``class_unseen_in_fit`` rather than right or wrong.
+
+The place->object pairing is still drawn per pair from the shared object pool,
+NOT fixed globally. A fixed global place->object map would make the intermediate
+and the answer perfectly co-linear across the whole dataset, and arm 3 could
+then no longer distinguish "the intermediate is linearly present" from "the
+answer is linearly present" -- which is the very thing it exists to separate.
+
 Every word listed below has been checked against the real tokenizer in its
 space-prefixed form. Nothing here is assumed.
 """
@@ -199,6 +221,38 @@ LEXICONS: dict[str, tuple[list[str], list[str], list[str]]] = {
 
 FACT_ORDERS: tuple[str, ...] = ("AB", "BA")
 BINDING_VARIANTS: tuple[str, ...] = ("A", "B")
+
+
+def round_robin_schedule(n: int) -> list[tuple[int, int]]:
+    """Every unordered pair of ``0..n-1``, ordered so that PREFIXES are balanced.
+
+    The circle method emits pairs one ROUND at a time, and a round is a perfect
+    matching: it touches every index exactly once (for odd n, all but one). So
+    the first k entries of the flattened list spread those k pairs over the
+    indices as evenly as k allows. That prefix property is the whole reason this
+    is not just ``itertools.combinations``: lexicographic order would give the
+    first index five appearances in ten pairs and the last index two.
+
+    Deterministic, no RNG.
+    """
+    if n < 2:
+        raise ValueError(f"round_robin_schedule needs n >= 2, got {n}")
+    idx = list(range(n))
+    ghost = None
+    if n % 2:
+        ghost = n            # odd n: one index sits out each round
+        idx.append(ghost)
+    m = len(idx)
+    arr = list(idx)
+    out: list[tuple[int, int]] = []
+    for _ in range(m - 1):
+        for k in range(m // 2):
+            a, b = arr[k], arr[m - 1 - k]
+            if ghost is not None and ghost in (a, b):
+                continue
+            out.append((a, b) if a < b else (b, a))
+        arr = [arr[0], arr[-1]] + arr[1:-1]      # rotate all but the pivot
+    return out
 
 
 class LexiconError(ValueError):
@@ -437,7 +491,8 @@ def build_pairs(tok: Any, *, n_pairs: int, seed: int, lexicon: str,
                 fact_orders: Sequence[str] = FACT_ORDERS,
                 shot: str = "zero", n_shots: int = 2,
                 min_per_role: int = 6, id_prefix: str = "",
-                start_index: int = 0) -> list[Pair]:
+                start_index: int = 0, vocab_pool: int = 0,
+                pool_seed: int | None = None) -> list[Pair]:
     """Build `n_pairs` paired items, cycling through the templates.
 
     Each Pair carries one Variant per (binding variant, fact_order) cell, i.e.
@@ -448,6 +503,16 @@ def build_pairs(tok: Any, *, n_pairs: int, seed: int, lexicon: str,
     single-token, "equal token length across a swapped pair" holds by
     construction -- but `verify_pair_tokenization` asserts it explicitly rather
     than trusting the argument.
+
+    ``vocab_pool=N`` switches on the SHARED CLOSED VOCABULARY described in the
+    module docstring: the two places of pair *i* are
+    ``round_robin_schedule(N)[i % len(schedule)]`` indexed into one N-word pool,
+    and the two objects are drawn from one N-word object pool. The pool itself
+    is sampled once from ``pool_seed`` (defaulting to ``seed``), so it does not
+    depend on how the pairs are chunked across calls -- ``build_pairs`` called
+    once for ten pairs and called ten times with ``start_index=i`` produce the
+    same place assignment. ``vocab_pool=0`` (the default) keeps the original
+    behaviour: fresh words sampled per pair.
     """
     people, places, objects = _pools(tok, lexicon, min_per_role=min_per_role)
 
@@ -462,13 +527,35 @@ def build_pairs(tok: Any, *, n_pairs: int, seed: int, lexicon: str,
         res_places, places = places[:n_res], places[n_res:]
         res_objects, objects = objects[:n_res], objects[n_res:]
 
+    place_pool: list[str] | None = None
+    object_pool: list[str] | None = None
+    schedule: list[tuple[int, int]] = []
+    if vocab_pool:
+        if vocab_pool < 2:
+            raise LexiconError(f"vocab_pool must be >= 2, got {vocab_pool}")
+        if len(places) < vocab_pool or len(objects) < vocab_pool:
+            raise LexiconError(
+                f"lexicon {lexicon!r} shot={shot!r}: vocab_pool={vocab_pool} "
+                f"needs that many single-token places AND objects after the "
+                f"few-shot reservation, but only {len(places)} places / "
+                f"{len(objects)} objects are available.")
+        prng = random.Random(seed if pool_seed is None else pool_seed)
+        place_pool = prng.sample(sorted(places), vocab_pool)
+        object_pool = prng.sample(sorted(objects), vocab_pool)
+        schedule = round_robin_schedule(vocab_pool)
+
     rng = random.Random(seed)
     pairs: list[Pair] = []
     for i in range(start_index, start_index + n_pairs):
         t = TEMPLATES[i % len(TEMPLATES)]
         pq, pd = rng.sample(people, 2)
-        place1, place2 = rng.sample(places, 2)
-        obj1, obj2 = rng.sample(objects, 2)
+        if place_pool is not None:
+            a, b = schedule[i % len(schedule)]
+            place1, place2 = place_pool[a], place_pool[b]
+            obj1, obj2 = rng.sample(object_pool, 2)
+        else:
+            place1, place2 = rng.sample(places, 2)
+            obj1, obj2 = rng.sample(objects, 2)
 
         prefix = ""
         if shot == "few":
