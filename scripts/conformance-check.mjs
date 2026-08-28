@@ -287,7 +287,14 @@ check('SCR-35', 'SUBMIT', 'Write-up is structured by narrative, not chronologica
 check('MEC-14/15/16', 'EXECUTE', 'Counted hours within budget', () => {
   const s = read(P.time);
   if (!s) return fail('llm/memory_bank/time-log.md missing');
-  const nums = [...s.matchAll(/\|\s*([\d.]+)\s*\|\s*([\d.]+)\s*\|\s*$/gm)].map(m => parseFloat(m[1]));
+  // The ledger table is | Date | Block | Description | Hours | Basis |, and an
+  // estimated block writes its hours as "~1.5". The earlier pattern here looked
+  // for two numeric columns at the end of a row, which this table does not have,
+  // so it matched nothing and this check passed while reporting 0.0 hours -- a
+  // check that cannot fail is worse than no check. Parse the Hours column, and
+  // fail loudly if the table shape drifts again rather than reporting zero.
+  const nums = [...s.matchAll(/^\|[^|]*\|[^|]*\|[^|]*\|\s*~?\s*([\d.]+)\s*\|[^|]*\|\s*$/gm)].map(m => parseFloat(m[1]));
+  if (!nums.length) return fail('time-log.md has no parseable hour rows — the ledger table shape changed, and this check was silently reporting 0.0');
   const total = nums.reduce((a, b) => a + b, 0);
   const execM = (s.match(/Exec summary:\s*([\d.]+)\s*\/\s*2/i) || [])[1];
   const out = [];
@@ -299,8 +306,10 @@ check('MEC-14/15/16', 'EXECUTE', 'Counted hours within budget', () => {
 check('ADV-06', 'EXECUTE', 'Paper reading ≤5 of the counted hours', () => {
   const s = read(P.time);
   if (!s) return na('no time log');
-  const reading = s.split('\n').filter(l => /read|paper|literature/i.test(l))
-    .map(l => parseFloat((l.match(/\|\s*([\d.]+)\s*\|\s*[\d.]+\s*\|\s*$/) || [])[1] || 0))
+  // \b-anchored: the bare substring "read" also matches "passive-readout", which
+  // charged 1.5h of instrument-building to the paper-reading budget.
+  const reading = s.split('\n').filter(l => /\bread(ing|s)?\b|\bpapers?\b|\bliterature\b/i.test(l))
+    .map(l => parseFloat((l.match(/^\|[^|]*\|[^|]*\|[^|]*\|\s*~?\s*([\d.]+)\s*\|[^|]*\|\s*$/) || [])[1] || 0))
     .reduce((a, b) => a + b, 0);
   return reading > 5 ? fail(`${reading.toFixed(1)}h reading — he recommends at most 5`) : pass(`${reading.toFixed(1)}h reading`);
 });
