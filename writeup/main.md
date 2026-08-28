@@ -543,7 +543,7 @@ memory: an audit of the pinned vendor tree (`scripts/v2_decomposition_audit.sh`,
 run as step 0 of the Stage 1 job) searched the `jlens` package, its README and
 its walkthrough notebook for sparse, non-negative, NNLS, lasso, dictionary,
 decomposition and reconstruction, and found zero matches for any of those terms.
-`[RUN ID PENDING — job 550627 step 0]`
+Run id: `results/runs/20260827T153925Z-stage1-passive-readout/` (job 550690, step 0; the tests directory was searched too, also zero). Full documented negative: `results/design-verification/v2-decomposition-verification.md`.
 
 Stated plainly: the capability the method's framing implies is not supported by
 its released artifact. That is reported here as a finding about the method —

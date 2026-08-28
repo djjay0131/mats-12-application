@@ -1,0 +1,16 @@
+[runlog] results/runs/20260827T153925Z-stage1-passive-readout  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1719.68it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  11%|#1        | 47/426 [00:00<00:00, 426.23it/s]Loading weights:  29%|##8       | 122/426 [00:00<00:00, 606.18it/s]Loading weights:  45%|####5     | 192/426 [00:00<00:00, 643.39it/s]Loading weights:  60%|######    | 257/426 [00:00<00:00, 623.63it/s]Loading weights:  75%|#######5  | 320/426 [00:00<00:00, 609.59it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 682.71it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 114.90it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=16.3s  n_records=4
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+
+==============================================================
+  jlens                    final     L27  margin=+5.000 ctrl=-0.594 frac=1.000 medrank=74
+  jlens                    prequery  L28  margin=+0.266 ctrl=+0.234 frac=0.500 medrank=196
+  logitlens                final     L29  margin=+4.506 ctrl=-0.627 frac=1.000 medrank=239
+  logitlens                prequery  L29  margin=+0.270 ctrl=+0.316 frac=0.500 medrank=1656
+  jlens_random_transport   final     L30  margin=+0.500 ctrl=-0.230 frac=0.500 medrank=227457
+  jlens_random_transport   prequery  L27  margin=+0.118 ctrl=+0.212 frac=0.500 medrank=117467
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T153925Z-stage1-passive-readout/outputs/stage1-passive-readout.json

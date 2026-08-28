@@ -1,0 +1,12 @@
+[runlog] results/runs/20260827T154143Z-stage1-supervised-reference  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1736.77it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 19369.87it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 348.91it/s]
+[arm3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.1s  n_records=40
+[arm3] positions -> final=29 prequery=20 aligned=True
+
+==============================================================
+  arm3 final     L30  LOO margin=+31.499 LOO acc=0.583 (in-sample acc=0.800)
+  arm3 prequery  L26  LOO margin=+0.589 LOO acc=0.417 (in-sample acc=0.550)
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T154143Z-stage1-supervised-reference/outputs/stage1-supervised-reference.json

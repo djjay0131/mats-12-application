@@ -1,0 +1,60 @@
+{
+  "slug": "stage1-passive-readout",
+  "started_utc": "2026-08-27T15:39:25.680244+00:00",
+  "argv": [
+    "experiments/stage1/passive_readout.py",
+    "--max-records",
+    "4"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "45158b0f5220e04ebde404d409676ceba1b4f383",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/slurm-logs/stage1-550690.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal009",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "550690",
+    "SLURM_JOB_NAME": "mats12-stage1",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "a30_normal_q",
+    "SLURM_JOB_NODELIST": "fal009",
+    "SLURM_JOB_GPUS": "1"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA A30",
+    "count": 1,
+    "capability": [
+      8,
+      0
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "dataset": "results/datasets/dev.jsonl",
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "lens_file": "qwen3.5-4b/jlens/Salesforce-wikitext/Qwen3.5-4B_jacobian_lens_n1000.pt",
+    "split": "dev",
+    "note": "held-out split not read by this script"
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-27T15:39:53.292298+00:00",
+  "outputs": [
+    "stage1-passive-readout.json"
+  ]
+}
