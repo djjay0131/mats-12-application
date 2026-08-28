@@ -197,10 +197,76 @@ this job so its evidence sits inside a job log rather than a login shell.
 
 ### Execution record
 
-- Start/stop time: **pending** — not yet submitted at time of writing
-- Commands / run IDs: `sbatch experiments/stage1/run_stage1.sbatch`
-- Raw artifact paths: `results/runs/` (written by `src/runlog.py`)
-- Anomalies noticed without interpretation: **pending**
+- Start/stop time: job 550690, node fal009 (NVIDIA A30), 2026-08-27. Three runs
+  in one allocation: 15:39:25Z (dry run), 15:40:16Z (full dev), 15:41:43Z
+  (arm 3). Walltime 25 min; the job took a fraction of it.
+- Commands / run IDs: `sbatch experiments/stage1/run_stage1.sbatch`, commit
+  `45158b0` ->
+  `results/runs/20260827T153925Z-stage1-passive-readout/` (dry run + step-0 audit)
+  `results/runs/20260827T154016Z-stage1-passive-readout/` (full dev, n=40)
+  `results/runs/20260827T154143Z-stage1-supervised-reference/` (arm 3)
+- Raw artifact paths: `outputs/*.json` in each; slurm log
+  `results/slurm-logs/stage1-550690.out`.
+- Third job id for this work: 550627 was cancelled before starting to add arm 3,
+  550652 was cancelled after 90 minutes pending. Only 550690 ran.
+
+**Position alignment**, verified rather than assumed, identical on the 4-record
+dry run and the 40-record full run: `final` = index 29, token `':'`;
+`prequery` = index 20, token `'.'`; `alignment_ok = true`.
+
+**Passive readout, dev split, n = 40, final position:**
+
+| arm | layer | margin intermediate | margin answer | label-perm control | frac correct outranks | median rank |
+|---|---|---|---|---|---|---|
+| J-Lens | 27 | +4.251 | +8.406 | -0.202 | 0.950 | 30 |
+| logit lens | 27 | +2.957 | +6.422 | -0.005 | 0.850 | 1290 |
+| random transport | 30 | +0.196 | +0.106 | -0.079 | 0.500 | 153149 |
+
+**Pre-query position:**
+
+| arm | layer | margin intermediate | label-perm control | frac | median rank |
+|---|---|---|---|---|---|
+| J-Lens | 26 | +0.022 | +0.020 | 0.450 | 393 |
+| logit lens | 26 | +0.015 | +0.064 | 0.525 | 56930 |
+| random transport | 26 | +0.033 | -0.010 | 0.550 | 194963 |
+
+Unembedding width 248320 (B4: ranks taken over the full width).
+
+**Arm 3, supervised difference-in-means reference:**
+
+| position | layer | LOO margin | LOO accuracy | in-sample accuracy | scored | unscorable |
+|---|---|---|---|---|---|---|
+| final | 30 | +31.499 | 0.583 | 0.800 | 12 | 28 (`class_unseen_in_fit`) |
+| prequery | 26 | +0.589 | 0.417 | 0.550 | 12 | 28 (`class_unseen_in_fit`) |
+
+14 distinct intermediate classes across 10 pairs, 40 records.
+
+**Step 0, vendor audit** (commit `581d398`, jlens 0.1.0, 1713 lines / 9 modules).
+Zero matches for `nonneg|non_neg|non-neg|sparse|nnls|lasso|omp_|matching_pursuit|dictionary|decompos|reconstruct|j_space|jspace`
+in the package, the README, the walkthrough notebook and the tests. Public API:
+`ActivationRecorder, HFLensModel, JacobianLens, Layout, LensModel,
+configure_logging, fit, from_hf, jacobian_for_prompt`.
+
+- Anomalies noticed without interpretation:
+  1. The **answer** margin (+8.406) is roughly twice the **intermediate** margin
+     (+4.251) at the final position, for J-Lens and for the logit lens alike.
+  2. Arm 3's leave-one-pair-out scored 12 of 40 records; the other 28 were
+     unscorable because the class had no support once its pair was held out.
+  3. Norm-matched random transport returns frac exactly 0.500 and median rank
+     153149 of 248320.
+  4. J-Lens `prequery` frac is 0.450 — below one half, not at it.
+  5. At `prequery` the logit lens's label-permutation control (+0.064) is larger
+     than its own signal (+0.015).
+  6. J-Lens median rank of the correct intermediate at the final position is 30,
+     not 0, while V1's degenerate single-binding control put the answer at
+     rank 0.
+  7. J-Lens and the logit lens both select layer 27; random transport selects 30.
+  8. The 4-record dry run and the 40-record full run agree on layer 27 and on
+     the direction of every arm; the J-Lens margin moves 5.000 -> 4.251 and
+     frac 1.000 -> 0.950.
+  9. Every `prequery` selected layer is 26, across all three arms.
+
+All numbers `agent-unverified`.
 
 ### First interpretation — Jason
 
