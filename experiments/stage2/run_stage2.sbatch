@@ -37,11 +37,11 @@
 # `set -e` is deliberately NOT used: no step may silently prevent a later one
 # from running, and each step's own exit code is reported explicitly.
 #SBATCH -A agents4research
-#SBATCH -p a30_normal_q,l40s_normal_q
+#SBATCH -p a30_normal_q,l40s_normal_q,a30_preemptable_q,l40s_preemptable_q
 #SBATCH --gres=gpu:1
 #SBATCH -c 2
 #SBATCH --mem=24G
-#SBATCH -t 00:35:00
+#SBATCH -t 00:20:00
 #SBATCH -J mats12-stage2
 #SBATCH -o /scratch/djjay/mats12/repo/results/slurm-logs/stage2-%j.out
 #SBATCH -e /scratch/djjay/mats12/repo/results/slurm-logs/stage2-%j.out
