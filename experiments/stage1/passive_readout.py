@@ -275,7 +275,7 @@ def main() -> int:
                 # cases. See results/design-verification/xref-readout-vs-behaviour.md
                 beh = None
                 if model_logits is not None:
-                    row = model_logits[0][-1].float()
+                    row = model_logits[0].float()   # apply() returns [n_positions, vocab], not [batch, seq, vocab]
                     beh = {
                         "answer_margin": float(row[r["answer_id"]]
                                                - row[r["alt_answer_id"]]),
