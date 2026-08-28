@@ -1,0 +1,15 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: tc-dgx008  job: 7298891 ===
+NVIDIA A100-SXM4-80GB, 81920 MiB, 595.71.05
+
+python        : 3.12.3
+torch         : 2.13.0+cu130
+torch.cuda    : 13.0
+cuda available: True
+device 0      : NVIDIA A100-SXM4-80GB
+capability    : (8, 0)
+transformers  : 5.16.1
+jlens version : 0.1.0
+jlens path    : /home/djjay/mats12-tc/vendor/jacobian-lens/jlens/__init__.py
+matmul ok     : True
+=== SMOKE_RC=0 ===
