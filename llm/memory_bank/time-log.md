@@ -48,7 +48,12 @@ hours.** Parallel subagent work is a bonus, not a multiplier on the budget.
 | 2026-08-27 | 15:05–03:45 | Stage 1 executes; device bridge drops mid-commit | ~0.5 | Estimated — 12.7h span, almost all idle and queue wait |
 | 2026-08-28 | 03:45–05:41 | Run records committed, V2 documented negative, notes on the invalid runs, controls 10/11 cut, Hour 2 log filled, coach interpretation, cross-reference attempted, shared-vocabulary dataset | 1.9 | Verified |
 
-**Running total: 10.1 / 20.0** — 7.1 verified, 3.0 estimated.
+| 2026-08-28 | 16:13–16:29 | TinkerCliffs environment rebuilt from scratch: venv, HF cache, pinned model and lens revisions, smoke job | 0.0 | Uncounted — ARC setup, by Jason's ruling |
+| 2026-08-28 | 20:36–22:10 | Stage 2 on both clusters: environment verification, partition fix, submission, answer-shadow analysis, record-level join, cross-cluster comparison, run records committed, results doc, conformance-check repair | ~1.0 | Estimated — 1.6h span containing two device-bridge outages totalling roughly 50 min |
+
+**Running total: 11.1 / 20.0** — 7.1 verified, 4.0 estimated.
+**Verified with artifacts at both ends: 7.1h.** The estimated blocks are
+labelled, never folded in.
 **Exec summary: 0.0 / 2.0**
 **Paper reading: 0.0 of the 5.0 allowance** (the 2026-08-22 literature scan
 predates the project lock and is not counted).
@@ -58,7 +63,8 @@ predates the project lock and is not counted).
 - Slurm queue waiting. Jobs 550627 and 550652 were cancelled after 90 minutes
   pending and never ran; job 550652's wait alone was ~1.5h. The rules exclude
   waiting on compute.
-- The device-bridge outage on 2026-08-28 and the overnight gap.
+- The device-bridge outages on 2026-08-28 (three of them, roughly 50 min in
+  the evening alone) and the overnight gap.
 - Environment setup: node install, SSH plumbing, ControlMaster, the transport
   protocol. Generic tech setup by the rules.
 - Time before the first commit of any verified block.
