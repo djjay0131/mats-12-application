@@ -1,0 +1,20 @@
+[runlog] results/runs/20260829T160114Z-stage1-supervised-reference  git=7adaad14e25259834c182670d48346b786969708 DIRTY  slurm=552322
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1871.20it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 22060.29it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 38.52it/s]
+[arm3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=10.0s  n_records=40
+[arm3] positions -> final=29 prequery=20 aligned=True
+
+==============================================================
+  arm3 prequery  L30  LOO margin=+0.673 LOO acc=0.525 (in-sample acc=0.525)
+  arm3 q00       L30  LOO margin=+0.203 LOO acc=0.475 (in-sample acc=0.500)
+  arm3 q01       L30  LOO margin=+0.257 LOO acc=0.525 (in-sample acc=0.550)
+  arm3 q02       L30  LOO margin=+0.072 LOO acc=0.525 (in-sample acc=0.550)
+  arm3 q03       L30  LOO margin=+0.636 LOO acc=0.500 (in-sample acc=0.500)
+  arm3 q04       L30  LOO margin=+1.466 LOO acc=0.500 (in-sample acc=0.550)
+  arm3 q05       L30  LOO margin=+6.625 LOO acc=0.500 (in-sample acc=0.550)
+  arm3 q06       L30  LOO margin=+32.850 LOO acc=0.700 (in-sample acc=0.725)
+  arm3 q07       L30  LOO margin=+3.232 LOO acc=0.575 (in-sample acc=0.650)
+  arm3 final     L30  LOO margin=+24.199 LOO acc=0.625 (in-sample acc=0.775)
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260829T160114Z-stage1-supervised-reference/outputs/stage1-supervised-reference.json

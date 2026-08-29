@@ -1,0 +1,46 @@
+source: results/runs/20260829T155822Z-stage1-passive-readout/outputs/stage1-passive-readout.json
+query window tokens:
+  q00=ĠWhat  q01=Ġis  q02=Ġused  q03=Ġwhere  q04=ĠHelen  q05=Ġlives  q06=?  q07=ĠAnswer
+
+A. PRE-REGISTERED: each position at its own argmax-margin layer
+pos       token      |                        jlens |                    logitlens |                 jlens_random
+                     |  L   frac  ctrlfrac  medrank |  L   frac  ctrlfrac  medrank |  L   frac  ctrlfrac  medrank
+prequery  '.'        | L25  0.550  0.400        357 | L24  0.525  0.500      78568 | L9   0.475  0.475     111263
+q00       ĠWhat      | L29  0.475  0.500       5186 | L30  0.500  0.450       2564 | L13  0.525  0.450     116932
+q01       Ġis        | L23  0.450  0.500       3686 | L23  0.500  0.525      33089 | L17  0.500  0.500      87225
+q02       Ġused      | L27  0.475  0.425        181 | L18  0.500  0.425     136903 | L15  0.500  0.525     220892
+q03       Ġwhere     | L29  0.500  0.450        123 | L30  0.500  0.475        118 | L17  0.500  0.500     117349
+q04       ĠHelen     | L9   0.550  0.650      11765 | L12  0.550  0.550      96695 | L9   0.525  0.550      95778
+q05       Ġlives     | L30  0.775  0.350        119 | L30  0.675  0.400        272 | L25  0.500  0.450     159003
+q06       ?          | L27  0.675  0.350        116 | L29  0.725  0.350         87 | L13  0.500  0.500     110071
+q07       ĠAnswer    | L30  0.575  0.500        539 | L30  0.600  0.450       1372 | L30  0.500  0.475     205903
+final     ':'        | L27  0.975  0.375         37 | L30  0.900  0.375         20 | L25  0.500  0.600     128589
+
+n=40, chance floor 0.500, SE at 0.5 = 0.079
+
+B. FIXED LAYER L27 (NOT pre-registered; shape check only)
+pos       |                  jlens |              logitlens |   jlens_random_transpo
+prequery  | 0.500 ctl 0.400 r     18 | 0.475 ctl 0.400 r   2033 | 0.500 ctl 0.450 r 162724
+q00       | 0.500 ctl 0.550 r  40134 | 0.500 ctl 0.525 r  55787 | 0.475 ctl 0.450 r 146951
+q01       | 0.500 ctl 0.500 r    138 | 0.500 ctl 0.375 r   5853 | 0.500 ctl 0.475 r 104030
+q02       | 0.475 ctl 0.425 r    181 | 0.500 ctl 0.450 r  36945 | 0.475 ctl 0.475 r 130475
+q03       | 0.475 ctl 0.475 r    331 | 0.550 ctl 0.400 r  20567 | 0.550 ctl 0.500 r  77831
+q04       | 0.525 ctl 0.550 r  30482 | 0.500 ctl 0.450 r 113927 | 0.525 ctl 0.350 r  85763
+q05       | 0.800 ctl 0.325 r   1296 | 0.700 ctl 0.450 r 103481 | 0.500 ctl 0.425 r 108402
+q06       | 0.675 ctl 0.350 r    116 | 0.675 ctl 0.325 r   1555 | 0.475 ctl 0.525 r 168934
+q07       | 0.450 ctl 0.375 r  30875 | 0.450 ctl 0.400 r 140193 | 0.525 ctl 0.525 r 156785
+final     | 0.975 ctl 0.375 r     37 | 0.950 ctl 0.400 r   1087 | 0.450 ctl 0.550 r 148138
+
+B. FIXED LAYER L30 (NOT pre-registered; shape check only)
+pos       |                  jlens |              logitlens |   jlens_random_transpo
+prequery  | 0.500 ctl 0.350 r      9 | 0.525 ctl 0.375 r     29 | 0.500 ctl 0.550 r 138669
+q00       | 0.525 ctl 0.375 r   3376 | 0.500 ctl 0.450 r   2564 | 0.500 ctl 0.450 r 103648
+q01       | 0.475 ctl 0.450 r     15 | 0.450 ctl 0.475 r     51 | 0.525 ctl 0.550 r  63379
+q02       | 0.525 ctl 0.350 r     64 | 0.500 ctl 0.350 r    119 | 0.450 ctl 0.525 r  84331
+q03       | 0.525 ctl 0.450 r     44 | 0.500 ctl 0.475 r    118 | 0.500 ctl 0.475 r 127866
+q04       | 0.575 ctl 0.475 r   6008 | 0.500 ctl 0.475 r  16288 | 0.500 ctl 0.475 r 137253
+q05       | 0.775 ctl 0.350 r    119 | 0.675 ctl 0.400 r    272 | 0.525 ctl 0.450 r 161894
+q06       | 0.725 ctl 0.325 r     15 | 0.725 ctl 0.425 r     34 | 0.500 ctl 0.550 r 186202
+q07       | 0.575 ctl 0.500 r    539 | 0.600 ctl 0.450 r   1372 | 0.500 ctl 0.475 r 205903
+final     | 0.925 ctl 0.400 r     11 | 0.900 ctl 0.375 r     20 | 0.500 ctl 0.525 r 203658
+

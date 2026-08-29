@@ -1,0 +1,98 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal045  job: 552322 ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+dataset: 41 lines in results/datasets/dev.jsonl
+
+=== STEP 0/2: behavioural eligibility screen on results/datasets/dev.jsonl ===
+    behavioural labels for EXACTLY the stimuli steps 1 and 2 read
+[runlog] results/runs/20260829T155627Z-eligibility-screen  git=7adaad14e25259834c182670d48346b786969708 DIRTY  slurm=552322
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1740.74it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 17356.25it/s]
+[padding control] batched==unbatched: True (0/8 mismatched)
+[dataset] results/datasets/dev.jsonl  n_records=40 n_pairs=10 seed=20260827 vocab_pool=6
+  real   zero  AB=1.000 BA=1.000 all4=1.000 var=1.000 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 100.0%  -> PASS
+BEST      real/zero  = 100.0%  -> PASS
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260829T155627Z-eligibility-screen/outputs/eligibility-screen.json
+screen exit=0
+
+=== STEP 1/2: passive J-Lens readout, full dev split ===
+    keeps model_logits, so the readout-vs-behaviour margin is per record
+[runlog] results/runs/20260829T155822Z-stage1-passive-readout  git=7adaad14e25259834c182670d48346b786969708 DIRTY  slurm=552322
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1879.59it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 16671.55it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 131.38it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.4s  n_records=40
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+[stage1] query window -> q00=21('ĠWhat')  q01=22('Ġis')  q02=23('Ġused')  q03=24('Ġwhere')  q04=25('ĠHelen')  q05=26('Ġlives')  q06=27('?')  q07=28('ĠAnswer')
+
+==============================================================
+  jlens                    prequery  L25  margin=+0.068 ctrl=-0.369 frac=0.550 medrank=357
+  jlens                    q00       L29  margin=+0.055 ctrl=-0.517 frac=0.475 medrank=5186
+  jlens                    q01       L23  margin=+0.012 ctrl=-0.114 frac=0.450 medrank=3686
+  jlens                    q02       L27  margin=+0.006 ctrl=-0.762 frac=0.475 medrank=181
+  jlens                    q03       L29  margin=+0.144 ctrl=-1.015 frac=0.500 medrank=123
+  jlens                    q04       L9   margin=+0.483 ctrl=+0.329 frac=0.550 medrank=11765
+  jlens                    q05       L30  margin=+1.202 ctrl=-1.247 frac=0.775 medrank=119
+  jlens                    q06       L27  margin=+3.259 ctrl=-1.464 frac=0.675 medrank=116
+  jlens                    q07       L30  margin=+0.480 ctrl=-0.827 frac=0.575 medrank=539
+  jlens                    final     L27  margin=+3.794 ctrl=-1.305 frac=0.975 medrank=37
+  logitlens                prequery  L24  margin=+0.052 ctrl=-0.119 frac=0.525 medrank=78568
+  logitlens                q00       L30  margin=+0.053 ctrl=-0.515 frac=0.500 medrank=2564
+  logitlens                q01       L23  margin=+0.009 ctrl=-0.017 frac=0.500 medrank=33089
+  logitlens                q02       L18  margin=+0.008 ctrl=+0.043 frac=0.500 medrank=136903
+  logitlens                q03       L30  margin=+0.145 ctrl=-1.036 frac=0.500 medrank=118
+  logitlens                q04       L12  margin=+0.282 ctrl=+0.095 frac=0.550 medrank=96695
+  logitlens                q05       L30  margin=+1.075 ctrl=-1.011 frac=0.675 medrank=272
+  logitlens                q06       L29  margin=+2.565 ctrl=-1.445 frac=0.725 medrank=87
+  logitlens                q07       L30  margin=+0.395 ctrl=-0.706 frac=0.600 medrank=1372
+  logitlens                final     L30  margin=+2.823 ctrl=-1.410 frac=0.900 medrank=20
+  jlens_random_transport   prequery  L9   margin=+0.020 ctrl=+0.192 frac=0.475 medrank=111263
+  jlens_random_transport   q00       L13  margin=+0.020 ctrl=+0.029 frac=0.525 medrank=116932
+  jlens_random_transport   q01       L17  margin=+0.010 ctrl=-0.023 frac=0.500 medrank=87225
+  jlens_random_transport   q02       L15  margin=+0.016 ctrl=+0.100 frac=0.500 medrank=220892
+  jlens_random_transport   q03       L17  margin=+0.017 ctrl=-0.115 frac=0.500 medrank=117349
+  jlens_random_transport   q04       L9   margin=+0.101 ctrl=+0.049 frac=0.525 medrank=95778
+  jlens_random_transport   q05       L25  margin=+0.058 ctrl=+0.191 frac=0.500 medrank=159003
+  jlens_random_transport   q06       L13  margin=+0.063 ctrl=-0.001 frac=0.500 medrank=110071
+  jlens_random_transport   q07       L30  margin=+0.027 ctrl=+0.068 frac=0.500 medrank=205903
+  jlens_random_transport   final     L25  margin=+0.116 ctrl=-0.031 frac=0.500 medrank=128589
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260829T155822Z-stage1-passive-readout/outputs/stage1-passive-readout.json
+readout exit=0
+
+=== STEP 2/2: arm 3, supervised difference-in-means reference ===
+    now with class support outside every held-out pair
+[runlog] results/runs/20260829T160114Z-stage1-supervised-reference  git=7adaad14e25259834c182670d48346b786969708 DIRTY  slurm=552322
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1871.20it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 22060.29it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 38.52it/s]
+[arm3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=10.0s  n_records=40
+[arm3] positions -> final=29 prequery=20 aligned=True
+
+==============================================================
+  arm3 prequery  L30  LOO margin=+0.673 LOO acc=0.525 (in-sample acc=0.525)
+  arm3 q00       L30  LOO margin=+0.203 LOO acc=0.475 (in-sample acc=0.500)
+  arm3 q01       L30  LOO margin=+0.257 LOO acc=0.525 (in-sample acc=0.550)
+  arm3 q02       L30  LOO margin=+0.072 LOO acc=0.525 (in-sample acc=0.550)
+  arm3 q03       L30  LOO margin=+0.636 LOO acc=0.500 (in-sample acc=0.500)
+  arm3 q04       L30  LOO margin=+1.466 LOO acc=0.500 (in-sample acc=0.550)
+  arm3 q05       L30  LOO margin=+6.625 LOO acc=0.500 (in-sample acc=0.550)
+  arm3 q06       L30  LOO margin=+32.850 LOO acc=0.700 (in-sample acc=0.725)
+  arm3 q07       L30  LOO margin=+3.232 LOO acc=0.575 (in-sample acc=0.650)
+  arm3 final     L30  LOO margin=+24.199 LOO acc=0.625 (in-sample acc=0.775)
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260829T160114Z-stage1-supervised-reference/outputs/stage1-supervised-reference.json
+arm3 exit=0
+
+=== SWEEP COMPLETE (screen rc=0, readout rc=0, arm3 rc=0) ===
+results/runs/20260829T033509Z-output-shadow-audit/
+results/runs/20260829T155627Z-eligibility-screen/
+results/runs/20260829T155822Z-stage1-passive-readout/
+results/runs/20260829T160114Z-stage1-supervised-reference/
