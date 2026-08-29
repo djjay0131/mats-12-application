@@ -1,0 +1,2 @@
+/usr/bin/python3 experiments/analysis/output_shadow_audit.py --elig results/runs/20260828T204025Z-eligibility-screen --readout results/runs/20260828T204356Z-stage1-passive-readout --label tinkercliffs-7298944
+# cwd: /home/djjay/code/mats-12-application

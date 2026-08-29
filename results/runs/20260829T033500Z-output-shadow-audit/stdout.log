@@ -1,0 +1,12 @@
+[runlog] results/runs/20260829T033500Z-output-shadow-audit  git=64ba959b0ef67ff3c1a86c40b69a05573f7990b1 DIRTY  slurm=None
+
+==============================================================
+  label                       tinkercliffs-7298944   n=40
+  generation NAMES the intermediate   38/40   -> the intermediate is NOT latent here
+  model's own intermediate margin     mean +2.766   median +2.625   min -1.188
+  DISCRIMINATING SET (margin < 0)     3/40   95% CI [0.0258, 0.1986]
+  coupling: jlens final vs model      r=+0.771   (shadow anchor: logit lens L30 r=+0.811)
+  coupling: jlens final vs ANSWER     r=-0.016
+  coupling: jlens prequery vs model   r=+0.445
+==============================================================
+wrote /home/djjay/code/mats-12-application/results/runs/20260829T033500Z-output-shadow-audit/outputs/output-shadow-audit.json

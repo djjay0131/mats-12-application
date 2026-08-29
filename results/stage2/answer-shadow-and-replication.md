@@ -242,3 +242,82 @@ and at n=10 per cell is noise. Neither table changes the conclusion the correlat
    version of the project's question needs a split built to produce more of them.
 
 All numbers `agent-unverified`.
+
+---
+
+# Part 3 — why the discriminating set is three records
+
+Added 2026-08-29. Produced by `experiments/analysis/output_shadow_audit.py`, a
+committed script with a run record, not by ad-hoc inspection. Run on both
+clusters' Stage 2 records; the audit itself replicates.
+
+## The measurement
+
+| | TinkerCliffs 7298944 | Falcon 551834 |
+|---|---|---|
+| generation names the intermediate in plain text | **38 / 40 (0.95)** | **38 / 40 (0.95)** |
+| generation names the answer | 40 / 40 | 40 / 40 |
+| generation names the *alternative* intermediate | 1 / 40 | 1 / 40 |
+| `<think>`-mode generations | 37 / 40 | 37 / 40 |
+| model's own final-layer intermediate margin, mean | +2.766 | +2.728 |
+| records with a **negative** such margin | **3 / 40** | **3 / 40** |
+| r(J-Lens final margin, model's intermediate margin) | +0.771 | +0.773 |
+| shadow anchor: r(last-layer logit lens, same) | +0.811 | +0.810 |
+| r(J-Lens final margin, model's **answer** margin) | −0.016 | −0.032 |
+| r at the **prequery** position | +0.445 | +0.445 |
+
+95% Wilson interval on 3/40: **[0.026, 0.199]**. The rate itself is barely
+estimated, which is a further reason not to build a claim on those three records.
+
+## What it says
+
+**The intermediate is not hidden at the readout position.** The model writes it
+out: "Helen lives in **Prague**. The fact states that **Prague uses wool**." So
+the final-position next-token distribution carries the intermediate because the
+model is about to say it. Recovering it from the residual there is close to
+reading the model's next few words, and that is what the r=0.771 against a 0.811
+shadow anchor is measuring.
+
+**It is not the items, and not the task shape.** Mean model intermediate margin
+by cell: A/AB 2.31, A/BA 3.66, B/AB 2.58, B/BA 2.52. The three negatives fall in
+three different pairs. The margin distribution is smooth and unimodal from −1.19
+to +5.75 — 3 records below 0, 5 below +1.0, 12 below +2.0. Nothing clusters. The
+AB/BA role-swap structure, the six-word vocabulary and the pair construction are
+all behaving as designed; the shortage is a global shift, not a structural defect.
+
+**The eligibility screen and the discriminating criterion are near-complements.**
+Eligibility keeps records the model handles correctly. The audit needs records
+where the output does not already contain the intermediate. Those two sets are
+close to complementary, so the filter that makes a stimulus valid is close to the
+negation of the filter that makes it informative. That is why neither scaling n
+(linear: 400 records buys about 30) nor making the task harder (harder items fail
+eligibility and are excluded) fixes it.
+
+This is the most transferable observation in the project, and it generalizes past
+this task: **any passive-readout design that reads at a position on the model's
+own generation path, and that screens stimuli on behavioural correctness, will
+have this problem.** Models that reason in text put their intermediates on the
+surface, and a lens that reports them is not thereby reporting a latent.
+
+## The one thing that argues against the mechanism
+
+The two records whose generations do **not** name the intermediate still have
+model intermediate margins of +3.31 and +1.31, and the readout gets both right.
+If surface restatement were the whole story those two should sit near zero. They
+do not. n=2 supports no conclusion, but it is enough to say the output
+distribution may carry the intermediate whether or not the text names it — in
+which case suppressing the chain of thought would move the discriminating set
+very little.
+
+That is a testable disagreement, and it is the subject of `docs/adr/0006-*`,
+which proposes exactly that test and commits in advance to rejecting the change
+if the discriminating set does not grow.
+
+## Provenance
+
+`results/runs/20260829T033500Z-output-shadow-audit/` (TinkerCliffs records) and
+`results/runs/20260829T033509Z-output-shadow-audit/` (Falcon records). Both read
+committed run records and `results/datasets/dev.jsonl`, join on `record_id`, load
+no model and use no GPU. Run on the agents4research VM, not on an ARC login node.
+
+All numbers `agent-unverified`.

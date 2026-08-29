@@ -1,0 +1,12 @@
+[runlog] results/runs/20260829T033509Z-output-shadow-audit  git=64ba959b0ef67ff3c1a86c40b69a05573f7990b1 DIRTY  slurm=None
+
+==============================================================
+  label                       falcon-551834   n=40
+  generation NAMES the intermediate   38/40   -> the intermediate is NOT latent here
+  model's own intermediate margin     mean +2.728   median +2.562   min -1.250
+  DISCRIMINATING SET (margin < 0)     3/40   95% CI [0.0258, 0.1986]
+  coupling: jlens final vs model      r=+0.773   (shadow anchor: logit lens L30 r=+0.810)
+  coupling: jlens final vs ANSWER     r=-0.032
+  coupling: jlens prequery vs model   r=+0.445
+==============================================================
+wrote /home/djjay/code/mats-12-application/results/runs/20260829T033509Z-output-shadow-audit/outputs/output-shadow-audit.json
