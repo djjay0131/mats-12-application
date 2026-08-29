@@ -499,7 +499,47 @@ has emitted nothing at a prompt token, and what follows `?` is ` Answer` rather
 than a city. Capturing `model_logits` across the window would settle it and is
 one cheap re-run. It has not been done and the claim is not made.
 
-TinkerCliffs job 7307558 was still queued more than two hours after submission
-and is deliberately left queued rather than cancelled — it blocks nothing, and
-if it runs it gives the cross-GPU replication for free. The Falcon result stands
-on its own; the replication is outstanding, not failed.
+### Cross-GPU replication — TinkerCliffs 7307558
+
+It did eventually run: A100, node `tc-dgx003`, 6:15, exit 0, commit `c703dd7`.
+It had sat in the queue about four hours and was left there rather than
+cancelled, which turned out to be the right call. Table:
+`results/stage2/postquery-sweep-by-position-tinkercliffs.txt`.
+
+**The sweep replicates.** J-Lens frac / control frac, Falcon → TinkerCliffs:
+
+| pos | J-Lens frac | ctrl frac | J-Lens median rank |
+|---|---|---|---|
+| prequery | .550 → .550 | .400 → .400 | 357 → 346 |
+| q03 ` where` | .500 → .500 | .450 → .450 | 123 → 125 |
+| q04 ` Helen` | .550 → .550 | .650 → .650 | 11,765 → 12,105 |
+| **q05 ` lives`** | **.775 → .750** | **.350 → .350** | 119 → 123 |
+| **q06 `?`** | **.675 → .675** | **.350 → .350** | 116 → 110 |
+| q07 ` Answer` | .575 → .575 | .500 → .525 | 539 → 557 |
+| final | .975 → .975 | .375 → .375 | 37 → 35 |
+
+The logit lens matches too — q05 .675 → .700, q06 .725 → .725 — and the
+norm-matched random-transport arm is flat at .500 across the whole window on
+both machines. Arm 3 also peaks at `q06` on both, above the final token:
++32.850 / .700 → +33.865 / .700 at q06, against +24.199 / .625 → +24.717 / .650
+at final.
+
+**The one substantive difference is a single record.** `q05` moves .775 → .750,
+which at n=40 is one record flipping. The conclusion — direction resolves at the
+token completing the relation, far above a control that sits at .350 — is
+unchanged.
+
+**Where it does NOT replicate, and why that is expected.** The selected layer
+differs at `q00` (L29 → L28) and `q02` (L27 → L19), and the median rank at those
+two positions swings wildly: 5,186 → 29,916 and 181 → 26,232. Those are exactly
+the positions where every layer's mean margin is ≈0.005, so the argmax-margin
+layer rule is choosing between near-identical noise and a different GPU's
+rounding picks a different winner. This is a property of the pre-registered rule
+at positions with no signal, not a defect in the measurement and not a finding
+about the lens. It is the reason the fixed-layer check at L27 and L30 is
+reported alongside. **No position that carries signal changed its layer.**
+
+The behavioural eligibility screen shows the same GPU-dependent instability
+already recorded for Stage 2: AB = 1.000 on the L40S against 0.900 on the A100,
+padding control 0/8 against 2/8 mismatched. Consistent with the earlier finding,
+and the same caveat applies wherever eligibility is quoted.

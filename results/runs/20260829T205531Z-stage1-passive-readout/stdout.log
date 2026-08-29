@@ -1,0 +1,41 @@
+[runlog] results/runs/20260829T205531Z-stage1-passive-readout  git=c703dd77d0ed73cedf3273f4af687a5bf9e048e3 DIRTY  slurm=7307558
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1757.14it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 25649.92it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 24.75it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=4.2s  n_records=40
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+[stage1] query window -> q00=21('ĠWhat')  q01=22('Ġis')  q02=23('Ġused')  q03=24('Ġwhere')  q04=25('ĠHelen')  q05=26('Ġlives')  q06=27('?')  q07=28('ĠAnswer')
+
+==============================================================
+  jlens                    prequery  L25  margin=+0.070 ctrl=-0.367 frac=0.550 medrank=346
+  jlens                    q00       L28  margin=+0.047 ctrl=-0.164 frac=0.475 medrank=29916
+  jlens                    q01       L23  margin=+0.019 ctrl=-0.117 frac=0.450 medrank=3684
+  jlens                    q02       L19  margin=+0.004 ctrl=-0.183 frac=0.500 medrank=26232
+  jlens                    q03       L29  margin=+0.135 ctrl=-1.023 frac=0.500 medrank=125
+  jlens                    q04       L9   margin=+0.480 ctrl=+0.330 frac=0.550 medrank=12105
+  jlens                    q05       L30  margin=+1.180 ctrl=-1.257 frac=0.750 medrank=123
+  jlens                    q06       L27  margin=+3.333 ctrl=-1.486 frac=0.675 medrank=110
+  jlens                    q07       L30  margin=+0.488 ctrl=-0.841 frac=0.575 medrank=557
+  jlens                    final     L27  margin=+3.848 ctrl=-1.311 frac=0.975 medrank=35
+  logitlens                prequery  L24  margin=+0.053 ctrl=-0.122 frac=0.525 medrank=78525
+  logitlens                q00       L30  margin=+0.043 ctrl=-0.522 frac=0.500 medrank=2566
+  logitlens                q01       L23  margin=+0.014 ctrl=-0.016 frac=0.500 medrank=32893
+  logitlens                q02       L18  margin=+0.007 ctrl=+0.043 frac=0.500 medrank=137383
+  logitlens                q03       L30  margin=+0.126 ctrl=-1.040 frac=0.500 medrank=121
+  logitlens                q04       L12  margin=+0.284 ctrl=+0.096 frac=0.550 medrank=96840
+  logitlens                q05       L30  margin=+1.057 ctrl=-1.016 frac=0.700 medrank=294
+  logitlens                q06       L29  margin=+2.606 ctrl=-1.453 frac=0.725 medrank=82
+  logitlens                q07       L30  margin=+0.401 ctrl=-0.727 frac=0.600 medrank=1405
+  logitlens                final     L30  margin=+2.854 ctrl=-1.418 frac=0.900 medrank=19
+  jlens_random_transport   prequery  L9   margin=+0.017 ctrl=+0.197 frac=0.500 medrank=110956
+  jlens_random_transport   q00       L13  margin=+0.016 ctrl=+0.031 frac=0.525 medrank=116480
+  jlens_random_transport   q01       L18  margin=+0.008 ctrl=-0.034 frac=0.500 medrank=74292
+  jlens_random_transport   q02       L17  margin=+0.017 ctrl=-0.042 frac=0.500 medrank=131670
+  jlens_random_transport   q03       L17  margin=+0.021 ctrl=-0.117 frac=0.500 medrank=119711
+  jlens_random_transport   q04       L9   margin=+0.101 ctrl=+0.048 frac=0.525 medrank=95991
+  jlens_random_transport   q05       L19  margin=+0.060 ctrl=-0.094 frac=0.500 medrank=192382
+  jlens_random_transport   q06       L13  margin=+0.067 ctrl=+0.003 frac=0.500 medrank=110321
+  jlens_random_transport   q07       L30  margin=+0.028 ctrl=+0.069 frac=0.500 medrank=205735
+  jlens_random_transport   final     L25  margin=+0.121 ctrl=-0.026 frac=0.500 medrank=128084
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260829T205531Z-stage1-passive-readout/outputs/stage1-passive-readout.json

@@ -1,0 +1,62 @@
+{
+  "slug": "stage1-passive-readout",
+  "started_utc": "2026-08-29T20:55:31.821032+00:00",
+  "argv": [
+    "experiments/stage1/passive_readout.py"
+  ],
+  "cwd": "/home/djjay/mats12-tc/repo",
+  "git": {
+    "sha": "c703dd77d0ed73cedf3273f4af687a5bf9e048e3",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260829T202603Z-eligibility-screen/",
+      "?? results/runs/20260829T203451Z-eligibility-screen/",
+      "?? results/runs/20260829T203742Z-stage1-passive-readout/",
+      "?? results/runs/20260829T205245Z-eligibility-screen/",
+      "?? results/slurm-logs/sweeptc-7307558.out"
+    ],
+    "note": null
+  },
+  "hostname": "tc-dgx003",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "7307558",
+    "SLURM_JOB_NAME": "mats12-sweep-tc",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "a100_preemptable_q",
+    "SLURM_JOB_NODELIST": "tc-dgx003",
+    "SLURM_JOB_GPUS": "7"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA A100-SXM4-80GB",
+    "count": 1,
+    "capability": [
+      8,
+      0
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "dataset": "results/datasets/dev.jsonl",
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "lens_file": "qwen3.5-4b/jlens/Salesforce-wikitext/Qwen3.5-4B_jacobian_lens_n1000.pt",
+    "split": "dev",
+    "note": "held-out split not read by this script"
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-29T20:57:46.262689+00:00",
+  "outputs": [
+    "stage1-passive-readout.json"
+  ]
+}
