@@ -132,6 +132,48 @@ def resolve_positions(tok, prompt, input_ids):
     }
 
 
+def query_window(align, tok, input_ids):
+    """Ordered {name: token_index} for the span from query onset to the token
+    before the final one, plus the token strings, recorded into `align`.
+
+    WHY THIS SPAN. `prequery` sits at the last token of the facts block, BEFORE
+    the question names a subject. At that point the prompt does not determine
+    which entity is the correct intermediate, so the direction bit is undefined
+    there: a chance-level frac at prequery is the CONTROL PASSING, not the lens
+    failing. `final` sits after the model has selected an answer and, in this
+    prompt format, is about to say the intermediate out loud -- 38 of 40 dev
+    generations name it (results/stage2/answer-shadow-and-replication.md).
+
+    Between them is the only span where the binding is DETERMINED by the prompt
+    but NOT YET EMITTED by the model. It had never been read. This function
+    exposes it.
+
+    Indices are resolved PER RECORD from the tokenizer offset mapping, not from
+    a fixed offset: results/datasets/tokenization_report.json records the
+    tokenizer, the vocabulary width and one demo prompt length, but carries no
+    per-record token indices, and prompt length varies by template.
+    """
+    pre, fin = align.get("prequery_idx"), align.get("final_idx")
+    if pre is None or fin is None or fin - pre < 2:
+        align["query_window"] = None
+        align["query_window_reason"] = "no span between prequery and final"
+        return {}
+    ids = input_ids[0].tolist()
+    win = {f"q{k:02d}": p for k, p in enumerate(range(pre + 1, fin))}
+    align["query_window"] = {name: {"idx": p,
+                                    "token": tok.convert_ids_to_tokens(ids[p])}
+                             for name, p in win.items()}
+    align["query_window_reason"] = None
+    return win
+
+
+def ordered_positions(names):
+    """prequery, then the query window left to right, then final."""
+    def key(k):
+        return (0, "") if k == "prequery" else ((2, "") if k == "final" else (1, k))
+    return sorted(names, key=key)
+
+
 def score_positions(lens_logits, pos_order, targets):
     """Per-layer ranks and continuous margins for every target at every position.
 
@@ -248,8 +290,12 @@ def main() -> int:
                 probe_ll, model_logits, input_ids = lens.apply(
                     lm, prompt, positions=[-1], use_jacobian=use_j)
                 align = resolve_positions(tok, prompt, input_ids)
-                pos_order = {"final": align["final_idx"],
-                             "prequery": align["prequery_idx"]}
+                # prequery, the whole query window, then final -- one apply()
+                # per record with EVERY position requested, so every position
+                # comes from the same forward pass by construction.
+                pos_order = {"prequery": align["prequery_idx"],
+                             **query_window(align, tok, input_ids),
+                             "final": align["final_idx"]}
                 want = [p for p in pos_order.values() if p is not None]
                 lens_logits, _, _ = lens.apply(
                     lm, prompt, positions=want, use_jacobian=use_j)
@@ -299,6 +345,13 @@ def main() -> int:
                           f"prequery={align['prequery_idx']} "
                           f"({align['prequery_token_str']!r})  "
                           f"aligned={align['alignment_ok']}", flush=True)
+                    w = align.get("query_window") or {}
+                    print("[stage1] query window -> " + "  ".join(
+                        f"{k}={v['idx']}({v['token']!r})" for k, v in w.items())
+                        or "[stage1] query window -> EMPTY", flush=True)
+                if not align.get("alignment_ok"):
+                    print(f"[stage1] WARNING alignment failed on "
+                          f"{r['record_id']}; positions unverified", flush=True)
         finally:
             if saved is not None:
                 lens.jacobians = saved
@@ -312,11 +365,17 @@ def main() -> int:
     layers = sorted({int(l) for r in results
                      for p in r["scores"].values() if p
                      for l in p})
+    seen = []
+    for r in results:
+        for k in r["scores"]:
+            if k not in seen:
+                seen.append(k)
+    pos_names = ordered_positions(seen)
     summary = {}
     for arm_name, _, _ in arms:
         arm_rows = [r for r in results if r["arm"] == arm_name]
         summary[arm_name] = {}
-        for pos in ("final", "prequery"):
+        for pos in pos_names:
             per_layer = {}
             for l in layers:
                 cells = [r["scores"][pos][l] for r in arm_rows
@@ -362,8 +421,17 @@ def main() -> int:
             "final": "method-claim, WEAK -- the SELECTED intermediate is "
                      "readable; this is not evidence that stored bindings are "
                      "readable",
-            "prequery": "method-claim, STRONG -- stored binding readable "
-                        "before the query selects a subject",
+            "prequery": "concept-availability claim only. The query has NOT "
+                        "yet named a subject at this position, so neither "
+                        "entity is the correct intermediate and the direction "
+                        "bit is undefined: frac at chance here is the CONTROL "
+                        "PASSING, not the lens failing. Median rank is "
+                        "interpretable, frac is not.",
+            "query_window": "method-claim, STRONG -- the only span where the "
+                            "binding is determined by the prompt but the model "
+                            "has not yet emitted the intermediate. Direction "
+                            "IS defined here, and the output shadow that "
+                            "contaminates `final` has not yet formed.",
         },
         "split": "dev", "n_records": len(recs), "n_pairs": meta.get("n_pairs"),
         "dataset": args.dataset, "dataset_seed": meta.get("seed"),
@@ -391,7 +459,7 @@ def main() -> int:
 
     print("\n" + "=" * 62)
     for arm_name, _, _ in arms:
-        for pos in ("final", "prequery"):
+        for pos in pos_names:
             s = summary[arm_name][pos]
             if not s:
                 print(f"  {arm_name:24s} {pos:9s}  NO DATA")

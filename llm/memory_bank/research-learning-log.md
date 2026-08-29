@@ -347,3 +347,92 @@ resample control. Held-out stays untouched until the layer is frozen.
 ### Hour gate — Jason confirms
 
 - Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+
+
+## Hour 3 — Post-query sweep: is binding readable where it is determined but not yet emitted?
+
+- Date/time: 2026-08-29, written **before** the sweep was coded or submitted.
+- Research stage: **Interpretation → targeted re-measurement**
+- Interpretation-first: Jason's reading of the Stage 2 result is recorded below
+  verbatim, before any agent analysis of it.
+
+### Jason's interpretation of the Stage 2 result (verbatim)
+
+> "The prequery frac is 0.550 likely because, like the other lenses, it is
+> simply reading ahead getting us the right answer. Both concepts are in each
+> group, but the model still has to guess the final result."
+
+### Coach sharpening, agreed with Jason
+
+The prequery position (token index 20 on the T1 template) sits at the last token
+of the facts block, **before the question names a subject**. At that point the
+prompt does not determine which of the two entities is the correct intermediate.
+So a directional readout there has nothing to be right about.
+
+**0.550 is the control PASSING, not the lens failing.** It has been described in
+this repo as J-Lens "failing to pick between the correct intermediate and its
+role-swapped twin". That description is wrong and is corrected everywhere it
+appears. What the prequery numbers do show is real and narrower: at a position
+where neither entity is yet privileged, J-Lens puts the concept set two orders of
+magnitude higher in the ranking than the logit lens does (median rank 346 against
+78,525). That is a concept-availability result, not a binding result.
+
+**The consequence is the reason for this hour.** `final` is contaminated — the
+model is about to say the intermediate out loud, 38 of 40 generations name it.
+`prequery` is uncontaminated but undetermined. **Binding has never been measured
+at a position where it is determined but not yet emitted.** That span — from the
+first token of the question to the final token — was never read.
+
+### Pre-registered before the sweep is submitted
+
+- **Positions:** every token from query onset (the first token after the facts
+  block) through the final token, inclusive, plus the existing `prequery` and
+  `final`. Resolved **per record** from the tokenizer's offset mapping.
+  Note: `results/datasets/tokenization_report.json` records the tokenizer, the
+  vocabulary width and a single demo prompt length; it carries **no per-record
+  token indices**, so the indices cannot be read from it and are derived from
+  the offset mapping instead, with the alignment against `apply()`'s own
+  `input_ids` verified per record and reported.
+- **Arms:** `jlens`, `logitlens`, `jlens_random_transport` (norm-matched), plus
+  the supervised difference-in-means reference (arm 3) at every position.
+- **Controls:** label permutation (derangement, seed 20260827) at every
+  position, and the norm-matched random transport arm. Unchanged from Hour 2.
+- **Metrics reported by position:** `frac_correct_outranks_incorrect` (the
+  direction bit), median rank of the correct intermediate over the full
+  248,320-wide unembedding (the concept-availability measure), and the mean
+  paired margin, each at that position's argmax layer.
+- **Split:** dev only. Held-out is not touched.
+
+### Decision rule, pre-registered — the sweep decides the primary claim
+
+1. **If J-Lens resolves direction in the post-query window** — `frac`
+   meaningfully above the label-permutation control at some position in the
+   window — then that position is the project's primary measurement position.
+   ADR-0006's stimulus regeneration is then likely unnecessary. Report and hold
+   for Jason's call; do not proceed to regeneration on the agent's own judgement.
+2. **If concepts stay elevated but direction stays at chance across the window**
+   — median rank far better than the logit lens while `frac` tracks the control
+   — then that IS the bag-of-concepts result, measured with the output shadow
+   excluded by construction. ADR-0006 regeneration then proceeds as the
+   robustness check, one cycle, subject to its own accept/reject criterion.
+3. Then freeze, then held-out. **The freeze must name the chosen position(s) and
+   cite this sweep as the basis.**
+
+"Meaningfully above" is deliberately not given a threshold here: with n=40 and a
+0.500 floor, a single pre-set cut would be false precision. The control margin
+and the control `frac` are reported at every position and the comparison is made
+against them in the open.
+
+### Before execution — Jason
+
+- **Prediction: not offered.** Jason's interpretation above is of the *previous*
+  result, not a prediction about this one, and is not recorded as one.
+- Agent's prediction, flagged as the agent's and not Jason's: direction resolves
+  somewhere in the window rather than at its start — the question has to be read
+  before the subject is bound — and the logit lens resolves it later than J-Lens
+  or not at all. Concept availability is expected to be flat and high across the
+  whole window for J-Lens.
+
+### Result
+
+- *pending — this entry was written before submission.*

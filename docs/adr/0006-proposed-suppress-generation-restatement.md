@@ -1,6 +1,6 @@
 # ADR-0006: Suppress the model's own restatement of the intermediate before the held-out freeze
 
-Status: Proposed
+Status: Proposed — HELD pending the post-query sweep (see Consequences)
 Date: 2026-08-29
 
 This ADR does not change the research question, the substrate, the lens, or the
@@ -106,13 +106,21 @@ grow," and why the audit is a committed script rather than a judgement call.
 
 ## Alternatives Considered
 
-**Do nothing and report the prequery position as the primary result.** Defensible
-and cheap: at prequery all 40 records are discriminating by construction, the
-output coupling drops to 0.445, and J-Lens beats the logit lens on median rank
-346 vs 78,525. The problem is `frac` 0.550 against a 0.500 floor — J-Lens
-localizes the intermediate there but does not recover *which* one is correct. As
-a primary result this is honest but weak, and it leaves the strongest-looking
-number in the project sitting on a contaminated position.
+**Do nothing and report the prequery position as the primary result.** Now known to
+be unavailable, and the reason supersedes part of this ADR. The prequery position
+precedes the question, so no entity is yet the correct intermediate and its
+chance-level `frac` of 0.550 is the control passing rather than a lens failure. It
+can report concept availability — median rank 346 against the logit lens's 78,525 —
+but it cannot report binding, because at that position there is no binding to report.
+
+**Read the post-query window first.** Between the undetermined prequery position and
+the contaminated final position lies the span from query onset to the last token,
+where the binding is determined but not yet emitted. That span was never read. The
+sweep over it is cheap, uses the same stimuli and the same runs, and it decides
+whether this ADR is needed at all: if J-Lens resolves direction in that window, the
+regeneration proposed here is likely unnecessary. The pre-registered decision rule
+is in the Hour 3 entry of `llm/memory_bank/research-learning-log.md`. **This ADR is
+therefore held pending the sweep**, and its status stays Proposed.
 
 **Intervene rather than read.** Patch the intermediate and check whether the
 answer moves. This removes the confound completely, because it does not depend

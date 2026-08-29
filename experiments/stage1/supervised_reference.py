@@ -61,7 +61,11 @@ from runlog import start_run
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from passive_readout import (MODEL_ID, MODEL_REV, LENS_REPO, LENS_REV,  # noqa: E402
-                             LENS_FILE, resolve_positions)
+                             LENS_FILE, resolve_positions, query_window,
+                             ordered_positions)
+
+
+POSITIONS = []          # filled from the first record's resolved positions
 
 
 def fit_centroids(items):
@@ -139,7 +143,11 @@ def main() -> int:
                 _, _, input_ids = lens.apply(lm, r["prompt"], positions=[-1],
                                              use_jacobian=True)
         align = resolve_positions(tok, r["prompt"], input_ids)
-        pos = {"final": align["final_idx"], "prequery": align["prequery_idx"]}
+        pos = {"prequery": align["prequery_idx"],
+               **query_window(align, tok, input_ids),
+               "final": align["final_idx"]}
+        if i == 0:
+            POSITIONS[:] = ordered_positions(pos)
         H = {}
         for l in layers:
             act = rec.activations[l][0].detach().float().cpu()
@@ -203,7 +211,7 @@ def main() -> int:
         }
 
     results = {}
-    for position in ("final", "prequery"):
+    for position in POSITIONS:
         per_layer = {}
         for l in layers:
             in_sample = evaluate(all_idx, all_idx, l, position)
@@ -236,7 +244,7 @@ def main() -> int:
     # promise cannot be checked by a reader and any drift in the capture path
     # between now and then would change them silently.
     fitted = {}
-    for position in ("final", "prequery"):
+    for position in POSITIONS:
         sel = results[position].get("selected_layer")
         if sel is None:
             continue
@@ -294,7 +302,7 @@ def main() -> int:
     out.write_text(json.dumps(payload, indent=2))
 
     print("\n" + "=" * 62)
-    for position in ("final", "prequery"):
+    for position in POSITIONS:
         r = results[position]
         if r.get("selected_layer") is None:
             print(f"  arm3 {position:9s}  NO SCORABLE FIT")

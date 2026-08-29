@@ -12,6 +12,19 @@ Both at repo commit `06ef3a5`, lens `neuronpedia/jacobian-lens` @
 `vocab_pool=6` / seed 20260827. See `experiments/stage2/tinkercliffs-env/README.md`
 for what was pinned across the two clusters and what was deliberately allowed to differ.
 
+> **CORRECTION, 2026-08-29 — read before any prequery number below.** The
+> prequery position sits at the last token of the facts block, *before the
+> question names a subject*. At that point the prompt does not determine which
+> entity is the correct intermediate, so a directional readout there has nothing
+> to be right about: **`frac` 0.550 is the control passing, not the lens
+> failing.** Earlier wording in this document described it as J-Lens failing to
+> pick between the correct intermediate and its twin. That was wrong. The
+> prequery median-rank result (346 against the logit lens's 78,525) stands and is
+> a **concept-availability** finding, not a binding finding. The consequence is
+> that binding had never been measured at a position where it is determined but
+> not yet emitted, which is what the post-query sweep exists to do — see
+> `llm/memory_bank/research-learning-log.md`, Hour 3.
+
 **Every number here is `agent-unverified`.** They come from this pipeline and share its
 code. Nothing below should enter the write-up as settled until it has been re-derived by
 a path that does not.
@@ -73,10 +86,12 @@ next-token distribution at the final position cannot be the explanation there:
 |---|---|---|
 | prequery (best layer) | frac 0.550 / median rank **346** | frac 0.525 / median rank 78,525 |
 
-227× on rank. But `frac` is 0.550 against a 0.500 floor: **at the prequery position
-J-Lens does not recover which intermediate is correct.** It puts the region of the
-vocabulary containing the intermediate far higher than the logit lens does, and then
-fails to pick between the correct one and its role-swapped twin.
+227× on rank. `frac` is 0.550 against a 0.500 floor, and that is the **expected and
+correct** value: at prequery the question has not yet named a subject, so neither entity
+is the correct intermediate and there is no direction to recover. The chance-level `frac`
+is the control passing. What the position does show is that J-Lens puts the concept set
+two orders of magnitude higher in the ranking than the logit lens does at a point where
+neither concept is privileged — **concept availability, not binding.**
 
 ## The claim that is supportable
 
@@ -200,9 +215,10 @@ the resolution of this measurement.** Its readout at the final position moves wi
 model's own output preference for the intermediate, and is uncorrelated with how well the
 model answers.
 
-At the prequery position the coupling drops to 0.445, which is the quantitative form of
-the earlier claim: that position is where the readout is doing something the output does
-not already contain.
+At the prequery position the coupling drops to 0.445 — the readout there is substantially
+not a function of the final-position output. That is what makes the position clean. It is
+also why the position cannot carry the primary claim: it is clean *because* nothing has
+been determined yet.
 
 ## Where the shadow and the truth disagree
 
@@ -234,7 +250,9 @@ and at n=10 per cell is noise. Neither table changes the conclusion the correlat
    directional finding at the final position is not evidence of a hidden intermediate.**
 3. At matched layers J-Lens still localizes the intermediate 30–250× higher in the ranking
    than the logit lens, and at the prequery position the output coupling falls to 0.445.
-   **Localization claim, supported. Binding claim, not supported.**
+   **Concept-availability claim, supported. Binding claim, NOT MEASURED** — not "not
+   supported". The final position is contaminated and the prequery position is
+   undetermined; neither can answer it. See the correction at the top.
 4. The binary behaviour-vs-readout contingency table is dead on this split — one
    discriminating case on one cluster, zero on the other. It should be dropped from the
    write-up rather than reported with n=1.
