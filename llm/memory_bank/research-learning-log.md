@@ -539,7 +539,33 @@ at positions with no signal, not a defect in the measurement and not a finding
 about the lens. It is the reason the fixed-layer check at L27 and L30 is
 reported alongside. **No position that carries signal changed its layer.**
 
-The behavioural eligibility screen shows the same GPU-dependent instability
-already recorded for Stage 2: AB = 1.000 on the L40S against 0.900 on the A100,
-padding control 0/8 against 2/8 mismatched. Consistent with the earlier finding,
-and the same caveat applies wherever eligibility is quoted.
+### The eligibility split is deterministic by GPU architecture, not run-to-run noise
+
+Job 7307558 ran on a preemptable partition and was **preempted and requeued
+twice** before the attempt that finished. `sacct` keeps only the last attempt and
+the requeue overwrote the log, so the two earlier attempts survive only as
+orphaned run directories; each now carries a `NOTE.md` saying what it is, and
+none of them has been back-filled into a manifest. The 6:15 elapsed time is the
+final attempt, not the job's whole occupancy.
+
+That accident is informative. It means the eligibility screen ran **three times
+on A100 hardware** — 20:26:03, 20:34:51 and 20:52:45 — and returned
+**AB = 0.900 every time**. Against that: 551581 on an A30 gave 1.000, and 551834
+and 552322 on L40S gave 1.000 each.
+
+| GPU | runs | eligibility AB |
+|---|---|---|
+| A30 | 1 | 1.000 |
+| L40S | 2 | 1.000, 1.000 |
+| A100 | 3 (+7298944 earlier, also 0.900) | 0.900 × 4 |
+
+So the earlier characterisation — "one prompt in ten flips its behavioural label
+between two GPUs" — was too weak, and in the direction of making it sound like
+noise. It is not noise. **It is deterministic per architecture and reproducible
+within one.** The same prompt is scored the same way every time on the same class
+of card and differently on another, which is what greedy decoding over a
+last-bit-different logit does. The Stage 2 write-up should say this rather than
+the weaker version, and eligibility should be quoted with the architecture named.
+
+`padding control batched==unbatched` follows the same split: 0/8 mismatched on
+L40S, 2/8 on A100.

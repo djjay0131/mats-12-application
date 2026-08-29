@@ -1,0 +1,2 @@
+/home/djjay/mats12-tc/venv/bin/python experiments/design-verification/eligibility_screen.py --dataset results/datasets/dev.jsonl
+# cwd: /home/djjay/mats12-tc/repo
