@@ -117,7 +117,9 @@ Against the pre-registered threshold: PASS (>= 80%).
 
 ### Hour gate — Jason confirms
 
-- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+- Decision: **CONTINUE** — never separately confirmed at the time; the work
+  proceeded, and Jason's 2026-08-29 "CONTINUE." (recorded at Hour 4) ratifies
+  the chain retroactively. Recorded as such rather than backdated.
 
 ---
 
@@ -346,7 +348,10 @@ resample control. Held-out stays untouched until the layer is frozen.
 
 ### Hour gate — Jason confirms
 
-- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+- Decision: **CONTINUE** — Jason, 2026-08-29, verbatim: "CONTINUE." Given after
+  the full verification chain (answer-shadow result, prequery reframe,
+  post-query sweep, cross-GPU replication) was on the table, so it ratifies the
+  corrected framing, not the original headline.
 
 
 ## Hour 3 — Post-query sweep: is binding readable where it is determined but not yet emitted?
@@ -569,3 +574,64 @@ the weaker version, and eligibility should be quoted with the architecture named
 
 `padding control batched==unbatched` follows the same split: 0/8 mismatched on
 L40S, 2/8 on A100.
+
+
+## Hour 4 — Stage 3: held-out at frozen settings
+
+- Date/time: 2026-08-29, written **before** the code was submitted.
+- Research stage: **Confirmation** — the first run in this project whose purpose
+  is to confirm rather than explore.
+- Gate context: this entry is also the record of the Hour 3 gate. Decision:
+  **CONTINUE** (Jason, in discussion, after reviewing the sweep, the shadow
+  result, the replication, and the keep-vs-pivot question directly). ADR-0006
+  deferred by Jason the same day; the intervention arm is future work.
+
+### Why this experiment and not another
+
+The relcomp/qmark result was FOUND by a sweep over ten positions on dev — the
+textbook forking-paths setup. Held-out at frozen settings is the only
+experiment that converts "we found a position" into "there is a position."
+Nothing else reachable in the remaining budget changes the strength of the
+primary claim.
+
+### The freeze (committed before this runs)
+
+`experiments/stage3/freeze.json` + `results/stage2/FREEZE.md`. Positions by
+ANCHOR (relcomp = token before the final '?'; qmark = '?'; prequery and final
+as references), because held-out spans templates T1–T6 of varying length and a
+frozen token index would silently misalign. Layers from the pre-registered dev
+argmax, identical on both clusters: jlens relcomp L30 / qmark L27; logitlens
+L30 / L29; random transport at the jlens layers; arm 3 at L30, fit on all of
+dev, applied unchanged to held-out.
+
+### What is measured that was previously argued
+
+`model_logits` is kept at every scored position on both splits, so the output
+shadow at relcomp/qmark becomes a per-record measurement. This adds recorded
+data and tunes nothing.
+
+### Held-out contact disclosure
+
+Before the freeze: the `_meta` header, record count (160), pair count (40) and
+template-id set (T1–T6) were read once, to design the anchoring. No prompt,
+entity, vocabulary item or answer was read.
+
+### Pre-registered predictions (agent's, flagged as the agent's)
+
+- jlens frac at relcomp/qmark on held-out lands near dev (0.65–0.78), control
+  near 0.35–0.50; logitlens at parity on direction; jlens ahead on median rank.
+- shadow intermediate margin at relcomp/qmark near zero on both splits.
+- arm 3 transfers: held-out accuracy at qmark above 0.60.
+- eligibility on held-out lower than dev's (six templates, harder mix), and
+  architecture-dependent as established.
+
+### Failure condition, stated in advance
+
+If held-out frac at BOTH frozen primary positions is at or near its
+label-permutation control, the sweep result was forking paths. That outcome is
+the finding and will be reported as such — the frozen settings make
+re-selection impossible by construction.
+
+### Result
+
+- *pending — written before submission.*
