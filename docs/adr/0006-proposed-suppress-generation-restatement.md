@@ -1,6 +1,15 @@
 # ADR-0006: Suppress the model's own restatement of the intermediate before the held-out freeze
 
-Status: Proposed — HELD pending the post-query sweep (see Consequences)
+Status: Deferred — not actioned; kept as future work or pivot (Jason, 2026-08-29)
+
+Resolution: the post-query sweep ran and rule 1 of its pre-registered decision
+rule fired — J-Lens resolves direction at q05/q06, inside the window, on both
+clusters (Falcon 552322, TinkerCliffs 7307558). The regeneration this ADR
+proposes is therefore not needed for the primary claim, and Jason ruled on
+2026-08-29 not to action it. It is deliberately kept rather than rejected:
+it becomes relevant again if the q05/q06 result weakens on held-out, or as
+the robustness check it was originally designed to be, and its accept/reject
+criterion and self-falsification evidence remain as written.
 Date: 2026-08-29
 
 This ADR does not change the research question, the substrate, the lens, or the
