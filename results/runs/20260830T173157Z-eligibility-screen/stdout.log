@@ -1,0 +1,12 @@
+[runlog] results/runs/20260830T173157Z-eligibility-screen  git=62dc94b4033286ccbe2d1d1121feb2c412f15096 DIRTY  slurm=554591
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 400.54it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   3%|3         | 13/426 [00:00<00:03, 118.83it/s]Loading weights:  11%|#         | 46/426 [00:00<00:01, 228.85it/s]Loading weights:  57%|#####7    | 243/426 [00:00<00:00, 952.63it/s]Loading weights:  80%|#######9  | 339/426 [00:00<00:00, 786.74it/s]Loading weights:  99%|#########8| 421/426 [00:00<00:00, 724.68it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 690.85it/s]
+[padding control] batched==unbatched: False (1/8 mismatched)
+[dataset] results/datasets/heldout.jsonl  n_records=160 n_pairs=40 seed=20260827 vocab_pool=6
+  real   zero  AB=0.950 BA=0.925 all4=0.900 var=0.963 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 95.0%  -> PASS
+BEST      real/zero  = 95.0%  -> PASS
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260830T173157Z-eligibility-screen/outputs/eligibility-screen.json

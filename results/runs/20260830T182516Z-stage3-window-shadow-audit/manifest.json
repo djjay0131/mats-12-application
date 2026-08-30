@@ -1,0 +1,53 @@
+{
+  "slug": "stage3-window-shadow-audit",
+  "started_utc": "2026-08-30T18:25:16.592881+00:00",
+  "argv": [
+    "experiments/analysis/window_shadow_audit.py",
+    "--run",
+    "results/runs/20260830T175149Z-stage3-heldout-frozen"
+  ],
+  "cwd": "/home/djjay/code/mats-12-application",
+  "git": {
+    "sha": "62f5e75a5e00b543640e63e7296875fc30987ec2",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? experiments/analysis/window_shadow_audit.py",
+      "?? results/runs/20260830T173157Z-eligibility-screen/",
+      "?? results/runs/20260830T175149Z-stage3-heldout-frozen/",
+      "?? results/slurm-logs/stage3-554591.out"
+    ],
+    "note": null
+  },
+  "hostname": "agents4research",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "slurm": {
+    "SLURM_JOB_ID": null,
+    "SLURM_JOB_NAME": null,
+    "SLURM_JOB_ACCOUNT": null,
+    "SLURM_JOB_PARTITION": null,
+    "SLURM_JOB_NODELIST": null,
+    "SLURM_JOB_GPUS": null
+  },
+  "gpu": {
+    "available": null,
+    "name": null,
+    "note": "probe failed: No module named 'torch'"
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": null,
+    "transformers": null,
+    "numpy": null
+  },
+  "params": {
+    "seed": 20260827,
+    "source_run": "results/runs/20260830T175149Z-stage3-heldout-frozen",
+    "note": "record-level attribution of the query-window direction signal"
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-30T18:25:16.601812+00:00",
+  "outputs": [
+    "window-shadow-audit.json"
+  ]
+}

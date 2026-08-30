@@ -634,4 +634,67 @@ re-selection impossible by construction.
 
 ### Result
 
-- *pending — written before submission.*
+Falcon 554591, A30, 37:10, exit 0, commit `62f5e75`. Runs
+`results/runs/20260830T173157Z-eligibility-screen` (held-out screen, 95.0%
+PASS) and `20260830T175149Z-stage3-heldout-frozen`; record-level attribution in
+`20260830T182516Z-stage3-window-shadow-audit`
+(`experiments/analysis/window_shadow_audit.py`). Anchor failures 0/0; all
+positions resolved on every template.
+
+**The failure condition did NOT fire.** Held-out at frozen settings, n=160:
+jlens relcomp frac **0.781** vs control 0.519, qmark **0.669** vs 0.556;
+random transport flat. The positions are real — not forking paths. Dev values
+reproduced at the frozen layers (0.775 / 0.675), and even by template the
+signal holds everywhere (relcomp T1 0.96 down to T5/T6 0.68 — the dev template
+is inflated, the others still clear the control).
+
+**But one pre-registered prediction was WRONG, and it is the important one.**
+The prediction said the output shadow at relcomp/qmark would be near zero. The
+measurement says otherwise: the model's own next-token distribution already
+prefers the correct intermediate at **0.800** (relcomp) and **0.731** (qmark)
+on held-out, mean margins +1.33 and +2.24. The window is NOT shadow-free.
+"Reading ahead" — Jason's interpretation from the start — is what the model
+itself is doing mid-question.
+
+**The discriminating set settles the attribution.** With 32 (relcomp) and 40
+(qmark) held-out records where the shadow points the WRONG way:
+
+| | lens acc, shadow WRONG | lens acc, shadow right | r(lens, shadow) |
+|---|---|---|---|
+| jlens relcomp | **0.344** (n=32) | 0.891 | +0.884 |
+| jlens qmark | **0.125** (n=40) | 0.872 | +0.917 |
+| logitlens relcomp | 0.250 | 0.797 | +0.707 |
+| logitlens qmark | 0.200 | 0.932 | +0.925 |
+
+Below chance on every discriminating cell. Where the model's developing
+preference is wrong about the intermediate, the lens is wrong WITH it — it is
+reading the preference, not the binding.
+
+**The mechanism, made explicit by arm 3.** At relcomp the supervised
+difference-in-means probe on the SAME residual reads nothing (0.525) while
+J-Lens reads 0.781. The binding is not linearly present in the residual there;
+what J-Lens adds is its Jacobian — a linearization of the remaining
+computation — which manufactures the output preference from the residual. At
+qmark, arm 3 transfers dev→held-out at 0.725→**0.731**, exactly the shadow's
+own frac: the linearly decodable signal at its best position IS the shadow.
+
+**Supportable claim, final form:** J-Lens is a well-calibrated predictor of
+what the model is about to say, at every position where direction is readable
+— and an instrument for reading stored-but-unexpressed bindings nowhere on
+this task. Its residual advantage over the logit lens on held-out is
+concept-rank localization at early/mid positions (prequery 373 vs 76,276;
+relcomp 128 vs 393) and largely vanishes by qmark (95 vs 82).
+
+**Control caveat, measured:** with the six-city pool, only 65/160 held-out
+label permutations are fully disjoint from the record's own pair (4 identical,
+8 swapped, 83 share one city), which is why the held-out control frac sits
+near 0.52 rather than dev's 0.35. The treatment-control gaps above stand, but
+the control is weaker on held-out and is reported with this audit attached.
+
+Eligibility on held-out: 95.0% (A30), below dev's 100% as predicted; the
+architecture caveat carries over. All numbers `agent-unverified` except where
+Jason's own re-derivations cover them.
+
+### Hour gate — Jason confirms
+
+- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*

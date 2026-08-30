@@ -1,0 +1,297 @@
+{
+ "framing": "method evaluation using a narrow task as instrument; not circuit discovery",
+ "status": "agent-unverified",
+ "source_run": "results/runs/20260830T175149Z-stage3-heldout-frozen",
+ "coupling": {
+  "dev/jlens/prequery": {
+   "lens_frac": 0.525,
+   "shadow_frac": 0.525,
+   "r_lens_vs_shadow": 0.6838,
+   "n": 40
+  },
+  "dev/jlens/relcomp": {
+   "lens_frac": 0.775,
+   "shadow_frac": 0.75,
+   "r_lens_vs_shadow": 0.9293,
+   "n": 40
+  },
+  "dev/jlens/qmark": {
+   "lens_frac": 0.675,
+   "shadow_frac": 0.775,
+   "r_lens_vs_shadow": 0.9543,
+   "n": 40
+  },
+  "dev/jlens/final": {
+   "lens_frac": 0.975,
+   "shadow_frac": 0.925,
+   "r_lens_vs_shadow": 0.7651,
+   "n": 40
+  },
+  "dev/logitlens/prequery": {
+   "lens_frac": 0.525,
+   "shadow_frac": 0.525,
+   "r_lens_vs_shadow": 0.1728,
+   "n": 40
+  },
+  "dev/logitlens/relcomp": {
+   "lens_frac": 0.7,
+   "shadow_frac": 0.75,
+   "r_lens_vs_shadow": 0.8073,
+   "n": 40
+  },
+  "dev/logitlens/qmark": {
+   "lens_frac": 0.725,
+   "shadow_frac": 0.775,
+   "r_lens_vs_shadow": 0.9298,
+   "n": 40
+  },
+  "dev/logitlens/final": {
+   "lens_frac": 0.9,
+   "shadow_frac": 0.925,
+   "r_lens_vs_shadow": 0.8107,
+   "n": 40
+  },
+  "heldout/jlens/prequery": {
+   "lens_frac": 0.5125,
+   "shadow_frac": 0.4813,
+   "r_lens_vs_shadow": 0.7124,
+   "n": 160
+  },
+  "heldout/jlens/relcomp": {
+   "lens_frac": 0.7812,
+   "shadow_frac": 0.8,
+   "r_lens_vs_shadow": 0.8836,
+   "n": 160
+  },
+  "heldout/jlens/qmark": {
+   "lens_frac": 0.6687,
+   "shadow_frac": 0.7312,
+   "r_lens_vs_shadow": 0.9165,
+   "n": 160
+  },
+  "heldout/jlens/final": {
+   "lens_frac": 0.9563,
+   "shadow_frac": 0.9313,
+   "r_lens_vs_shadow": 0.6564,
+   "n": 160
+  },
+  "heldout/logitlens/prequery": {
+   "lens_frac": 0.4875,
+   "shadow_frac": 0.4813,
+   "r_lens_vs_shadow": 0.3204,
+   "n": 160
+  },
+  "heldout/logitlens/relcomp": {
+   "lens_frac": 0.6875,
+   "shadow_frac": 0.8,
+   "r_lens_vs_shadow": 0.7071,
+   "n": 160
+  },
+  "heldout/logitlens/qmark": {
+   "lens_frac": 0.7375,
+   "shadow_frac": 0.7312,
+   "r_lens_vs_shadow": 0.9245,
+   "n": 160
+  },
+  "heldout/logitlens/final": {
+   "lens_frac": 0.9125,
+   "shadow_frac": 0.9313,
+   "r_lens_vs_shadow": 0.8154,
+   "n": 160
+  }
+ },
+ "discriminating": {
+  "dev/jlens/relcomp": {
+   "n_shadow_wrong": 10,
+   "lens_acc_on_shadow_wrong": 0.3,
+   "n_shadow_right": 30,
+   "lens_acc_on_shadow_right": 0.9333
+  },
+  "dev/jlens/qmark": {
+   "n_shadow_wrong": 9,
+   "lens_acc_on_shadow_wrong": 0.0,
+   "n_shadow_right": 31,
+   "lens_acc_on_shadow_right": 0.871
+  },
+  "dev/jlens/final": {
+   "n_shadow_wrong": 3,
+   "lens_acc_on_shadow_wrong": 0.6667,
+   "n_shadow_right": 37,
+   "lens_acc_on_shadow_right": 1.0
+  },
+  "dev/logitlens/relcomp": {
+   "n_shadow_wrong": 10,
+   "lens_acc_on_shadow_wrong": 0.3,
+   "n_shadow_right": 30,
+   "lens_acc_on_shadow_right": 0.8333
+  },
+  "dev/logitlens/qmark": {
+   "n_shadow_wrong": 9,
+   "lens_acc_on_shadow_wrong": 0.1111,
+   "n_shadow_right": 31,
+   "lens_acc_on_shadow_right": 0.9032
+  },
+  "dev/logitlens/final": {
+   "n_shadow_wrong": 3,
+   "lens_acc_on_shadow_wrong": 0.3333,
+   "n_shadow_right": 37,
+   "lens_acc_on_shadow_right": 0.9459
+  },
+  "heldout/jlens/relcomp": {
+   "n_shadow_wrong": 32,
+   "lens_acc_on_shadow_wrong": 0.3438,
+   "n_shadow_right": 128,
+   "lens_acc_on_shadow_right": 0.8906
+  },
+  "heldout/jlens/qmark": {
+   "n_shadow_wrong": 40,
+   "lens_acc_on_shadow_wrong": 0.125,
+   "n_shadow_right": 117,
+   "lens_acc_on_shadow_right": 0.8718
+  },
+  "heldout/jlens/final": {
+   "n_shadow_wrong": 9,
+   "lens_acc_on_shadow_wrong": 0.6667,
+   "n_shadow_right": 149,
+   "lens_acc_on_shadow_right": 0.9732
+  },
+  "heldout/logitlens/relcomp": {
+   "n_shadow_wrong": 32,
+   "lens_acc_on_shadow_wrong": 0.25,
+   "n_shadow_right": 128,
+   "lens_acc_on_shadow_right": 0.7969
+  },
+  "heldout/logitlens/qmark": {
+   "n_shadow_wrong": 40,
+   "lens_acc_on_shadow_wrong": 0.2,
+   "n_shadow_right": 117,
+   "lens_acc_on_shadow_right": 0.9316
+  },
+  "heldout/logitlens/final": {
+   "n_shadow_wrong": 9,
+   "lens_acc_on_shadow_wrong": 0.3333,
+   "n_shadow_right": 149,
+   "lens_acc_on_shadow_right": 0.953
+  }
+ },
+ "control_collisions": {
+  "dev": {
+   "n": 40,
+   "identical_pair": 1,
+   "swapped_pair": 6,
+   "one_shared_city": 12,
+   "disjoint": 21
+  },
+  "heldout": {
+   "n": 160,
+   "identical_pair": 4,
+   "swapped_pair": 8,
+   "one_shared_city": 83,
+   "disjoint": 65
+  }
+ },
+ "prediction_check": {
+  "dev/prequery": {
+   "mean": 0.0016,
+   "frac_positive": 0.525,
+   "n_negative": 19,
+   "n": 40
+  },
+  "dev/relcomp": {
+   "mean": 1.275,
+   "frac_positive": 0.75,
+   "n_negative": 10,
+   "n": 40
+  },
+  "dev/qmark": {
+   "mean": 2.3164,
+   "frac_positive": 0.775,
+   "n_negative": 9,
+   "n": 40
+  },
+  "dev/final": {
+   "mean": 2.7672,
+   "frac_positive": 0.925,
+   "n_negative": 3,
+   "n": 40
+  },
+  "heldout/prequery": {
+   "mean": 0.0066,
+   "frac_positive": 0.4813,
+   "n_negative": 78,
+   "n": 160
+  },
+  "heldout/relcomp": {
+   "mean": 1.3332,
+   "frac_positive": 0.8,
+   "n_negative": 32,
+   "n": 160
+  },
+  "heldout/qmark": {
+   "mean": 2.2369,
+   "frac_positive": 0.7312,
+   "n_negative": 40,
+   "n": 160
+  },
+  "heldout/final": {
+   "mean": 2.6393,
+   "frac_positive": 0.9313,
+   "n_negative": 9,
+   "n": 160
+  }
+ },
+ "heldout_by_template_jlens": {
+  "relcomp": {
+   "T1": {
+    "frac": 0.9643,
+    "n": 28
+   },
+   "T2": {
+    "frac": 0.7857,
+    "n": 28
+   },
+   "T3": {
+    "frac": 0.75,
+    "n": 24
+   },
+   "T4": {
+    "frac": 0.8333,
+    "n": 24
+   },
+   "T5": {
+    "frac": 0.6786,
+    "n": 28
+   },
+   "T6": {
+    "frac": 0.6786,
+    "n": 28
+   }
+  },
+  "qmark": {
+   "T1": {
+    "frac": 0.8214,
+    "n": 28
+   },
+   "T2": {
+    "frac": 0.6429,
+    "n": 28
+   },
+   "T3": {
+    "frac": 0.625,
+    "n": 24
+   },
+   "T4": {
+    "frac": 0.75,
+    "n": 24
+   },
+   "T5": {
+    "frac": 0.6429,
+    "n": 28
+   },
+   "T6": {
+    "frac": 0.5357,
+    "n": 28
+   }
+  }
+ }
+}
