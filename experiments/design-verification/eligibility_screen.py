@@ -312,14 +312,22 @@ def main() -> int:
                          "generating pairs. Use this whenever the labels have "
                          "to line up with a readout run: a behavioural label "
                          "is only a label for the record it was measured on.")
+    ap.add_argument("--frozen-eval", action="store_true",
+                    help="permit the held-out split. Only valid AFTER the freeze "
+                         "is committed (results/stage2/FREEZE.md): the frozen "
+                         "evaluation needs behavioural labels for exactly the "
+                         "records it reads.")
     args = ap.parse_args()
 
     ds_meta, ds_recs = ({}, [])
     if args.dataset:
         ds_meta, ds_recs = load_dataset(args.dataset)
-        if ds_meta.get("split") != "dev":
-            print(f"REFUSING: split is {ds_meta.get('split')!r}, not 'dev'. "
-                  "This screen never reads the held-out split.", flush=True)
+        allowed = {"dev"} | ({"heldout"} if args.frozen_eval else set())
+        if ds_meta.get("split") not in allowed:
+            print(f"REFUSING: split is {ds_meta.get('split')!r}; allowed "
+                  f"{sorted(allowed)}. The held-out split requires "
+                  "--frozen-eval, and only after the freeze is committed.",
+                  flush=True)
             return 2
         if not ds_recs:
             print(f"REFUSING: {args.dataset} contains no records.", flush=True)
