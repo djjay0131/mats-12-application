@@ -1,0 +1,5250 @@
+{
+  "status": "agent-unverified",
+  "stage": "1",
+  "arm": "3 -- supervised difference-in-means reference",
+  "claim_type": "method-claim, REFERENCE LEVEL not a ceiling; biased downward (ten pairs of class means) and upward (given the labels)",
+  "framing": "method evaluation using a narrow task as instrument; not circuit discovery",
+  "interpretation_rule": {
+    "arm3_at_floor": "the conclusion is about the model or the layer, not about J-Lens",
+    "arm3_high_lenses_at_floor": "the conclusion is about the readouts"
+  },
+  "split": "dev",
+  "n_records": 40,
+  "n_pairs": 10,
+  "dataset": "results/datasets/dev.jsonl",
+  "dataset_seed": 20260827,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "lens_repo": "neuronpedia/jacobian-lens",
+  "lens_revision": "qwen-n1000",
+  "source_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "class_counts_layer0_final": {
+    "65019": 8,
+    "44299": 6,
+    "42484": 6,
+    "55918": 6,
+    "15875": 8,
+    "31785": 6
+  },
+  "thin_class_warning": "with ten pairs each intermediate centroid is estimated from very few examples; read the leave-one-pair-out number, not the in-sample one",
+  "seconds": {
+    "model_load": 5.04,
+    "capture": 14.96
+  },
+  "fitted_parameters_file": "outputs/centroids-dev.pt",
+  "fitted_parameters_note": "h_bar and mu at the selected layer, fitted on all dev records. Held-out scoring must LOAD these, not refit.",
+  "results": {
+    "prequery": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.4089057114906608e-05,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.111568075837567e-05,
+            "success_rate": 0.525
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.6140654012560846e-05,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.876453895121813e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.868030522018671e-05,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -7.102761883288622e-05,
+            "success_rate": 0.475
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00038094227202236655,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0002978529315441847,
+            "success_rate": 0.525
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00033980133011937144,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -5.034524947404862e-05,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0011154232546687127,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00038909409195184705,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005277731642127037,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004275936633348465,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005360411852598191,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0022111393511295317,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0069778189063072205,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002474209666252136,
+            "success_rate": 0.525
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01228894740343094,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002536970376968384,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.015694751217961312,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.003236348181962967,
+            "success_rate": 0.475
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.014565593376755715,
+            "success_rate": 0.45
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0014257460832595825,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.015154094621539115,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0031566038727760316,
+            "success_rate": 0.475
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.016311702877283098,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.003401082009077072,
+            "success_rate": 0.5
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.018972262740135193,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.005570442974567413,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.015541610494256019,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.010733343288302421,
+            "success_rate": 0.5
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.014138635993003846,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.014009371399879456,
+            "success_rate": 0.475
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01526653990149498,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.017194452136754988,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.011508198827505112,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.033865886926651004,
+            "success_rate": 0.475
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.013160885870456695,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.04751519486308098,
+            "success_rate": 0.45
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004744906723499298,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.07570488154888153,
+            "success_rate": 0.5
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0033283278346061705,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.09059990048408509,
+            "success_rate": 0.475
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.036854963004589084,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.17903315126895905,
+            "success_rate": 0.475
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2957912921905518,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.281123685836792,
+            "success_rate": 0.525
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.26972622871398927,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.2921305179595947,
+            "success_rate": 0.525
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2526424527168274,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.34027504324913027,
+            "success_rate": 0.525
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14473506808280945,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.6009501636028289,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.0563597202301025,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06962018013000489,
+            "success_rate": 0.525
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.3524078369140624,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.314332914352417,
+            "success_rate": 0.525
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.4456401824951173,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1926509380340576,
+            "success_rate": 0.525
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.947222900390625,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4812908172607422,
+            "success_rate": 0.525
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 1.947222900390625,
+          "success_rate": 0.525
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.4812908172607422,
+          "success_rate": 0.525
+        }
+      }
+    },
+    "q00": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 7.888198888394982e-06,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.8311176467686895e-06,
+            "success_rate": 0.475
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0001430230273399502,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0001606945414096117,
+            "success_rate": 0.525
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005267717642709613,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0006701755104586482,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005625213729217648,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0006292476784437895,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005020166747272015,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0002818048931658268,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009356290102005005,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00046234317123889924,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0012418740428984166,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00016930662095546723,
+            "success_rate": 0.475
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0031702304258942604,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002284420933574438,
+            "success_rate": 0.525
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0028378749266266823,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001427295058965683,
+            "success_rate": 0.525
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0023586541414260865,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0009704282507300377,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004324785247445106,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0006960896775126457,
+            "success_rate": 0.475
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0028154561296105385,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0021629443392157553,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0027660606428980827,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0022960877045989036,
+            "success_rate": 0.475
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.003073000721633434,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0024941165000200273,
+            "success_rate": 0.475
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0030493613332509993,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.004624435305595398,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0027178848162293435,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.004780142568051815,
+            "success_rate": 0.5
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0025024062022566797,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.005571838654577732,
+            "success_rate": 0.5
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002240858227014542,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.006675700284540653,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0033577658236026765,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.007830464839935302,
+            "success_rate": 0.5
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0027513287961483,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.01172819696366787,
+            "success_rate": 0.5
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0004695013165473938,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.021373281627893446,
+            "success_rate": 0.5
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.004947110265493393,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.03717505261301994,
+            "success_rate": 0.475
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.015588679909706115,
+            "success_rate": 0.425
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.06732864826917648,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.013390052318572997,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.08163230419158936,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.012946009635925293,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.10150732100009918,
+            "success_rate": 0.5
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.024899399280548094,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.1389186441898346,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.014265936613082886,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.13417702913284302,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03306981325149536,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.119596928358078,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05209723711013794,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.13796813488006593,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14402310848236083,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.06799798011779785,
+            "success_rate": 0.475
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.27039394378662107,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03922545909881592,
+            "success_rate": 0.475
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.27039394378662107,
+          "success_rate": 0.5
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.03922545909881592,
+          "success_rate": 0.475
+        }
+      }
+    },
+    "q01": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -4.735353286378086e-06,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -1.44546567753423e-05,
+            "success_rate": 0.475
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.854624858126044e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.146617720834911e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.000238833692856133,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00027683551888912916,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0004308275762014091,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00046231255400925876,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005410746205598115,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0004282162990421057,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00031179138459265233,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -8.98667611181736e-05,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0004239930771291256,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0002951346803456545,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0015083539299666881,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009476727340370416,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001963415089994669,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009122118353843689,
+            "success_rate": 0.5
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0020081095397472383,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0004675363190472126,
+            "success_rate": 0.525
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0020479487255215647,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00012599481269717216,
+            "success_rate": 0.5
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002530360035598278,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -3.6159809678792956e-05,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0028216563165187835,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00038117701187729837,
+            "success_rate": 0.5
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0037768520414829254,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00018406817689538003,
+            "success_rate": 0.5
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004550396371632815,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00025978246703743934,
+            "success_rate": 0.525
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004744926746934652,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.1249894052743913e-05,
+            "success_rate": 0.525
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005628567282110452,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -3.3857673406600954e-05,
+            "success_rate": 0.525
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00742954695597291,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0004511488601565361,
+            "success_rate": 0.525
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00922329630702734,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0011754516512155534,
+            "success_rate": 0.5
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.009433489292860031,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0075995102524757385,
+            "success_rate": 0.5
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00976380705833435,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.011482923477888107,
+            "success_rate": 0.5
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00969681590795517,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.018402932584285735,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.013200488686561585,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.027220039069652556,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0504378616809845,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0034091964364051817,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.047078770399093625,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.011479714512825012,
+            "success_rate": 0.5
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.035073912143707274,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.03675602078437805,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.045191633701324466,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.033852750062942506,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.21838850975036622,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06644914150238038,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.27857794761657717,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.10599348545074463,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.32796435356140136,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06129822731018066,
+            "success_rate": 0.5
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5250356197357178,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.21303391456604004,
+            "success_rate": 0.525
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.5250356197357178,
+          "success_rate": 0.525
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.21303391456604004,
+          "success_rate": 0.525
+        }
+      }
+    },
+    "q02": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.4019630402326587e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.690214991569519e-05,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00023481454700231553,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0003519289195537567,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -4.109274595975876e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00012370795011520385,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 9.47132706642151e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 8.522868156433106e-05,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.5034289360046384e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0003457993268966675,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0003014698624610901,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00039229393005371096,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0016530588269233703,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001083490252494812,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004277725517749786,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004650034010410309,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00690431147813797,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00804838091135025,
+            "success_rate": 0.5
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005097074806690216,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005054272711277008,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.007378922402858734,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.007000833749771118,
+            "success_rate": 0.525
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.008245164155960083,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0065180912613868715,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.007096844166517258,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.003061384707689285,
+            "success_rate": 0.55
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.011858467757701874,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.008938451111316682,
+            "success_rate": 0.5
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.012108147144317627,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.008970727026462556,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.017375841736793518,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01324743926525116,
+            "success_rate": 0.525
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01804118901491165,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.013417389988899232,
+            "success_rate": 0.525
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.020073768496513367,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.015736594796180725,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.028300961852073668,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.024944132566452025,
+            "success_rate": 0.5
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.044163858890533446,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03842989206314087,
+            "success_rate": 0.5
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.04597283601760864,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03919527530670166,
+            "success_rate": 0.5
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06040769815444946,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05337438583374023,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.07138972282409668,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06801178455352783,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.08292475938796998,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06703217029571533,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.08177496194839477,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06292009353637695,
+            "success_rate": 0.475
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.076510751247406,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.055471611022949216,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.07785975933074951,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05558254718780518,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.21042723655700685,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14051351547241211,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2513885974884033,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.15610008239746093,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.20792274475097655,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0016398429870605469,
+            "success_rate": 0.525
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3996333122253418,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1665632724761963,
+            "success_rate": 0.525
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.3996333122253418,
+          "success_rate": 0.525
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.1665632724761963,
+          "success_rate": 0.525
+        }
+      }
+    },
+    "q03": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 6.79092772770673e-06,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.8888724045827983e-06,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 8.436017669737339e-05,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 8.311145938932896e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005044578574597836,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.000624485919252038,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001019572839140892,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0012624640949070454,
+            "success_rate": 0.475
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0016537487506866455,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002024001348763704,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0017504498362541198,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0016041204333305358,
+            "success_rate": 0.55
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0003695257008075714,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.000857912003993988,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0035626254975795746,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.003147096186876297,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005378178134560585,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005471629276871681,
+            "success_rate": 0.5
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.003520435839891434,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00256078764796257,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0028575632721185686,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00020988062024116517,
+            "success_rate": 0.5
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0034971840679645537,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0021382197737693787,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006110808998346329,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0006767995655536652,
+            "success_rate": 0.5
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006408729404211044,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00022011622786521912,
+            "success_rate": 0.5
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005339805781841278,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0043405376374721525,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0028252921998500823,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.01471596136689186,
+            "success_rate": 0.5
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00200437530875206,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.01832710951566696,
+            "success_rate": 0.5
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0032467365264892576,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.028678169846534728,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.005601030588150024,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.039007487893104556,
+            "success_rate": 0.5
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.003236262500286102,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.04609941840171814,
+            "success_rate": 0.5
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.014617544412612916,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.07082262635231018,
+            "success_rate": 0.5
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.02015349268913269,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.09198753833770752,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.027868154644966125,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.12574400901794433,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.031941017508506774,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.24841556549072266,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.01697484254837036,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.2372493863105774,
+            "success_rate": 0.5
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.025876203179359437,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.262216192483902,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0026309967041015627,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.2572423696517944,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4300096035003662,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.07726149559020996,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5615085601806641,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.13296046257019042,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8097549438476562,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.28935914039611815,
+            "success_rate": 0.5
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.261990451812744,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6745843887329102,
+            "success_rate": 0.5
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 1.261990451812744,
+          "success_rate": 0.5
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 0.6745843887329102,
+          "success_rate": 0.5
+        }
+      }
+    },
+    "q04": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.768781363964081e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 8.010100573301316e-05,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 6.19005411863327e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.1613389253616334e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0008991032838821412,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0012010559439659119,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0008411251008510589,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0025452688336372376,
+            "success_rate": 0.525
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.002908768504858017,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005376368761062622,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006798192858695984,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.004573652893304825,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.009596427530050277,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006834437698125839,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.07189294919371605,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05081735551357269,
+            "success_rate": 0.55
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14385410770773888,
+            "success_rate": 0.625
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.09696756675839424,
+            "success_rate": 0.55
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2701608367264271,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.19131481796503066,
+            "success_rate": 0.575
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.23279382064938545,
+            "success_rate": 0.625
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1601687990128994,
+            "success_rate": 0.55
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4387647949159145,
+            "success_rate": 0.775
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.295220547914505,
+            "success_rate": 0.525
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.567137786000967,
+            "success_rate": 0.775
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3975015453994274,
+            "success_rate": 0.575
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6024443365633487,
+            "success_rate": 0.75
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4350050650537014,
+            "success_rate": 0.55
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5295751057565212,
+            "success_rate": 0.775
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3805382914841175,
+            "success_rate": 0.55
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6485892832279205,
+            "success_rate": 0.725
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.45632740408182143,
+            "success_rate": 0.55
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.7648014098405838,
+            "success_rate": 0.75
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5526184543967247,
+            "success_rate": 0.55
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.626478360593319,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4416618511080742,
+            "success_rate": 0.525
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5944296956062317,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4098083823919296,
+            "success_rate": 0.55
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6007193207740784,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3963556230068207,
+            "success_rate": 0.525
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6192256450653076,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4059906184673309,
+            "success_rate": 0.525
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.7579766094684601,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5298142671585083,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8971960186958313,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6123720645904541,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.044115149974823,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.741650128364563,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.1128377318382263,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8025994777679444,
+            "success_rate": 0.525
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.2586846590042113,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9587567806243896,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.4465921640396118,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.1228164196014405,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.5503500938415526,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.1412994384765625,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.7909595966339111,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.3217879295349122,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.0648214340209963,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.482327365875244,
+            "success_rate": 0.5
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.5285472869873047,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.7876708984375,
+            "success_rate": 0.5
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 2.5285472869873047,
+          "success_rate": 0.55
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 1.7876708984375,
+          "success_rate": 0.5
+        }
+      }
+    },
+    "q05": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00015729842707514762,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00017799660563468933,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -4.391651600599289e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -6.556771695613861e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00017835553735494613,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0003345377743244171,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0001019757241010666,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0007135584950447082,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0012807577848434448,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00045701488852500916,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00047452449798583983,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0028069078922271728,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0013011395931243896,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0016510963439941406,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.026138775050640106,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01792055517435074,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.029438640922307968,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01855877786874771,
+            "success_rate": 0.525
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.06631329357624054,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03616592288017273,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0723191350698471,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.044029176235198975,
+            "success_rate": 0.5
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2673732578754425,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.18675762861967088,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2934733495116234,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.19644107520580292,
+            "success_rate": 0.5
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3776231795549393,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.25168539583683014,
+            "success_rate": 0.525
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.33064043819904326,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.21113278567790986,
+            "success_rate": 0.525
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5870388478040696,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.35705347210168836,
+            "success_rate": 0.5
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6132561519742012,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3672702223062515,
+            "success_rate": 0.5
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5415179878473282,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.31734113544225695,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5141053825616837,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2901161819696426,
+            "success_rate": 0.55
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4825285732746124,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.23860738277435303,
+            "success_rate": 0.5
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.46719653606414796,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.20691752433776855,
+            "success_rate": 0.525
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5132164359092712,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.22385472059249878,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.5708699703216553,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2190453052520752,
+            "success_rate": 0.525
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8154966235160828,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.41134188175201414,
+            "success_rate": 0.525
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8202389597892761,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.39306739568710325,
+            "success_rate": 0.525
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.8800634920597077,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.46184616088867186,
+            "success_rate": 0.525
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9032086491584778,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4898416757583618,
+            "success_rate": 0.525
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.368330955505371,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.8158663034439086,
+            "success_rate": 0.525
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.8031439065933226,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.2381221771240236,
+            "success_rate": 0.5
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.721941328048706,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.344242238998413,
+            "success_rate": 0.5
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 6.665439033508301,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 6.465007781982422,
+            "success_rate": 0.5
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 6.665439033508301,
+          "success_rate": 0.55
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 6.465007781982422,
+          "success_rate": 0.5
+        }
+      }
+    },
+    "q06": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.7167985283304008e-06,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.522235445212573e-06,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.796028227545321e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.4729041140526533e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0005505231907591224,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0007168356794863939,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0008373551070690155,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.000985401263460517,
+            "success_rate": 0.475
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0008988171815872192,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009546840563416481,
+            "success_rate": 0.525
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001482014451175928,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0012017126195132733,
+            "success_rate": 0.475
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006129361502826214,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005532857775688171,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.022038766369223594,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.022032075747847556,
+            "success_rate": 0.525
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.024334215745329856,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.023082154989242553,
+            "success_rate": 0.5
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.02871284857392311,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.024957993254065513,
+            "success_rate": 0.525
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.04947410896420479,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03853698968887329,
+            "success_rate": 0.5
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14508102349936963,
+            "success_rate": 0.6
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.10811831429600716,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1716973703354597,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.13139565028250216,
+            "success_rate": 0.525
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2336489014327526,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1744529489427805,
+            "success_rate": 0.55
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2423551395535469,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.1809611540287733,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.28049066141247747,
+            "success_rate": 0.625
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.19290393143892287,
+            "success_rate": 0.525
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3033730089664459,
+            "success_rate": 0.625
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.19303230568766594,
+            "success_rate": 0.5
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4064718890935183,
+            "success_rate": 0.675
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2836567733436823,
+            "success_rate": 0.575
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.39699704833328725,
+            "success_rate": 0.625
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2874755933880806,
+            "success_rate": 0.575
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4457946211099625,
+            "success_rate": 0.725
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3261750616133213,
+            "success_rate": 0.575
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.489036975055933,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.34839942753314973,
+            "success_rate": 0.575
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6304707951843739,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.47329510375857353,
+            "success_rate": 0.575
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9504152134060859,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.7441396236419677,
+            "success_rate": 0.575
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.1515244036912917,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.4001555413007736,
+            "success_rate": 0.525
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.3324446052312853,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.5127929717302322,
+            "success_rate": 0.525
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.52801961004734,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.6537905752658844,
+            "success_rate": 0.55
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.048074421286583,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.1198005825281143,
+            "success_rate": 0.55
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 19.638965249061584,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 17.7673677444458,
+            "success_rate": 0.65
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 22.461252403259277,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 20.341218042373658,
+            "success_rate": 0.625
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 28.44506196975708,
+            "success_rate": 0.7
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 26.636247825622558,
+            "success_rate": 0.7
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 36.03460741043091,
+            "success_rate": 0.725
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 33.86451258659363,
+            "success_rate": 0.7
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 36.03460741043091,
+          "success_rate": 0.725
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 33.86451258659363,
+          "success_rate": 0.7
+        }
+      }
+    },
+    "q07": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.335755947977304e-05,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.732518718810752e-05,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.700023953570053e-05,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.3515408500097693e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0001704279740806669,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00016479045152664184,
+            "success_rate": 0.5
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00015256339684128762,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00040729776956140997,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0003124426119029522,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0009078457951545715,
+            "success_rate": 0.525
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0003989521414041519,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0011951953172683715,
+            "success_rate": 0.5
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00011789714917540551,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0007624785415828228,
+            "success_rate": 0.5
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0006365618668496609,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0002469591796398163,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009497279301285743,
+            "success_rate": 0.45
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0006519324146211147,
+            "success_rate": 0.475
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0014721386134624482,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.000499333068728447,
+            "success_rate": 0.5
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001963583938777447,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0009290623478591442,
+            "success_rate": 0.5
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001816733181476593,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0012220712378621101,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0022991256788372993,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0012169142253696918,
+            "success_rate": 0.5
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.005457145068794489,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0009498625993728637,
+            "success_rate": 0.5
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.007067118864506483,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00042975693941116333,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00652799904346466,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -1.4731474220752715e-05,
+            "success_rate": 0.5
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.007263199239969253,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00021689310669898988,
+            "success_rate": 0.5
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.009313203953206539,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.001331348903477192,
+            "success_rate": 0.5
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01292693205177784,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0033047014847397806,
+            "success_rate": 0.5
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.012990065291523934,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0018782347440719604,
+            "success_rate": 0.475
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.017337095551192762,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0032696546986699104,
+            "success_rate": 0.475
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.030098184011876583,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.010692498087882996,
+            "success_rate": 0.5
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05241674240678549,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.027035333029925824,
+            "success_rate": 0.5
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0685350600630045,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.03210082203149796,
+            "success_rate": 0.475
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.10489417836070061,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.05647539719939232,
+            "success_rate": 0.425
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.16532656848430632,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.10720576047897339,
+            "success_rate": 0.45
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2287191241979599,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.15908027142286302,
+            "success_rate": 0.5
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3287950098514557,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.19475654363632203,
+            "success_rate": 0.5
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6414986968040466,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.4918859928846359,
+            "success_rate": 0.525
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9927796721458435,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.7693119645118713,
+            "success_rate": 0.525
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.257468104362488,
+            "success_rate": 0.65
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.3595108509063722,
+            "success_rate": 0.575
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 3.257468104362488,
+          "success_rate": 0.65
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 3.3595108509063722,
+          "success_rate": 0.575
+        }
+      }
+    },
+    "final": {
+      "per_layer": {
+        "0": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 3.6382643884280697e-06,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.7330596165265888e-06,
+            "success_rate": 0.5
+          }
+        },
+        "1": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.7438644105568525e-05,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.225509474053979e-05,
+            "success_rate": 0.5
+          }
+        },
+        "2": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0002069700392894447,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00020485188579186798,
+            "success_rate": 0.525
+          }
+        },
+        "3": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.000172350334469229,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 2.627243520691991e-05,
+            "success_rate": 0.5
+          }
+        },
+        "4": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0001017928123474121,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0002953988034278154,
+            "success_rate": 0.5
+          }
+        },
+        "5": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0003422122448682785,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00022752839140594006,
+            "success_rate": 0.475
+          }
+        },
+        "6": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00011249538511037827,
+            "success_rate": 0.525
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0010715010575950146,
+            "success_rate": 0.475
+          }
+        },
+        "7": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.00022051576524972916,
+            "success_rate": 0.45
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.001630889717489481,
+            "success_rate": 0.5
+          }
+        },
+        "8": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0008015968836843967,
+            "success_rate": 0.45
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0009098110720515251,
+            "success_rate": 0.475
+          }
+        },
+        "9": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.00026498669758439063,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.002042596880346537,
+            "success_rate": 0.45
+          }
+        },
+        "10": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0006261215545237065,
+            "success_rate": 0.45
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.0026590293273329735,
+            "success_rate": 0.475
+          }
+        },
+        "11": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0012212357483804225,
+            "success_rate": 0.5
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.002109762281179428,
+            "success_rate": 0.5
+          }
+        },
+        "12": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0018018783070147038,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.002106950618326664,
+            "success_rate": 0.475
+          }
+        },
+        "13": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.006926777213811875,
+            "success_rate": 0.475
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.0027092620730400085,
+            "success_rate": 0.475
+          }
+        },
+        "14": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.01263117715716362,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.008599874656647443,
+            "success_rate": 0.5
+          }
+        },
+        "15": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.014572131074965,
+            "success_rate": 0.55
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.009408456273376942,
+            "success_rate": 0.525
+          }
+        },
+        "16": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.02239531371742487,
+            "success_rate": 0.575
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.014242605213075877,
+            "success_rate": 0.475
+          }
+        },
+        "17": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.2029334831982851,
+            "success_rate": 0.75
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.14658901374787092,
+            "success_rate": 0.575
+          }
+        },
+        "18": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.21592261418700218,
+            "success_rate": 0.75
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.15778620094060897,
+            "success_rate": 0.55
+          }
+        },
+        "19": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9956487327814102,
+            "success_rate": 0.825
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.44581887423992156,
+            "success_rate": 0.6
+          }
+        },
+        "20": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.9232970140874386,
+            "success_rate": 0.8
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.3976577609777451,
+            "success_rate": 0.575
+          }
+        },
+        "21": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.0334493398666382,
+            "success_rate": 0.8
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.47655878216028214,
+            "success_rate": 0.55
+          }
+        },
+        "22": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 1.3093910753726958,
+            "success_rate": 0.825
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 0.6355922058224678,
+            "success_rate": 0.525
+          }
+        },
+        "23": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 5.006007602810859,
+            "success_rate": 0.85
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.2732277810573578,
+            "success_rate": 0.5
+          }
+        },
+        "24": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.786461487412453,
+            "success_rate": 0.85
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.06966707110404968,
+            "success_rate": 0.5
+          }
+        },
+        "25": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 4.882981735467911,
+            "success_rate": 0.85
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.20812608003616334,
+            "success_rate": 0.5
+          }
+        },
+        "26": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 5.143110784888267,
+            "success_rate": 0.85
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": -0.30412774682044985,
+            "success_rate": 0.55
+          }
+        },
+        "27": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 22.491526675224303,
+            "success_rate": 0.8
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 8.394345593452453,
+            "success_rate": 0.575
+          }
+        },
+        "28": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 25.469031667709352,
+            "success_rate": 0.8
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 9.839145755767822,
+            "success_rate": 0.6
+          }
+        },
+        "29": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 32.82971477508545,
+            "success_rate": 0.775
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 15.749643659591674,
+            "success_rate": 0.625
+          }
+        },
+        "30": {
+          "in_sample": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 44.84739866256714,
+            "success_rate": 0.75
+          },
+          "leave_one_pair_out": {
+            "n": 40,
+            "n_unscorable": 0,
+            "unscorable_reasons": {},
+            "mean_margin": 24.716639709472656,
+            "success_rate": 0.65
+          }
+        }
+      },
+      "selected_layer": 30,
+      "selection_rule": "argmax mean leave-one-pair-out margin on dev; selected on LOO, not in-sample, on purpose",
+      "at_selected_layer": {
+        "in_sample": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 44.84739866256714,
+          "success_rate": 0.75
+        },
+        "leave_one_pair_out": {
+          "n": 40,
+          "n_unscorable": 0,
+          "unscorable_reasons": {},
+          "mean_margin": 24.716639709472656,
+          "success_rate": 0.65
+        }
+      }
+    }
+  }
+}

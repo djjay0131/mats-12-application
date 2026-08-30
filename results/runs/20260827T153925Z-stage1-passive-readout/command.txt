@@ -1,0 +1,2 @@
+/scratch/djjay/mats12/venv/bin/python experiments/stage1/passive_readout.py --max-records 4
+# cwd: /scratch/djjay/mats12/repo

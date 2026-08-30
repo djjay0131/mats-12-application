@@ -1,0 +1,58 @@
+{
+  "slug": "v1-tooling-verification",
+  "started_utc": "2026-08-27T09:32:24.471901+00:00",
+  "argv": [
+    "experiments/design-verification/v1_tooling_verification.py"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "11aa27cafeb0544cfb7ec0fa21282f17901edaa0",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260827T090437Z-eligibility-screen/",
+      "?? results/runs/20260827T093224Z-v1-tooling-verification/",
+      "?? results/slurm-logs/gate1-550555.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal045",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "550555",
+    "SLURM_JOB_NAME": "mats12-gate1",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal045",
+    "SLURM_JOB_GPUS": "3"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "lens_file": "qwen3.5-4b/jlens/Salesforce-wikitext/Qwen3.5-4B_jacobian_lens_n1000.pt",
+    "k": 10
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-27T09:32:42.169315+00:00",
+  "outputs": [
+    "v1-tooling-verification.json"
+  ]
+}

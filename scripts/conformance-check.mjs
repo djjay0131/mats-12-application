@@ -63,6 +63,8 @@ const words = s => (s.replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')      // drop images
 const images = s => (s.match(/!\[[^\]]*\]\([^)]*\)|<img\s/gi) || []).length;
 const tables = s => s.split('\n\n').filter(b => /^\|.*\|/m.test(b) && /\|\s*-{2,}/.test(b));
 const numbersIn = s => (s.replace(/```[\s\S]*?```/g, ' ')
+                         .replace(/^#{1,6}\s.*$/gm, ' ')            // section numbers are not results
+                         .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')   // figure captions are not results
                          .match(/(?<![\w.])-?\d+(?:\.\d+)?%?(?![\w])/g) || [])
                        .map(n => n.replace('%', ''))
                        .filter(n => Math.abs(parseFloat(n)) > 1); // ignore 0/1/small ordinals
@@ -285,7 +287,14 @@ check('SCR-35', 'SUBMIT', 'Write-up is structured by narrative, not chronologica
 check('MEC-14/15/16', 'EXECUTE', 'Counted hours within budget', () => {
   const s = read(P.time);
   if (!s) return fail('llm/memory_bank/time-log.md missing');
-  const nums = [...s.matchAll(/\|\s*([\d.]+)\s*\|\s*([\d.]+)\s*\|\s*$/gm)].map(m => parseFloat(m[1]));
+  // The ledger table is | Date | Block | Description | Hours | Basis |, and an
+  // estimated block writes its hours as "~1.5". The earlier pattern here looked
+  // for two numeric columns at the end of a row, which this table does not have,
+  // so it matched nothing and this check passed while reporting 0.0 hours -- a
+  // check that cannot fail is worse than no check. Parse the Hours column, and
+  // fail loudly if the table shape drifts again rather than reporting zero.
+  const nums = [...s.matchAll(/^\|[^|]*\|[^|]*\|[^|]*\|\s*~?\s*([\d.]+)\s*\|[^|]*\|\s*$/gm)].map(m => parseFloat(m[1]));
+  if (!nums.length) return fail('time-log.md has no parseable hour rows — the ledger table shape changed, and this check was silently reporting 0.0');
   const total = nums.reduce((a, b) => a + b, 0);
   const execM = (s.match(/Exec summary:\s*([\d.]+)\s*\/\s*2/i) || [])[1];
   const out = [];
@@ -297,8 +306,10 @@ check('MEC-14/15/16', 'EXECUTE', 'Counted hours within budget', () => {
 check('ADV-06', 'EXECUTE', 'Paper reading ≤5 of the counted hours', () => {
   const s = read(P.time);
   if (!s) return na('no time log');
-  const reading = s.split('\n').filter(l => /read|paper|literature/i.test(l))
-    .map(l => parseFloat((l.match(/\|\s*([\d.]+)\s*\|\s*[\d.]+\s*\|\s*$/) || [])[1] || 0))
+  // \b-anchored: the bare substring "read" also matches "passive-readout", which
+  // charged 1.5h of instrument-building to the paper-reading budget.
+  const reading = s.split('\n').filter(l => /\bread(ing|s)?\b|\bpapers?\b|\bliterature\b/i.test(l))
+    .map(l => parseFloat((l.match(/^\|[^|]*\|[^|]*\|[^|]*\|\s*~?\s*([\d.]+)\s*\|[^|]*\|\s*$/) || [])[1] || 0))
     .reduce((a, b) => a + b, 0);
   return reading > 5 ? fail(`${reading.toFixed(1)}h reading — he recommends at most 5`) : pass(`${reading.toFixed(1)}h reading`);
 });
@@ -329,6 +340,103 @@ check('GATE-1', 'EXECUTE', 'Project ADR accepted before counted execution begins
 });
 
 // ── report ─────────────────────────────────────────────────────────────────
+// ── BLK-36 — reported experiments map to committed code + a run record ─────
+// The repo is an interrogation surface, not an appendix: Neel feeds submitted
+// code to his agents and asks what was actually done. A number whose only
+// provenance is kernel history cannot survive that, so these checks refuse to
+// let one reach the write-up.
+const RUNS_REL = 'results/runs';
+const RUN_ID_RE = /\b\d{8}T\d{6}Z-[a-z0-9][a-z0-9-]*\b/g;
+const RUN_MEMBERS = ['command.txt', 'manifest.json', 'stdout.log', 'outputs'];
+
+const runDirs = () => {
+  const d = join(ROOT, RUNS_REL);
+  if (!existsSync(d)) return [];
+  return readdirSync(d, { withFileTypes: true })
+    .filter(e => e.isDirectory()).map(e => e.name);
+};
+const runManifest = id => {
+  try { return JSON.parse(readFileSync(join(ROOT, RUNS_REL, id, 'manifest.json'), 'utf8')); }
+  catch { return null; }
+};
+
+check('BLK-36a', 'WRITEUP', 'Every run record is well-formed, or says plainly why not', () => {
+  const ids = runDirs();
+  if (!ids.length) return na('no runs recorded yet');
+  const bad = [];
+  for (const id of ids) {
+    const missing = RUN_MEMBERS.filter(m => !has(join(RUNS_REL, id, m)));
+    if (!missing.length) continue;
+    // An honest gap is explicitly permitted: work that predates the record
+    // may say so in a plain note. A fabricated manifest is the failure mode
+    // this is guarding against, so we accept the note and reject silence.
+    if (has(join(RUNS_REL, id, 'NOTE.md'))) continue;
+    bad.push(`${id} (missing ${missing.join(', ')}, no NOTE.md)`);
+  }
+  return bad.length
+    ? fail(`${bad.length} malformed run record(s): ${bad.slice(0, 5).join('; ')}`)
+    : pass(`${ids.length} run record(s) well-formed`);
+});
+
+check('BLK-36b', 'WRITEUP', 'Run ids cited in the write-up resolve, and name a script that exists', () => {
+  const s = [read(P.main), read(P.exec)].filter(Boolean).join('\n');
+  if (!s) return na('write-up not started');
+  const cited = [...new Set((s.match(RUN_ID_RE) || []))];
+  if (!cited.length) return warn('write-up cites no run ids yet');
+  const ids = new Set(runDirs());
+  const missing = cited.filter(id => !ids.has(id));
+  if (missing.length) return fail(`cited but absent from ${RUNS_REL}/: ${missing.join(', ')}`);
+  const noScript = [];
+  for (const id of cited) {
+    const m = runManifest(id);
+    const script = m && Array.isArray(m.argv) ? m.argv[0] : null;
+    if (!script || !/\.py$/.test(script) || !has(script)) {
+      noScript.push(`${id} -> ${script || 'no argv in manifest'}`);
+    }
+  }
+  return noScript.length
+    ? fail(`${noScript.length} cited run(s) do not map to a committed script: ${noScript.join('; ')}`)
+    : pass(`${cited.length} cited run(s) resolve to a run record and a script`);
+});
+
+check('BLK-36c', 'SUBMIT', 'Every canonical.json entry carries a run id that resolves', () => {
+  if (!has(P.canon)) return na('results/canonical.json not written yet');
+  let canon;
+  try { canon = JSON.parse(read(P.canon)); } catch (e) { return fail(`canonical.json is not valid JSON: ${e.message}`); }
+  const entries = Array.isArray(canon) ? canon
+    : Array.isArray(canon.entries) ? canon.entries
+    : Object.values(canon).filter(v => v && typeof v === 'object');
+  if (!entries.length) return fail('canonical.json has no entries');
+  const ids = new Set(runDirs());
+  const bad = entries.filter(e => !e.run_id || !ids.has(e.run_id));
+  return bad.length
+    ? fail(`${bad.length}/${entries.length} canonical entr(ies) lack a resolving run_id — BLK-24 must point at provenance, not at an assertion`)
+    : pass(`${entries.length} canonical entries all carry a resolving run_id`);
+});
+
+check('BLK-36d', 'WRITEUP', 'Every results subsection reporting a number cites a run id', () => {
+  const s = read(P.main);
+  if (!s) return na('write-up not started');
+  const resultsSecs = s.split(/^#{1,3}\s+/m).filter(sec => /^[\d.\s]*results?\b/i.test(sec));
+  if (!resultsSecs.length) return warn('no Results section found yet');
+  const offenders = [];
+  for (const sec of resultsSecs) {
+    for (const sub of sec.split(/^#{3,4}\s+/m)) {
+      const title = (sub.split('\n')[0] || '').trim().slice(0, 48);
+      // drop the subsection heading line: split() already ate its '#' marks, so the
+      // ordinal would otherwise read as a reported number.
+      const body = sub.split('\n').slice(1).join('\n')
+        .replace(/\[(RESULT|STATUS|DECISION) PENDING[^\]]*\]/gi, ' ');
+      if (!numbersIn(body).length) continue;          // no numbers, nothing to trace
+      RUN_ID_RE.lastIndex = 0;
+      if (!RUN_ID_RE.test(body)) offenders.push(title || '(untitled)');
+    }
+  }
+  return offenders.length
+    ? fail(`${offenders.length} results subsection(s) report numbers with no run id: ${offenders.slice(0, 6).join('; ')}`)
+    : pass('every numeric results subsection cites its run');
+});
+
 const C = { PASS: '\x1b[32m', FAIL: '\x1b[31m', WARN: '\x1b[33m', 'N/A': '\x1b[90m', ERROR: '\x1b[31m', r: '\x1b[0m' };
 const pad = (s, n) => String(s).padEnd(n);
 console.log(`\nMATS 12.0 conformance — gate: ${GATE}\n${'='.repeat(78)}`);

@@ -1,0 +1,53 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal045  job: 550555 ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+
+=== STEP 1/2: behavioural eligibility screen (the kill-shot) ===
+[runlog] results/runs/20260827T090437Z-eligibility-screen  git=11aa27cafeb0544cfb7ec0fa21282f17901edaa0 DIRTY  slurm=550555
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1689.89it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 18014.92it/s]
+[padding control] batched==unbatched: False (2/8 mismatched)
+  real   zero  AB=0.900 BA=0.933 all4=0.867 var=0.950 alt=0.000  [PASS]
+  real   few   AB=0.667 BA=0.667 all4=0.567 var=0.750 alt=0.017  [MARGINAL]
+  rare   zero  AB=0.867 BA=0.967 all4=0.833 var=0.958 alt=0.000  [PASS]
+  rare   few   AB=0.333 BA=0.600 all4=0.267 var=0.550 alt=0.025  [STOP]
+  pseudo zero  AB=0.700 BA=0.767 all4=0.600 var=0.808 alt=0.017  [MARGINAL]
+  pseudo few   AB=0.267 BA=0.200 all4=0.200 var=0.358 alt=0.108  [STOP]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T090437Z-eligibility-screen/outputs/eligibility-screen.json
+eligibility screen exit=0
+
+=== STEP 2/2: V1 tooling and positive-control verification ===
+[runlog] results/runs/20260827T093224Z-v1-tooling-verification  git=11aa27cafeb0544cfb7ec0fa21282f17901edaa0 DIRTY  slurm=550555
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1750.91it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 17386.65it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 107.46it/s]
+[v1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.3s
+
+==============================================================
+V1 VERDICT: PASS
+  ok   official_positive_control_reproduces
+  ok   both_paths_run
+  ok   logit_lens_switch_is_live
+  ok   deterministic
+  ok   negative_control_available
+  ok   no_transformerlens_in_path
+  ok   coverage_positive_control
+  ok   headroom_for_20_pairs_plus_controls
+  jlens pass@10      = 0.350
+  logitlens pass@10  = 0.200
+==============================================================
+v1 exit=0
+
+=== GATE 1 COMPLETE (eligibility rc=0, v1 rc=0) ===
+results/runs/20260827T055404Z-v1-tooling-verification/
+results/runs/20260827T081208Z-eligibility-screen/
+results/runs/20260827T082947Z-v1-tooling-verification/
+results/runs/20260827T090437Z-eligibility-screen/
+results/runs/20260827T093224Z-v1-tooling-verification/

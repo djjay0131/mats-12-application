@@ -1,0 +1,16 @@
+[runlog] results/runs/20260827T154016Z-stage1-passive-readout  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1760.83it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 18037.65it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 300.67it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.3s  n_records=40
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+
+==============================================================
+  jlens                    final     L27  margin=+4.251 ctrl=-0.202 frac=0.950 medrank=30
+  jlens                    prequery  L26  margin=+0.022 ctrl=+0.020 frac=0.450 medrank=393
+  logitlens                final     L27  margin=+2.957 ctrl=-0.005 frac=0.850 medrank=1290
+  logitlens                prequery  L26  margin=+0.015 ctrl=+0.064 frac=0.525 medrank=56930
+  jlens_random_transport   final     L30  margin=+0.196 ctrl=-0.079 frac=0.500 medrank=153149
+  jlens_random_transport   prequery  L26  margin=+0.033 ctrl=-0.010 frac=0.550 medrank=194963
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T154016Z-stage1-passive-readout/outputs/stage1-passive-readout.json

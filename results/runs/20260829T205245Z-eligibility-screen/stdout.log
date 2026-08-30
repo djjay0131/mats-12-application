@@ -1,0 +1,12 @@
+[runlog] results/runs/20260829T205245Z-eligibility-screen  git=c703dd77d0ed73cedf3273f4af687a5bf9e048e3 DIRTY  slurm=7307558
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1633.30it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 15090.10it/s]
+[padding control] batched==unbatched: False (2/8 mismatched)
+[dataset] results/datasets/dev.jsonl  n_records=40 n_pairs=10 seed=20260827 vocab_pool=6
+  real   zero  AB=0.900 BA=1.000 all4=0.900 var=0.975 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260829T205245Z-eligibility-screen/outputs/eligibility-screen.json

@@ -1,0 +1,99 @@
+{
+  "class_support_dev": {
+    "min_pairs_per_class_observed": 3,
+    "min_pairs_per_class_required": 3,
+    "n_classes": 6,
+    "n_duplicate_prompts": 0,
+    "n_pairs": 10,
+    "n_records": 40,
+    "ok": true,
+    "rows": [
+      {
+        "intermediate": "Prague",
+        "intermediate_id": 65019,
+        "n_alternative": 8,
+        "n_correct": 8,
+        "n_pairs": 4
+      },
+      {
+        "intermediate": "Seattle",
+        "intermediate_id": 15875,
+        "n_alternative": 8,
+        "n_correct": 8,
+        "n_pairs": 4
+      },
+      {
+        "intermediate": "Athens",
+        "intermediate_id": 44299,
+        "n_alternative": 6,
+        "n_correct": 6,
+        "n_pairs": 3
+      },
+      {
+        "intermediate": "Bristol",
+        "intermediate_id": 42484,
+        "n_alternative": 6,
+        "n_correct": 6,
+        "n_pairs": 3
+      },
+      {
+        "intermediate": "Dublin",
+        "intermediate_id": 31785,
+        "n_alternative": 6,
+        "n_correct": 6,
+        "n_pairs": 3
+      },
+      {
+        "intermediate": "Oslo",
+        "intermediate_id": 55918,
+        "n_alternative": 6,
+        "n_correct": 6,
+        "n_pairs": 3
+      }
+    ],
+    "single_role_classes": [],
+    "thin_classes": []
+  },
+  "class_support_heldout": {
+    "min_pairs_per_class_observed": 12,
+    "min_pairs_per_class_required": 3,
+    "n_classes": 6,
+    "n_duplicate_prompts": 0,
+    "n_pairs": 40,
+    "n_records": 160,
+    "ok": true,
+    "single_role_classes": [],
+    "thin_classes": []
+  },
+  "framing": "method evaluation, not circuit discovery",
+  "heldout_policy": "HELD-OUT split. Method evaluation, not circuit discovery. This file is never tuned on and must not be inspected during development: no threshold, template, vocabulary item or hyperparameter may be chosen by looking at it. Read it once, at evaluation time, after the method is frozen.",
+  "lexicons": [
+    "real"
+  ],
+  "min_pairs_per_class": 3,
+  "model": "Qwen/Qwen3.5-4B",
+  "n_dev_pairs": 10,
+  "n_dev_records": 40,
+  "n_heldout_pairs": 40,
+  "n_heldout_records": 160,
+  "preamble": "Facts:",
+  "provenance": "agent-unverified",
+  "records_per_pair": 4,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260827,
+  "sha256": {
+    "dev.jsonl": "977b3d6700387933b637ec816934b5ecdd287e7496c820f85e0e48432a2d343c",
+    "heldout.jsonl": "88f69b628dce58ceb066965e186e04d07e64524b0e0a0f8a8a5510fcfdbb430e"
+  },
+  "shot": "zero",
+  "templates": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6"
+  ],
+  "vocab_pool": 6,
+  "vocab_pool_note": "intermediates and their paired objects for every pair are drawn from one shared pool of this many words, assigned by task_templates.round_robin_schedule, so that leave-one-pair-out has class support outside each held-out pair. 0 = disabled."
+}

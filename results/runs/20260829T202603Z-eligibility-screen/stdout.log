@@ -1,0 +1,12 @@
+[runlog] results/runs/20260829T202603Z-eligibility-screen  git=c703dd77d0ed73cedf3273f4af687a5bf9e048e3 DIRTY  slurm=7307558
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1704.31it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  10%|#         | 44/426 [00:00<00:01, 251.55it/s]Loading weights:  21%|##1       | 91/426 [00:00<00:00, 344.85it/s]Loading weights:  31%|###       | 130/426 [00:00<00:00, 350.30it/s]Loading weights:  40%|###9      | 169/426 [00:00<00:00, 337.15it/s]Loading weights:  48%|####7     | 204/426 [00:00<00:00, 336.87it/s]Loading weights:  56%|#####6    | 239/426 [00:00<00:00, 330.09it/s]Loading weights:  64%|######4   | 274/426 [00:00<00:00, 333.78it/s]Loading weights:  72%|#######2  | 308/426 [00:00<00:00, 303.01it/s]Loading weights:  80%|#######9  | 339/426 [00:01<00:00, 270.12it/s]Loading weights:  86%|########6 | 367/426 [00:01<00:00, 251.40it/s]Loading weights:  93%|#########3| 398/426 [00:01<00:00, 258.82it/s]Loading weights: 100%|##########| 426/426 [00:01<00:00, 302.57it/s]
+[padding control] batched==unbatched: False (2/8 mismatched)
+[dataset] results/datasets/dev.jsonl  n_records=40 n_pairs=10 seed=20260827 vocab_pool=6
+  real   zero  AB=0.900 BA=1.000 all4=0.900 var=0.975 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260829T202603Z-eligibility-screen/outputs/eligibility-screen.json

@@ -1,0 +1,65 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: tc-dgx008  job: 7298944 ===
+NVIDIA A100-SXM4-80GB, 81920 MiB, 595.71.05
+dataset: 41 lines in results/datasets/dev.jsonl
+
+=== STEP 0/2: behavioural eligibility screen on results/datasets/dev.jsonl ===
+    behavioural labels for EXACTLY the stimuli steps 1 and 2 read
+[runlog] results/runs/20260828T204025Z-eligibility-screen  git=06ef3a5beec1327957621331ba4adb5d612434e2 DIRTY  slurm=7298944
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1414.84it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 25748.98it/s]
+[padding control] batched==unbatched: False (2/8 mismatched)
+[dataset] results/datasets/dev.jsonl  n_records=40 n_pairs=10 seed=20260827 vocab_pool=6
+  real   zero  AB=0.900 BA=1.000 all4=0.900 var=0.975 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260828T204025Z-eligibility-screen/outputs/eligibility-screen.json
+screen exit=0
+
+=== STEP 1/2: passive J-Lens readout, full dev split ===
+    keeps model_logits, so the readout-vs-behaviour margin is per record
+[runlog] results/runs/20260828T204356Z-stage1-passive-readout  git=06ef3a5beec1327957621331ba4adb5d612434e2 DIRTY  slurm=7298944
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1324.80it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 25035.36it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 41.17it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.4s  n_records=40
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+
+==============================================================
+  jlens                    final     L27  margin=+3.848 ctrl=-1.311 frac=0.975 medrank=35
+  jlens                    prequery  L25  margin=+0.070 ctrl=-0.366 frac=0.550 medrank=346
+  logitlens                final     L30  margin=+2.854 ctrl=-1.418 frac=0.900 medrank=19
+  logitlens                prequery  L24  margin=+0.053 ctrl=-0.122 frac=0.525 medrank=78525
+  jlens_random_transport   final     L25  margin=+0.121 ctrl=-0.026 frac=0.500 medrank=128084
+  jlens_random_transport   prequery  L9   margin=+0.017 ctrl=+0.197 frac=0.500 medrank=110957
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260828T204356Z-stage1-passive-readout/outputs/stage1-passive-readout.json
+readout exit=0
+
+=== STEP 2/2: arm 3, supervised difference-in-means reference ===
+    now with class support outside every held-out pair
+[runlog] results/runs/20260828T204541Z-stage1-supervised-reference  git=06ef3a5beec1327957621331ba4adb5d612434e2 DIRTY  slurm=7298944
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1394.85it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 24890.62it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 229.62it/s]
+[arm3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.5s  n_records=40
+[arm3] positions -> final=29 prequery=20 aligned=True
+
+==============================================================
+  arm3 final     L30  LOO margin=+24.717 LOO acc=0.650 (in-sample acc=0.750)
+  arm3 prequery  L30  LOO margin=+0.481 LOO acc=0.525 (in-sample acc=0.525)
+==============================================================
+wrote /home/djjay/mats12-tc/repo/results/runs/20260828T204541Z-stage1-supervised-reference/outputs/stage1-supervised-reference.json
+arm3 exit=0
+
+=== STAGE 2 COMPLETE (screen rc=0, readout rc=0, arm3 rc=0) ===
+results/runs/20260828T164704Z-stage1-supervised-reference/
+results/runs/20260828T204025Z-eligibility-screen/
+results/runs/20260828T204356Z-stage1-passive-readout/
+results/runs/20260828T204541Z-stage1-supervised-reference/

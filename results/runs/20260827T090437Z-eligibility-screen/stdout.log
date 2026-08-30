@@ -1,0 +1,16 @@
+[runlog] results/runs/20260827T090437Z-eligibility-screen  git=11aa27cafeb0544cfb7ec0fa21282f17901edaa0 DIRTY  slurm=550555
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1689.89it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 18014.92it/s]
+[padding control] batched==unbatched: False (2/8 mismatched)
+  real   zero  AB=0.900 BA=0.933 all4=0.867 var=0.950 alt=0.000  [PASS]
+  real   few   AB=0.667 BA=0.667 all4=0.567 var=0.750 alt=0.017  [MARGINAL]
+  rare   zero  AB=0.867 BA=0.967 all4=0.833 var=0.958 alt=0.000  [PASS]
+  rare   few   AB=0.333 BA=0.600 all4=0.267 var=0.550 alt=0.025  [STOP]
+  pseudo zero  AB=0.700 BA=0.767 all4=0.600 var=0.808 alt=0.017  [MARGINAL]
+  pseudo few   AB=0.267 BA=0.200 all4=0.200 var=0.358 alt=0.108  [STOP]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T090437Z-eligibility-screen/outputs/eligibility-screen.json

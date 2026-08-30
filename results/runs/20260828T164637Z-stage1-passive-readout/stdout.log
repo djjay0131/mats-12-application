@@ -1,0 +1,13 @@
+[runlog] results/runs/20260828T164637Z-stage1-passive-readout  git=23a839159018baeb6876742aa15d6646964d5597 DIRTY  slurm=551581
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1556.04it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 21020.12it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 126.03it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.2s  n_records=40
+Traceback (most recent call last):
+  File "/scratch/djjay/mats12/repo/experiments/stage1/passive_readout.py", line 411, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/scratch/djjay/mats12/repo/experiments/stage1/passive_readout.py", line 280, in main
+    "answer_margin": float(row[r["answer_id"]]
+                           ~~~^^^^^^^^^^^^^^^^
+IndexError: index 37260 is out of bounds for dimension 0 with size 0

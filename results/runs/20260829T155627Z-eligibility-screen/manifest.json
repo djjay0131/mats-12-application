@@ -1,0 +1,61 @@
+{
+  "slug": "eligibility-screen",
+  "started_utc": "2026-08-29T15:56:27.810297+00:00",
+  "argv": [
+    "experiments/design-verification/eligibility_screen.py",
+    "--dataset",
+    "results/datasets/dev.jsonl"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "7adaad14e25259834c182670d48346b786969708",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/slurm-logs/sweep-552322.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal045",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "552322",
+    "SLURM_JOB_NAME": "mats12-sweep",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal045",
+    "SLURM_JOB_GPUS": "3"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "n_pairs": 30,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "mode": "dataset",
+    "dataset": "results/datasets/dev.jsonl",
+    "thresholds": {
+      "pass": 0.8,
+      "marginal_low": 0.6
+    }
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-29T15:57:51.293730+00:00",
+  "outputs": [
+    "eligibility-screen.json"
+  ]
+}

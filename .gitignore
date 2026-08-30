@@ -19,3 +19,6 @@ _to_delete/
 # report build artifacts
 writeup/.build/
 
+
+!results/runs/*.log
+!results/runs/**/*.log

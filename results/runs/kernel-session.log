@@ -1,0 +1,6 @@
+
+salloc: Job has been cancelled
+salloc: Job allocation 550487 has been revoked.
+salloc: error: Job submit/allocate failed: Job/step already completing or completed
+[?2004h[djjay@falcon1 ~]$ 
+[?2004l[?2004h[djjay@falcon1 ~]$ 

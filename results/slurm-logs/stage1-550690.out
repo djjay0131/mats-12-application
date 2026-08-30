@@ -1,0 +1,107 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal009  job: 550690 ===
+NVIDIA A30, 24576 MiB, 595.71.05
+
+=== STEP 0/3: V2 decomposition audit (static, no GPU) ===
+vendor: /scratch/djjay/mats12/vendor/jacobian-lens
+commit: 581d398613e5602a5af361e1c34d3a92ea82ba8e
+version: Version: 0.1.0
+modules:
+  181 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/examples.py
+  388 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/fitting.py
+  211 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/hf.py
+   74 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/hooks.py
+   23 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/__init__.py
+  216 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/lens.py
+   53 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/_logging.py
+   52 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/protocol.py
+  515 /scratch/djjay/mats12/vendor/jacobian-lens/jlens/vis.py
+ 1713 total
+
+--- grep -rniE 'nonneg|non_neg|non-neg|sparse|nnls|lasso|omp_|matching_pursuit|dictionary|decompos|reconstruct|j_space|jspace' jlens
+matches: 0
+
+--- grep -rniE 'nonneg|non_neg|non-neg|sparse|nnls|lasso|omp_|matching_pursuit|dictionary|decompos|reconstruct|j_space|jspace' README.md
+matches: 0
+
+--- grep -rniE 'nonneg|non_neg|non-neg|sparse|nnls|lasso|omp_|matching_pursuit|dictionary|decompos|reconstruct|j_space|jspace' walkthrough.ipynb
+matches: 0
+
+--- grep -rniE 'nonneg|non_neg|non-neg|sparse|nnls|lasso|omp_|matching_pursuit|dictionary|decompos|reconstruct|j_space|jspace' tests
+matches: 0
+
+--- public API
+13:__all__ = [
+14-    "ActivationRecorder",
+15-    "HFLensModel",
+16-    "JacobianLens",
+17-    "Layout",
+18-    "LensModel",
+19-    "configure_logging",
+20-    "fit",
+21-    "from_hf",
+22-    "jacobian_for_prompt",
+23-]
+audit exit=0
+
+=== STEP 1/3: dry run, 4 records, position alignment check ===
+[runlog] results/runs/20260827T153925Z-stage1-passive-readout  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1719.68it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  11%|#1        | 47/426 [00:00<00:00, 426.23it/s]Loading weights:  29%|##8       | 122/426 [00:00<00:00, 606.18it/s]Loading weights:  45%|####5     | 192/426 [00:00<00:00, 643.39it/s]Loading weights:  60%|######    | 257/426 [00:00<00:00, 623.63it/s]Loading weights:  75%|#######5  | 320/426 [00:00<00:00, 609.59it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 682.71it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 114.90it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=16.3s  n_records=4
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+
+==============================================================
+  jlens                    final     L27  margin=+5.000 ctrl=-0.594 frac=1.000 medrank=74
+  jlens                    prequery  L28  margin=+0.266 ctrl=+0.234 frac=0.500 medrank=196
+  logitlens                final     L29  margin=+4.506 ctrl=-0.627 frac=1.000 medrank=239
+  logitlens                prequery  L29  margin=+0.270 ctrl=+0.316 frac=0.500 medrank=1656
+  jlens_random_transport   final     L30  margin=+0.500 ctrl=-0.230 frac=0.500 medrank=227457
+  jlens_random_transport   prequery  L27  margin=+0.118 ctrl=+0.212 frac=0.500 medrank=117467
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T153925Z-stage1-passive-readout/outputs/stage1-passive-readout.json
+dry run exit=0
+
+=== STEP 2/3: full dev split ===
+[runlog] results/runs/20260827T154016Z-stage1-passive-readout  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1760.83it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 18037.65it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 300.67it/s]
+[stage1] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.3s  n_records=40
+[stage1] positions -> final=29 (':')  prequery=20 ('.')  aligned=True
+
+==============================================================
+  jlens                    final     L27  margin=+4.251 ctrl=-0.202 frac=0.950 medrank=30
+  jlens                    prequery  L26  margin=+0.022 ctrl=+0.020 frac=0.450 medrank=393
+  logitlens                final     L27  margin=+2.957 ctrl=-0.005 frac=0.850 medrank=1290
+  logitlens                prequery  L26  margin=+0.015 ctrl=+0.064 frac=0.525 medrank=56930
+  jlens_random_transport   final     L30  margin=+0.196 ctrl=-0.079 frac=0.500 medrank=153149
+  jlens_random_transport   prequery  L26  margin=+0.033 ctrl=-0.010 frac=0.550 medrank=194963
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T154016Z-stage1-passive-readout/outputs/stage1-passive-readout.json
+stage1 exit=0
+
+=== STEP 3/3: arm 3, supervised difference-in-means reference ===
+[runlog] results/runs/20260827T154143Z-stage1-supervised-reference  git=45158b0f5220e04ebde404d409676ceba1b4f383 DIRTY  slurm=550690
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1736.77it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 19369.87it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 348.91it/s]
+[arm3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=3.1s  n_records=40
+[arm3] positions -> final=29 prequery=20 aligned=True
+
+==============================================================
+  arm3 final     L30  LOO margin=+31.499 LOO acc=0.583 (in-sample acc=0.800)
+  arm3 prequery  L26  LOO margin=+0.589 LOO acc=0.417 (in-sample acc=0.550)
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260827T154143Z-stage1-supervised-reference/outputs/stage1-supervised-reference.json
+arm3 exit=0
+
+=== STAGE 1 COMPLETE (stage1 rc=0, arm3 rc=0) ===
+results/runs/20260827T093224Z-v1-tooling-verification/
+results/runs/20260827T153925Z-stage1-passive-readout/
+results/runs/20260827T154016Z-stage1-passive-readout/
+results/runs/20260827T154143Z-stage1-supervised-reference/

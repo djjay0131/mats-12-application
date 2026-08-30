@@ -1,0 +1,54 @@
+{
+  "slug": "output-shadow-audit",
+  "started_utc": "2026-08-29T03:35:00.558660+00:00",
+  "argv": [
+    "experiments/analysis/output_shadow_audit.py",
+    "--elig",
+    "results/runs/20260828T204025Z-eligibility-screen",
+    "--readout",
+    "results/runs/20260828T204356Z-stage1-passive-readout",
+    "--label",
+    "tinkercliffs-7298944"
+  ],
+  "cwd": "/home/djjay/code/mats-12-application",
+  "git": {
+    "sha": "64ba959b0ef67ff3c1a86c40b69a05573f7990b1",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? experiments/analysis/output_shadow_audit.py"
+    ],
+    "note": null
+  },
+  "hostname": "agents4research",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "slurm": {
+    "SLURM_JOB_ID": null,
+    "SLURM_JOB_NAME": null,
+    "SLURM_JOB_ACCOUNT": null,
+    "SLURM_JOB_PARTITION": null,
+    "SLURM_JOB_NODELIST": null,
+    "SLURM_JOB_GPUS": null
+  },
+  "gpu": {
+    "available": null,
+    "name": null,
+    "note": "probe failed: No module named 'torch'"
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": null,
+    "transformers": null,
+    "numpy": null
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-29T03:35:00.561992+00:00",
+  "outputs": [
+    "output-shadow-audit.json"
+  ]
+}
