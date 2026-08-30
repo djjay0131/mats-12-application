@@ -1,0 +1,25 @@
+records: 40
+fields: record_id prompt intermediate alt_intermediate
+lens loaded: d_model 2560  layers 0 .. 30
+lens attributes: ['d_model', 'jacobians', 'n_prompts', 'source_layers']
+
+id                pos     method layer corr_rank twin_rank  path
+real-zero-000-AAB    final  logitlens    30       114       999  own matmul sanity=FAIL <-- investigate
+real-zero-000-AAB    final      jlens    27         —         —  FAILED: index 65019 is out of bounds for dimension 0 with size 2560
+real-zero-000-AAB prequery  logitlens    24    120514    123692  own matmul 
+real-zero-000-AAB prequery      jlens    25         —         —  FAILED: index 65019 is out of bounds for dimension 0 with size 2560
+real-zero-000-BAB    final  logitlens    30        25     15279  own matmul sanity=FAIL <-- investigate
+real-zero-000-BAB    final      jlens    27         —         —  FAILED: index 44299 is out of bounds for dimension 0 with size 2560
+real-zero-000-BAB prequery  logitlens    24     85439    132332  own matmul 
+real-zero-000-BAB prequery      jlens    25         —         —  FAILED: index 44299 is out of bounds for dimension 0 with size 2560
+real-zero-000-ABA    final  logitlens    30        55       793  own matmul sanity=FAIL <-- investigate
+real-zero-000-ABA    final      jlens    27         —         —  FAILED: index 65019 is out of bounds for dimension 0 with size 2560
+real-zero-000-BBA    final  logitlens    30       164     15655  own matmul sanity=FAIL <-- investigate
+real-zero-000-BBA    final      jlens    27         —         —  FAILED: index 44299 is out of bounds for dimension 0 with size 2560
+real-zero-001-AAB    final  logitlens    30        21        61  own matmul sanity=FAIL <-- investigate
+real-zero-001-AAB    final      jlens    27         —         —  FAILED: index 42484 is out of bounds for dimension 0 with size 2560
+
+expected neighbourhoods (medians over all 40, yours are 5 spot checks):
+  final:   jlens L27 ~ 35    logitlens L30 ~ 19
+  prequery: jlens L25 ~ 346  logitlens ~ 78,500
+compare your per-record numbers against the same records in the run outputs.

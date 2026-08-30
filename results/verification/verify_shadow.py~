@@ -1,0 +1,32 @@
+import json, sys, glob, torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+MODEL   = "FIXQwen/Qwen3.5-4B"      # exact id from the manifest
+REV     = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"           # revision from the manifest
+DEVPATH = "./results/datasets/dev.jsonl"
+F_ID, F_PROMPT, F_CORR, F_TWIN = "record_id", "prompt", "intermediate", "intermediate_alt"  # fix to real names
+
+recs = [json.loads(l) for l in open(DEVPATH)] if DEVPATH.endswith("jsonl") else json.load(open(DEVPATH))
+assert len(recs) == 40, len(recs)
+
+tok = AutoTokenizer.from_pretrained(MODEL, revision=REV)
+model = AutoModelForCausalLM.from_pretrained(MODEL, revision=REV,
+        torch_dtype=torch.bfloat16, device_map="auto").eval()
+
+def tid(w):
+    ids = tok(" " + w, add_special_tokens=False)["input_ids"]
+    assert len(ids) == 1, (w, ids)      # single-token by construction
+    return ids[0]
+
+wins, margins = 0, []
+for r in recs:
+    enc = tok(r[F_PROMPT], return_tensors="pt")
+    toks = tok.convert_ids_to_tokens(enc["input_ids"][0])
+    # CHECK 5 rides along: alignment, per record
+    assert len(toks) == 30 and "." in toks[20] and ":" in toks[29], (r[F_ID], len(toks), toks[20], toks[29])
+    with torch.no_grad():
+        logits = model(**enc.to(model.device)).logits[0, -1].float()
+    m = (logits[tid(r[F_CORR])] - logits[tid(r[F_TWIN])]).item()
+    margins.append(m); wins += m > 0
+    print(f"{r[F_ID]}  margin={m:+.3f}  {'WIN' if m>0 else 'LOSS'}")
+print(f"\nwins {wins}/40   mean margin {sum(margins)/40:+.3f}")
