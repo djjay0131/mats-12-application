@@ -1,0 +1,2 @@
+/usr/bin/python3 experiments/analysis/window_shadow_audit.py --run results/runs/20260830T175149Z-stage3-heldout-frozen
+# cwd: /home/djjay/code/mats-12-application

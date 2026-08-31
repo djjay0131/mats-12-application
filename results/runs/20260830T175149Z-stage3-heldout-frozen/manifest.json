@@ -1,0 +1,61 @@
+{
+  "slug": "stage3-heldout-frozen",
+  "started_utc": "2026-08-30T17:51:49.652778+00:00",
+  "argv": [
+    "experiments/stage3/heldout_frozen.py"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "62f5e75a5e00b543640e63e7296875fc30987ec2",
+    "branch": "exp/v1-v3-verification",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260830T173157Z-eligibility-screen/",
+      "?? results/slurm-logs/stage3-554591.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal027",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "554591",
+    "SLURM_JOB_NAME": "mats12-stage3",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "a30_normal_q",
+    "SLURM_JOB_NODELIST": "fal027",
+    "SLURM_JOB_GPUS": "2"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA A30",
+    "count": 1,
+    "capability": [
+      8,
+      0
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "datasets": [
+      "results/datasets/dev.jsonl",
+      "results/datasets/heldout.jsonl"
+    ],
+    "freeze": "experiments/stage3/freeze.json",
+    "note": "frozen evaluation; no selection happens in this run"
+  },
+  "status": "ok",
+  "finished_utc": "2026-08-30T18:08:05.703669+00:00",
+  "outputs": [
+    "stage3-heldout-frozen.json"
+  ]
+}

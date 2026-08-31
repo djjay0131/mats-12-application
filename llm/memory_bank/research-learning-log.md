@@ -117,7 +117,9 @@ Against the pre-registered threshold: PASS (>= 80%).
 
 ### Hour gate — Jason confirms
 
-- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+- Decision: **CONTINUE** — never separately confirmed at the time; the work
+  proceeded, and Jason's 2026-08-29 "CONTINUE." (recorded at Hour 4) ratifies
+  the chain retroactively. Recorded as such rather than backdated.
 
 ---
 
@@ -346,7 +348,10 @@ resample control. Held-out stays untouched until the layer is frozen.
 
 ### Hour gate — Jason confirms
 
-- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+- Decision: **CONTINUE** — Jason, 2026-08-29, verbatim: "CONTINUE." Given after
+  the full verification chain (answer-shadow result, prequery reframe,
+  post-query sweep, cross-GPU replication) was on the table, so it ratifies the
+  corrected framing, not the original headline.
 
 
 ## Hour 3 — Post-query sweep: is binding readable where it is determined but not yet emitted?
@@ -569,3 +574,127 @@ the weaker version, and eligibility should be quoted with the architecture named
 
 `padding control batched==unbatched` follows the same split: 0/8 mismatched on
 L40S, 2/8 on A100.
+
+
+## Hour 4 — Stage 3: held-out at frozen settings
+
+- Date/time: 2026-08-29, written **before** the code was submitted.
+- Research stage: **Confirmation** — the first run in this project whose purpose
+  is to confirm rather than explore.
+- Gate context: this entry is also the record of the Hour 3 gate. Decision:
+  **CONTINUE** (Jason, in discussion, after reviewing the sweep, the shadow
+  result, the replication, and the keep-vs-pivot question directly). ADR-0006
+  deferred by Jason the same day; the intervention arm is future work.
+
+### Why this experiment and not another
+
+The relcomp/qmark result was FOUND by a sweep over ten positions on dev — the
+textbook forking-paths setup. Held-out at frozen settings is the only
+experiment that converts "we found a position" into "there is a position."
+Nothing else reachable in the remaining budget changes the strength of the
+primary claim.
+
+### The freeze (committed before this runs)
+
+`experiments/stage3/freeze.json` + `results/stage2/FREEZE.md`. Positions by
+ANCHOR (relcomp = token before the final '?'; qmark = '?'; prequery and final
+as references), because held-out spans templates T1–T6 of varying length and a
+frozen token index would silently misalign. Layers from the pre-registered dev
+argmax, identical on both clusters: jlens relcomp L30 / qmark L27; logitlens
+L30 / L29; random transport at the jlens layers; arm 3 at L30, fit on all of
+dev, applied unchanged to held-out.
+
+### What is measured that was previously argued
+
+`model_logits` is kept at every scored position on both splits, so the output
+shadow at relcomp/qmark becomes a per-record measurement. This adds recorded
+data and tunes nothing.
+
+### Held-out contact disclosure
+
+Before the freeze: the `_meta` header, record count (160), pair count (40) and
+template-id set (T1–T6) were read once, to design the anchoring. No prompt,
+entity, vocabulary item or answer was read.
+
+### Pre-registered predictions (agent's, flagged as the agent's)
+
+- jlens frac at relcomp/qmark on held-out lands near dev (0.65–0.78), control
+  near 0.35–0.50; logitlens at parity on direction; jlens ahead on median rank.
+- shadow intermediate margin at relcomp/qmark near zero on both splits.
+- arm 3 transfers: held-out accuracy at qmark above 0.60.
+- eligibility on held-out lower than dev's (six templates, harder mix), and
+  architecture-dependent as established.
+
+### Failure condition, stated in advance
+
+If held-out frac at BOTH frozen primary positions is at or near its
+label-permutation control, the sweep result was forking paths. That outcome is
+the finding and will be reported as such — the frozen settings make
+re-selection impossible by construction.
+
+### Result
+
+Falcon 554591, A30, 37:10, exit 0, commit `62f5e75`. Runs
+`results/runs/20260830T173157Z-eligibility-screen` (held-out screen, 95.0%
+PASS) and `20260830T175149Z-stage3-heldout-frozen`; record-level attribution in
+`20260830T182516Z-stage3-window-shadow-audit`
+(`experiments/analysis/window_shadow_audit.py`). Anchor failures 0/0; all
+positions resolved on every template.
+
+**The failure condition did NOT fire.** Held-out at frozen settings, n=160:
+jlens relcomp frac **0.781** vs control 0.519, qmark **0.669** vs 0.556;
+random transport flat. The positions are real — not forking paths. Dev values
+reproduced at the frozen layers (0.775 / 0.675), and even by template the
+signal holds everywhere (relcomp T1 0.96 down to T5/T6 0.68 — the dev template
+is inflated, the others still clear the control).
+
+**But one pre-registered prediction was WRONG, and it is the important one.**
+The prediction said the output shadow at relcomp/qmark would be near zero. The
+measurement says otherwise: the model's own next-token distribution already
+prefers the correct intermediate at **0.800** (relcomp) and **0.731** (qmark)
+on held-out, mean margins +1.33 and +2.24. The window is NOT shadow-free.
+"Reading ahead" — Jason's interpretation from the start — is what the model
+itself is doing mid-question.
+
+**The discriminating set settles the attribution.** With 32 (relcomp) and 40
+(qmark) held-out records where the shadow points the WRONG way:
+
+| | lens acc, shadow WRONG | lens acc, shadow right | r(lens, shadow) |
+|---|---|---|---|
+| jlens relcomp | **0.344** (n=32) | 0.891 | +0.884 |
+| jlens qmark | **0.125** (n=40) | 0.872 | +0.917 |
+| logitlens relcomp | 0.250 | 0.797 | +0.707 |
+| logitlens qmark | 0.200 | 0.932 | +0.925 |
+
+Below chance on every discriminating cell. Where the model's developing
+preference is wrong about the intermediate, the lens is wrong WITH it — it is
+reading the preference, not the binding.
+
+**The mechanism, made explicit by arm 3.** At relcomp the supervised
+difference-in-means probe on the SAME residual reads nothing (0.525) while
+J-Lens reads 0.781. The binding is not linearly present in the residual there;
+what J-Lens adds is its Jacobian — a linearization of the remaining
+computation — which manufactures the output preference from the residual. At
+qmark, arm 3 transfers dev→held-out at 0.725→**0.731**, exactly the shadow's
+own frac: the linearly decodable signal at its best position IS the shadow.
+
+**Supportable claim, final form:** J-Lens is a well-calibrated predictor of
+what the model is about to say, at every position where direction is readable
+— and an instrument for reading stored-but-unexpressed bindings nowhere on
+this task. Its residual advantage over the logit lens on held-out is
+concept-rank localization at early/mid positions (prequery 373 vs 76,276;
+relcomp 128 vs 393) and largely vanishes by qmark (95 vs 82).
+
+**Control caveat, measured:** with the six-city pool, only 65/160 held-out
+label permutations are fully disjoint from the record's own pair (4 identical,
+8 swapped, 83 share one city), which is why the held-out control frac sits
+near 0.52 rather than dev's 0.35. The treatment-control gaps above stand, but
+the control is weaker on held-out and is reported with this audit attached.
+
+Eligibility on held-out: 95.0% (A30), below dev's 100% as predicted; the
+architecture caveat carries over. All numbers `agent-unverified` except where
+Jason's own re-derivations cover them.
+
+### Hour gate — Jason confirms
+
+- Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*

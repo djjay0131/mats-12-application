@@ -1,0 +1,30 @@
+lens: d_model 2560 layers 0 .. 30
+recorded jlens scores pulled from results/runs/20260829T205531Z-stage1-passive-readout/outputs/stage1-passive-readout.json for 5 records
+structure of recorded scores for real-zero-000-AAB (first 500 chars):
+{"prequery": {"0": {"intermediate": {"rank_correct": 138113, "rank_incorrect": 68301, "margin": -1.15625}, "answer": {"rank_correct": 59240, "rank_incorrect": 81747, "margin": 0.419921875}, "control_label_permutation": {"rank_correct": 68301, "rank_incorrect": 138113, "margin": 1.15625}}, "1": {"intermediate": {"rank_correct": 94173, "rank_incorrect": 25665, "margin": -1.83203125}, "answer": {"rank_correct": 14884, "rank_incorrect": 19602, "margin": 0.3203125}, "control_label_permutation": {"ran
+
+--- logit lens (own matmul) ---
+id                      pos   L corr_rank twin_rank  sanity(final L30 only)
+real-zero-000-AAB     final  30       114       999  max|d|=15.789 top1=DIFF rank(corr) 114 vs real 5
+real-zero-000-AAB  prequery  24    120514    123692  
+real-zero-000-BAB     final  30        25     15279  max|d|=15.607 top1=DIFF rank(corr) 25 vs real 6
+real-zero-000-BAB  prequery  24     85439    132332  
+real-zero-000-ABA     final  30        55       793  max|d|=15.516 top1=DIFF rank(corr) 55 vs real 5
+real-zero-000-BBA     final  30       164     15655  max|d|=15.746 top1=DIFF rank(corr) 164 vs real 29
+real-zero-001-AAB     final  30        21        61  max|d|=18.328 top1=DIFF rank(corr) 21 vs real 5
+
+--- J-Lens: four candidate compositions of jacobians[L] with the unembedding ---
+variant key: Jh = J@h, JTh = J.T@h; +n = final norm applied before lm_head
+id                      pos   L        Jh      Jh+n       JTh     JTh+n   (rank of correct intermediate)
+real-zero-000-AAB     final  27    11646      9060    221472    219083
+real-zero-000-AAB  prequery  25      949       663    192831    187513
+real-zero-000-BAB     final  27      648       795    149096    155915
+real-zero-000-BAB  prequery  25      213       185     95886     90985
+real-zero-000-ABA     final  27     5805      4282    215576    213247
+real-zero-000-BBA     final  27      896      1223    147568    155233
+real-zero-001-AAB     final  27     3271      2707    185548    195393
+
+read-off: the variant whose final-position ranks sit near the recorded values
+(median ~35 at L27; compare per-record against the recorded scores above)
+is the pipeline's convention. Note which one in the log; the other columns
+are the evidence you checked rather than assumed.

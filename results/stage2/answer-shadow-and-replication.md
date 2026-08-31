@@ -25,6 +25,20 @@ for what was pinned across the two clusters and what was deliberately allowed to
 > not yet emitted, which is what the post-query sweep exists to do — see
 > `llm/memory_bank/research-learning-log.md`, Hour 3.
 
+> **CORRECTION, 2026-08-30 — layer indexing.** Several passages below call L30
+> "the last layer" and say that at L30 both lenses are "approximately the
+> model's output." That is wrong. The model has **32 blocks**; the lens's
+> source layers 0..30 capture **block outputs**, so **L30 is the penultimate
+> block**, and block 31 is never read by either lens arm. The model's own
+> output (`model_logits`) comes from block 31 and is what the shadow numbers
+> use — those are unaffected, and were independently re-derived by Jason
+> (`results/verification/verify-shadow-554518.out`: 37 WIN / 3 LOSS, mean
+> +2.767). The convergence of the two lenses at L30 should read "one block
+> below the output," and the r=0.811 anchor reads "a passive linear readout
+> one block below the output," not "reading the output by another path."
+> Identified by Jason's rank spot-checks (commit 2552feb); pipeline
+> convention documented in `results/verification/readout-convention.md`.
+
 **Every number here is `agent-unverified`.** They come from this pipeline and share its
 code. Nothing below should enter the write-up as settled until it has been re-derived by
 a path that does not.

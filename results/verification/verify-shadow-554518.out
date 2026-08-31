@@ -1,0 +1,77 @@
+MODEL = Qwen/Qwen3.5-4B
+REV   = 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+
+lines=41  records=40  metadata_lines=1
+META: {'_meta': True, 'header': 'DEV split. Method evaluation, not circuit discovery. Develop, tune and debug against this file only.', 'seed': 20260827, 'model': 'Qwen/Qwen3.5-4B', 'revision': '851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a', 'lexicons': ['real'], 'shot': 'zero', 'vocab_pool': 6, 'framing': 'm
+
+field mapping: id=record_id  prompt=prompt  correct=intermediate  twin=alt_intermediate
+first record for eyeball check:
+{
+  "pair_id": "real-zero-000",
+  "record_id": "real-zero-000-AAB",
+  "template_id": "T1",
+  "lexicon": "real",
+  "fact_order": "AB",
+  "variant": "A",
+  "cell": "A/AB",
+  "shot": "zero",
+  "seed": 20260827,
+  "prompt": "Facts: Helen lives in Prague. Laura lives in Athens. Prague uses wool. Athens uses granite. What is used where Helen lives? Answer:",
+  "prompt_n_tokens": 30,
+  "person_q": "Helen",
+  "person_d": "Laura",
+  "intermediate": "Prague",
+  "answer": "wool",
+  "alt_intermediate": "Athens",
+  "alt_answer": "granite",
+  "intermediate_id": 65019,
+  "answer_id": 37260,
+  "alt_intermediate_id": 44299,
+  "alt_answer_id": 36055
+}
+
+id             ntok   tok20   tok29    correct       twin   margin  result
+real-zero-000-AAB   30       .       :     Prague     Athens   +4.125  WIN
+real-zero-000-BAB   30       .       :     Athens     Prague   +3.188  WIN
+real-zero-000-ABA   30       .       :     Prague     Athens   +4.062  WIN
+real-zero-000-BBA   30       .       :     Athens     Prague   +2.750  WIN
+real-zero-001-AAB   30       .       :    Bristol       Oslo   +2.000  WIN
+real-zero-001-BAB   30       .       :       Oslo    Bristol   +1.750  WIN
+real-zero-001-ABA   30       .       :    Bristol       Oslo   +4.938  WIN
+real-zero-001-BBA   30       .       :       Oslo    Bristol   +1.375  WIN
+real-zero-002-AAB   30       .       :    Seattle     Dublin   +3.125  WIN
+real-zero-002-BAB   30       .       :     Dublin    Seattle   -1.188  LOSS
+real-zero-002-ABA   30       .       :    Seattle     Dublin   +5.688  WIN
+real-zero-002-BBA   30       .       :     Dublin    Seattle   +0.500  WIN
+real-zero-003-AAB   30       .       :     Prague       Oslo   +1.375  WIN
+real-zero-003-BAB   30       .       :       Oslo     Prague   +5.625  WIN
+real-zero-003-ABA   30       .       :     Prague       Oslo   +2.125  WIN
+real-zero-003-BBA   30       .       :       Oslo     Prague   +3.312  WIN
+real-zero-004-AAB   30       .       :     Dublin     Athens   +4.188  WIN
+real-zero-004-BAB   30       .       :     Athens     Dublin   +1.062  WIN
+real-zero-004-ABA   30       .       :     Dublin     Athens   +4.312  WIN
+real-zero-004-BBA   30       .       :     Athens     Dublin   -0.062  LOSS
+real-zero-005-AAB   30       .       :    Bristol    Seattle   +2.500  WIN
+real-zero-005-BAB   30       .       :    Seattle    Bristol   +1.125  WIN
+real-zero-005-ABA   30       .       :    Bristol    Seattle   +3.750  WIN
+real-zero-005-BBA   30       .       :    Seattle    Bristol   +2.375  WIN
+real-zero-006-AAB   30       .       :     Prague     Dublin   +2.562  WIN
+real-zero-006-BAB   30       .       :     Dublin     Prague   +4.188  WIN
+real-zero-006-ABA   30       .       :     Prague     Dublin   +4.062  WIN
+real-zero-006-BBA   30       .       :     Dublin     Prague   +5.000  WIN
+real-zero-007-AAB   30       .       :    Seattle       Oslo   +1.688  WIN
+real-zero-007-BAB   30       .       :       Oslo    Seattle   +0.812  WIN
+real-zero-007-ABA   30       .       :    Seattle       Oslo   +3.500  WIN
+real-zero-007-BBA   30       .       :       Oslo    Seattle   +2.250  WIN
+real-zero-008-AAB   30       .       :    Bristol     Athens   +2.188  WIN
+real-zero-008-BAB   30       .       :     Athens    Bristol   +3.562  WIN
+real-zero-008-ABA   30       .       :    Bristol     Athens   +2.500  WIN
+real-zero-008-BBA   30       .       :     Athens    Bristol   +2.688  WIN
+real-zero-009-AAB   30       .       :     Prague    Seattle   -0.500  LOSS
+real-zero-009-BAB   30       .       :    Seattle     Prague   +5.875  WIN
+real-zero-009-ABA   30       .       :     Prague    Seattle   +1.250  WIN
+real-zero-009-BBA   30       .       :    Seattle     Prague   +5.062  WIN
+
+script totals (confirm by hand-counting rows): WIN 37  LOSS 3  SKIP 0
+mean margin +2.767
+expected: 37 WIN / 3 LOSS, mean ~ +2.766, ntok 30, tok20 '.', tok29 ':'

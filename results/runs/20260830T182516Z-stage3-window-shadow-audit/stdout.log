@@ -1,0 +1,54 @@
+[runlog] results/runs/20260830T182516Z-stage3-window-shadow-audit  git=62f5e75a5e00b543640e63e7296875fc30987ec2 DIRTY  slurm=None
+source: results/runs/20260830T175149Z-stage3-heldout-frozen/outputs/stage3-heldout-frozen.json
+
+A. shadow at each position (prediction said ~0 at relcomp/qmark)
+  dev      prequery mean=+0.002 shadowFracPositive=0.525 neg=19/40
+  dev      relcomp  mean=+1.275 shadowFracPositive=0.750 neg=10/40
+  dev      qmark    mean=+2.316 shadowFracPositive=0.775 neg=9/40
+  dev      final    mean=+2.767 shadowFracPositive=0.925 neg=3/40
+  heldout  prequery mean=+0.007 shadowFracPositive=0.481 neg=78/160
+  heldout  relcomp  mean=+1.333 shadowFracPositive=0.800 neg=32/160
+  heldout  qmark    mean=+2.237 shadowFracPositive=0.731 neg=40/160
+  heldout  final    mean=+2.639 shadowFracPositive=0.931 neg=9/160
+
+B. lens frac vs the shadow's own frac, and per-record coupling r
+  dev      jlens      prequery lensFrac=0.525 shadowFrac=0.525 r=+0.684 n=40
+  dev      jlens      relcomp  lensFrac=0.775 shadowFrac=0.750 r=+0.929 n=40
+  dev      jlens      qmark    lensFrac=0.675 shadowFrac=0.775 r=+0.954 n=40
+  dev      jlens      final    lensFrac=0.975 shadowFrac=0.925 r=+0.765 n=40
+  dev      logitlens  prequery lensFrac=0.525 shadowFrac=0.525 r=+0.173 n=40
+  dev      logitlens  relcomp  lensFrac=0.700 shadowFrac=0.750 r=+0.807 n=40
+  dev      logitlens  qmark    lensFrac=0.725 shadowFrac=0.775 r=+0.930 n=40
+  dev      logitlens  final    lensFrac=0.900 shadowFrac=0.925 r=+0.811 n=40
+  heldout  jlens      prequery lensFrac=0.512 shadowFrac=0.481 r=+0.712 n=160
+  heldout  jlens      relcomp  lensFrac=0.781 shadowFrac=0.800 r=+0.884 n=160
+  heldout  jlens      qmark    lensFrac=0.669 shadowFrac=0.731 r=+0.917 n=160
+  heldout  jlens      final    lensFrac=0.956 shadowFrac=0.931 r=+0.656 n=160
+  heldout  logitlens  prequery lensFrac=0.487 shadowFrac=0.481 r=+0.320 n=160
+  heldout  logitlens  relcomp  lensFrac=0.688 shadowFrac=0.800 r=+0.707 n=160
+  heldout  logitlens  qmark    lensFrac=0.738 shadowFrac=0.731 r=+0.925 n=160
+  heldout  logitlens  final    lensFrac=0.912 shadowFrac=0.931 r=+0.815 n=160
+
+C. THE DISCRIMINATING SET: records where the shadow points the wrong way
+  dev      jlens      relcomp  shadowWRONG n= 10 lensAcc=0.300   shadowRIGHT n= 30 lensAcc=0.933
+  dev      jlens      qmark    shadowWRONG n=  9 lensAcc=0.000   shadowRIGHT n= 31 lensAcc=0.871
+  dev      jlens      final    shadowWRONG n=  3 lensAcc=0.667   shadowRIGHT n= 37 lensAcc=1.000
+  dev      logitlens  relcomp  shadowWRONG n= 10 lensAcc=0.300   shadowRIGHT n= 30 lensAcc=0.833
+  dev      logitlens  qmark    shadowWRONG n=  9 lensAcc=0.111   shadowRIGHT n= 31 lensAcc=0.903
+  dev      logitlens  final    shadowWRONG n=  3 lensAcc=0.333   shadowRIGHT n= 37 lensAcc=0.946
+  heldout  jlens      relcomp  shadowWRONG n= 32 lensAcc=0.344   shadowRIGHT n=128 lensAcc=0.891
+  heldout  jlens      qmark    shadowWRONG n= 40 lensAcc=0.125   shadowRIGHT n=117 lensAcc=0.872
+  heldout  jlens      final    shadowWRONG n=  9 lensAcc=0.667   shadowRIGHT n=149 lensAcc=0.973
+  heldout  logitlens  relcomp  shadowWRONG n= 32 lensAcc=0.250   shadowRIGHT n=128 lensAcc=0.797
+  heldout  logitlens  qmark    shadowWRONG n= 40 lensAcc=0.200   shadowRIGHT n=117 lensAcc=0.932
+  heldout  logitlens  final    shadowWRONG n=  9 lensAcc=0.333   shadowRIGHT n=149 lensAcc=0.953
+
+D. label-permutation control collision audit (six-city pool)
+  dev      n=40 identical=1 swapped=6 oneShared=12 disjoint=21
+  heldout  n=160 identical=4 swapped=8 oneShared=83 disjoint=65
+
+E. held-out by template (jlens, primary positions)
+  relcomp: T1=0.96(n=28)  T2=0.79(n=28)  T3=0.75(n=24)  T4=0.83(n=24)  T5=0.68(n=28)  T6=0.68(n=28)
+  qmark: T1=0.82(n=28)  T2=0.64(n=28)  T3=0.62(n=24)  T4=0.75(n=24)  T5=0.64(n=28)  T6=0.54(n=28)
+
+wrote /home/djjay/code/mats-12-application/results/runs/20260830T182516Z-stage3-window-shadow-audit/outputs/window-shadow-audit.json

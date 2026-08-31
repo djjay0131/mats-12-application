@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/scratch/djjay/mats12/repo/results/verification/verify_shadow.py", line 63, in <module>
+    assert K_PROMPT and K_CORR and K_TWIN, \
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: auto-detect failed — read the record above and hardcode the three keys near the top of the loop

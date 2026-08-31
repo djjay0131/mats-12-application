@@ -1,0 +1,23 @@
+MODEL = Qwen/Qwen3.5-4B
+REV   = 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+
+lines=41  records=41  metadata_lines=0
+*** NOTE: 41 records, expected 40 ***
+
+field mapping: id=None  prompt=header  correct=None  twin=None
+first record for eyeball check:
+{
+  "_meta": true,
+  "header": "DEV split. Method evaluation, not circuit discovery. Develop, tune and debug against this file only.",
+  "seed": 20260827,
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "lexicons": [
+    "real"
+  ],
+  "shot": "zero",
+  "vocab_pool": 6,
+  "framing": "method evaluation, not circuit discovery",
+  "split": "dev",
+  "n_pairs": 10
+}

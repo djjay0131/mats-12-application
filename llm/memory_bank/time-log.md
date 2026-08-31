@@ -51,7 +51,12 @@ hours.** Parallel subagent work is a bonus, not a multiplier on the budget.
 | 2026-08-28 | 16:13–16:29 | TinkerCliffs environment rebuilt from scratch: venv, HF cache, pinned model and lens revisions, smoke job | 0.0 | Uncounted — ARC setup, by Jason's ruling |
 | 2026-08-28 | 20:36–22:10 | Stage 2 on both clusters: environment verification, partition fix, submission, answer-shadow analysis, record-level join, cross-cluster comparison, run records committed, results doc, conformance-check repair | ~1.0 | Estimated — 1.6h span containing two device-bridge outages totalling roughly 50 min |
 
-**Running total: 11.1 / 20.0** — 7.1 verified, 4.0 estimated.
+| 2026-08-29 | 15:20–17:40 | Prequery reframe, Hour 3 pre-registration, sweep instrumentation, both sweep jobs, by-position analysis | ~1.2 | Estimated — span contains queue waits and two bridge outages |
+| 2026-08-30 | (Jason) | Independent verification: shadow re-derivation, rank spot-checks, eligibility hand-counts (checks 3-6, commit 2552feb) | ~1.5 | Estimated — reconstructed from the commit, not tracked |
+| 2026-08-30 | 16:20–19:00 | FREEZE, Stage 3 build and run, window-shadow attribution analysis, readout-convention source reading | ~1.5 | Estimated — span contains the 37-min job and sync overhead |
+| 2026-08-30 | 19:00–20:30 | Write-up: sections 3-10 drafted from run records, controls ledger, figures | ~1.4 | Estimated |
+
+**Running total: 16.7 / 20.0** — 7.1 verified, 9.6 estimated.
 **Verified with artifacts at both ends: 7.1h.** The estimated blocks are
 labelled, never folded in.
 **Exec summary: 0.0 / 2.0**

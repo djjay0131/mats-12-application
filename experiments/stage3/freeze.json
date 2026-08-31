@@ -1,0 +1,39 @@
+{
+  "frozen_at": "2026-08-29",
+  "frozen_from": "post-query sweep on dev: Falcon 552322 and TinkerCliffs 7307558 (commit 7adaad1). Layer rule = pre-registered argmax of mean paired intermediate margin on dev; both clusters selected identical layers at every position carrying signal.",
+  "position_anchors": {
+    "relcomp": "token immediately preceding the final '?' -- completes the relation (dev T1: ' lives')",
+    "qmark": "the final '?'",
+    "prequery": "last token of the facts block -- REFERENCE ONLY, binding undetermined here",
+    "final": "last prompt token -- REFERENCE ONLY, output-contaminated (38/40 dev generations name the intermediate)"
+  },
+  "why_anchors_not_indices": "held-out uses templates T1-T6 of varying length; a frozen token index would silently misalign across templates",
+  "primary_positions": [
+    "relcomp",
+    "qmark"
+  ],
+  "layers": {
+    "jlens": {
+      "relcomp": 30,
+      "qmark": 27,
+      "final": 27,
+      "prequery": 25
+    },
+    "logitlens": {
+      "relcomp": 30,
+      "qmark": 29,
+      "final": 30,
+      "prequery": 24
+    },
+    "jlens_random_transport": "evaluated at the jlens layers -- the control shares the treatment's frozen settings",
+    "arm3": 30
+  },
+  "arm3": "difference-in-means, fit on ALL dev records, applied unchanged to held-out (the section-2.5 promise)",
+  "controls": [
+    "label permutation (derangement, seed 20260827, within split)",
+    "norm-matched random transport"
+  ],
+  "heldout_contact_before_freeze": "_meta header, n_records=160, n_pairs=40, template_id set T1..T6 only; no prompts, entities or answers",
+  "predictions": "Hour 4 entry, llm/memory_bank/research-learning-log.md",
+  "failure_condition": "held-out frac at BOTH primary positions at or near its label-permutation control => the sweep result was forking paths; that outcome is the finding and is reported as such"
+}
