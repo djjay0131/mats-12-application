@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">
+  <rect width="980" height="560" fill="#ffffff"/>
+  <text x="490" y="34" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a1f2b">Where a binding can be seen — one prompt, three phases</text>
+
+  <!-- token timeline -->
+  <g font-size="13">
+    <rect x="50"  y="70" width="180" height="40" rx="6" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="140" y="95" text-anchor="middle" fill="#1e40af">Arin lives in Paris.</text>
+    <rect x="238" y="70" width="180" height="40" rx="6" fill="#fff7ed" stroke="#d97706"/>
+    <text x="328" y="95" text-anchor="middle" fill="#92400e">Bela lives in Tokyo.</text>
+    <rect x="426" y="70" width="330" height="40" rx="6" fill="#ecfdf5" stroke="#059669"/>
+    <text x="591" y="95" text-anchor="middle" fill="#065f46">What is used where Arin lives</text>
+    <rect x="764" y="70" width="60" height="40" rx="6" fill="#fef2f2" stroke="#dc2626"/>
+    <text x="794" y="95" text-anchor="middle" fill="#991b1b" font-weight="bold">:</text>
+    <text x="850" y="95" font-size="13" fill="#5b6472">&#8594; answer</text>
+  </g>
+
+  <!-- position markers -->
+  <g font-size="12" fill="#5b6472">
+    <line x1="418" y1="112" x2="418" y2="140" stroke="#94a3b8" stroke-dasharray="3,3"/>
+    <text x="418" y="156" text-anchor="middle">prequery &#8226; token '.' (idx 20)</text>
+    <line x1="794" y1="112" x2="794" y2="140" stroke="#94a3b8" stroke-dasharray="3,3"/>
+    <text x="794" y="156" text-anchor="middle">final &#8226; token ':' (idx 29)</text>
+  </g>
+
+  <!-- phase bands -->
+  <g>
+    <rect x="50"  y="180" width="368" height="150" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <rect x="426" y="180" width="330" height="150" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <rect x="764" y="180" width="166" height="150" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+
+    <text x="234" y="206" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">PHASE 1 &#8226; STORED</text>
+    <text x="234" y="230" text-anchor="middle" font-size="12.5" fill="#475569">Both bindings in context;</text>
+    <text x="234" y="248" text-anchor="middle" font-size="12.5" fill="#475569">query not yet seen, so</text>
+    <text x="234" y="266" text-anchor="middle" font-size="12.5" fill="#475569">&#8220;correct&#8221; is UNDEFINED.</text>
+    <text x="234" y="292" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">Chance is the correct value.</text>
+    <text x="234" y="310" text-anchor="middle" font-size="12" fill="#5b6472">frac 0.550 = control passing</text>
+
+    <text x="591" y="206" text-anchor="middle" font-size="14" font-weight="bold" fill="#065f46">PHASE 2 &#8226; RESOLVING</text>
+    <text x="591" y="230" text-anchor="middle" font-size="12.5" fill="#065f46">Query selects one binding.</text>
+    <text x="591" y="248" text-anchor="middle" font-size="12.5" fill="#065f46">Binding is determined but</text>
+    <text x="591" y="266" text-anchor="middle" font-size="12.5" fill="#065f46">NOT yet emitted.</text>
+    <text x="591" y="292" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#065f46">Only span where a readout</text>
+    <text x="591" y="310" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#065f46">can see binding &#8212; THE SWEEP</text>
+
+    <text x="847" y="206" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">PHASE 3 &#8226; EMITTED</text>
+    <text x="847" y="230" text-anchor="middle" font-size="12.5" fill="#991b1b">Answer computed.</text>
+    <text x="847" y="248" text-anchor="middle" font-size="12.5" fill="#991b1b">Model's own output prefers</text>
+    <text x="847" y="266" text-anchor="middle" font-size="12.5" fill="#991b1b">correct intermediate 37/40.</text>
+    <text x="847" y="292" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#991b1b">Output shadow: r = 0.771</text>
+    <text x="847" y="310" text-anchor="middle" font-size="12" fill="#b91c1c">(shadow anchor 0.811)</text>
+  </g>
+
+  <!-- shadow growth arrow -->
+  <g>
+    <text x="60" y="368" font-size="12.5" fill="#5b6472" letter-spacing="1">OUTPUT SHADOW GROWS TOWARD THE FINAL TOKEN</text>
+    <path d="M 60 400 C 350 398, 600 390, 920 378" stroke="#dc2626" stroke-width="0" fill="none"/>
+    <path d="M 60 402 L 500 402 C 650 402, 760 392, 900 378 L 900 404 L 60 404 Z" fill="#fecaca" opacity="0.7"/>
+    <path d="M 60 402 L 500 402 C 650 402, 760 392, 900 378" stroke="#dc2626" stroke-width="2" fill="none"/>
+    <text x="906" y="376" font-size="12" fill="#dc2626" font-weight="bold">92.5%</text>
+  </g>
+
+  <!-- what was measured -->
+  <rect x="50" y="428" width="880" height="104" rx="10" fill="#fefce8" stroke="#eab308"/>
+  <text x="70" y="456" font-size="14" fill="#1a1f2b"><tspan font-weight="bold">What Stages 1&#8211;2 measured:</tspan> Phase 1 (direction undefined) and Phase 3 (direction shadowed) &#8212; the two phases where, for opposite</text>
+  <text x="70" y="478" font-size="14" fill="#1a1f2b">reasons, a directional binding readout is uninformative.</text>
+  <text x="70" y="508" font-size="14" fill="#1a1f2b"><tspan font-weight="bold">What the post-query sweep measures:</tspan> Phase 2, at every (layer &#215; position) cell &#8212; the first read of the window where binding lives.</text>
+</svg>

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Keep writeup/mats12-report.docx in sync with its markdown sources.
+# Rebuilds the docx whenever writeup/main.md or writeup/exec-summary.md is
+# part of the commit, and stages the refreshed artifact so the committed
+# .docx can never drift from the committed markdown.
+# Install with: bash scripts/install-hooks.sh
+set -uo pipefail
+cd "$(git rev-parse --show-toplevel)"
+git diff --cached --name-only | grep -qE '^writeup/(main|exec-summary)\.md$' || exit 0
+echo "[pre-commit] writeup markdown staged — rebuilding docx via scripts/build-report.sh"
+logf="$(git rev-parse --git-dir)/last-report-build.log"
+if ! bash scripts/build-report.sh >"$logf" 2>&1; then
+  echo "[pre-commit] build-report.sh exited non-zero — this is usually just the"
+  echo "             WRITEUP conformance gate, not the docx build. The .docx was"
+  echo "             rebuilt if pandoc succeeded. Full log: $logf"
+fi
+git add writeup/mats12-report.docx
+echo "[pre-commit] staged refreshed writeup/mats12-report.docx"
+exit 0

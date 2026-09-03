@@ -1,7 +1,7 @@
 ---
 title: "Beyond a Bag of Concepts: does J-Lens recover relational binding?"
 subtitle: "MATS 12.0 application — Neel Nanda stream"
-author: "Jason Day"
+author: "Jason Cusati"
 date: "September 2026"
 ---
 
