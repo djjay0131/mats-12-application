@@ -108,7 +108,72 @@ the model's answer?
 
 J-Lens is defined from first principles in §2.1.
 
-## 1.2 The gap
+## 1.2 What binding is and why a lens struggles to see it
+
+<!-- Inserted from writeup/drafts/binding-section-draft.md (2026-08-29 coach
+     draft), updated 2026-09-03 for the Stage 3 result. Per the draft's own
+     STATUS note: rewrite in your voice; keep the structure and numbers. -->
+
+The question this project asks is not whether the model represents Paris. It is
+whether the model represents *Paris-as-the-city-attached-to-Arin* — and whether
+an unsupervised readout can see the difference.
+
+The distinction is the classic binding problem. Two prompts —
+
+> Arin lives in Paris. Bela lives in Tokyo.
+> Arin lives in Tokyo. Bela lives in Paris.
+
+— contain exactly the same four concepts: Arin, Bela, Paris, Tokyo. A readout
+that only detects which concepts are present cannot tell these prompts apart.
+What differs is the pairing, and the pairing is the binding (Figure below).
+This is why every record in the dataset carries a role-swapped twin: both
+cities are in the context, equally salient, so a bag-of-concepts readout scores
+exactly chance (frac = 0.500) by construction, and only a readout that has
+recovered the relation can beat it. The distractor is the experiment.
+
+![The binding problem: two prompts, the same four concepts, opposite pairings. Only the pairing distinguishes them, so only a reader of the relation can tell them apart.](results/figures/binding-concept/fig1-binding-problem.png)
+
+Binding is structurally awkward for a lens. A lens maps a residual vector to a
+ranking over the vocabulary, and vocabulary items are identities — there is no
+token that means "the-city-attached-to-Arin." A token-ranking instrument can
+therefore only express a binding indirectly, by ranking Paris above Tokyo, and
+it can only do that once the model has resolved the relation into a selection.
+That yields a three-phase account of the forward pass at the readout positions
+(Figure below):
+
+1. **Before the query** (the prequery position): both bindings are stored,
+   neither is selected. "Correct intermediate" is undefined — it is a property
+   of the query, which has not been seen. Chance is the correct expected value
+   here, and a directional readout above chance would indicate a leak, not
+   binding. This is the reframe of the Stage 2 prequery result: frac 0.550 is
+   the control passing, not the lens failing.
+2. **During the query** (query onset to the final token): the model resolves
+   which binding the question selects. This is the only span where a binding
+   could be determined but not yet emitted — the only place a token-ranking
+   readout could, in principle, see a binding rather than an output.
+3. **At the final token**: the answer is computed. The model's own output
+   distribution already prefers the correct intermediate on 92.5% of records,
+   so a directional readout here is dominated by the output shadow (Stage 2:
+   J-Lens final-position margin couples to the model's own intermediate margin
+   at r = 0.771 against a shadow anchor of 0.811).
+
+![Where a binding is visible to a token-ranking readout: stored before the query, resolving inside the query window, emitted at the final token. The readout positions used in Stage 3 are marked.](results/figures/binding-concept/fig2-where-binding-is-visible.png)
+
+Stages 1 and 2 of this project measured phases 1 and 3 — the two phases where,
+for opposite reasons, a directional binding readout is uninformative. Stage 3
+(Section 4.2) read phase 2 at frozen settings, with a supervised
+difference-in-means probe on the same grid as a ceiling. The measured answer,
+stated here so the three-phase account is not left implying an untested
+prediction: on this task phase 2 is not shadow-free either. The model's own
+next-token preference is already directional inside the query window (frac
+0.800 at the relation-completing token, 0.731 at the question mark), both
+lenses track it at r = 0.88–0.92, and the supervised ceiling reads chance
+(0.525) at the relation-completing token — so the window carries the model's
+developing selection, not a linearly decodable stored binding. The three-phase
+account survives; the hoped-for shadow-free middle band, on this task, does
+not.
+
+## 1.3 The gap
 
 <!-- The bag-of-concepts limitation, quoted from the source rather than
      paraphrased. Then: nobody has quantified it against a matched
@@ -436,6 +501,9 @@ reads held-out was committed. The final and pre-query positions are retained
 as the contaminated and undetermined references respectively.
 
 ## 2.5 Arms, metrics, and controls
+
+![Three instruments on the same residual: the supervised difference-in-means probe as ceiling, J-Lens as the unsupervised reader, and the logit lens as floor.](results/figures/binding-concept/fig3-three-instruments.png)
+
 
 ### Three arms
 

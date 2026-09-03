@@ -44,15 +44,15 @@ The data inside of the brain of AI is made up of vectors of numbers. What if we 
 <!-- One paragraph: what it was, what you found, why it supports the takeaway.
      Then the figure. -->
 
-![Pairwise binding accuracy by method, with bootstrap 95% CIs. Chance is 50%.](results/figures/binding-accuracy-by-method.png)
+![Direction score — correct intermediate outranks its role-swapped twin — by position, frozen held-out split, n=160. Both lenses rise with, and to, the model's own next-token preference (dashed); norm-matched random transport stays at chance.](results/figures/direction-vs-shadow.png)
 
 ## Experiment 2 — Do the controls hold?
 
-![Binding advantage under relation deletion, question truncation, and label permutation.](results/figures/controls-panel.png)
+![Median rank of the correct intermediate over the 248,320-token vocabulary at each readout position, held-out n=160, log scale. J-Lens's localization advantage is largest before the query (373 vs 76,276) and narrows as the model's own preference arrives.](results/figures/localization-by-position.png)
 
 ## Experiment 3 — <!-- causal arm, or the stronger passive control that replaced it -->
 
-![](results/figures/layerwise-margin.png)
+![Supervised difference-in-means probe (arm 3), fit on dev, applied unchanged to held-out (n=160). At the relation-completing token it reads chance (0.525) — binding is not linearly decodable there — and its later gains match the output shadow.](results/figures/supervised-ceiling.png)
 
 ## Biggest limitation
 
