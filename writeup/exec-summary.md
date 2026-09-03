@@ -7,6 +7,10 @@ date: "September 2026"
 
 # Executive summary
 
+Let's start with how I got here. For a while I have been thinking about how the screens that the operators are reading in the matrix relates to AI today or in the near future. I have had this idea that machines would write code, and execute the code in real time to do new things or in order to learn or invent new ways of doing things. And I viewed the operators terminal as this code flying by the AI's internal eyes. As I dug into your interests, and started reading the current research on Chain of Thought, a new idea spawned. 
+
+The data inside of the brain of AI is made up of vectors of numbers. What if we could train humans to read those representations, just as the operators read the screens in the matrix? With that as the North Star, I began to understand how this could be done. 
+
 <!-- HARD LIMITS, checked by scripts/conformance-check.mjs at --gate SUBMIT:
        * 600 words maximum (MEC-06)
        * 3 pages maximum, 1 page is ideal

@@ -38,8 +38,20 @@ in the write-up.
 - Expected 0.771 / 0.811 / -0.016 / 0.445 — got: same
 
 ## Check 4 / 7 — rank spot checks
-- Records checked: real-zero-002-BAB, real-zero-004-BBA, real-zero-009-BAB, layer/position, my rank vs recorded rank: <fill in>
+- Records checked: real-zero-002-BAB, real-zero-004-BBA, real-zero-009-BAB
+, layer/position, my rank vs recorded rank: <fill in>
 
-## Check 6 — behavioural labels
-- Hand count of correct outputs: <n>/40 (expected 39/40 on TC join)
-- Padding-flip prompt inspected: <id, what differed>
+## Check 6 — behavioural labels & padding control (hand-checked 2026-08-30)
+- Source: results/runs/20260829T205245Z-eligibility-screen/outputs/eligibility-screen.json (Falcon).
+- Per-pair table read by hand: 40 variant-cells, 39 true / 1 false; failing cell
+  real-zero-009 A/AB. Matches the 39/1 shape.
+- pair_eligibility_AB = 0.900 on this Falcon run vs 1.000 on Falcon job 551581
+  (Aug 28): the eligibility number is unstable run-to-run on the SAME cluster,
+  not only across GPU architectures. [Pending: confirm the Aug 29 run's config
+  matches 551581 before quoting this — see command.txt/manifest.]
+- Padding control mismatches (both read in full): batched vs unbatched outputs
+  differ only in phrasing; final answers identical and correct in both
+  (Athens→granite, Bristol→linen). On this run the 2/8-style mismatch is
+  surface wording, not an answer flip.
+- Not verified from raw text: the one false label (009 A/AB) — boolean only;
+  raw generation not stored in this output file.
