@@ -4,13 +4,9 @@ subtitle: "MATS 12.0 application — Neel Nanda stream"
 author: "Jason Cusati"
 date: "September 2026"
 ---
-
 # Executive summary
-
-Let's start with how I got here. For a while I have been thinking about how the screens that the operators are reading in the matrix relates to AI today or in the near future. I have had this idea that machines would write code, and execute the code in real time to do new things or in order to learn or invent new ways of doing things. And I viewed the operators terminal as this code flying by the AI's internal eyes. As I dug into your interests, and started reading the current research on Chain of Thought, a new idea spawned. 
-
-The data inside of the brain of AI is made up of vectors of numbers. What if we could train humans to read those representations, just as the operators read the screens in the matrix? With that as the North Star, I began to understand how this could be done. 
-
+## Research Question
+J-Lens can show you the vocabulary and the bag of concepts at each step or layer, but is it able to read out the binding information, or is it just predicting what the model is about to answer?  
 <!-- HARD LIMITS, checked by scripts/conformance-check.mjs at --gate SUBMIT:
        * 600 words maximum (MEC-06)
        * 3 pages maximum, 1 page is ideal
@@ -20,43 +16,22 @@ The data inside of the brain of AI is made up of vectors of numbers. What if we 
      LLM are a significant negative signal - I see hundreds of them, and they
      blur together." An agent may build the figures and check the limits. The
      prose is yours. -->
-
 ## What problem am I trying to solve?
-
-<!-- 2-4 sentences. The J-Lens paper names its own limitation: a readout can
-     list the right concepts without showing which entity fills which role —
-     `spider`, `legs`, `eight` does not tell you what has eight of what. State
-     the question and why a reader with mech interp experience should care.
-     Assume zero context on this project; assume full context on the field. -->
-
+How do we know if the thoughts exposed by an interpretability lens are trustworthy enough to reveal what the model actually represents? I built a small task and experiment to measure, audit, and tell the difference between a guess and the actual answer.  
+To answer this question, I built a dataset of prompts. Each prompt contains a pair, such as "Helen lives in Prague, and Mark lives in Oslo". For each prompt I swapped pairs changing who goes with what. I then used J-Lens, partway through the computation for the answer, to see if it could tell which city goes with which person. Both cities appear in every prompt, so a method that only detects concepts scores 50%, which is just chance. The intuition says that only binding-access beats chance.  However, there is a second way to beat chance, and that is by predicting the answer the model is about to give. My experiment is designed to distinguish between the two. 
+## Methodology 
+For my experiment I used Qwen3.5-4B with the released pre-fitted J-Lens. Qwen3.5-4B has 32 layers (0-31), with layer 31 being the final answer. J-Lens can read from any of the layers. Using the development dataset, I probed at various points in the prompt: after the facts, during the question, at the question mark, and right before the answer colon. At each of these point I measured the margin. I then froze the layer with the best margin at each position in the sentence. 
+Using the held-out data, I again probed at the frozen layers at each position to measure the margin. A positive value means the lens prefers the correct answer. The magnitude of that number measures how much it's preferred.  Of the 4 popsitions, the interesting one is just after the model is forced to start answering the question. 
+## Results
+J-Lens scoore 0.781 vs 0.519 for a shuffled-label control end of the fact token. But the next token for the same position is 0.800. On the records where the model is wrong, the lnes redcues to 0.344 and 0.125, well below chance.  
+![Direction score by position on frozen held-out data (n=160): both lenses rise at the token that pins down the answer and track the model's own next-token preference; the shuffled-label and random-transport controls stay at chance.](results/figures/stage3-frac-by-position.png){width=80%}
+![J-Lens accuracy on held-out records, split by whether the model itself was leaning right or wrong. Where the model leaned wrong, every passive readout followed it below chance.](results/figures/stage3-discriminating-set.png){width=80%}
 ## High-level takeaways
-
 <!-- Bullets. The most interesting thing first, not the chronology. Each
      bullet is a claim you can defend, with the number in it. If a takeaway is
      speculative, say so in the bullet — do not bury the hedge below. -->
-
--
--
--
-
-## Experiment 1 — Does J-Lens beat the logit lens at binding?
-
-<!-- One paragraph: what it was, what you found, why it supports the takeaway.
-     Then the figure. -->
-
-![Direction score — correct intermediate outranks its role-swapped twin — by position, frozen held-out split, n=160. Both lenses rise with, and to, the model's own next-token preference (dashed); norm-matched random transport stays at chance.](results/figures/direction-vs-shadow.png)
-
-## Experiment 2 — Do the controls hold?
-
-![Median rank of the correct intermediate over the 248,320-token vocabulary at each readout position, held-out n=160, log scale. J-Lens's localization advantage is largest before the query (373 vs 76,276) and narrows as the model's own preference arrives.](results/figures/localization-by-position.png)
-
-## Experiment 3 — <!-- causal arm, or the stronger passive control that replaced it -->
-
-![Supervised difference-in-means probe (arm 3), fit on dev, applied unchanged to held-out (n=160). At the relation-completing token it reads chance (0.525) — binding is not linearly decodable there — and its later gains match the output shadow.](results/figures/supervised-ceiling.png)
-
-## Biggest limitation
-
-<!-- One short paragraph. Neel: "It's OK if you show self-awareness of where
-     the holes are... If you seem overconfident in shaky results, that is not."
-     Name the real one, not a decorative one. -->
-
+- On the task I tested, J-Lens does NOT read what the model has stored for bindings - it simply guesses what the model is about to say.  
+- J-Lens scoring used by most does not catch this; my method allows you to measure whether the readings are saying more than the model's output, making the use of a Lens more trustworthy.
+- A probe trained with the answer key found nothing to read at the frozen position and layers I scored.
+- J-Lens is better than previous lenses at ranking the right words. J-Lens vs Logit Lens had a ranking of 35 vs 1000 out of 248K words.  
+- Key Limitaion: I tested just one model (Qwen3.5.4B), only tested on fitted lens, and only tested on small task.
