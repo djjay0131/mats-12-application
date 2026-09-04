@@ -262,7 +262,9 @@ prediction-first loop are committed in the repo); the culture of red-teaming
 your own result. Two or three sentences beats a page.
 
 ```ANSWER
+Let's start with how I got here. For a while I have been thinking about how the screens that the operators are reading in the matrix relates to AI today or in the near future. I have had this idea that machines would write code, and execute the code in real time to do new things or in order to learn or invent new ways of doing things. And I viewed the operators terminal as this code flying by the AI's internal eyes. As I dug into your interests, and started reading the current research on Chain of Thought, a new idea spawned. 
 
+The data inside of the brain of AI is made up of vectors of numbers. What if we could train humans to read those representations, just as the operators read the screens in the matrix? With that as my North Star, I began to understand how this could be done. After reading througn the list of recommended reseach problems, I found that attempting to answer some of your J-Lens questions would be both interesting to you, as well as give me the opportunity to learn more about how J-Lens (and others) work, and start my ground work for teaching humans to read the thoughts of AI. 
 ```
 
 ## ★ What is the likelihood you will join Neel Nanda's training program (Sept 28 – Oct 30) if accepted?
