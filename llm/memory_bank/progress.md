@@ -99,3 +99,22 @@ Gate 1, Aug 24.
   explain why that directory holds only ADRs and the delta.
 
 **Counted hours: 0 / 20.**
+
+## 2026-09-03 → 09-05 — Write-up assembled, condensed, and mirrored to a Google Doc
+
+- **Executive summary** written by Jason in the repo (`0bdb1ad` … `ffb4837`),
+  then edited directly in the Google Doc; split into methodology and results
+  per experiment with one figure each; ranks reported for both dev (35 vs
+  ~1,000) and held-out (128 vs 393). Cut to ~800 words / 3 pages on 09-05.
+- **Experiment 2 controls figure** `results/figures/stage3-controls.png`
+  added and registered (CL-02, CL-04).
+- **Main body condensed** 6.5k → 3.6k → 3.2k words (`4116910` and after);
+  unabridged text preserved as `writeup/main-full.md`; run-id citations
+  restored so BLK-36b resolves.
+- **Google Doc** carries the executive summary and body with figures
+  embedded from the public repo; 16 pages after the 09-05 pass.
+- **Repository made public** for submission.
+- **Time ledger** brought current: 19.8 / 20 counted (7.1 verified,
+  12.7 estimated). Executive-summary hours are Jason's to enter.
+
+**Counted hours: 19.8 / 20.**

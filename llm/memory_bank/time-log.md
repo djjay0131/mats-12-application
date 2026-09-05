@@ -55,11 +55,14 @@ hours.** Parallel subagent work is a bonus, not a multiplier on the budget.
 | 2026-08-30 | (Jason) | Independent verification: shadow re-derivation, rank spot-checks, eligibility hand-counts (checks 3-6, commit 2552feb) | ~1.5 | Estimated — reconstructed from the commit, not tracked |
 | 2026-08-30 | 16:20–19:00 | FREEZE, Stage 3 build and run, window-shadow attribution analysis, readout-convention source reading | ~1.5 | Estimated — span contains the 37-min job and sync overhead |
 | 2026-08-30 | 19:00–20:30 | Write-up: sections 3-10 drafted from run records, controls ledger, figures | ~1.4 | Estimated |
+| 2026-09-03 | 10:09–14:33 | Three concept figures with registry rows, section 1.2 binding explainer, exec-summary figure placement, report rebuild | ~1.5 | Estimated — 4.4h span; commits 47eb04b, 96db80e; Jason's exec-summary drafting in the same span is counted under the separate +2 budget |
+| 2026-09-04 | 04:21 | Main body condensed to ~12 pages; full text preserved as main-full.md | ~0.8 | Estimated — single commit fec943e, other session |
+| 2026-09-05 | 00:53–02:24 | Experiment 2 controls figure, main body condensed to 3.6k then 3.2k words, run-id citations restored, time ledger | ~0.8 | Estimated — commits 3b915d4, 4116910; Google Doc assembly and transport uncounted as formatting |
 
-**Running total: 16.7 / 20.0** — 7.1 verified, 9.6 estimated.
+**Running total: 19.8 / 20.0** — 7.1 verified, 12.7 estimated.
 **Verified with artifacts at both ends: 7.1h.** The estimated blocks are
 labelled, never folded in.
-**Exec summary: 0.0 / 2.0**
+**Exec summary: Jason's prose, drafted 2026-09-03 to 09-05 in the Google Doc; hours to be entered by Jason against the 2.0 budget.**
 **Paper reading: 0.0 of the 5.0 allowance** (the 2026-08-22 literature scan
 predates the project lock and is not counted).
 

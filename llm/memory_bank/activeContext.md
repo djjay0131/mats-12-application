@@ -1,97 +1,61 @@
 # Active Context
 
-Last updated: 2026-08-26
+Last updated: 2026-09-05
 
 Current focus, next actions and live risks only. Durable environment facts
 are in `techContext.md`; conventions in `systemPatterns.md`; scope in
-`projectbrief.md`.
+`projectbrief.md`; the counted-hours ledger is `time-log.md`.
 
 ## Where we are
 
-**Project selected and locked: the J-Lens relational-binding experiment**
-(ADR-0005, Accepted; supersedes ADR-0002, resolves ADR-0004).
+**Execution is finished; the write-up is in final assembly.** Stage 3
+(frozen held-out, job 554591) is the primary result: J-Lens reads the
+model's developing output preference at every position where direction is
+readable, and reads no stored-but-unexpressed binding anywhere on this task
+(discriminating set 0.344 / 0.125; supervised probe 0.525 at the
+relation-completing token). The causal arm was unavailable (blocker B2) and
+is reported as a method-evaluation finding, not a gap.
 
-> When two prompts contain the same entities and concepts but assign them
-> different relational roles, does J-Lens identify the correct hidden
-> intermediate — and does changing that representation causally change the
-> model's answer?
+**Clock: 19.8 / 20 counted hours** (7.1 verified, 12.7 estimated;
+`time-log.md`). The executive summary is Jason's prose under the separate
++2 budget; those hours are Jason's to enter. Budget is effectively spent:
+further agent write-up work must be formatting or verification, not new
+drafting.
 
-**Scope: passive-primary.** H1/H2/H4 are the deliverable. The causal arm (H3)
-is contingent on V2 clearing blocker B2 — the reference implementation ships
-no sparse non-negative J-space reconstruction. Do not approximate it with a
-top-token projection; that is the design's own FAIL condition.
+**Deadline: Fri 2026-09-04 23:59 PT** (this note is written on the far side
+of it — the application form submission is Jason's).
 
-**Clock: 0.0 / 20 counted hours.** ADR-0005 §3 rules that everything through
-2026-08-26 is ideation and setup, and that no reset is needed because
-ADR-0002 was never executed against. V1/V2/V3 count one hour each.
+## Where the write-up lives (three copies)
 
-**9 days to the deadline** (Fri 2026-09-04, 23:59 PT).
+- **Google Doc** "MATS 12.0 Application - Jason Cusati - Beyond a Bag of
+  Concepts" (djjay0131@gmail.com Drive) is the copy Neel reads. The
+  executive summary there is Jason's; the body is `writeup/main.md`
+  rendered through pandoc → HTML → clipboard paste (see
+  `claude/writeup-status-2026-09-05.md` in the Cowork project for the
+  procedure).
+- **Repo** `exp/v1-v3-verification`: `writeup/exec-summary.md` mirrors the
+  Doc's executive summary; `writeup/main.md` is the condensed body (~3.2k
+  words); `writeup/main-full.md` keeps the unabridged text. `scripts/
+  build-report.sh` rebuilds `writeup/mats12-report.docx` and runs the
+  WRITEUP gate (11 pass / 2 warn / 0 fail).
+- **agents4research** clone at `~/code/mats-12-application` and the Mac clone
+  at `~/code/mats-12-application` track the same branch head.
 
 ## Immediate next actions
 
-1. **V1 (1 counted hour).** Reproduce an official J-Lens example and
-   **exercise the logit-lens switch** — that is the one part of ADR-0004
-   condition 1 setup did not close.
-2. **V2 (1 counted hour).** Settle B2. Either a faithful J-space
-   reconstruction is reproducible inside the hour, or causal work is declared
-   unavailable and Hours 12–13 reallocate to passive controls. Do not let
-   this run long.
-3. **V3 (1 counted hour).** Binding-identifiability audit on 8–12 development
-   pairs — does the metric test binding, or only whether the model already
-   picked the right intermediate?
+1. Jason: final read of the Google Doc; cut the executive summary from
+   ~800 words toward the 600-word rule if he chooses (3-page limit is met).
+2. Jason: enter executive-summary hours in `time-log.md`.
+3. Submit the form (`llm/application/form-answers-worksheet.md` holds the
+   draft answers; it is Jason's file and uncommitted by design).
+4. After submission: merge `exp/v1-v3-verification` to `main`.
 
 ## Live risks
 
-- ⚠️ **B2** — no sparse non-negative J-space reconstruction in the reference
-  code. Scoped by ADR-0005, settled at V2.
-- ⚠️ **Crowding** — J-Lens was promoted with a bolded "Key resource" link.
-  The relational-binding framing has to carry the differentiation, and it
-  must be obvious in the first paragraph.
-- Schedule — 20 counted hours across 9 days with no slack for a second false
-  start. A V2 that runs long is the most likely way to lose a day.
-
-B3, B4 and queue latency are environment facts, not live decisions:
-`techContext.md` §Known environment issues.
-
-## Where the work runs
-
-Mac → `agents4research` (Ubuntu VM, durable tmux `mats-12-application`) →
-`djjay@falcon1.arc.vt.edu` (ARC login) → `salloc` GPU node. The VM hop exists
-so the session survives the Mac sleeping. `agents4research` is also the Slurm
-account name — do not conflate. Detail: `techContext.md` §Topology.
-
-**Open question for V1:** where the repo working copy lives. Options are a
-clone on the VM with results pulled back, or a clone on ARC with the VM as a
-pure orchestration shell. The second is simpler — jobs and data are already
-on ARC at `/scratch/$USER/mats12` — but confirm before building on it.
-
-## Design deltas from the 600k audit
-
-`llm/research/context-audit-2026-08-26.md`. Eight changes folded into the
-execution prompt; two are Jason's call:
-
-- **Open — promote H3 out of contingency.** ADR-0005 §2 deferred the causal arm
-  because the reference implementation has no J-space reconstruction. The audit
-  shows causal validity does not require intervening *in J-space*: a 1-D
-  activation-space intervention on a difference-in-means direction, patched on
-  the residual stream, is a few lines. That converts a predicted negative from
-  a number into a mechanism, which is what the novelty squeeze (L764) demands.
-  Would need an ADR-0006.
-- **Open — cut two redundant controls** (pair-alternative / relation deletion /
-  question truncation are mutually predictive) to pay for the coverage control,
-  the supervised ceiling and the order-reversed variant.
-
-**Headline:** the 600k file predates J-Lens — zero mentions. It is background,
-not requirements, and the write-up must define J-Lens from first principles.
-
-## Open
-
-- The three ledgers still carry their example rows. Delete them before the
-  first real entry — `conformance-audit` flags any row containing "example".
-- Local git is deadlocked on lock files the bridge cannot unlink; commits are
-  going in server-side via the GitHub API. Jason clears it with
-  `rm -f .git/*.lock && git fetch && git reset --hard origin/main && git gc --prune=now`.
-- `origin/docs/jlens-relational-binding-history` and
-  `origin/exp/jlens-design-verification` are kept deliberately as work history.
-- `latex-agent`, `proposal-agent` and `position-paper-agent` are dead weight
-  for a pandoc/Word project. Kept for now by decision.
+- Counted hours sit at 19.8 / 20; any further drafting risks the budget.
+  Formatting, transport and verification are uncounted by the standing
+  ruling.
+- The Google Doc and `writeup/exec-summary.md` drift whenever Jason edits
+  the Doc directly; re-export before any rebuild that must match it.
+- Estimated ledger rows could each be wrong by roughly an hour; they are
+  labelled, never folded into the verified figure.
