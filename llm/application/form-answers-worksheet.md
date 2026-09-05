@@ -69,7 +69,10 @@ NOTES
   instrument. Not circuit discovery.
 
 ```ANSWER
-
+J-Lens can show you the vocabulary and the bag of concepts at each step or layer, but is it able to read out the binding information, or is it just predicting what the model is about to answer?
+Does J-Lens beat the logit lens at binding?
+Do the controls hold — is the score coming from the lens, or from the pipeline?
+Does the lens still work when the model is wrong?
 ```
 
 ## ★ Why is this question interesting / why did you choose it?
@@ -89,7 +92,7 @@ NOTES
   a KG is typed edges, not a node set.
 
 ```ANSWER
-
+I chose this question because it scored the highest (well, tied) in the matrix I used to determine which problem to try. I had Claude come up with five ideas, and then Claude and I came up with a sixth that was tied to one of my interests. I think I scored them on six dimensions: Fit, Originality, Feasibility, Baseline, Negative Result, and Risk. Fit being mostly: does this fit with what Neel is interested in? Does it fit with what I am interested in? My idea spawned from an idea I have had in my head for some time. The operators in the Matrix read the characters streaming across the screen. While researching MI, it made me think: if the internals of AI are all vectors of numbers, could we teach humans to read it? If we could, that would be just like reading the mind of AI. Obviously, it's not as simple as just teaching it; we need to first learn how to understand it. Another aspect of my research is knowlege graphs, which then led me to learn more about lenses, and your questions about J-Lens and lenses in general and what they really do. It was a weakness that has been mentioned in the J-Lens paper as well. What was interesting is that the lens appears to be answering a different question than everyone assumed.
 ```
 
 ## ★ What conclusions have you reached about this research problem?
@@ -114,7 +117,7 @@ replicated Falcon L40S + TinkerCliffs A100 unless marked dev):
    Concepts recovered, binding not — the limitation, measured.
 
 ```ANSWER
-
+I have concluded that J-Lens does not read what the model has stored, it predicts what the model is about to say. I have also concluded via the probe that there was nothing there to read.  The normal way of scoring a lens can't tell the difference between reading stored data and prediction. We have provied a simple method that works. Both J-Lens and Logit Lens report the answer correctly, however, J-Lens does a better job of ranking the words at each step.  Before the model reads the word that answers the question, the lens reads chance.  
 ```
 
 ## ★ Technical setup: what do you quantify, how defined and measured? Models, datasets, prompts, metrics.
@@ -145,6 +148,7 @@ NOTES — exact identifiers (from the run manifests):
   clusters.
 
 ```ANSWER
+I used Qwen3.5-4B with the released, pre-fit J-Lens (the Neuronpedia checkpoint, fit on wikitext — I did not fit a lens), and the logit lens as the baseline, which is the same code with the Jacobian switched off. The dataset is 50 pairs of short two-hop prompts across six templates: each pair is the same words with the pairings swapped ("Helen lives in Prague. Mark lives in Oslo." vs. Prague and Oslo swapped), so a method that only spots which words are present scores exactly 50%. Ten pairs (40 records) were for development, 40 pairs (160 records) were held out and scored once after everything was frozen. I read the lens at four points in each prompt — after the facts, at the word in the question that pins down the answer, at the question mark, and at the final colon — at the layer that scored best on development data. Three things get measured: direction, the fraction of records where the lens prefers the correct city over the swapped one (the margin is score for the correct city minus score for the swapped one, averaged across the pair so token biases cancel); localization, the median rank of the correct city across the full 248K-token vocabulary; and reading vs. predicting, which uses the model's own next-token preference for the same two cities, saved from the same forward pass, to split records into "model leaning right" and "model leaning wrong" and score the lens on each group separately. Controls were a shuffled answer key, a random matrix in place of the trained one, fact-order reversal on every item, and a probe trained with the answer key to check whether anything was readable there at all.
 
 ```
 
@@ -167,7 +171,7 @@ NOTES
   disjoint under the 6-city pool → control sits ≈0.52).
 
 ```ANSWER
-
+The strongest evidence I found against my hypothesis is that the records the model got wrong, might be the records where the fact itself was scrambled, not just the output.  I chose the records that were wrong because the model was leaning wrong, and a model tends to lean wrong with the internal state is off. So it's possible my pairings were weak or corrupted. However, I did also use the probe, and it found nothing on ALL 160 records, not just the model-wrong records.  
 ```
 
 ## ★ What are the biggest limitations to your results? Could you have addressed them?
@@ -191,7 +195,7 @@ NOTES — real ones, each with the could-we-have line:
   was structural reasoning until then, and the log says so.
 
 ```ANSWER
-
+I only used one model, one lens checkpoint, one task family. A larger pools of cities could have given us better control, but that would have made it less readable. I wanted to do a causal study experiment, however that would have required writing updates to the lens that was not in the budgeted time.  This is something we can do in the next part of the project. It's possible that I did not find any bindings in the storage because I did not lok in the right places.  
 ```
 
 ## ★ How did you use LLMs in this research task and write-up? Which LLMs? How exactly did you make sure they weren't just giving you slop?
@@ -226,7 +230,9 @@ NOTES — the factual inventory; the calibration sentences must be yours:
   the per-part "how surprised would I be" calibration.
 
 ```ANSWER
+I used both Claude and ChatGPT, and I tended to stick with the highest models for this project.  I initially used ChatGPT to discuss the project and my ideas. I then used claude desktop to setup my experiment harness, which is a github repository, with my agentic-goverance and agentic-research skills that I have developed.  From here, I did the initial setup and housekeeping tasks, such as getting access to ARC Servers at my institution.  I used claude to help me setup a framework for the application inside the repo, from a scoring system for ideas, through confirming that I followed all of your instructions and advice as best I could.  Claude even helped me keep track of my time.
 
+As far as validation goes, I hand-counted the data in the first set of experiments.  I ran scripts by hand on the ARC servers to check the data.  Until it became too complicated to do by hand.  In experiments 2 and 3 I did more of an integergation with claude on the experiments and the results, which scanning the outputs and conclusions.  
 ```
 
 ## ★ What, if any, prior experience do you have with mechanistic interpretability?
@@ -236,7 +242,7 @@ plainly — his doc: a good application task is enough, whatever the
 background.
 
 ```ANSWER
-
+None really.  I did try to build my own GPT and then use transformer lens from your older MI resarch from 2025, but I did not get as far as I would have liked.  This could be my opportunity to really get my hands dirty and dig deeply into MI. That said, I always have new ideas, and I alway want to find ways to understand both the physchology of humans and comptuers at the same time.  Why was that done that way? What was that person or machine thinking when they made that choice? How can we ensure future tasks are done with pure provenance?
 ```
 
 ## ★ Other than your research task, what are 1–3 pieces of evidence that you'd be able to do good research in the program? (~100 words)
@@ -262,9 +268,7 @@ prediction-first loop are committed in the repo); the culture of red-teaming
 your own result. Two or three sentences beats a page.
 
 ```ANSWER
-Let's start with how I got here. For a while I have been thinking about how the screens that the operators are reading in the matrix relates to AI today or in the near future. I have had this idea that machines would write code, and execute the code in real time to do new things or in order to learn or invent new ways of doing things. And I viewed the operators terminal as this code flying by the AI's internal eyes. As I dug into your interests, and started reading the current research on Chain of Thought, a new idea spawned. 
-
-The data inside of the brain of AI is made up of vectors of numbers. What if we could train humans to read those representations, just as the operators read the screens in the matrix? With that as my North Star, I began to understand how this could be done. After reading througn the list of recommended reseach problems, I found that attempting to answer some of your J-Lens questions would be both interesting to you, as well as give me the opportunity to learn more about how J-Lens (and others) work, and start my ground work for teaching humans to read the thoughts of AI. 
+I have been interested in your work since someone did a presentation on MI at a conference in SC last year.  I just have not set aside the time to dig in.  I really love the way you talk about things, simplify things, and I believe if I am going to learn to make a difference in AI Saftey, that you are the person to learn from.  I have been targetting Anthropic when I graduate, but I would also love to work with you at google!  
 ```
 
 ## ★ What is the likelihood you will join Neel Nanda's training program (Sept 28 – Oct 30) if accepted?
@@ -273,7 +277,7 @@ NOTES · Free text. One plain sentence; note the exploration phase is
 part-time-compatible if that's load-bearing for you.
 
 ```ANSWER
-
+100%
 ```
 
 ## (Optional) Anything else important about your application project not covered above?
@@ -284,5 +288,5 @@ verified/estimated split); the wrong pre-registered prediction and where
 it's recorded. Skip it if the answers above already carried these.
 
 ```ANSWER
-
+Everything I did for this application is in the repo history. I did use claude heavily, but I did not just sit back and prompt. The repo is shared above you can look at both the code, experiments, and the rest of the project harness. 
 ```

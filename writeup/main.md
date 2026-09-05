@@ -191,9 +191,9 @@ Clock ruling (ADR-0005): wall-clock time, not summed agent-hours; setup and queu
 |---|---|
 | Experiments, code, analysis (incl. Jason's independent verification) | 15.3 |
 | Project-specific reading | 0.0 (literature scan predates the project lock; uncounted) |
-| Write-up drafting (agent: sections, figures, condensation) | 4.5 |
-| **Total counted (limit 20)** | **19.8** — 7.1 verified, 12.7 estimated |
-| Executive summary (separate +2 budget) | Jason's prose, drafted 2026-09-03 to 09-05; hours entered by Jason |
+| Main write-up (Jason-stated wall-clock; agent drafting sessions ran inside it) | 4.0 |
+| **Total counted (limit 20)** | **19.3** — 7.1 verified, 8.2 estimated, 4.0 stated |
+| Executive summary (separate +2 budget) | 2.0 of 2.0 — Jason's prose, Jason-stated |
 
 ---
 

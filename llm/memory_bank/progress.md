@@ -114,7 +114,8 @@ Gate 1, Aug 24.
 - **Google Doc** carries the executive summary and body with figures
   embedded from the public repo; 16 pages after the 09-05 pass.
 - **Repository made public** for submission.
-- **Time ledger** brought current: 19.8 / 20 counted (7.1 verified,
-  12.7 estimated). Executive-summary hours are Jason's to enter.
+- **Time ledger** brought current: 19.3 / 20 counted (7.1 verified,
+  8.2 estimated, 4.0 Jason-stated for the write-up). Executive summary
+  2.0 / 2.0, Jason-stated.
 
-**Counted hours: 19.8 / 20.**
+**Counted hours: 19.3 / 20.**

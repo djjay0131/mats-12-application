@@ -16,9 +16,8 @@ readable, and reads no stored-but-unexpressed binding anywhere on this task
 relation-completing token). The causal arm was unavailable (blocker B2) and
 is reported as a method-evaluation finding, not a gap.
 
-**Clock: 19.8 / 20 counted hours** (7.1 verified, 12.7 estimated;
-`time-log.md`). The executive summary is Jason's prose under the separate
-+2 budget; those hours are Jason's to enter. Budget is effectively spent:
+**Clock: 19.3 / 20 counted hours** (7.1 verified, 8.2 estimated, 4.0
+Jason-stated; `time-log.md`). Executive summary: 2.0 / 2.0, Jason-stated. Budget is effectively spent:
 further agent write-up work must be formatting or verification, not new
 drafting.
 
@@ -45,14 +44,13 @@ of it — the application form submission is Jason's).
 
 1. Jason: final read of the Google Doc; cut the executive summary from
    ~800 words toward the 600-word rule if he chooses (3-page limit is met).
-2. Jason: enter executive-summary hours in `time-log.md`.
 3. Submit the form (`llm/application/form-answers-worksheet.md` holds the
    draft answers; it is Jason's file and uncommitted by design).
 4. After submission: merge `exp/v1-v3-verification` to `main`.
 
 ## Live risks
 
-- Counted hours sit at 19.8 / 20; any further drafting risks the budget.
+- Counted hours sit at 19.3 / 20; any further drafting risks the budget.
   Formatting, transport and verification are uncounted by the standing
   ruling.
 - The Google Doc and `writeup/exec-summary.md` drift whenever Jason edits
