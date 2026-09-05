@@ -40,7 +40,7 @@ ax.set_title("Experiment 2: both controls sit at chance; the trained matrix does
 ax.legend(fontsize=8, loc="upper left", frameon=False)
 fig.tight_layout()
 p = save_figure(fig, "stage3-controls",
-    "Experiment 2 controls on frozen held-out data (n=160). Shuffling the answer key drops J-Lens to chance; replacing the trained matrix with a random one drops both the direction score to chance and the median rank of the correct city from tens to over a hundred thousand.",
+    "Experiment 2 controls on frozen held-out data (n=160). Shuffling the answer key drops J-Lens to chance; replacing the trained matrix with a random one drops both the direction score to chance and the median rank of the correct city from about a hundred to over a hundred thousand.",
     claim="CL-02, CL-04", n="160", seed="20260827",
     notes="job 554591; label-permutation control and norm-matched random transport")
 print("wrote", p)

@@ -59,7 +59,7 @@ At the relation token J-Lens scored 0.781 and the logit lens 0.688, both against
 
 With the shuffled labels, the results were 0.52 at the relation token, 0.556 at the question mark, and 0.35 on the dev set. This rules out a scoring step that scores high without the real answer key. With the random matrix, the resulting direction was 0.475-0.537 everywhere, and the correct city was a median rank of 130K-206K out of 248,320, versus 35 for the real matrix. So the trained matrix is what does the work.
 
-![Figure 2. Experiment 2 controls on frozen held-out data (n=160): shuffling the answer key drops J-Lens to chance, and a random matrix in place of the trained one drops both the direction score to chance and the median rank of the correct city from tens to over a hundred thousand.](results/figures/stage3-controls.png){width=80%}
+![Figure 2. Experiment 2 controls on frozen held-out data (n=160): shuffling the answer key drops J-Lens to chance, and a random matrix in place of the trained one drops both the direction score to chance and the median rank of the correct city from about a hundred to over a hundred thousand.](results/figures/stage3-controls.png){width=80%}
 
 ### Experiment 3 — What replaced the causal test
 
