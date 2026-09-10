@@ -124,6 +124,6 @@ Gate 1, Aug 24.
   delta rather than relocated. `docs/README.md` is now the data-plane index.
 - The two-plane routing rule is installed in `CLAUDE.md` and `AGENTS.md`.
 - Verification: `governance-checks.mjs --layout` — 4 of 4 passed, `--layout`
-  a real PASS rather than a SKIP. PR #PRNUM.
+  a real PASS rather than a SKIP. PR #7.
 
 **Counted hours: unchanged — governance housekeeping, not research.**

@@ -99,7 +99,7 @@ not requirements, and the write-up must define J-Lens from first principles.
 ## Governance layout — migrated 2026-09-10
 
 This repo is on the **agentic-governance v0.5 two-plane layout** (PR
-#PRNUM). `llm/` is the control plane; `docs/` is the data plane and holds no
+#7). `llm/` is the control plane; `docs/` is the data plane and holds no
 source of truth. What changes for anyone working here:
 
 - The delta is at `llm/governance/governance-delta.md`, the ADRs at
