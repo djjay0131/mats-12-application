@@ -11,11 +11,11 @@ Mission: execute the bounded J-Lens design-verification sprint defined in llm/co
 
 Read, in order:
 1. CLAUDE.md
-2. llm/plan/PLAN.md
+2. llm/plans/PLAN.md
 3. llm/memory_bank/activeContext.md
-4. docs/adr/0002-project-selection.md
-5. docs/adr/0004-proposed-jlens-relational-binding-candidate.md
-6. llm/plan/jlens-relational-binding-experiment-design.md
+4. llm/governance/adr/0002-project-selection.md
+5. llm/governance/adr/0004-proposed-jlens-relational-binding-candidate.md
+6. llm/plans/jlens-relational-binding-experiment-design.md
 7. llm/research/jlens-project-research-and-positioning.md
 8. llm/construction/jlens-design-verification-sprint.md
 
@@ -32,7 +32,7 @@ Execution:
 2. Execute V1. Stop on FAIL and write the decision record.
 3. Execute V2 only after V1 PASS. Stop on FAIL.
 4. Execute V3 only after V2 PASS.
-5. Produce llm/plan/jlens-design-verification-decision.md with GO, REVISE, or NO-GO and evidence paths.
+5. Produce llm/plans/jlens-design-verification-decision.md with GO, REVISE, or NO-GO and evidence paths.
 
 At every hour boundary, answer:
 - What artifact now exists?
@@ -134,7 +134,7 @@ Tasks:
 Required outputs:
 - experiments/design-verification/dev-binding-pairs.jsonl
 - results/design-verification/v3-binding-identifiability.md
-- llm/plan/jlens-design-verification-decision.md
+- llm/plans/jlens-design-verification-decision.md
 
 The decision record must include:
 - verdict;

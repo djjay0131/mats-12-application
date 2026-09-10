@@ -19,7 +19,7 @@ has failed at the only thing the role exists to guarantee.
 
 This project follows agentic-governance (canonical docs in the
 `agentic-governance` repo, normally at `~/code/agentic-governance`; project
-specifics in this repo's `docs/governance-delta.md`). The governance levels
+specifics in this repo's `llm/governance/governance-delta.md`). The governance levels
 (L0–L3), the L0 definition, the semantic test, and the conservative default
 are defined in canonical `docs/governance-levels.md`; the fast-track
 eligibility conditions, allowlist, Administrative Change Certification
@@ -29,7 +29,7 @@ win.
 
 ## Activation Gate (read this first)
 
-**Merging is forbidden unless this repo's `docs/governance-delta.md` shows
+**Merging is forbidden unless this repo's `llm/governance/governance-delta.md` shows
 `Steward Activation Status: ACTIVE`, backed by the ADR and human-approved
 activation PR it cites.** Where the status is INACTIVE or absent, you may
 still classify, certify, open L0 PRs, and request audits — but the human

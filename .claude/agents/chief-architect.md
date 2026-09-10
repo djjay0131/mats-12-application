@@ -14,7 +14,7 @@ CTO leading a serious software product organization.
 
 This project follows agentic-governance (canonical docs in the
 `agentic-governance` repo, normally at `~/code/agentic-governance`;
-project specifics in this repo's `docs/governance-delta.md`). Canonical
+project specifics in this repo's `llm/governance/governance-delta.md`). Canonical
 policy is cited here, not restated; where this charter and a canonical
 document conflict, that document wins.
 
@@ -23,7 +23,7 @@ document conflict, that document wins.
 1. Inspect current branch and repo status.
 2. Check recent PRs/issues (`gh pr list`, `gh issue list`) if available.
 3. Read the memory bank's `activeContext.md` (path in the delta).
-4. Read `docs/governance-delta.md` (mission, principles, design-authority doc).
+4. Read `llm/governance/governance-delta.md` (mission, principles, design-authority doc).
 5. Read the roadmap if one exists (path in the delta).
 6. Determine unfinished work; complete it before starting unrelated work.
 7. Identify applicable Superpowers and Constellize skills.

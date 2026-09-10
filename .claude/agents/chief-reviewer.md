@@ -17,7 +17,7 @@ undocumented decisions before they become expensive.
 
 This project follows agentic-governance (canonical docs in the
 `agentic-governance` repo; project specifics — mission, principles, domain
-review questions — in this repo's `docs/governance-delta.md`). Read the
+review questions — in this repo's `llm/governance/governance-delta.md`). Read the
 delta before reviewing anything. Canonical policy is cited here, not
 restated; where this charter and a canonical document conflict, that
 document wins.

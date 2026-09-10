@@ -202,8 +202,8 @@ with C1** (same harness, same rollouts).
 ## C6 — Does J-Lens recover relational binding, or only a bag of concepts?
 
 **Origin.** Jason's own idea, developed 2026-08-24. Full specification in
-`docs/adr/0004-proposed-jlens-relational-binding-candidate.md`,
-`llm/plan/jlens-relational-binding-experiment-design.md`, and
+`llm/governance/adr/0004-proposed-jlens-relational-binding-candidate.md`,
+`llm/plans/jlens-relational-binding-experiment-design.md`, and
 `llm/research/jlens-project-research-and-positioning.md`.
 
 **Question.** When two prompts contain the same entities and concepts but

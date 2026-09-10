@@ -6,7 +6,7 @@ Deciders: Jason
 
 ## Context
 
-Five candidates are scored in `llm/plan/project-candidates.md` against
+Five candidates are scored in `llm/plans/project-candidates.md` against
 fit to Neel's stated interests, originality, 20-hour feasibility, baseline
 availability, and whether a null result is still interesting.
 
@@ -65,4 +65,4 @@ fallback: its checkpoints are verified public and it requires no lens.
 
 The C2 gating fact (Olmo 3 Think stage checkpoints public — verified GO,
 plus 98 intermediate checkpoints as git branches) stands and is preserved in
-`llm/plan/project-candidates.md` should the fallback ever be needed.
+`llm/plans/project-candidates.md` should the fallback ever be needed.

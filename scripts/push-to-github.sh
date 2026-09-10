@@ -7,7 +7,7 @@
 #
 # ADR-0001 accepts convention-only enforcement for this repo, so this script
 # deliberately does NOT apply branch protection. It probes and reports, so the
-# real answer can be recorded in docs/governance-delta.md instead of assumed.
+# real answer can be recorded in llm/governance/governance-delta.md instead of assumed.
 
 set -euo pipefail
 OWNER=djjay0131
@@ -57,6 +57,6 @@ esac
 
 echo
 echo "Now update the 'Platform Enforcement Reality' section of"
-echo "docs/governance-delta.md with what you just saw — the point of that"
+echo "llm/governance/governance-delta.md with what you just saw — the point of that"
 echo "section is that it says what is true, not what we hoped."
 echo "Then: node scripts/conformance-check.mjs --gate SELECT"
