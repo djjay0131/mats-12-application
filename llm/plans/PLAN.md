@@ -17,9 +17,9 @@ Extension available to Sept 11: <https://forms.gle/gpceDYrxTUaZBoHA8>
 > intermediate — and does changing that representation causally change the
 > model's answer?
 
-Design of record: `llm/plan/jlens-relational-binding-experiment-design.md`.
-Selection and scope: `docs/adr/0005-accept-jlens-relational-binding.md`.
-Why this over the alternatives: `llm/plan/project-candidates.md` (C6, 24/25).
+Design of record: `llm/plans/jlens-relational-binding-experiment-design.md`.
+Selection and scope: `llm/governance/adr/0005-accept-jlens-relational-binding.md`.
+Why this over the alternatives: `llm/plans/project-candidates.md` (C6, 24/25).
 
 **Scope is passive-primary.** H1, H2 and H4 are the deliverable. The causal
 arm (H3) is contingent on V2 clearing blocker B2 — the reference

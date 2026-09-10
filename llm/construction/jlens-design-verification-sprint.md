@@ -221,7 +221,7 @@ All are true:
 
 - `results/design-verification/v3-binding-identifiability.md`
 - `experiments/design-verification/dev-binding-pairs.jsonl`
-- `llm/plan/jlens-design-verification-decision.md`
+- `llm/plans/jlens-design-verification-decision.md`
 
 ## Final decision record
 

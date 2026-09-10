@@ -3,7 +3,7 @@
 This repo follows
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance)
 **v0.2**. Policy lives there; project facts live in
-[`docs/governance-delta.md`](docs/governance-delta.md). Nothing here
+[`llm/governance/governance-delta.md`](llm/governance/governance-delta.md). Nothing here
 restates policy.
 
 ## Flow
@@ -27,7 +27,7 @@ Conservative default: if unsure, escalate.
 Run the governance checks:
 
 ```
-node ~/code/agentic-governance/governance/scripts/governance-checks.mjs
+node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
 ```
 
 ## Domain review questions

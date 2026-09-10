@@ -36,7 +36,7 @@ const P = {
   controls: 'llm/application/controls-ledger.md',
   time:     'llm/memory_bank/time-log.md',
   canon:    'results/canonical.json',
-  adr2:     'docs/adr/0005-accept-jlens-relational-binding.md',
+  adr2:     'llm/governance/adr/0005-accept-jlens-relational-binding.md',
 };
 
 const results = [];

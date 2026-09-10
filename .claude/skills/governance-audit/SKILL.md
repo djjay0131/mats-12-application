@@ -13,15 +13,18 @@ This skill reports; it does not fix unless the user asks afterward.
 
 ## Checks
 
-1. **Adoption + version.** `docs/governance-delta.md` exists, has all
+1. **Adoption + version.** `llm/governance/governance-delta.md` exists, has all
    template sections filled (no placeholder brackets), and pins a
    governance version. Compare the pinned version against the canonical
    `VERSION`; flag drift and summarize what changed (CHANGELOG entries in
    between). For deltas pinned to v0.2+, verify the v0.2 fields exist:
    memory-bank path, roadmap path, governance check command, L0 Path
-   Allowlist, Platform Enforcement Reality, Steward Activation Status.
+   Allowlist, Platform Enforcement Reality, Steward Activation Status. For
+   deltas pinned to v0.3+, also verify the `## Repository Layout` block
+   binds every path this repo uses — the two-plane rule is unenforceable
+   until it does.
 
-2. **ADR health.** `docs/adr/` exists with template and README index.
+2. **ADR health.** `llm/governance/adr/` exists with template and README index.
    Every ADR has Status/Context/Decision/Alternatives/Consequences.
    Superseded ADRs are marked both directions. Cross-check: do recent
    design docs, specs, or memory-bank entries record durable decisions

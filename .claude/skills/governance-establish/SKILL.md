@@ -25,21 +25,21 @@ the ADR if the user asks, but never flip the status yourself.
 
 1. **Preflight.** Confirm the target is a git repo (offer `git init` if
    not; default branch `main`). Read the canonical repo's `VERSION`. Check
-   nothing conflicts (existing `docs/governance-delta.md` means this is an
+   nothing conflicts (existing `llm/governance/governance-delta.md` means this is an
    upgrade — diff against the current template instead of overwriting, and
    add any template sections the delta is missing, including the v0.2
    fields below).
 
 2. **Governance delta.** Copy
-   `~/code/agentic-governance/docs/governance-delta-template.md` to
-   `docs/governance-delta.md`. Fill it in by reading the repo (README,
+   `~/code/agentic-governance/llm/governance/governance-delta-template.md` to
+   `llm/governance/governance-delta.md`. Fill it in by reading the repo (README,
    memory bank, design specs) and interviewing the user for anything not
    derivable:
    - mission, design-authority document path, project principles, domain
      review questions, milestone labels, related repos;
    - **memory-bank path** and **roadmap path**;
    - **governance check command** (default:
-     `node ~/code/agentic-governance/governance/scripts/governance-checks.mjs`;
+     `node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs`;
      "none" if the user declines — note that this blocks any future fast
      track);
    - **L0 Path Allowlist** — instantiate the fenced `l0-allowlist` block
@@ -54,9 +54,9 @@ the ADR if the user asks, but never flip the status yourself.
    - **Steward Activation Status: INACTIVE** — always.
    Pin the governance version (`Governance: agentic-governance vX.Y`).
 
-3. **ADR system.** Create `docs/adr/`, copy
-   `docs/templates/adr-template.md` from the canonical repo as
-   `docs/adr/0000-template.md`, and write `docs/adr/README.md` (index +
+3. **ADR system.** Create `llm/governance/adr/`, copy
+   `llm/governance/templates/adr-template.md` from the canonical repo as
+   `llm/governance/adr/0000-template.md`, and write `llm/governance/adr/README.md` (index +
    lifecycle summary). If the repo has existing durable decisions living
    only in specs or memory banks, list them as ADR back-fill candidates and
    offer to draft them.

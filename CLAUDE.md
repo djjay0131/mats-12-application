@@ -5,7 +5,7 @@
 **J-Lens relational binding** — ADR-0005. When two prompts contain the same
 entities but swap their relational roles, does J-Lens identify the correct
 hidden intermediate? Design of record:
-`llm/plan/jlens-relational-binding-experiment-design.md`.
+`llm/plans/jlens-relational-binding-experiment-design.md`.
 
 **Scope is passive-primary.** H1/H2/H4 are the deliverable. The causal arm
 (H3) is contingent on V2 clearing blocker B2 — the reference implementation
@@ -19,7 +19,7 @@ with a top-token projection; that is the design's own FAIL condition.
 
 A sprint to produce a MATS 12.0 application for Neel Nanda's mech interp
 stream. Hard deadline **2026-09-04 23:59 PT**. Read
-`llm/plan/PLAN.md` first, then `llm/memory_bank/activeContext.md`.
+`llm/plans/PLAN.md` first, then `llm/memory_bank/activeContext.md`.
 
 ## Before anything ships
 
@@ -85,9 +85,9 @@ fresh clone has it. Load it before doing research work.
 ⚠️ It is Neel's compilation, kept here because this repository is **private**.
 Do not make this repository public without removing it first.
 
-Also load, in this order: `llm/plan/PLAN.md`,
-`docs/adr/0005-accept-jlens-relational-binding.md`,
-`llm/plan/jlens-relational-binding-experiment-design.md`,
+Also load, in this order: `llm/plans/PLAN.md`,
+`llm/governance/adr/0005-accept-jlens-relational-binding.md`,
+`llm/plans/jlens-relational-binding-experiment-design.md`,
 `results/design-verification/environment-manifest.md`.
 
 ## Persistent kernel discipline (ADV-17 / ADV-18)
@@ -125,9 +125,11 @@ the VM's session. Nothing long-lived runs on the Mac side.
 
 ## Layout
 
-PM and research material under `llm/`; execution and outputs at the root.
-`docs/` holds only ADRs and the governance delta. See
-`docs/governance-delta.md` §Repository Layout.
+`llm/` is the control plane — PM, research, the governance delta and the
+ADRs. Execution and its outputs are at the root. `docs/` is the data plane
+and holds no source of truth. Declared paths:
+`llm/governance/governance-delta.md` §Repository Layout; the routing rule is
+at the end of this file.
 
 ## Models
 
@@ -146,7 +148,7 @@ which width they rank over.
 
 The Olmo 3 post-training lineage belonged to candidate C2, superseded by
 ADR-0005. Its verified details are preserved in
-`llm/plan/project-candidates.md` should the fallback ever be needed.
+`llm/plans/project-candidates.md` should the fallback ever be needed.
 
 ## Tooling
 
@@ -169,7 +171,7 @@ Skills: `constellize:*` for memory and feature workflows,
 
 ## Governance
 
-`docs/governance-delta.md`, pinned to agentic-governance v0.2. Issue →
+`llm/governance/governance-delta.md`, pinned to agentic-governance v0.2. Issue →
 branch → PR with a governance-level declaration → review → merge. Steward
 merge authority INACTIVE.
 

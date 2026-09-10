@@ -18,7 +18,7 @@ ADR-0002, and set four conditions to be met first. Three are now resolved;
 the fourth is decided here.
 
 Both candidates score **24/25** on the selection rubric
-(`llm/plan/project-candidates.md`). The rubric does not separate them.
+(`llm/plans/project-candidates.md`). The rubric does not separate them.
 
 Two asymmetries do.
 
@@ -48,7 +48,7 @@ every cross-stage number is confounded. C6 degrades; C2 breaks.
 > intermediate — and does changing that representation causally change the
 > model's answer?
 
-Design of record: `llm/plan/jlens-relational-binding-experiment-design.md`.
+Design of record: `llm/plans/jlens-relational-binding-experiment-design.md`.
 
 **2. Scope: passive-primary. The causal arm is a contingent extension, not a
 deliverable.**
@@ -151,9 +151,9 @@ nodes draining; `a30_normal_q` is an unrestricted fallback.
 
 ## Related artifacts
 
-- `docs/adr/0004-proposed-jlens-relational-binding-candidate.md`
-- `llm/plan/project-candidates.md` (C6 scoring and the tie-break)
-- `llm/plan/jlens-relational-binding-experiment-design.md`
+- `llm/governance/adr/0004-proposed-jlens-relational-binding-candidate.md`
+- `llm/plans/project-candidates.md` (C6 scoring and the tie-break)
+- `llm/plans/jlens-relational-binding-experiment-design.md`
 - `llm/research/jlens-project-research-and-positioning.md`
 - `results/design-verification/environment-manifest.md`
 - `llm/construction/jlens-design-verification-sprint.md`

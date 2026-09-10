@@ -11,35 +11,37 @@ against the 20; the executive summary gets a separate +2 hours.
 
 | Read | For |
 |---|---|
-| [`docs/adr/0005-accept-jlens-relational-binding.md`](docs/adr/0005-accept-jlens-relational-binding.md) | **The project.** Accepts the J-Lens relational-binding experiment, sets passive-primary scope, and rules on the clock |
-| [`llm/plan/jlens-relational-binding-experiment-design.md`](llm/plan/jlens-relational-binding-experiment-design.md) | The design of record: hypotheses, metrics, eight controls, hour-by-hour plan |
-| [`llm/plan/PLAN.md`](llm/plan/PLAN.md) | The phased plan, day-by-day timeline, time-budget rules, and gates |
-| [`llm/plan/project-candidates.md`](llm/plan/project-candidates.md) | Five scored candidate projects and the recommendation |
+| [`llm/governance/adr/0005-accept-jlens-relational-binding.md`](llm/governance/adr/0005-accept-jlens-relational-binding.md) | **The project.** Accepts the J-Lens relational-binding experiment, sets passive-primary scope, and rules on the clock |
+| [`llm/plans/jlens-relational-binding-experiment-design.md`](llm/plans/jlens-relational-binding-experiment-design.md) | The design of record: hypotheses, metrics, eight controls, hour-by-hour plan |
+| [`llm/plans/PLAN.md`](llm/plans/PLAN.md) | The phased plan, day-by-day timeline, time-budget rules, and gates |
+| [`llm/plans/project-candidates.md`](llm/plans/project-candidates.md) | Five scored candidate projects and the recommendation |
 | [`llm/research/literature-scan-2026-08-22.md`](llm/research/literature-scan-2026-08-22.md) | What's live and contested in CoT faithfulness and model biology, current open-weight reasoning models, tooling status |
 | [`llm/application/conformance-register.md`](llm/application/conformance-register.md) | **All 121 requirements extracted from Neel's doc** — 38 blockers, 33 scored, 21 mechanics, 29 advice — each with its source quote, verification method, and gate |
 | [`llm/application/selection-rubric.md`](llm/application/selection-rubric.md) | The 15 judgement criteria a script can't check. 28+/30 to submit |
 | [`llm/application/mats12-application-instructions-distilled.md`](llm/application/mats12-application-instructions-distilled.md) | Neel's full instructions, structured — evaluation criteria, anti-patterns, the complete suggested-problem list |
 | [`llm/application/mats12-instructions-raw.txt`](llm/application/mats12-instructions-raw.txt) | The source doc verbatim (125k chars) |
-| [`docs/governance-delta.md`](docs/governance-delta.md) | How this repo is governed |
+| [`llm/governance/governance-delta.md`](llm/governance/governance-delta.md) | How this repo is governed |
 
 ## Layout
 
-All project-management and research material lives under `llm/`; `docs/`
-carries only what governance fixes in place. Rule of thumb: if it describes
+Two planes. `llm/` is the **control plane**: everything that governs,
+plans, remembers or reviews this repo — the governance delta and the ADRs
+included. `docs/` is the **data plane** and holds no source of truth. The
+work itself and its outputs stay at the root. Rule of thumb: if it describes
 **what we will do or why**, it is under `llm/`. If it **is the work or its
 output**, it is at the root.
 
 ```
-docs/
-  adr/           decision records (path fixed by agentic-governance)
-  governance-delta.md
 llm/
+  governance/    the governance delta, and the ADRs in adr/
   memory_bank/   active context, progress, the 20-hour ledger, history
-  plan/          PLAN.md, candidate scoring, the experiment design
+  plans/         PLAN.md, candidate scoring, the experiment design
   research/      literature scan, positioning notes
   application/   Neel's instructions, conformance register, rubric, ledgers
   construction/  verification sprints, prompts, process overlays
   features/      BACKLOG.md
+docs/            the data plane — a derived index only
+context/         Neel's compiled 600k-token mech-interp context file
 experiments/     Slurm batch scripts and run definitions
 results/         raw outputs, manifests, figures
 writeup/         the report and executive summary
@@ -47,10 +49,14 @@ src/, notebooks/ experiment code
 scripts/         conformance-check.mjs and repo tooling
 ```
 
+Full bindings, including the slots this repo deliberately does not declare:
+[`llm/governance/governance-delta.md`](llm/governance/governance-delta.md)
+§Repository Layout.
+
 ## Governance
 
 Adopts [`agentic-governance`](https://github.com/djjay0131/agentic-governance)
-**v0.2**. Local facts live in [`docs/governance-delta.md`](docs/governance-delta.md).
+**v0.2**. Local facts live in [`llm/governance/governance-delta.md`](llm/governance/governance-delta.md).
 Steward merge authority is INACTIVE. Given the 13-day clock, enforcement
 here is convention-only by deliberate choice — recorded in the delta rather
 than pretended away.

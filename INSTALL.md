@@ -11,7 +11,7 @@ tar xzf ~/Downloads/mats-12-application-docs.tar.gz --strip-components=0
 Then verify and commit:
 
 ```bash
-node ~/code/agentic-governance/governance/scripts/governance-checks.mjs
+node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
 git add -A
 git commit -m "Establish repo: governance v0.2, paper agents, plan, literature scan"
 ```
@@ -34,7 +34,7 @@ gh label create agent-unverified --color E99695 --description "Agent output no h
 ```
 
 Then record what branch protection actually enforces in
-`docs/governance-delta.md` — run
+`llm/governance/governance-delta.md` — run
 `gh api repos/djjay0131/mats-12-application/branches/main/protection` and
 write down the real answer (a 403 on a private free-plan repo means
 unavailable). ADR-0001 accepts convention-only enforcement for this repo,

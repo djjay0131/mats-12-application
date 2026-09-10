@@ -6,20 +6,21 @@ How this repository is organised and the conventions that hold it together.
 
 ## Repository layout
 
-Planning and research material lives under `llm/`; `docs/` holds only what
-agentic-governance fixes in place. Rule of thumb: if it describes **what we
-will do or why**, it is under `llm/`. If it **is the work or its output**, it
-is at the root. Full table: `docs/governance-delta.md` §Repository Layout.
+`llm/` is the control plane: everything that governs, plans, remembers or
+reviews this repo, the governance delta and the ADRs included. `docs/` is the
+data plane and holds no source of truth. Rule of thumb: if it describes
+**what we will do or why**, it is under `llm/`. If it **is the work or its
+output**, it is at the root. Full table:
+`llm/governance/governance-delta.md` §Repository Layout.
 
 ```
-docs/adr/          decision records (path fixed by governance)
-docs/governance-delta.md
-llm/memory_bank/   living state — this directory
-llm/plan/          PLAN.md, candidate scoring, the experiment design
-llm/research/      literature scan, positioning, discussion history
-llm/application/   Neel's instructions, conformance register, rubric, ledgers
-llm/construction/  verification sprints, prompts, process overlays
-llm/features/      BACKLOG.md
+llm/governance/     the governance delta and the ADRs (adr/)
+llm/memory_bank/    living state — this directory
+llm/plans/          PLAN.md, candidate scoring, the experiment design
+llm/research/       literature scan, positioning, discussion history
+llm/application/    Neel's instructions, conformance register, rubric, ledgers
+llm/construction/   verification sprints, prompts, process overlays
+llm/features/       BACKLOG.md
 experiments/       Slurm batch scripts
 results/           raw outputs, manifests, figures
 writeup/           report source and build output
@@ -85,7 +86,7 @@ arrive.
 
 ## Governance flow
 
-Adopts `agentic-governance` v0.2; local facts in `docs/governance-delta.md`.
+Adopts `agentic-governance` v0.2; local facts in `llm/governance/governance-delta.md`.
 Issue → branch → PR with a declared governance level → review → merge. No
 direct commits to `main`. Steward merge authority is **INACTIVE**, and branch
 protection is unavailable on this plan (verified 403), so enforcement is
