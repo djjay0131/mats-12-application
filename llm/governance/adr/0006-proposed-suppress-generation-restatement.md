@@ -1,6 +1,10 @@
 # ADR-0006: Suppress the model's own restatement of the intermediate before the held-out freeze
 
-Status: Deferred — not actioned; kept as future work or pivot (Jason, 2026-08-29)
+Status: Proposed — deferred 2026-08-29, not actioned; kept as future work
+or pivot (Jason, 2026-08-29). "Deferred" is not a status in the canonical
+lifecycle (Proposed -> Accepted -> Superseded | Deprecated); this decision was
+never accepted and is not withdrawn, so it stays Proposed and parked. The
+resolution below is the record of the ruling not to action it.
 
 Resolution: the post-query sweep ran and rule 1 of its pre-registered decision
 rule fired — J-Lens resolves direction at q05/q06, inside the window, on both

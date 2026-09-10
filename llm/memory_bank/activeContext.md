@@ -1,6 +1,6 @@
 # Active Context
 
-Last updated: 2026-08-26
+Last updated: 2026-09-10
 
 Current focus, next actions and live risks only. Durable environment facts
 are in `techContext.md`; conventions in `systemPatterns.md`; scope in
@@ -95,3 +95,27 @@ not requirements, and the write-up must define J-Lens from first principles.
   `origin/exp/jlens-design-verification` are kept deliberately as work history.
 - `latex-agent`, `proposal-agent` and `position-paper-agent` are dead weight
   for a pandoc/Word project. Kept for now by decision.
+
+## Governance layout — migrated 2026-09-10
+
+This repo is on the **agentic-governance v0.5 two-plane layout** (PR
+#PRNUM). `llm/` is the control plane; `docs/` is the data plane and holds no
+source of truth. What changes for anyone working here:
+
+- The delta is at `llm/governance/governance-delta.md`, the ADRs at
+  `llm/governance/adr/`. Not under `docs/`.
+- The plans directory is `llm/plans/` — plural. `llm/plan/` is gone.
+- Declared paths are in the delta's `## Repository Layout`; the routing rule
+  agents must follow is at the end of `CLAUDE.md`. Do not invent a location
+  for a new document — answer Q1, then Q2.
+- The check command now requires `--layout`:
+  `node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout`.
+- `experiments/`, `results/`, `writeup/`, `src/`, `notebooks/`, `scripts/`
+  and `context/` did not move and are not going to. They are declared data
+  plane.
+- **Open:** this repo has no CI workflow, so nothing runs the check command
+  on push or PR. The layout rule holds by operator discipline only. Recorded
+  rather than pretended away.
+- **Open:** ADR-0001 records the v0.2 adoption and stays accurate as
+  history. The v0.5 upgrade has no ADR of its own; a back-fill is a
+  reasonable candidate if this repo outlives the application.

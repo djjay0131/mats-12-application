@@ -56,7 +56,7 @@ Full bindings, including the slots this repo deliberately does not declare:
 ## Governance
 
 Adopts [`agentic-governance`](https://github.com/djjay0131/agentic-governance)
-**v0.2**. Local facts live in [`llm/governance/governance-delta.md`](llm/governance/governance-delta.md).
+**v0.5**. Local facts live in [`llm/governance/governance-delta.md`](llm/governance/governance-delta.md).
 Steward merge authority is INACTIVE. Given the 13-day clock, enforcement
 here is convention-only by deliberate choice — recorded in the delta rather
 than pretended away.

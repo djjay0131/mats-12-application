@@ -86,7 +86,7 @@ arrive.
 
 ## Governance flow
 
-Adopts `agentic-governance` v0.2; local facts in `llm/governance/governance-delta.md`.
+Adopts `agentic-governance` v0.5; local facts in `llm/governance/governance-delta.md`.
 Issue → branch → PR with a declared governance level → review → merge. No
 direct commits to `main`. Steward merge authority is **INACTIVE**, and branch
 protection is unavailable on this plan (verified 403), so enforcement is

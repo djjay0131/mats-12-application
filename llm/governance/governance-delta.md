@@ -1,8 +1,8 @@
 # Governance Delta: mats-12-application
 
 Status: Active
-Last updated: 2026-08-22
-Governance: agentic-governance v0.2
+Last updated: 2026-09-10
+Governance: agentic-governance v0.5
 
 This file localizes the canonical governance in
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance) for
@@ -23,9 +23,14 @@ infrastructure, anything that does not land in the Sept 4 submission.
 
 ## Design-Authority Document
 
-`llm/plan/PLAN.md` — the phased plan, time budget, and gates. Candidate
-selection is authorized by `docs/adr/0002-project-selection.md` once
-written.
+`llm/plans/PLAN.md` — the phased plan, time budget, and gates. Candidate
+selection is authorized by `llm/governance/adr/0002-project-selection.md`,
+and the accepted project by
+`llm/governance/adr/0005-accept-jlens-relational-binding.md`.
+
+This repo declares no separate spec directory, so the design of record
+(`llm/plans/jlens-relational-binding-experiment-design.md`) sits in the plans
+directory alongside the plan it drives. See §Repository Layout.
 
 ## Project Principles
 
@@ -70,16 +75,22 @@ Path: `llm/memory_bank/`
 
 ## Roadmap
 
-Path: `llm/plan/PLAN.md`
+Path: `llm/plans/PLAN.md`
 
 ## Governance Check Command
 
 Two commands, both required:
 
 ```
-node ~/code/agentic-governance/governance/scripts/governance-checks.mjs
+node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
 node scripts/conformance-check.mjs --gate <SELECT|EXECUTE|WRITEUP|SUBMIT>
 ```
+
+`--layout` is required, not optional: it asserts that every path declared in
+§Repository Layout exists and that no source of truth sits under the declared
+artifacts directory. Without it the two-plane rule is enforced only at
+onboarding, which is how this repo kept its delta and its ADRs in the data
+plane for three weeks.
 
 The first is the canonical portfolio check. The second is project-specific
 and asserts the mechanically-checkable subset of the 121 requirements in
@@ -90,50 +101,113 @@ requires an ADR, not a shrug.
 
 ## L0 Path Allowlist
 
+The fenced block below is an instance of the canonical rule set in
+agentic-governance `llm/governance/l0-fast-track.md` §Template Allowlist,
+which defines the grammar and the diff shapes. Deny rules are checked first;
+every path is bound to §Repository Layout below. The self-referential rules —
+the delta's own path and the ADR template — moved with everything else, and a
+stale one there silently stops the fast track matching anything.
+
 ```l0-allowlist
+# Instance of agentic-governance `llm/governance/l0-fast-track.md`
+# §Template Allowlist — the source of this rule set and its grammar.
 allow llm/memory_bank/** path-only
-allow docs/adr/README.md index-table-rows
-allow docs/adr/[0-9][0-9][0-9][0-9]-*.md status-line-only
-allow llm/plan/PLAN.md checkbox-only
+allow llm/governance/adr/README.md index-table-rows
+allow llm/governance/adr/[0-9][0-9][0-9][0-9]-*.md status-line-only
+allow llm/plans/PLAN.md checkbox-only
 allow llm/** link-target-only
 allow docs/** link-target-only
 deny src/**
 deny scripts/**
 deny .github/**
-deny docs/adr/0000-template.md
-deny docs/governance-delta.md
+deny llm/governance/adr/0000-template.md
+deny llm/governance/governance-delta.md
 deny writeup/**
 deny results/**
 deny scripts/conformance-check.mjs
 deny llm/application/**
-deny llm/plan/jlens-relational-binding-experiment-design.md
+deny llm/plans/jlens-relational-binding-experiment-design.md
 deny experiments/**
 ```
 
+
 ## Repository Layout
 
-Adopted 2026-08-26 to match the portfolio convention in `soa-agentic-se` and
-`reliable-trustworthy-se`: **all project-management and research material
-lives under `llm/`**; `docs/` carries only what governance fixes in place.
+The paths this repo binds. The canon prescribes the shape (agentic-governance
+`llm/governance/project-operating-system.md` §Repository Areas, ratified by
+`llm/governance/adr/0001-llm-control-plane-docs-data-plane.md`); this block
+binds it here, so nothing downstream hardcodes a path. Declare only the slots
+this repo uses — an absent slot is not a violation, an undeclared path is.
 
-| Path | Holds | Why here |
+Revised 2026-09-10 for agentic-governance v0.5. Before that, this repo kept
+its delta and its ADRs under `docs/` on the belief that
+`governance-checks.mjs` hard-coded those paths. It does not: it reads them
+from this block, and the canonical defaults were the other way round the whole
+time.
+
+- Governance directory: `llm/governance/`
+- ADR directory: `llm/governance/adr/`
+- Sprints directory: `llm/construction/`
+- Plans directory: `llm/plans/`
+- Features directory: `llm/features/`
+- Memory-bank path: `llm/memory_bank/`
+- Artifacts directory: `docs/`
+
+Two further control-plane directories this repo uses, for which the canon
+defines no slot. They are declared here because an undeclared path is the
+violation:
+
+- Research material: `llm/research/`
+- Application material: `llm/application/`
+
+**Not declared, deliberately.** No constitution directory — the role charters
+are vendored under `.claude/agents/`, a tool-contract path. No spec directory
+— the design of record lives in the plans directory (§Design-Authority
+Document).
+
+**`llm/plans/`, not `llm/plan/`.** The slot could have been bound to the
+singular path; the canonical name was adopted instead, because the local name
+carried no meaning, is not a published URL or an import path, and diverging
+from every canonical table and tool default costs a lookup on every future
+edit for no benefit.
+
+**`llm/construction/`, not `llm/sprints/`.** Bound rather than renamed. It
+holds the verification sprint plan, its prompt payloads, the process overlay
+and the spec builder — `sprints/` would name a third of it.
+
+### The data plane, and the work itself
+
+`docs/` is the artifacts tree and holds no source of truth. It currently
+carries one derived index (`docs/README.md`), which names the `llm/`
+documents it projects, as a derived view must.
+
+Everything below is **deliverables, evidence, and the code that produced
+them** — data plane by Q2, kept in the structure it plainly belongs to rather
+than moved under `docs/`. Q1 is NO for every one of them: none governs, plans,
+remembers, reviews or operates this repo.
+
+| Path | Holds | Plane |
 |---|---|---|
-| `docs/adr/` | Decision records | agentic-governance and `governance-checks.mjs` hard-code this path |
-| `docs/governance-delta.md` | This file | Same |
-| `llm/memory_bank/` | Living state: active context, progress, time ledger, discussion history | Declared memory-bank path |
-| `llm/plan/` | PLAN.md, candidate scoring, the experiment design | Roadmap and design authority |
-| `llm/research/` | Literature scan, positioning notes | Research inputs |
-| `llm/application/` | Neel's instructions (raw + distilled), conformance register, rubric, and the three ledgers | Application-facing governance |
-| `llm/construction/` | Verification sprints, prompts, process overlays | Design-first workspace |
-| `llm/features/` | BACKLOG.md | Work index |
-| `experiments/` | Slurm batch scripts, run definitions | Execution, not planning |
-| `results/` | Raw outputs, manifests, figures | Evidence |
-| `writeup/` | The report and executive summary | Deliverable |
-| `src/`, `notebooks/` | Experiment code | Execution |
-| `scripts/` | `conformance-check.mjs`, repo tooling | Tooling |
+| `experiments/` | Slurm batch scripts, run definitions, analysis entry points | Execution |
+| `results/` | Run outputs, manifests, figures, frozen held-out numbers | Evidence |
+| `writeup/` | The report and the executive summary — the submission | Deliverable |
+| `src/`, `notebooks/` | Experiment and figure code | Execution |
+| `scripts/` | `conformance-check.mjs` and repo tooling | Tooling |
+| `context/` | Neel's compiled 600k-token mech-interp context file | External source material |
+
+These are **not** relocated under `docs/`. `results/` alone is 189 tracked
+files of evidence whose paths are cited by name in the write-up, the
+environment manifest and the reproduce script; moving it would break the
+audit trail of a submitted application to satisfy a directory name. The canon
+provides for this directly: where an artifact is neither control plane nor a
+document, use the existing structure it plainly belongs to rather than
+inventing a location.
 
 Rule of thumb: if it describes **what we will do or why**, it belongs under
-`llm/`. If it **is the work or its output**, it belongs at the root.
+`llm/`. If it **is the work or its output**, it belongs at the root. If it is
+a derived view of something under `llm/`, it belongs in `docs/` and must say
+what it projects.
+
 
 ## Platform Enforcement Reality
 
@@ -188,5 +262,5 @@ None.
 
 ## Related Repos
 
-- `agentic-governance` — canonical governance (this repo pins v0.2)
+- `agentic-governance` — canonical governance (this repo pins v0.5)
 - `soa-agentic-se` — source of the paper/proposal writing agents ported here

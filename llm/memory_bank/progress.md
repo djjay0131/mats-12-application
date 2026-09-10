@@ -99,3 +99,31 @@ Gate 1, Aug 24.
   explain why that directory holds only ADRs and the delta.
 
 **Counted hours: 0 / 20.**
+
+## 2026-09-10 — Migrated to the agentic-governance v0.5 two-plane layout
+
+- Pin moved **v0.2 -> v0.5**. `llm/` is the control plane, `docs/` the data
+  plane (canonical
+  `llm/governance/adr/0001-llm-control-plane-docs-data-plane.md`).
+- Moved, all `git mv` so history follows: `docs/adr/` ->
+  `llm/governance/adr/`, `docs/governance-delta.md` ->
+  `llm/governance/governance-delta.md`, `llm/plan/` -> `llm/plans/`.
+- The belief that `governance-checks.mjs` hard-coded `docs/adr/` and
+  `docs/governance-delta.md` was **wrong** — it reads both from the delta's
+  `## Repository Layout` block, and its built-in defaults were the `llm/`
+  paths all along. That belief is why the delta and every ADR spent three
+  weeks in the data plane. Recorded in the delta's layout section so it is
+  not re-derived.
+- The delta now binds every slot this repo uses, including the two the canon
+  has no slot for (`llm/research/`, `llm/application/`) and the
+  non-canonical `llm/construction/`, bound to the sprints slot.
+- `llm/plan/` renamed to the canonical `llm/plans/`; `llm/construction/`
+  deliberately **not** renamed to `llm/sprints/`.
+- `experiments/`, `results/`, `writeup/`, `src/`, `notebooks/`, `scripts/`
+  and `context/` are data plane and stay where they are — declared in the
+  delta rather than relocated. `docs/README.md` is now the data-plane index.
+- The two-plane routing rule is installed in `CLAUDE.md` and `AGENTS.md`.
+- Verification: `governance-checks.mjs --layout` — 4 of 4 passed, `--layout`
+  a real PASS rather than a SKIP. PR #PRNUM.
+
+**Counted hours: unchanged — governance housekeeping, not research.**
