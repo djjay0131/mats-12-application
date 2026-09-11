@@ -24,11 +24,16 @@ Conservative default: if unsure, escalate.
 
 ## Before opening a PR
 
-Run the governance checks:
+Run the governance checks. When the governance plugin is loaded:
 
 ```
-node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
+node "${CLAUDE_PLUGIN_ROOT}/scripts/governance-checks.mjs" --layout
 ```
+
+From a plain shell, run the same script —
+`plugin/scripts/governance-checks.mjs --layout` — under the `Canon checkout`
+declared in `llm/governance/governance-delta.md` §Canon Location. The path is
+not repeated here: that declaration is the one place this repo records it.
 
 ## Domain review questions
 

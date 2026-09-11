@@ -111,11 +111,11 @@ the governance plugin is loaded:
 node "${CLAUDE_PLUGIN_ROOT}/scripts/governance-checks.mjs" --layout
 ```
 
-Fallback, from a plain shell, using the path declared in §Canon Location:
-
-```
-node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
-```
+From a plain shell, the same script — `plugin/scripts/governance-checks.mjs
+--layout` — under the `Canon checkout` declared in §Canon Location above. The
+checkout path is deliberately **not** expanded here: the machine-specific value
+must appear in exactly one place per repo, and twenty lines below the
+declaration is still a second place.
 
 And the project-specific check:
 
@@ -129,7 +129,7 @@ artifacts directory. Without it the two-plane rule is enforced only at
 onboarding, which is how this repo kept its delta and its ADRs in the data
 plane for three weeks.
 
-The two preferred/fallback forms above invoke the same canonical portfolio
+The plugin form and the plain-shell form invoke the same canonical portfolio
 check; run whichever resolves. `conformance-check.mjs` is project-specific
 and asserts the mechanically-checkable subset of the 121 requirements in
 `llm/application/conformance-register.md` — the register extracted verbatim
