@@ -11,10 +11,14 @@ tar xzf ~/Downloads/mats-12-application-docs.tar.gz --strip-components=0
 Then verify and commit:
 
 ```bash
-node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
+node "${CLAUDE_PLUGIN_ROOT}/scripts/governance-checks.mjs" --layout
 git add -A
 git commit -m "Establish repo: governance v0.2, paper agents, plan, literature scan"
 ```
+
+Without the governance plugin loaded, run the same script —
+`plugin/scripts/governance-checks.mjs --layout` — under the `Canon checkout`
+declared in `llm/governance/governance-delta.md` §Canon Location.
 
 To create the remote (I have no GitHub auth from the cloud session):
 
