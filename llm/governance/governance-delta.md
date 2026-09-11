@@ -2,7 +2,7 @@
 
 Status: Active
 Last updated: 2026-09-10
-Governance: agentic-governance v0.5
+Governance: agentic-governance v0.7
 
 This file localizes the canonical governance in
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance) for
@@ -77,12 +77,49 @@ Path: `llm/memory_bank/`
 
 Path: `llm/plans/PLAN.md`
 
+## Canon Location
+
+Where the canonical `agentic-governance` repo lives, declared once. **This is
+the only machine-specific path this repo is permitted to contain** — every
+canon citation in `CLAUDE.md`, `AGENTS.md` and the check command below resolves
+against it, so it changes in one place instead of a dozen.
+
+- Canon checkout: `~/code/agentic-governance`
+- Canon repository: `https://github.com/djjay0131/agentic-governance`
+- Plugin registered: `repo` (`.claude/settings.json`) — the
+  `agentic-governance` marketplace is registered by git URL and
+  `governance@agentic-governance` is enabled, so the `/governance:*` skills
+  are invokable here.
+
+Skills and agents running as the installed plugin resolve canon from
+`${CLAUDE_PLUGIN_ROOT}/..` and need none of this; the declaration exists for
+everything that is read *without* the plugin loaded — static instructions in
+`CLAUDE.md`, and a check command run from a plain shell.
+
+**Deliberately not verified by `--layout`.** A canon checkout is
+environment-specific: CI fetches canon into a runner temp directory and has no
+such path, so asserting it would fail every CI run for a repo whose local
+declaration is perfectly correct. Verify it yourself when you change it —
+`ls <canon checkout>/VERSION`.
+
 ## Governance Check Command
 
-Two commands, both required:
+Two checks, both required. The canonical portfolio check, preferred form when
+the governance plugin is loaded:
+
+```
+node "${CLAUDE_PLUGIN_ROOT}/scripts/governance-checks.mjs" --layout
+```
+
+Fallback, from a plain shell, using the path declared in §Canon Location:
 
 ```
 node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout
+```
+
+And the project-specific check:
+
+```
 node scripts/conformance-check.mjs --gate <SELECT|EXECUTE|WRITEUP|SUBMIT>
 ```
 
@@ -92,7 +129,8 @@ artifacts directory. Without it the two-plane rule is enforced only at
 onboarding, which is how this repo kept its delta and its ADRs in the data
 plane for three weeks.
 
-The first is the canonical portfolio check. The second is project-specific
+The two preferred/fallback forms above invoke the same canonical portfolio
+check; run whichever resolves. `conformance-check.mjs` is project-specific
 and asserts the mechanically-checkable subset of the 121 requirements in
 `llm/application/conformance-register.md` — the register extracted verbatim
 from Neel's application doc, of which 38 are individually disqualifying.
