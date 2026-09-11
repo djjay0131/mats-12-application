@@ -2,7 +2,7 @@
 
 Status: Active
 Last updated: 2026-09-10
-Governance: agentic-governance v0.7
+Governance: agentic-governance v0.8
 
 This file localizes the canonical governance in
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance) for
@@ -300,5 +300,5 @@ None.
 
 ## Related Repos
 
-- `agentic-governance` — canonical governance (this repo pins v0.5)
+- `agentic-governance` — canonical governance (this repo pins v0.8)
 - `soa-agentic-se` — source of the paper/proposal writing agents ported here
