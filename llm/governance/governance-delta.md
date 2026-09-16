@@ -1,8 +1,8 @@
 # Governance Delta: mats-12-application
 
 Status: Active
-Last updated: 2026-09-10
-Governance: agentic-governance v0.8
+Last updated: 2026-09-16
+Governance: agentic-governance v0.9
 
 This file localizes the canonical governance in
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance) for
@@ -249,28 +249,44 @@ what it projects.
 
 ## Platform Enforcement Reality
 
-Verified against the live API on 2026-08-24, not assumed.
+Re-verified against the live API on 2026-09-16, not assumed. Two rows
+changed since the 2026-08-24 reading and are corrected here.
 
-- **Branch protection on `main`: UNAVAILABLE.**
-  `GET /repos/djjay0131/mats-12-application/branches/main/protection` returns
-  **403** — *"Upgrade to GitHub Pro or make this repository public to enable
-  this feature."* Branch protection cannot be configured on a private repo
-  on this plan. This is the case ADR-0001 anticipated, and it is recorded
-  here rather than left aspirational.
-- **Required status checks: UNAVAILABLE** — same 403, same cause.
+- **Branch protection on `main`: NOT CONFIGURED.**
+  `GET /repos/djjay0131/mats-12-application/branches/main/protection` now
+  returns **404 — "Branch not protected"**, not the 403 recorded on
+  2026-08-24. The repository is **public** today, so the Pro-plan paywall
+  that produced that 403 no longer applies: branch protection is *available*
+  and simply has not been configured. The practical effect is identical —
+  nothing platform-blocks a direct push to `main` — but the reason is now a
+  choice rather than a plan limit, and `GET .../rulesets` returns `[]` for
+  the same reason. This is the case ADR-0001 anticipated, recorded rather
+  than left aspirational.
+- **Required status checks: NONE.** There is no CI in this repository — no
+  `.github/workflows/` directory exists — so there is nothing to require.
+- **Branch cleanup: `delete_branch_on_merge` is `true`** — verified with
+  `gh api repos/djjay0131/mats-12-application -q .delete_branch_on_merge`.
+  A repository setting rather than branch protection, so it binds regardless
+  of the above: merged branches are deleted by GitHub without anyone
+  remembering `--delete-branch` (agentic-governance v0.9.0,
+  `llm/governance/branch-protection.md` §Branch Cleanup).
 - **Token/identity model:** single owner (`djjay0131`). Pushes during this
   project may originate from a fine-grained PAT scoped to this repo alone.
   Chief Architect, Chief Reviewer, Repository Steward and Chief Product
   Officer are **procedural roles, not distinct identities** — nothing at the
   platform layer distinguishes them.
-- **What is actually enforced:** nothing. Every control in this repo is
-  convention, held by the operator and by `scripts/conformance-check.mjs`.
-  The Issue → branch → PR → review → merge flow is honoured, not imposed.
-- **Hardening path:** make the repo public, or upgrade to GitHub Pro. Both
-  are rejected for this project — public would expose an in-flight
-  application in a process where originality is graded, and a paid upgrade
-  buys enforcement that is theatre on a single-reviewer repo. Revisit after
-  2026-09-04.
+- **What is actually enforced:** branch deletion on merge, and nothing
+  else. Every other control in this repo is convention, held by the operator
+  and by `scripts/conformance-check.mjs`. The Issue → branch → PR → review →
+  merge flow is honoured, not imposed.
+- **Hardening path:** the plan blocker is gone — the repo is public, so
+  branch protection and rulesets are available for the asking. Going public
+  was previously rejected because it would have exposed an in-flight
+  application in a process where originality is graded; the repository is
+  public now, and this file does not record when or why that changed. What
+  is unchanged is the second objection: protection buys enforcement that is
+  largely theatre on a single-reviewer repo with no CI to require.
+  Configuring it is now a decision, not a purchase.
 
 ## Steward Activation Status
 
@@ -300,5 +316,5 @@ None.
 
 ## Related Repos
 
-- `agentic-governance` — canonical governance (this repo pins v0.8)
+- `agentic-governance` — canonical governance (this repo pins v0.9)
 - `soa-agentic-se` — source of the paper/proposal writing agents ported here
