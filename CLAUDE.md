@@ -171,7 +171,7 @@ Skills: `constellize:*` for memory and feature workflows,
 
 ## Governance
 
-`llm/governance/governance-delta.md`, pinned to agentic-governance v0.8. Issue →
+`llm/governance/governance-delta.md`, pinned to agentic-governance v0.9. Issue →
 branch → PR with a governance-level declaration → review → merge. Steward
 merge authority INACTIVE.
 
