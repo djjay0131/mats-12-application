@@ -878,3 +878,150 @@ original held-out (R0: nothing excluded). Full note with every table:
 ### Hour gate — Jason confirms
 
 - Decision: CONTINUE to step 2 / other — *pending*
+
+## Phase 1, steps 2–5 — pre-registered together, before any of the four jobs is queued
+
+- Date/time: 2026-09-17, written after step 1's result and **before** the
+  jobs for steps 2, 3, 4 are queued (they run in parallel on separate GPUs
+  and cannot collide: separate scripts, separate run directories) and before
+  step 5 is queued with a Slurm dependency on step 2.
+- Research stage: **Confirmation / causal test** for steps 3–4;
+  **Exploration under a fixed protocol** for steps 2 and 5 (every layer is
+  reported; the only selection is dev-LOPO layer choice, the application's
+  protocol, with the frozen L30 always reported beside it).
+- Common to all four: code in `experiments/phase1/` (`common.py` reuses the
+  application's `ranks_of`, `resolve_positions`, `derangement`,
+  `randomize_lens`, `fit_centroids`, `margin_of`, and the stage-3 anchoring
+  verbatim). Each job runs a 2–4-record smoke pass first and deletes that
+  run directory; smoke runs are never reported. Model, revision, lens and
+  the freeze are unchanged. Every number `agent-unverified`. Where the
+  brief said "decision rule as specified" and the specification is not in
+  the repo, the rule below is the agent's and is marked *(agent's rule)*.
+
+### Step 2 — fact-token probes (`step2_fact_tokens.py`, `step2_fact_tokens.sbatch`)
+
+- Positions per record: the four frozen anchors plus six fact tokens —
+  person, city, period of the queried person's sentence (role q) and of the
+  distractor's (role d) — located by offset mapping and verified token by
+  token (failures counted, position dropped).
+- Two-way targets: city token → PERSON (person stated in that sentence vs
+  the other person); person token → CITY; period → both; query anchors →
+  CITY (the application's "intermediate") and ANSWER. Label-permutation
+  control: the deranged record's pair for the same target.
+- Arm 3 (difference-in-means): classes = token ids; fit on dev pooled over
+  roles q/d per token type; leave-one-PAIR-out on dev; applied unchanged to
+  heldout and heldout2; every block 0..31; L30 (frozen) primary,
+  dev-LOPO-selected layer secondary. J-Lens and logit lens at every lens
+  layer 0..30 at the same positions and targets.
+- Residuals at all 32 block outputs × 10 positions saved to
+  `/scratch/djjay/mats12/phase1/residuals/` (outside the repo) for step 5.
+- **Rules (from the brief, operationalised):**
+  - R2.1 A probe cell (token type × target) counts as **linearly readable**
+    if, on the combined held-out (n = 400 records, 800 fact-token samples),
+    arm-3 accuracy at L30 ≥ 0.65 AND exceeds its label-permutation control by
+    ≥ 0.15. If no fact-token cell clears this, the finding is "not linearly
+    readable at any position we probed".
+  - R2.2 For every cell that clears R2.1: J-Lens **reads it there** if its
+    direction frac at the same position, at L30, exceeds its own
+    label-permutation control by ≥ 0.15; otherwise it does not. The logit
+    lens is reported beside it. This is the Phase 1 headline cell.
+  - Causal-order note, stated in advance: in a sentence "P lives in C.", the
+    city is to the right of the person token, so a CITY probe *at the person
+    token* cannot read that sentence's city; a chance result there is
+    expected and is not evidence about storage.
+- **Predictions (agent's):** city→PERSON readable at most layers ≥ 0.85
+  (the name is three tokens back); period→CITY ≥ 0.9; period→PERSON ≥ 0.8;
+  person→CITY at chance. J-Lens at the period reads CITY above control;
+  PERSON above control at the city token.
+
+### Step 3 — twin activation patching (`step3_patching.py`, `step3_patching.sbatch`)
+
+- For each record X and its swapped twin Y (same pair and fact order, other
+  variant; prompts differ only in which city is in each person sentence),
+  X's residual at one (anchor, block) is replaced by Y's; the model's answer
+  margin at the final position, logit[X's answer] − logit[Y's answer], is
+  re-read (Y's answer is X's alternative answer, so this is the
+  application's `answer_margin`). Cells: prequery, relcomp, qmark, final ×
+  every block 0..31; PRIMARY cells are the frozen layers per anchor (jlens,
+  logitlens, arm 3: relcomp {30}, qmark {27, 29, 30}, prequery {24, 25, 30},
+  final {27, 30}).
+- Reported per cell: two-way flip rate over records whose unpatched margin is
+  positive; mean margin change over all records; full-vocab argmax change
+  rate; reverse-flip rate on unpatched-wrong records; mean cosine between
+  X's and Y's residual at the cell.
+- Controls: (a) same patch from an unrelated record (different pair, same
+  template / fact order / variant, same token count), norm-matched to X's
+  own residual; (b) the prequery-period row of the same table at the same
+  block.
+- Dev is processed and printed first; heldout and heldout2 once each in the
+  same job.
+- **Rule (agent's rule):** on the combined held-out at a primary cell:
+  twin flip rate ≥ 0.50 AND ≥ 2 × the unrelated-donor flip rate → "the
+  single-position state at this cell **carries the binding causally**";
+  twin flip rate ≤ unrelated flip rate + 0.10 → "**does not**"; between →
+  "partial". The prequery row is read with the same rule (control (b) is
+  informative, not a nuisance).
+- **Predictions (agent's):** final L27/L30 flips ≥ 0.8 (the output position);
+  relcomp L30 ≤ 0.3 (only block 31 downstream); qmark L27 0.2–0.5; prequery
+  L25 uncertain, 0.2–0.7. Unrelated donor ≤ 0.15 everywhere except final.
+
+### Step 4 — resample control (`step4_resample.py`, `step4_resample.sbatch`)
+
+- The correct intermediate's object fact "{city} uses {answer}." is rewritten
+  with a fresh single-token object from `REAL_OBJECTS` that appears nowhere
+  in the prompt (seeded per record, seed 20260917 + crc32(record_id)).
+  Nothing else changes. J-Lens and logit lens re-read at the frozen anchors
+  and layers; targets: NEW vs OLD object (primary, "the readout follows the
+  stated fact"), NEW vs ALT object (both present in the prompt, so
+  co-occurrence cannot decide it), OLD vs ALT, CITY (the rank result; should
+  not move). Control: the same targets on the UNMODIFIED prompt (how often a
+  fresh pool word outranks the stated answer anyway). The model's own
+  preference NEW vs OLD is recorded at every anchor.
+- **Rule (agent's rule):** on the combined held-out, J-Lens at relcomp
+  (L30) and qmark (L27): NEW-vs-OLD frac ≥ 0.75 AND ≥ unmodified control +
+  0.30 → "readout follows the stated fact; the co-occurrence door is closed
+  at that position". ≤ 0.55 → "does not follow; §4.2 localization claim to
+  be softened". Between → partial; §4.2 softened with the number attached.
+  `final` is expected to follow trivially and is not a test.
+- **Predictions (agent's):** final NEW-vs-OLD ≥ 0.9; relcomp 0.55–0.8;
+  qmark 0.6–0.85; unmodified control ≤ 0.3 at relcomp/qmark; CITY frac
+  unchanged within ±0.05 of step 1's combined values.
+
+### Step 5 — trained linear probe (`step5_lr_probe.py`, `step5_lr_probe.sbatch`)
+
+- On the combined held-out (heldout + heldout2, 100 pairs, 400 records),
+  leave-one-pair-out: for each fold fit (i) logistic regression (sklearn,
+  lbfgs, C = 1.0, max_iter 500, tol 1e-3, StandardScaler fit on the training
+  fold, multinomial over the token-id classes present) and (ii)
+  difference-in-means (`fit_centroids`/`margin_of`) on the same fold; score
+  the held-out pair's records with the two-way margin correct − alternative
+  (unscorable if either class is absent from the fold). Label-permutation
+  control for both. Cells: query anchors (CITY) and fact tokens pooled over
+  role (city→PERSON, person→CITY, period→PERSON, period→CITY), every block;
+  L30 primary. Also LR accuracy on model-wrong records at relcomp/qmark
+  (model CITY margin < 0 at that anchor, from step 2's shadow).
+- **Rule (agent's rule):** at relcomp L30 on the combined held-out: LR
+  accuracy − DiM accuracy ≥ 0.10 AND LR ≥ 0.65 → "the application's probe
+  was too weak; the binding is linearly present at relcomp". LR ≤ 0.60 →
+  "not the probe's weakness". Between → partial. Separately, LR on
+  model-wrong records at relcomp ≥ 0.65 (n ≥ 60) → "a trained probe reads
+  the binding where the model's preference is wrong" (this would reverse
+  the application's attribution and is reported as such).
+- **Predictions (agent's):** LR at relcomp L30 0.55–0.70; DiM 0.50–0.55;
+  LR on model-wrong records at relcomp ≤ 0.6; LR at period→CITY ≥ 0.95.
+
+### Commands (exact)
+
+```
+sbatch experiments/phase1/step2_fact_tokens.sbatch
+sbatch experiments/phase1/step3_patching.sbatch
+sbatch experiments/phase1/step4_resample.sbatch
+sbatch --dependency=afterok:<step2 job id> experiments/phase1/step5_lr_probe.sbatch
+```
+Reports: one note per step in `results/phase1/step{2,3,4,5}-*.md`; figures
+via `src/figstyle.py::save_figure` where helpful; then
+`llm/plans/phase1-summary.md`.
+
+### Result
+
+*(filled after the runs; one block per step.)*
