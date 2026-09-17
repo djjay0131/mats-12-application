@@ -100,6 +100,26 @@ Gate 1, Aug 24.
 
 **Counted hours: 0 / 20.**
 
+## 2026-09-03 → 09-05 — Write-up assembled, condensed, and mirrored to a Google Doc
+
+- **Executive summary** written by Jason in the repo (`0bdb1ad` … `ffb4837`),
+  then edited directly in the Google Doc; split into methodology and results
+  per experiment with one figure each; ranks reported for both dev (35 vs
+  ~1,000) and held-out (128 vs 393). Cut to ~800 words / 3 pages on 09-05.
+- **Experiment 2 controls figure** `results/figures/stage3-controls.png`
+  added and registered (CL-02, CL-04).
+- **Main body condensed** 6.5k → 3.6k → 3.2k words (`4116910` and after);
+  unabridged text preserved as `writeup/main-full.md`; run-id citations
+  restored so BLK-36b resolves.
+- **Google Doc** carries the executive summary and body with figures
+  embedded from the public repo; 16 pages after the 09-05 pass.
+- **Repository made public** for submission.
+- **Time ledger** brought current: 19.3 / 20 counted (7.1 verified,
+  8.2 estimated, 4.0 Jason-stated for the write-up). Executive summary
+  2.0 / 2.0, Jason-stated.
+
+**Counted hours: 19.3 / 20.**
+
 ## 2026-09-10 — Migrated to the agentic-governance v0.5 two-plane layout
 
 - Pin moved **v0.2 -> v0.5**. `llm/` is the control plane, `docs/` the data

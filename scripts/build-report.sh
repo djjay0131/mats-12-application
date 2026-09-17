@@ -47,7 +47,7 @@ pandoc "$BUILD/report.md" \
   --from=markdown+yaml_metadata_block+pipe_tables \
   --to=docx \
   --resource-path=.:writeup \
-  --toc --toc-depth=2 \
+  --reference-doc=writeup/reference.docx \
   --output="$OUT"
 echo "==> $OUT"
 

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="480" viewBox="0 0 980 480" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">
+  <defs>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d97706"/>
+    </marker>
+  </defs>
+  <rect width="980" height="480" fill="#ffffff"/>
+  <text x="490" y="34" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a1f2b">Same concepts, different thought — the binding problem</text>
+
+  <!-- Panel A -->
+  <g>
+    <rect x="40" y="58" width="420" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="250" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1f2b">Prompt A</text>
+    <text x="250" y="110" text-anchor="middle" font-size="14" fill="#334155">&#8220;Arin lives in Paris. Bela lives in Tokyo.&#8221;</text>
+
+    <text x="250" y="148" text-anchor="middle" font-size="12" fill="#5b6472" letter-spacing="1">CONCEPTS PRESENT (the &#8220;bag&#8221;)</text>
+    <g font-size="14" font-weight="bold" text-anchor="middle">
+      <rect x="66"  y="160" width="84" height="30" rx="15" fill="#eff6ff" stroke="#2563eb"/><text x="108" y="180" fill="#2563eb">Arin</text>
+      <rect x="162" y="160" width="84" height="30" rx="15" fill="#fff7ed" stroke="#d97706"/><text x="204" y="180" fill="#d97706">Bela</text>
+      <rect x="258" y="160" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="300" y="180" fill="#334155">Paris</text>
+      <rect x="354" y="160" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="396" y="180" fill="#334155">Tokyo</text>
+    </g>
+
+    <text x="250" y="232" text-anchor="middle" font-size="12" fill="#5b6472" letter-spacing="1">THE BINDING (who goes with which)</text>
+    <g font-size="14" font-weight="bold" text-anchor="middle">
+      <rect x="90"  y="248" width="84" height="30" rx="15" fill="#eff6ff" stroke="#2563eb"/><text x="132" y="268" fill="#2563eb">Arin</text>
+      <rect x="326" y="248" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="368" y="268" fill="#334155">Paris</text>
+      <rect x="90"  y="300" width="84" height="30" rx="15" fill="#fff7ed" stroke="#d97706"/><text x="132" y="320" fill="#d97706">Bela</text>
+      <rect x="326" y="300" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="368" y="320" fill="#334155">Tokyo</text>
+    </g>
+    <line x1="178" y1="263" x2="320" y2="263" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrB)"/>
+    <line x1="178" y1="315" x2="320" y2="315" stroke="#d97706" stroke-width="2.5" marker-end="url(#arrO)"/>
+  </g>
+
+  <!-- Panel B -->
+  <g>
+    <rect x="520" y="58" width="420" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="730" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1f2b">Prompt B</text>
+    <text x="730" y="110" text-anchor="middle" font-size="14" fill="#334155">&#8220;Arin lives in Tokyo. Bela lives in Paris.&#8221;</text>
+
+    <text x="730" y="148" text-anchor="middle" font-size="12" fill="#5b6472" letter-spacing="1">CONCEPTS PRESENT (the &#8220;bag&#8221;)</text>
+    <g font-size="14" font-weight="bold" text-anchor="middle">
+      <rect x="546" y="160" width="84" height="30" rx="15" fill="#eff6ff" stroke="#2563eb"/><text x="588" y="180" fill="#2563eb">Arin</text>
+      <rect x="642" y="160" width="84" height="30" rx="15" fill="#fff7ed" stroke="#d97706"/><text x="684" y="180" fill="#d97706">Bela</text>
+      <rect x="738" y="160" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="780" y="180" fill="#334155">Paris</text>
+      <rect x="834" y="160" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="876" y="180" fill="#334155">Tokyo</text>
+    </g>
+
+    <text x="730" y="232" text-anchor="middle" font-size="12" fill="#5b6472" letter-spacing="1">THE BINDING (who goes with which)</text>
+    <g font-size="14" font-weight="bold" text-anchor="middle">
+      <rect x="570" y="248" width="84" height="30" rx="15" fill="#eff6ff" stroke="#2563eb"/><text x="612" y="268" fill="#2563eb">Arin</text>
+      <rect x="806" y="248" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="848" y="268" fill="#334155">Paris</text>
+      <rect x="570" y="300" width="84" height="30" rx="15" fill="#fff7ed" stroke="#d97706"/><text x="612" y="320" fill="#d97706">Bela</text>
+      <rect x="806" y="300" width="84" height="30" rx="15" fill="#f1f5f9" stroke="#64748b"/><text x="848" y="320" fill="#334155">Tokyo</text>
+    </g>
+    <line x1="658" y1="263" x2="800" y2="313" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrB)"/>
+    <line x1="658" y1="315" x2="800" y2="265" stroke="#d97706" stroke-width="2.5" marker-end="url(#arrO)"/>
+  </g>
+
+  <!-- middle equal/unequal -->
+  <text x="490" y="182" text-anchor="middle" font-size="26" font-weight="bold" fill="#059669">=</text>
+  <text x="490" y="292" text-anchor="middle" font-size="26" font-weight="bold" fill="#dc2626">&#8800;</text>
+
+  <!-- caption -->
+  <rect x="40" y="382" width="900" height="72" rx="10" fill="#fefce8" stroke="#eab308"/>
+  <text x="60" y="410" font-size="14" fill="#1a1f2b">A readout that only detects <tspan font-weight="bold">which concepts are present</tspan> cannot tell A from B &#8212; the bags are identical. Only the <tspan font-weight="bold">pairing</tspan> differs.</text>
+  <text x="60" y="436" font-size="14" fill="#1a1f2b">Every record has a role-swapped twin, so a bag-of-concepts readout scores <tspan font-weight="bold">frac = 0.500 by construction</tspan>. Beating chance requires the relation.</text>
+</svg>

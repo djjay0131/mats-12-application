@@ -54,12 +54,12 @@ hours.** Parallel subagent work is a bonus, not a multiplier on the budget.
 | 2026-08-29 | 15:20–17:40 | Prequery reframe, Hour 3 pre-registration, sweep instrumentation, both sweep jobs, by-position analysis | ~1.2 | Estimated — span contains queue waits and two bridge outages |
 | 2026-08-30 | (Jason) | Independent verification: shadow re-derivation, rank spot-checks, eligibility hand-counts (checks 3-6, commit 2552feb) | ~1.5 | Estimated — reconstructed from the commit, not tracked |
 | 2026-08-30 | 16:20–19:00 | FREEZE, Stage 3 build and run, window-shadow attribution analysis, readout-convention source reading | ~1.5 | Estimated — span contains the 37-min job and sync overhead |
-| 2026-08-30 | 19:00–20:30 | Write-up: sections 3-10 drafted from run records, controls ledger, figures | ~1.4 | Estimated |
+| 2026-08-30 → 09-05 | (Jason) | Main write-up: sections 3-10 from run records, concept figures, section 1.2, exec-summary integration, two condensation passes | 4.0 | Jason-stated wall-clock (2026-09-05). Supersedes the agent's reconstructed estimates for the same spans (1.4 + 1.5 + 0.8 + 0.8 = 4.5h; commits 3e50c24, 47eb04b, 96db80e, fec943e, 3b915d4, 4116910, 7cf0010) — a human record replaces a reconstruction |
 
-**Running total: 16.7 / 20.0** — 7.1 verified, 9.6 estimated.
+**Running total: 19.3 / 20.0** — 7.1 verified, 8.2 estimated, 4.0 Jason-stated.
 **Verified with artifacts at both ends: 7.1h.** The estimated blocks are
 labelled, never folded in.
-**Exec summary: 0.0 / 2.0**
+**Exec summary: 2.0 / 2.0** — Jason-stated wall-clock, drafted 2026-09-03 to 09-05 in the Google Doc.
 **Paper reading: 0.0 of the 5.0 allowance** (the 2026-08-22 literature scan
 predates the project lock and is not counted).
 

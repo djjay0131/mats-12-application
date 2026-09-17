@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif">
+  <rect width="980" height="620" fill="#ffffff"/>
+  <text x="490" y="34" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a1f2b">Three instruments, one question: is the binding linearly decodable anywhere in the window?</text>
+
+  <!-- left: the grid -->
+  <g>
+    <text x="235" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">The measurement grid</text>
+    <text x="235" y="92" text-anchor="middle" font-size="12" fill="#5b6472">every layer &#215; every position, query onset &#8594; final token</text>
+
+    <!-- axes -->
+    <g stroke="#94a3b8" stroke-width="1.5">
+      <line x1="90" y1="300" x2="380" y2="300"/>
+      <line x1="90" y1="300" x2="90" y2="110"/>
+    </g>
+    <text x="235" y="326" text-anchor="middle" font-size="12" fill="#5b6472">position in post-query window &#8594;</text>
+    <text x="60" y="205" text-anchor="middle" font-size="12" fill="#5b6472" transform="rotate(-90 60 205)">layer &#8594;</text>
+
+    <!-- grid cells -->
+    <g fill="#e2e8f0" stroke="#cbd5e1">
+      <rect x="100" y="120" width="40" height="24"/><rect x="146" y="120" width="40" height="24"/><rect x="192" y="120" width="40" height="24"/><rect x="238" y="120" width="40" height="24"/><rect x="284" y="120" width="40" height="24"/><rect x="330" y="120" width="40" height="24"/>
+      <rect x="100" y="150" width="40" height="24"/><rect x="146" y="150" width="40" height="24"/><rect x="192" y="150" width="40" height="24"/><rect x="238" y="150" width="40" height="24"/><rect x="284" y="150" width="40" height="24"/><rect x="330" y="150" width="40" height="24"/>
+      <rect x="100" y="180" width="40" height="24"/><rect x="146" y="180" width="40" height="24"/><rect x="192" y="180" width="40" height="24"/><rect x="238" y="180" width="40" height="24"/><rect x="284" y="180" width="40" height="24"/><rect x="330" y="180" width="40" height="24"/>
+      <rect x="100" y="210" width="40" height="24"/><rect x="146" y="210" width="40" height="24"/><rect x="192" y="210" width="40" height="24"/><rect x="238" y="210" width="40" height="24"/><rect x="284" y="210" width="40" height="24"/><rect x="330" y="210" width="40" height="24"/>
+      <rect x="100" y="240" width="40" height="24"/><rect x="146" y="240" width="40" height="24"/><rect x="192" y="240" width="40" height="24"/><rect x="238" y="240" width="40" height="24"/><rect x="284" y="240" width="40" height="24"/><rect x="330" y="240" width="40" height="24"/>
+      <rect x="100" y="270" width="40" height="24"/><rect x="146" y="270" width="40" height="24"/><rect x="192" y="270" width="40" height="24"/><rect x="238" y="270" width="40" height="24"/><rect x="284" y="270" width="40" height="24"/><rect x="330" y="270" width="40" height="24"/>
+    </g>
+    <text x="235" y="200" text-anchor="middle" font-size="13" fill="#334155" font-weight="bold">every cell gets all three readouts</text>
+    <text x="235" y="220" text-anchor="middle" font-size="11.5" fill="#5b6472">reported: frac, median rank, shadow coupling r</text>
+  </g>
+
+  <!-- right: instruments -->
+  <g>
+    <text x="700" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">The instruments</text>
+
+    <rect x="470" y="90" width="460" height="62" rx="9" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="490" y="115" font-size="14" font-weight="bold" fill="#5b21b6">SUPERVISED PROBE (arm 3) &#8212; the CEILING</text>
+    <text x="490" y="137" font-size="12.5" fill="#5b21b6">Trained with labels in hand. Answers: is binding linearly PRESENT here at all?</text>
+
+    <rect x="470" y="162" width="460" height="62" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="490" y="187" font-size="14" font-weight="bold" fill="#1e40af">J-LENS &#8212; the unsupervised reader</text>
+    <text x="490" y="209" font-size="12.5" fill="#1e40af">No labels. Answers: is the binding READABLE without knowing the answer?</text>
+
+    <rect x="470" y="234" width="460" height="62" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <text x="490" y="259" font-size="14" font-weight="bold" fill="#334155">LOGIT LENS &#8212; the FLOOR</text>
+    <text x="490" y="281" font-size="12.5" fill="#475569">What you get for free. Plus label-permutation + selectivity controls on all arms.</text>
+  </g>
+
+  <!-- outcomes -->
+  <text x="490" y="372" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1f2b">Pre-registered outcomes — every branch is a result</text>
+
+  <g>
+    <rect x="50" y="392" width="280" height="170" rx="10" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+    <text x="190" y="420" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#92400e">Probe at chance everywhere</text>
+    <line x1="80" y1="432" x2="300" y2="432" stroke="#fdba74"/>
+    <text x="190" y="456" text-anchor="middle" font-size="12.5" fill="#7c2d12">Binding is NOT linearly decodable</text>
+    <text x="190" y="474" text-anchor="middle" font-size="12.5" fill="#7c2d12">in the residual stream at all.</text>
+    <text x="190" y="502" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#92400e">J-Lens is exonerated:</text>
+    <text x="190" y="520" text-anchor="middle" font-size="12.5" fill="#7c2d12">the finding is about the MODEL,</text>
+    <text x="190" y="538" text-anchor="middle" font-size="12.5" fill="#7c2d12">not the method.</text>
+
+    <rect x="350" y="392" width="280" height="170" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="490" y="420" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#065f46">Probe up  &#8226;  J-Lens up</text>
+    <line x1="380" y1="432" x2="600" y2="432" stroke="#6ee7b7"/>
+    <text x="490" y="456" text-anchor="middle" font-size="12.5" fill="#064e3b">Binding is present AND readable</text>
+    <text x="490" y="474" text-anchor="middle" font-size="12.5" fill="#064e3b">without supervision.</text>
+    <text x="490" y="502" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#065f46">Strong method claim &#8212;</text>
+    <text x="490" y="520" text-anchor="middle" font-size="12.5" fill="#064e3b">that (layer, position) becomes the</text>
+    <text x="490" y="538" text-anchor="middle" font-size="12.5" fill="#064e3b">primary measurement position.</text>
+
+    <rect x="650" y="392" width="280" height="170" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="790" y="420" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#5b21b6">Probe up  &#8226;  J-Lens at chance</text>
+    <line x1="680" y1="432" x2="900" y2="432" stroke="#c4b5fd"/>
+    <text x="790" y="456" text-anchor="middle" font-size="12.5" fill="#4c1d95">Binding is present but the</text>
+    <text x="790" y="474" text-anchor="middle" font-size="12.5" fill="#4c1d95">unsupervised reader cannot see it.</text>
+    <text x="790" y="502" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5b21b6">The GAP is the finding:</text>
+    <text x="790" y="520" text-anchor="middle" font-size="12.5" fill="#4c1d95">a measured limit of unsupervised</text>
+    <text x="790" y="538" text-anchor="middle" font-size="12.5" fill="#4c1d95">reading, with a ceiling attached.</text>
+  </g>
+
+  <text x="490" y="596" text-anchor="middle" font-size="12" fill="#5b6472" font-style="italic">Illustrative design figure &#8212; no data shown. Outcomes and interpretation rules fixed before the sweep runs.</text>
+</svg>
