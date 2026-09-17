@@ -11,5 +11,5 @@ this 600k token file in the context window."*
 It is committed rather than fetched, so a fresh clone on ARC has everything it
 needs in one step.
 
-⚠️ It is his compilation, kept here because this repository is **private**.
-Do not make this repository public without removing the file first.
+It is his own compilation, which he publishes for applicants to use; it is kept
+here so a fresh clone has it. The repository is public by decision (2026-09-17).

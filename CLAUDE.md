@@ -82,8 +82,9 @@ the agent's context window:
 It is committed at **`context/default_600k.md`** (2.24 MB, 41,360 lines), so a
 fresh clone has it. Load it before doing research work.
 
-⚠️ It is Neel's compilation, kept here because this repository is **private**.
-Do not make this repository public without removing it first.
+It is Neel's own compilation, which he publishes for applicants to use; it is
+kept here so a fresh clone has it. The repository is public by decision
+(2026-09-17); the file is his to redistribute as he does.
 
 Also load, in this order: `llm/plans/PLAN.md`,
 `llm/governance/adr/0005-accept-jlens-relational-binding.md`,
