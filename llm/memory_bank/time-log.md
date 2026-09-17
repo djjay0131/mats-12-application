@@ -82,3 +82,14 @@ estimated portion entirely and still see 7.1 hours with artifacts at both ends.
 Track with [Toggl](https://toggl.com/) — Neel encourages attaching a
 screenshot to the write-up. **No Toggl record exists for this project; this
 ledger is the substitute and says so.**
+
+## Post-MATS (uncounted)
+
+The 20-hour rule ended with the submission on 2026-09-04 (tag
+`mats12-submitted`). Hours from here on are tracked for the record but are
+**not** under the application clock. Same conventions: verified rows are
+commit-bounded; estimated rows are marked `~`; Jason-stated rows say so.
+
+| Date | Block | Description | Hours | Basis |
+|---|---|---|---|---|
+| 2026-09-17 | Step 0 | Merge exp/v1-v3-verification to main, tag the submitted state, open research/phase1, continuation plan committed | ~0.5 | Estimated — housekeeping, agent session |
