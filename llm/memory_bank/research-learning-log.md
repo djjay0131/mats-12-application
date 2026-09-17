@@ -1022,6 +1022,16 @@ Reports: one note per step in `results/phase1/step{2,3,4,5}-*.md`; figures
 via `src/figstyle.py::save_figure` where helpful; then
 `llm/plans/phase1-summary.md`.
 
+### Amendment 2 (2026-09-17, reporting only) — step 5 breakdown
+
+Step 5's job (587868) reports only per-cell aggregates. Before reading any
+of them in detail, a reporting addendum is added: `step5_breakdown.py` re-runs
+the SAME folds and fits at the frozen block L30 and saves per-record margins,
+then tabulates by fact order (AB/BA), sentence position (first/second) for
+the fact tokens, template, split, and the model's own preference at the query
+anchors. No rule is attached; the pre-registered rules are unchanged. Queued
+as `step5_breakdown.sbatch` after this note is committed.
+
 ### Result
 
 *(filled after the runs; one block per step.)*
