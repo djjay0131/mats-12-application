@@ -1046,6 +1046,50 @@ the reduced sweep stated. `step3_patching.py` also gains a per-split
 checkpoint and a `--splits` flag for future runs; the running job is
 unaffected (its code was loaded at start).
 
-### Result
+### Result — step 2 (fact tokens)
 
-*(filled after the runs; one block per step.)*
+Falcon 587865, L40S, commit `7c55733`, exit 0; run
+`20260917T202900Z-phase1-step2-fact-tokens`; 0 fact-position failures / 440
+records. Note: `results/phase1/step2-fact-tokens.md`. **R2.1**: arm 3 at
+L30 on the combined held-out clears the readability rule at period → CITY
+(0.664 vs ctrl 0.502, n=800), qmark → CITY (0.725) and final → CITY (0.660);
+not at city → PERSON (0.528, n_sc 352), period → PERSON (0.608), person →
+CITY (0.502, the causal-order prediction), relcomp (0.515), prequery
+(0.495). The branch "not linearly readable anywhere" did not fire. **R2.2**:
+J-Lens at the period at L30 reads CITY at 0.559 vs ctrl 0.507 → does not
+read it there; its layer curve peaks at L9 (0.871, ctrl 0.512), reported
+not selected. Arm 3 period → CITY is 0.994 at block 0. Two of six agent
+predictions hit.
+
+### Result — step 4 (resample)
+
+Falcon 587867, L40S, commit `7c55733`, exit 0; run
+`20260917T202853Z-phase1-step4-resample`; 0 failed edits. Note:
+`results/phase1/step4-resample.md`. With the correct object fact rewritten,
+J-Lens ranks NEW above OLD in **0.970** (relcomp L30) and **0.993** (qmark
+L27) of 400 records vs 0.045 / 0.000 on the unmodified prompt; logit lens
+0.963 / 0.978; the model's own logits 0.983 / 1.000. Rule: **follows**; the
+"soften §4.2" branch did not fire. NEW vs ALT (both in the prompt) 0.633 /
+0.768; CITY frac moved ≤ 0.013. Predictions for relcomp/qmark were too low.
+
+### Result — step 5 (trained probe)
+
+Falcon 587868 (dep. on 587865), commit `7c55733`, exit 0; run
+`20260917T203740Z-phase1-step5-lr-probe`; breakdown 587883, run
+`20260917T205754Z-phase1-step5-breakdown` (Amendment 2). Note:
+`results/phase1/step5-lr-probe.md`. LOPO on the combined held-out (400
+records, 100 pairs) at L30: LR relcomp **0.897** (ctrl 0.520) vs DiM 0.620
+(ctrl 0.463); qmark 0.945 vs 0.700; final 0.998; period → CITY 1.000;
+period → PERSON 0.927; city → PERSON 0.740; person → CITY 0.705 (first
+sentence 0.500, second 0.918). LR on the 93 model-wrong records at relcomp
+**0.850** at L30, **0.98** at L15; layer peak L15–L20 (0.99). **Both rules
+fired**: the application's probe was too weak, and a trained probe reads the
+binding where the model's preference is wrong — the application's "no
+method finds binding at relcomp" is reversed on this point. Cross-reference
+(`step2_layercurve.py`): J-Lens at relcomp 0.53 at L15–L20; on the same 93
+records at most 0.634 (L18), 0.26 at L30. Three of four agent predictions
+missed, all too pessimistic about the probe.
+
+### Result — step 3 (twin patching)
+
+*(filled when job 587866 or the backup 587888 completes.)*
