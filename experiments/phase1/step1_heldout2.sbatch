@@ -13,8 +13,12 @@
 #      results/datasets/dataset-manifest.json. This proves the two flags added
 #      to src/make_dataset.py for this step (--pool-seed, --id-prefix) leave
 #      the original draw untouched. If it fails, the job stops here.
+#      (Job 587798 passed this check and then stopped at step 1: the
+#      generator's own self-check refused a 60-pair draw with 4 duplicate
+#      prompt strings. Nothing was written. Amendment: --dedupe-prompts,
+#      pre-registered in the learning log before this resubmission.)
 #   1. Fresh draw: --seed 20260917 --pool-seed 20260827 (same six-city pool)
-#      --n-dev 0 --n-heldout 60 --id-prefix h2-. Written ONLY to
+#      --n-dev 0 --n-heldout 60 --id-prefix h2- --dedupe-prompts. Written ONLY to
 #      results/datasets/heldout2.jsonl (+ heldout2-manifest.json,
 #      heldout2-tokenization_report.json). heldout.jsonl is not touched.
 #   2. Behavioural eligibility screen on heldout2 (same script, same
@@ -79,7 +83,7 @@ fi
 echo
 echo "=== STEP 1/3: fresh draw seed=20260917 pool_seed=20260827 n_heldout=60 ==="
 python src/make_dataset.py --out "$TMP/h2" --seed 20260917 --pool-seed 20260827 \
-    --n-dev 0 --n-heldout 60 --id-prefix h2-
+    --n-dev 0 --n-heldout 60 --id-prefix h2- --dedupe-prompts
 rc1=$?
 echo "draw exit=$rc1"
 if [ "$rc1" != "0" ]; then

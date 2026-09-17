@@ -826,6 +826,31 @@ agent will read `heldout2.jsonl` only inside the scoring job and the report
 script; no prompt is inspected by a human or the agent before the numbers
 are in.
 
+### Amendment 1 (2026-09-17, before resubmission)
+
+Job **587798** (L40S, commit `331e33a`) passed step 0 — the regenerated
+original dev/heldout files were byte-identical to the manifest sha256s, so
+`--pool-seed`/`--id-prefix` are inert for the old files — and then stopped
+at step 1: the generator's own self-check refused the 60-pair draw because
+**4 prompt strings were duplicated** within it (60 pairs over 15 city-pair
+slots × 6 templates with 24 names collide by birthday arithmetic; the
+original 40-pair draw happened not to). Nothing was written or scored; no
+number was seen. The pre-registration above did not say what to do in this
+case, so this amendment says it, and is committed before the job is
+re-queued:
+
+- `--dedupe-prompts` added to `src/make_dataset.py` (off by default; the
+  original files do not use it): walk the same seed-20260917 stream from
+  index 0, keep a pair unless one of its four prompts equals a prompt already
+  kept, advance the index until 60 unique pairs are kept. Kept pairs are
+  byte-identical to what the plain stream would produce at the same index;
+  the manifest records the skipped indices. The job's step 0 regression
+  check still runs first.
+- Consequence to report: the round-robin city-pair balance can be off by
+  one for the skipped slots (some city pairs 3 rather than 4 times). Reported
+  in the step note; it changes nothing about the frozen scoring.
+- Rules R0–R3 and the predictions are unchanged.
+
 ### Result
 
 *(filled after the run; job id, run ids, commit, numbers with n, and which

@@ -207,7 +207,10 @@ def pair_to_records(tok: Any, pair: tt.Pair, prompt_n_tokens: int) -> list[dict]
 def build_split(tok: Any, *, lexicons: list[str], n_pairs: int, seed: int,
                 start_index: int, shot: str,
                 vocab_pool: int = 0, pool_seed: int | None = None,
-                id_prefix: str = "") -> tuple[list[tt.Pair], list[dict]]:
+                id_prefix: str = "", dedupe_prompts: bool = False,
+                seen_prompts: set[str] | None = None,
+                skipped_out: list[int] | None = None
+                ) -> tuple[list[tt.Pair], list[dict]]:
     """Build `n_pairs` pairs, cycling the lexicon across pairs.
 
     Cycling keeps the requested pair counts exact while still covering more
@@ -223,17 +226,38 @@ def build_split(tok: Any, *, lexicons: list[str], n_pairs: int, seed: int,
     pool. `None` keeps the pre-Phase-1 behaviour exactly. `id_prefix` is
     prepended to every pair_id so a second held-out draw cannot collide with
     the original ids.
+
+    `dedupe_prompts` (Phase 1 amendment, after job 587798 refused a draw with
+    4 duplicate prompt strings): walk the same seeded stream from
+    `start_index`, but SKIP any pair one of whose prompts equals a prompt
+    already kept (in this split, or in `seen_prompts` from an earlier split),
+    advancing the index until `n_pairs` unique pairs are kept. Skipped
+    indices are appended to `skipped_out`. Kept pairs are byte-identical to
+    what the un-deduplicated stream would have produced at the same index.
+    Off by default; the original files do not use it.
     """
     pairs: list[tt.Pair] = []
-    for k in range(n_pairs):
+    seen: set[str] = set(seen_prompts or ())
+    k = 0
+    idx = start_index
+    while k < n_pairs:
         lex = lexicons[k % len(lexicons)]
-        idx = start_index + k
         built = tt.build_pairs(tok, n_pairs=1, seed=seed + idx, lexicon=lex,
                                shot=shot, start_index=idx,
                                vocab_pool=vocab_pool,
                                pool_seed=(seed if pool_seed is None else pool_seed),
                                id_prefix=id_prefix)
+        if dedupe_prompts:
+            these = [v.prompt for p in built for v in p.variants]
+            if any(t in seen for t in these):
+                if skipped_out is not None:
+                    skipped_out.append(idx)
+                idx += 1
+                continue
+            seen.update(these)
         pairs.extend(built)
+        k += 1
+        idx += 1
 
     records: list[dict] = []
     for p in pairs:
@@ -340,6 +364,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--id-prefix", default="",
                     help="prefix for every pair_id/record_id (e.g. 'h2-') so a "
                          "second draw cannot collide with the original ids")
+    ap.add_argument("--dedupe-prompts", action="store_true",
+                    help="skip any pair whose prompt duplicates an already "
+                         "kept prompt, advancing the seeded index, until the "
+                         "requested pair counts are met (Phase 1 amendment)")
     ap.add_argument("--min-pairs-per-class", type=int,
                     default=DEFAULT_MIN_PAIRS_PER_CLASS,
                     help="every intermediate class must occur in at least this "
@@ -429,14 +457,24 @@ def main(argv: list[str] | None = None) -> int:
         dead_audit[name] = {"n_candidates": len(words), "n_survived": len(kept),
                             "survivors": kept}
 
+    skipped_dev: list[int] = []
+    skipped_ho: list[int] = []
     dev_pairs, dev_recs = build_split(
         tok, lexicons=lexicons, n_pairs=args.n_dev, seed=args.seed,
         start_index=0, shot=args.shot, vocab_pool=args.vocab_pool,
-        pool_seed=args.pool_seed, id_prefix=args.id_prefix)
+        pool_seed=args.pool_seed, id_prefix=args.id_prefix,
+        dedupe_prompts=args.dedupe_prompts, skipped_out=skipped_dev)
+    # held-out starts after the last DEV index actually consumed
+    ho_start = args.n_dev + len(skipped_dev)
     ho_pairs, ho_recs = build_split(
         tok, lexicons=lexicons, n_pairs=args.n_heldout, seed=args.seed,
-        start_index=args.n_dev, shot=args.shot, vocab_pool=args.vocab_pool,
-        pool_seed=args.pool_seed, id_prefix=args.id_prefix)
+        start_index=ho_start, shot=args.shot, vocab_pool=args.vocab_pool,
+        pool_seed=args.pool_seed, id_prefix=args.id_prefix,
+        dedupe_prompts=args.dedupe_prompts,
+        seen_prompts={r["prompt"] for r in dev_recs}, skipped_out=skipped_ho)
+    if args.dedupe_prompts:
+        print(f"dedupe   dev skipped={skipped_dev}  heldout start_index={ho_start} "
+              f"skipped={skipped_ho}")
 
     assert not (set(p.pair_id for p in dev_pairs) &
                 set(p.pair_id for p in ho_pairs)), "dev/held-out overlap"
@@ -479,11 +517,13 @@ def main(argv: list[str] | None = None) -> int:
               "lexicons": lexicons, "shot": args.shot,
               "vocab_pool": args.vocab_pool,
               "framing": "method evaluation, not circuit discovery"}
-    if args.pool_seed is not None or args.id_prefix:
+    if args.pool_seed is not None or args.id_prefix or args.dedupe_prompts:
         # Only a non-default draw carries these keys, so the byte-identical
         # regeneration of the original dev/heldout files stays byte-identical.
         common["pool_seed"] = args.pool_seed
         common["id_prefix"] = args.id_prefix
+        common["dedupe_prompts"] = args.dedupe_prompts
+        common["skipped_indices"] = {"dev": skipped_dev, "heldout": skipped_ho}
     dev_path = os.path.join(args.out, "dev.jsonl")
     ho_path = os.path.join(args.out, "heldout.jsonl")
     dev_hash = write_jsonl(dev_path, DEV_HEADER, dev_recs,
@@ -522,6 +562,8 @@ def main(argv: list[str] | None = None) -> int:
         "vocab_pool": args.vocab_pool,
         "pool_seed": (args.seed if args.pool_seed is None else args.pool_seed),
         "id_prefix": args.id_prefix,
+        "dedupe_prompts": args.dedupe_prompts,
+        "skipped_indices": {"dev": skipped_dev, "heldout": skipped_ho},
         "vocab_pool_note": (
             "intermediates and their paired objects for every pair are drawn "
             "from one shared pool of this many words, assigned by "
