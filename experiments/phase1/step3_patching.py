@@ -73,9 +73,10 @@ def main() -> int:
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--layers", default="all", help="'all' or comma list")
     ap.add_argument("--max-records", type=int, default=0, help="smoke test only")
+    ap.add_argument("--splits", default="dev,heldout,heldout2")
     args = ap.parse_args()
 
-    splits = load_all()
+    splits = [(s, r) for s, r in load_all() if s in args.splits.split(",")]
     if args.max_records:
         splits = [(s, r[:args.max_records]) for s, r in splits]
     run = start_run("phase1-step3-patching", seed=args.seed,
@@ -181,9 +182,14 @@ def main() -> int:
                 print(f"[step3] {split} {i+1}/{len(recs)}  {time.time()-t0:.0f}s", flush=True)
         # ---- per-split summary printed as soon as the split is done (dev first)
         print_summary(split, results, layers)
+        # checkpoint: partial records after every split (a timeout loses nothing)
+        import gzip
+        with gzip.open(run.outputs / "step3-records-partial.json.gz", "wt") as fh:
+            json.dump({"records": results, "done_splits": [s for s, _ in splits if s == split or
+                                                            [x for x in results if x["split"] == s]]}, fh)
 
     summary = {s: summarise([e for e in results if e["split"] == s], layers)
-               for s in ("dev", "heldout", "heldout2")}
+               for s, _ in splits}
     summary["combined"] = summarise([e for e in results if e["split"] != "dev"], layers)
     payload = {"framing": "method evaluation using a narrow task as instrument; not circuit discovery",
                "status": "agent-unverified", "freeze": FREEZE, "primary_cells": PRIMARY,

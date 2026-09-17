@@ -1032,6 +1032,20 @@ the fact tokens, template, split, and the model's own preference at the query
 anchors. No rule is attached; the pre-registered rules are unchanged. Queued
 as `step5_breakdown.sbatch` after this note is committed.
 
+### Amendment 3 (2026-09-17, before any step-3 number is read) — step 3 backup run
+
+Job 587866 (full 32-block sweep) is running at ~29 s per record and is
+projected to finish within ~20 minutes of its 4-hour limit; it writes its
+results only at the end. Before any of its held-out output exists, a
+backup job with the SAME script, cells and rules but a reduced block sweep
+(the primary frozen blocks 24, 25, 27, 29, 30 plus every third block and
+31) is queued in parallel (`step3_backup.sbatch`). Precedence, fixed now:
+if 587866 completes, it is the reported run and the backup run directory is
+deleted, never reported; if 587866 times out, the backup is reported with
+the reduced sweep stated. `step3_patching.py` also gains a per-split
+checkpoint and a `--splits` flag for future runs; the running job is
+unaffected (its code was loaded at start).
+
 ### Result
 
 *(filled after the runs; one block per step.)*
