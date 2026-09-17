@@ -1,0 +1,59 @@
+{
+  "slug": "phase1-step1-report",
+  "started_utc": "2026-09-17T19:39:22.781861+00:00",
+  "argv": [
+    "experiments/phase1/step1_report.py",
+    "--original",
+    "results/runs/20260830T175149Z-stage3-heldout-frozen",
+    "--new",
+    "results/runs/20260917T193052Z-stage3-heldout-frozen"
+  ],
+  "cwd": "/home/djjay/code/mats-12-application",
+  "git": {
+    "sha": "fe1ca164f6be28f725e6c6e43697d66f1fa25476",
+    "branch": "research/phase1",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/datasets/heldout2-manifest.json",
+      "?? results/datasets/heldout2-tokenization_report.json",
+      "?? results/datasets/heldout2.jsonl",
+      "?? results/runs/20260917T192334Z-eligibility-screen/",
+      "?? results/runs/20260917T193052Z-stage3-heldout-frozen/",
+      "?? results/slurm-logs/phase1-step1-587798.out",
+      "?? results/slurm-logs/phase1-step1-587809.out"
+    ],
+    "note": null
+  },
+  "hostname": "agents4research",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "slurm": {
+    "SLURM_JOB_ID": null,
+    "SLURM_JOB_NAME": null,
+    "SLURM_JOB_ACCOUNT": null,
+    "SLURM_JOB_PARTITION": null,
+    "SLURM_JOB_NODELIST": null,
+    "SLURM_JOB_GPUS": null
+  },
+  "gpu": {
+    "available": null,
+    "name": null,
+    "note": "probe failed: No module named 'torch'"
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": null,
+    "transformers": null,
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "original_run": "results/runs/20260830T175149Z-stage3-heldout-frozen",
+    "new_run": "results/runs/20260917T193052Z-stage3-heldout-frozen",
+    "heldout2": "results/datasets/heldout2.jsonl",
+    "note": "original / new / combined at frozen settings; no selection"
+  },
+  "status": "ok",
+  "finished_utc": "2026-09-17T19:39:22.862010+00:00",
+  "outputs": [
+    "step1-report.json"
+  ]
+}

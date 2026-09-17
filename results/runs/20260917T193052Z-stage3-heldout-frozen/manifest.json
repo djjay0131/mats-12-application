@@ -1,0 +1,67 @@
+{
+  "slug": "stage3-heldout-frozen",
+  "started_utc": "2026-09-17T19:30:52.819952+00:00",
+  "argv": [
+    "experiments/stage3/heldout_frozen.py",
+    "--heldout",
+    "results/datasets/heldout2.jsonl"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "fe1ca164f6be28f725e6c6e43697d66f1fa25476",
+    "branch": "research/phase1",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/datasets/heldout2-manifest.json",
+      "?? results/datasets/heldout2-tokenization_report.json",
+      "?? results/datasets/heldout2.jsonl",
+      "?? results/runs/20260917T192334Z-eligibility-screen/",
+      "?? results/slurm-logs/phase1-step1-587798.out",
+      "?? results/slurm-logs/phase1-step1-587809.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal046",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "587809",
+    "SLURM_JOB_NAME": "mats12-p1s1",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal046",
+    "SLURM_JOB_GPUS": "0"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "datasets": [
+      "results/datasets/dev.jsonl",
+      "results/datasets/heldout2.jsonl"
+    ],
+    "freeze": "experiments/stage3/freeze.json",
+    "note": "frozen evaluation; no selection happens in this run"
+  },
+  "status": "ok",
+  "finished_utc": "2026-09-17T19:37:17.000318+00:00",
+  "outputs": [
+    "stage3-heldout-frozen.json"
+  ]
+}

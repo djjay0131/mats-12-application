@@ -1,0 +1,40 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal046  job: 587798  commit: 331e33a ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+scratch: /scratch/djjay/mats12/tmp-phase1-step1-AVqlZu
+
+=== STEP 0/3: regression -- regenerate the original draw, require identical sha256 ===
+vocab_pool=6 min_pairs_per_class=3
+classes  dev      n_classes=  6 min_pairs/class= 3 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+  class  Prague       pairs= 4  correct=  8  alternative=  8
+  class  Seattle      pairs= 4  correct=  8  alternative=  8
+  class  Athens       pairs= 3  correct=  6  alternative=  6
+  class  Bristol      pairs= 3  correct=  6  alternative=  6
+  class  Dublin       pairs= 3  correct=  6  alternative=  6
+  class  Oslo         pairs= 3  correct=  6  alternative=  6
+classes  heldout  n_classes=  6 min_pairs/class=12 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+seed=20260827 lexicons=real templates=6 vocab_pool=6
+dev       10 pairs   40 records  sha256=977b3d6700387933  /scratch/djjay/mats12/tmp-phase1-step1-AVqlZu/orig/dev.jsonl
+heldout   40 pairs  160 records  sha256=88f69b628dce58ce  /scratch/djjay/mats12/tmp-phase1-step1-AVqlZu/orig/heldout.jsonl  (NOT INSPECTED)
+report   /scratch/djjay/mats12/tmp-phase1-step1-AVqlZu/orig/tokenization_report.json
+audit    pseudo  people 39/39  places 32/32  objects 30/30
+audit    rare    people 16/16  places 12/12  objects 19/19
+audit    real    people 24/24  places 21/21  objects 21/21
+audit    NONCE_PEOPLE   2/26 survived  (removed from LEXICONS)
+audit    NONCE_PLACES   2/24 survived  (removed from LEXICONS)
+audit    NONCE_OBJECTS  7/24 survived  (removed from LEXICONS)
+  dev.jsonl      regenerated=977b3d6700387933 manifest=977b3d6700387933 IDENTICAL
+  dev.jsonl      committed  =977b3d6700387933 matches manifest
+  heldout.jsonl  regenerated=88f69b628dce58ce manifest=88f69b628dce58ce IDENTICAL
+  heldout.jsonl  committed  =88f69b628dce58ce matches manifest
+regression exit=0/0
+
+=== STEP 1/3: fresh draw seed=20260917 pool_seed=20260827 n_heldout=60 ===
+vocab_pool=6 min_pairs_per_class=3
+classes  dev      n_classes=  0 min_pairs/class= 0 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+classes  heldout  n_classes=  6 min_pairs/class=20 (need >= 3)  thin=0 single_role=0 dup_prompts=4  FAIL
+
+SELF-CHECK FAILED -- nothing written. heldout: 4 duplicate prompt string(s)
+Leave-one-pair-out cannot score records whose class has no support outside the held-out pair. Raise --vocab-pool, or pass --allow-thin-classes if a thin dataset is what you actually want.
+draw exit=3
+=== STOP: draw failed (self-check or tokenizer); nothing scored ===

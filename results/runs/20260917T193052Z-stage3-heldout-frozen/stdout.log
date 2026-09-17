@@ -1,0 +1,54 @@
+[runlog] results/runs/20260917T193052Z-stage3-heldout-frozen  git=fe1ca164f6be28f725e6c6e43697d66f1fa25476 DIRTY  slurm=587809
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1891.88it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 22261.21it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 84.78it/s]
+[stage3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=4.3s  dev n=40  heldout n=240
+[stage3] jlens: dev done
+[stage3] jlens: heldout done
+[stage3] logitlens: dev done
+[stage3] logitlens: heldout done
+[stage3] jlens_random_transport: dev done
+[stage3] jlens_random_transport: heldout done
+
+==================================================================
+  dev      jlens                  prequery L25  frac=0.550 ctrl=0.400 medrank=    357 n=40
+  dev      jlens                  relcomp  L30  frac=0.775 ctrl=0.350 medrank=    119 n=40
+  dev      jlens                  qmark    L27  frac=0.675 ctrl=0.350 medrank=    116 n=40
+  dev      jlens                  final    L27  frac=0.975 ctrl=0.375 medrank=     37 n=40
+  dev      logitlens              prequery L24  frac=0.525 ctrl=0.500 medrank=  78568 n=40
+  dev      logitlens              relcomp  L30  frac=0.675 ctrl=0.400 medrank=    272 n=40
+  dev      logitlens              qmark    L29  frac=0.725 ctrl=0.350 medrank=     87 n=40
+  dev      logitlens              final    L30  frac=0.900 ctrl=0.375 medrank=     20 n=40
+  dev      jlens_random_transport prequery L25  frac=0.500 ctrl=0.450 medrank= 153610 n=40
+  dev      jlens_random_transport relcomp  L30  frac=0.525 ctrl=0.450 medrank= 161894 n=40
+  dev      jlens_random_transport qmark    L27  frac=0.475 ctrl=0.525 medrank= 168934 n=40
+  dev      jlens_random_transport final    L27  frac=0.450 ctrl=0.550 medrank= 148138 n=40
+  heldout  jlens                  prequery L25  frac=0.496 ctrl=0.525 medrank=    394 n=240
+  heldout  jlens                  relcomp  L30  frac=0.733 ctrl=0.496 medrank=    132 n=240
+  heldout  jlens                  qmark    L27  frac=0.667 ctrl=0.454 medrank=     93 n=240
+  heldout  jlens                  final    L27  frac=0.942 ctrl=0.508 medrank=     21 n=240
+  heldout  logitlens              prequery L24  frac=0.512 ctrl=0.492 medrank=  72325 n=240
+  heldout  logitlens              relcomp  L30  frac=0.692 ctrl=0.504 medrank=    367 n=240
+  heldout  logitlens              qmark    L29  frac=0.750 ctrl=0.467 medrank=    106 n=240
+  heldout  logitlens              final    L30  frac=0.900 ctrl=0.479 medrank=     15 n=240
+  heldout  jlens_random_transport prequery L25  frac=0.504 ctrl=0.508 medrank= 135039 n=240
+  heldout  jlens_random_transport relcomp  L30  frac=0.504 ctrl=0.529 medrank= 156481 n=240
+  heldout  jlens_random_transport qmark    L27  frac=0.512 ctrl=0.487 medrank= 170558 n=240
+  heldout  jlens_random_transport final    L27  frac=0.529 ctrl=0.487 medrank= 149607 n=240
+------------------------------------------------------------------
+  shadow dev      prequery meanIntMargin=+0.005 neg=18/40
+  shadow dev      relcomp  meanIntMargin=+1.295 neg=9/40
+  shadow dev      qmark    meanIntMargin=+2.281 neg=9/40
+  shadow dev      final    meanIntMargin=+2.728 neg=3/40
+  shadow heldout  prequery meanIntMargin=+0.049 neg=119/240
+  shadow heldout  relcomp  meanIntMargin=+1.342 neg=61/240
+  shadow heldout  qmark    meanIntMargin=+2.225 neg=56/240
+  shadow heldout  final    meanIntMargin=+2.684 neg=14/240
+------------------------------------------------------------------
+  arm3   prequery L30 dev_acc=0.525 heldout_acc=0.487 heldout_scored=240/240
+  arm3   relcomp  L30 dev_acc=0.550 heldout_acc=0.508 heldout_scored=240/240
+  arm3   qmark    L30 dev_acc=0.725 heldout_acc=0.721 heldout_scored=240/240
+  arm3   final    L30 dev_acc=0.775 heldout_acc=0.617 heldout_scored=240/240
+==================================================================
+anchor failures: {'dev': 0, 'heldout': 0}
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T193052Z-stage3-heldout-frozen/outputs/stage3-heldout-frozen.json

@@ -1,0 +1,65 @@
+{
+  "class_support_dev": {
+    "min_pairs_per_class_observed": 0,
+    "min_pairs_per_class_required": 3,
+    "n_classes": 0,
+    "n_duplicate_prompts": 0,
+    "n_pairs": 0,
+    "n_records": 0,
+    "ok": true,
+    "rows": [],
+    "single_role_classes": [],
+    "thin_classes": []
+  },
+  "class_support_heldout": {
+    "min_pairs_per_class_observed": 19,
+    "min_pairs_per_class_required": 3,
+    "n_classes": 6,
+    "n_duplicate_prompts": 0,
+    "n_pairs": 60,
+    "n_records": 240,
+    "ok": true,
+    "single_role_classes": [],
+    "thin_classes": []
+  },
+  "dedupe_prompts": true,
+  "framing": "method evaluation, not circuit discovery",
+  "heldout_policy": "HELD-OUT split. Method evaluation, not circuit discovery. This file is never tuned on and must not be inspected during development: no threshold, template, vocabulary item or hyperparameter may be chosen by looking at it. Read it once, at evaluation time, after the method is frozen.",
+  "id_prefix": "h2-",
+  "lexicons": [
+    "real"
+  ],
+  "min_pairs_per_class": 3,
+  "model": "Qwen/Qwen3.5-4B",
+  "n_dev_pairs": 0,
+  "n_dev_records": 0,
+  "n_heldout_pairs": 60,
+  "n_heldout_records": 240,
+  "pool_seed": 20260827,
+  "preamble": "Facts:",
+  "provenance": "agent-unverified",
+  "records_per_pair": 4,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20260917,
+  "sha256": {
+    "dev.jsonl": "ef1db8ea9041e911abb370bc36e7cee876aa4f125d472dc2a07a58dccae0508b",
+    "heldout.jsonl": "3a06138a80aaad16e55497060901dc7a8241982b90e1b51b11858bbcf961f779"
+  },
+  "shot": "zero",
+  "skipped_indices": {
+    "dev": [],
+    "heldout": [
+      44
+    ]
+  },
+  "templates": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6"
+  ],
+  "vocab_pool": 6,
+  "vocab_pool_note": "intermediates and their paired objects for every pair are drawn from one shared pool of this many words, assigned by task_templates.round_robin_schedule, so that leave-one-pair-out has class support outside each held-out pair. 0 = disabled."
+}

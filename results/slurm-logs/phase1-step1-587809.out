@@ -1,0 +1,130 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal046  job: 587809  commit: fe1ca16 ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+scratch: /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu
+
+=== STEP 0/3: regression -- regenerate the original draw, require identical sha256 ===
+vocab_pool=6 min_pairs_per_class=3
+classes  dev      n_classes=  6 min_pairs/class= 3 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+  class  Prague       pairs= 4  correct=  8  alternative=  8
+  class  Seattle      pairs= 4  correct=  8  alternative=  8
+  class  Athens       pairs= 3  correct=  6  alternative=  6
+  class  Bristol      pairs= 3  correct=  6  alternative=  6
+  class  Dublin       pairs= 3  correct=  6  alternative=  6
+  class  Oslo         pairs= 3  correct=  6  alternative=  6
+classes  heldout  n_classes=  6 min_pairs/class=12 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+seed=20260827 lexicons=real templates=6 vocab_pool=6
+dev       10 pairs   40 records  sha256=977b3d6700387933  /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/orig/dev.jsonl
+heldout   40 pairs  160 records  sha256=88f69b628dce58ce  /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/orig/heldout.jsonl  (NOT INSPECTED)
+report   /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/orig/tokenization_report.json
+audit    pseudo  people 39/39  places 32/32  objects 30/30
+audit    rare    people 16/16  places 12/12  objects 19/19
+audit    real    people 24/24  places 21/21  objects 21/21
+audit    NONCE_PEOPLE   2/26 survived  (removed from LEXICONS)
+audit    NONCE_PLACES   2/24 survived  (removed from LEXICONS)
+audit    NONCE_OBJECTS  7/24 survived  (removed from LEXICONS)
+  dev.jsonl      regenerated=977b3d6700387933 manifest=977b3d6700387933 IDENTICAL
+  dev.jsonl      committed  =977b3d6700387933 matches manifest
+  heldout.jsonl  regenerated=88f69b628dce58ce manifest=88f69b628dce58ce IDENTICAL
+  heldout.jsonl  committed  =88f69b628dce58ce matches manifest
+regression exit=0/0
+
+=== STEP 1/3: fresh draw seed=20260917 pool_seed=20260827 n_heldout=60 ===
+dedupe   dev skipped=[]  heldout start_index=0 skipped=[44]
+vocab_pool=6 min_pairs_per_class=3
+classes  dev      n_classes=  0 min_pairs/class= 0 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+classes  heldout  n_classes=  6 min_pairs/class=19 (need >= 3)  thin=0 single_role=0 dup_prompts=0  OK
+seed=20260917 lexicons=real templates=6 vocab_pool=6
+dev        0 pairs    0 records  sha256=ef1db8ea9041e911  /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/h2/dev.jsonl
+heldout   60 pairs  240 records  sha256=3a06138a80aaad16  /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/h2/heldout.jsonl  (NOT INSPECTED)
+report   /scratch/djjay/mats12/tmp-phase1-step1-WpjVTu/h2/tokenization_report.json
+audit    pseudo  people 39/39  places 32/32  objects 30/30
+audit    rare    people 16/16  places 12/12  objects 19/19
+audit    real    people 24/24  places 21/21  objects 21/21
+audit    NONCE_PEOPLE   2/26 survived  (removed from LEXICONS)
+audit    NONCE_PLACES   2/24 survived  (removed from LEXICONS)
+audit    NONCE_OBJECTS  7/24 survived  (removed from LEXICONS)
+draw exit=0
+3a06138a80aaad16e55497060901dc7a8241982b90e1b51b11858bbcf961f779  results/datasets/heldout2.jsonl
+88f69b628dce58ceb066965e186e04d07e64524b0e0a0f8a8a5510fcfdbb430e  results/datasets/heldout.jsonl
+977b3d6700387933b637ec816934b5ecdd287e7496c820f85e0e48432a2d343c  results/datasets/dev.jsonl
+heldout2: 240 records
+
+=== STEP 2/3: behavioural eligibility screen on results/datasets/heldout2.jsonl ===
+[runlog] results/runs/20260917T192334Z-eligibility-screen  git=fe1ca164f6be28f725e6c6e43697d66f1fa25476 DIRTY  slurm=587809
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 952.82it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  15%|#4        | 62/426 [00:00<00:00, 578.67it/s]Loading weights:  38%|###7      | 160/426 [00:00<00:00, 751.50it/s]Loading weights:  55%|#####5    | 235/426 [00:00<00:00, 653.90it/s]Loading weights:  71%|#######   | 302/426 [00:00<00:00, 624.24it/s]Loading weights:  86%|########5 | 365/426 [00:00<00:00, 622.71it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 632.93it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[padding control] batched==unbatched: False (2/8 mismatched)
+[dataset] results/datasets/heldout2.jsonl  n_records=240 n_pairs=60 seed=20260917 vocab_pool=6
+  real   zero  AB=0.900 BA=0.850 all4=0.800 var=0.938 alt=0.000  [PASS]
+
+==============================================================
+HEADLINE  real/zero  pair_eligibility(AB) = 90.0%  -> PASS
+BEST      real/zero  = 90.0%  -> PASS
+==============================================================
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T192334Z-eligibility-screen/outputs/eligibility-screen.json
+screen exit=0
+
+=== STEP 3/3: frozen evaluation on heldout2 (dev re-scored for arm 3 mu only) ===
+[runlog] results/runs/20260917T193052Z-stage3-heldout-frozen  git=fe1ca164f6be28f725e6c6e43697d66f1fa25476 DIRTY  slurm=587809
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1891.88it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 22261.21it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 84.78it/s]
+[stage3] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers))  model_load=4.3s  dev n=40  heldout n=240
+[stage3] jlens: dev done
+[stage3] jlens: heldout done
+[stage3] logitlens: dev done
+[stage3] logitlens: heldout done
+[stage3] jlens_random_transport: dev done
+[stage3] jlens_random_transport: heldout done
+
+==================================================================
+  dev      jlens                  prequery L25  frac=0.550 ctrl=0.400 medrank=    357 n=40
+  dev      jlens                  relcomp  L30  frac=0.775 ctrl=0.350 medrank=    119 n=40
+  dev      jlens                  qmark    L27  frac=0.675 ctrl=0.350 medrank=    116 n=40
+  dev      jlens                  final    L27  frac=0.975 ctrl=0.375 medrank=     37 n=40
+  dev      logitlens              prequery L24  frac=0.525 ctrl=0.500 medrank=  78568 n=40
+  dev      logitlens              relcomp  L30  frac=0.675 ctrl=0.400 medrank=    272 n=40
+  dev      logitlens              qmark    L29  frac=0.725 ctrl=0.350 medrank=     87 n=40
+  dev      logitlens              final    L30  frac=0.900 ctrl=0.375 medrank=     20 n=40
+  dev      jlens_random_transport prequery L25  frac=0.500 ctrl=0.450 medrank= 153610 n=40
+  dev      jlens_random_transport relcomp  L30  frac=0.525 ctrl=0.450 medrank= 161894 n=40
+  dev      jlens_random_transport qmark    L27  frac=0.475 ctrl=0.525 medrank= 168934 n=40
+  dev      jlens_random_transport final    L27  frac=0.450 ctrl=0.550 medrank= 148138 n=40
+  heldout  jlens                  prequery L25  frac=0.496 ctrl=0.525 medrank=    394 n=240
+  heldout  jlens                  relcomp  L30  frac=0.733 ctrl=0.496 medrank=    132 n=240
+  heldout  jlens                  qmark    L27  frac=0.667 ctrl=0.454 medrank=     93 n=240
+  heldout  jlens                  final    L27  frac=0.942 ctrl=0.508 medrank=     21 n=240
+  heldout  logitlens              prequery L24  frac=0.512 ctrl=0.492 medrank=  72325 n=240
+  heldout  logitlens              relcomp  L30  frac=0.692 ctrl=0.504 medrank=    367 n=240
+  heldout  logitlens              qmark    L29  frac=0.750 ctrl=0.467 medrank=    106 n=240
+  heldout  logitlens              final    L30  frac=0.900 ctrl=0.479 medrank=     15 n=240
+  heldout  jlens_random_transport prequery L25  frac=0.504 ctrl=0.508 medrank= 135039 n=240
+  heldout  jlens_random_transport relcomp  L30  frac=0.504 ctrl=0.529 medrank= 156481 n=240
+  heldout  jlens_random_transport qmark    L27  frac=0.512 ctrl=0.487 medrank= 170558 n=240
+  heldout  jlens_random_transport final    L27  frac=0.529 ctrl=0.487 medrank= 149607 n=240
+------------------------------------------------------------------
+  shadow dev      prequery meanIntMargin=+0.005 neg=18/40
+  shadow dev      relcomp  meanIntMargin=+1.295 neg=9/40
+  shadow dev      qmark    meanIntMargin=+2.281 neg=9/40
+  shadow dev      final    meanIntMargin=+2.728 neg=3/40
+  shadow heldout  prequery meanIntMargin=+0.049 neg=119/240
+  shadow heldout  relcomp  meanIntMargin=+1.342 neg=61/240
+  shadow heldout  qmark    meanIntMargin=+2.225 neg=56/240
+  shadow heldout  final    meanIntMargin=+2.684 neg=14/240
+------------------------------------------------------------------
+  arm3   prequery L30 dev_acc=0.525 heldout_acc=0.487 heldout_scored=240/240
+  arm3   relcomp  L30 dev_acc=0.550 heldout_acc=0.508 heldout_scored=240/240
+  arm3   qmark    L30 dev_acc=0.725 heldout_acc=0.721 heldout_scored=240/240
+  arm3   final    L30 dev_acc=0.775 heldout_acc=0.617 heldout_scored=240/240
+==================================================================
+anchor failures: {'dev': 0, 'heldout': 0}
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T193052Z-stage3-heldout-frozen/outputs/stage3-heldout-frozen.json
+frozen-eval exit=0
+
+=== PHASE 1 STEP 1 COMPLETE (regression rc=0, draw rc=0, screen rc=0, eval rc=0) ===
+results/runs/20260830T182516Z-stage3-window-shadow-audit/
+results/runs/20260917T192334Z-eligibility-screen/
+results/runs/20260917T193052Z-stage3-heldout-frozen/

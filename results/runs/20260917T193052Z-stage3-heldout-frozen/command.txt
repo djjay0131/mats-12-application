@@ -1,0 +1,2 @@
+/scratch/djjay/mats12/venv/bin/python experiments/stage3/heldout_frozen.py --heldout results/datasets/heldout2.jsonl
+# cwd: /scratch/djjay/mats12/repo

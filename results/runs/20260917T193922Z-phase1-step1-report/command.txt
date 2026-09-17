@@ -1,0 +1,2 @@
+/usr/bin/python3 experiments/phase1/step1_report.py --original results/runs/20260830T175149Z-stage3-heldout-frozen --new results/runs/20260917T193052Z-stage3-heldout-frozen
+# cwd: /home/djjay/code/mats-12-application

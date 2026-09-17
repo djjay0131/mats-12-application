@@ -853,5 +853,28 @@ re-queued:
 
 ### Result
 
-*(filled after the run; job id, run ids, commit, numbers with n, and which
-branch of R0–R3 fired. Full note: `results/phase1/step1-heldout2.md`.)*
+Falcon **587809**, L40S, 14:55, exit 0 on all four steps, commit `fe1ca16`.
+Runs `20260917T192334Z-eligibility-screen` (heldout2, 0.900 PASS),
+`20260917T193052Z-stage3-heldout-frozen` (scoring), and
+`20260917T193922Z-phase1-step1-report` (tables). Draw: 60 pairs / 240
+records, index 44 skipped, 0 duplicate prompts, 0 contact with dev or the
+original held-out (R0: nothing excluded). Full note with every table:
+`results/phase1/step1-heldout2.md`. All numbers agent-unverified.
+
+- **R1 REPLICATES.** New draw, J-Lens at relcomp: frac **0.733** vs
+  label-permutation control 0.496 (gap +0.237 ≥ 0.10), n=240; qmark 0.667
+  vs 0.454. Random transport flat (0.50–0.53). Median rank 132 (logit lens
+  367). Combined n=400: relcomp 0.752 vs 0.505, rank 129.
+- **R2 inside the band, at its edge.** Combined J-Lens accuracy on
+  model-wrong records at relcomp **0.258 (n=93)**; the new draw alone is
+  **0.213 (n=61)** — below 0.25. qmark: new 0.089 (n=56), combined 0.104
+  (n=96). r(lens margin, model margin) on the new draw +0.913 / +0.918.
+- **R3 not contradicted** (0.213 ≪ 0.60).
+- Arm 3 transfers as before: new relcomp 0.508, qmark 0.721 (original
+  0.525 / 0.731).
+- One prediction missed: shadow frac at relcomp was 0.733, just under the
+  predicted 0.75–0.85. The other seven landed.
+
+### Hour gate — Jason confirms
+
+- Decision: CONTINUE to step 2 / other — *pending*

@@ -1,0 +1,65 @@
+[runlog] results/runs/20260917T193922Z-phase1-step1-report  git=fe1ca164f6be28f725e6c6e43697d66f1fa25476 DIRTY  slurm=None
+original run: results/runs/20260830T175149Z-stage3-heldout-frozen
+new run:      results/runs/20260917T193052Z-stage3-heldout-frozen
+heldout2 records: 240  dup-with-dev (excluded): 0  dup-with-heldout (kept in new, dropped from combined): 0
+n scored: original=160 new=240 combined=400
+
+== original
+  jlens                  prequery frac=0.512 ctrl=0.519 medrank=    373 n=160  shadow=0.481 modelWRONG n= 78 acc=0.282 r=+0.712
+  jlens                  relcomp  frac=0.781 ctrl=0.519 medrank=    128 n=160  shadow=0.800 modelWRONG n= 32 acc=0.344 r=+0.884
+  jlens                  qmark    frac=0.669 ctrl=0.556 medrank=     95 n=160  shadow=0.731 modelWRONG n= 40 acc=0.125 r=+0.916
+  jlens                  final    frac=0.956 ctrl=0.544 medrank=     21 n=160  shadow=0.931 modelWRONG n=  9 acc=0.667 r=+0.656
+  logitlens              prequery frac=0.487 ctrl=0.481 medrank=  76276 n=160  shadow=0.481 modelWRONG n= 78 acc=0.462 r=+0.320
+  logitlens              relcomp  frac=0.688 ctrl=0.519 medrank=    393 n=160  shadow=0.800 modelWRONG n= 32 acc=0.250 r=+0.707
+  logitlens              qmark    frac=0.738 ctrl=0.544 medrank=     82 n=160  shadow=0.731 modelWRONG n= 40 acc=0.200 r=+0.924
+  logitlens              final    frac=0.912 ctrl=0.512 medrank=     15 n=160  shadow=0.931 modelWRONG n=  9 acc=0.333 r=+0.815
+  jlens_random_transport prequery frac=0.494 ctrl=0.481 medrank= 131558 n=160  shadow=0.481 modelWRONG n= 78 acc=0.564 r=-0.165
+  jlens_random_transport relcomp  frac=0.525 ctrl=0.450 medrank= 167252 n=160  shadow=0.800 modelWRONG n= 32 acc=0.656 r=+0.034
+  jlens_random_transport qmark    frac=0.506 ctrl=0.456 medrank= 170491 n=160  shadow=0.731 modelWRONG n= 40 acc=0.725 r=-0.225
+  jlens_random_transport final    frac=0.537 ctrl=0.481 medrank= 142513 n=160  shadow=0.931 modelWRONG n=  9 acc=0.556 r=-0.085
+  arm3 (diff-in-means)   prequery acc=0.506 scored=160/160 L30
+  arm3 (diff-in-means)   relcomp  acc=0.525 scored=160/160 L30
+  arm3 (diff-in-means)   qmark    acc=0.731 scored=160/160 L30
+  arm3 (diff-in-means)   final    acc=0.725 scored=160/160 L30
+
+== new
+  jlens                  prequery frac=0.496 ctrl=0.525 medrank=    394 n=240  shadow=0.496 modelWRONG n=119 acc=0.235 r=+0.696
+  jlens                  relcomp  frac=0.733 ctrl=0.496 medrank=    132 n=240  shadow=0.733 modelWRONG n= 61 acc=0.213 r=+0.913
+  jlens                  qmark    frac=0.667 ctrl=0.454 medrank=     93 n=240  shadow=0.758 modelWRONG n= 56 acc=0.089 r=+0.918
+  jlens                  final    frac=0.942 ctrl=0.508 medrank=     21 n=240  shadow=0.942 modelWRONG n= 14 acc=0.571 r=+0.737
+  logitlens              prequery frac=0.512 ctrl=0.492 medrank=  72325 n=240  shadow=0.496 modelWRONG n=119 acc=0.420 r=+0.295
+  logitlens              relcomp  frac=0.692 ctrl=0.504 medrank=    367 n=240  shadow=0.733 modelWRONG n= 61 acc=0.246 r=+0.773
+  logitlens              qmark    frac=0.750 ctrl=0.467 medrank=    106 n=240  shadow=0.758 modelWRONG n= 56 acc=0.196 r=+0.919
+  logitlens              final    frac=0.900 ctrl=0.479 medrank=     15 n=240  shadow=0.942 modelWRONG n= 14 acc=0.286 r=+0.833
+  jlens_random_transport prequery frac=0.504 ctrl=0.508 medrank= 135039 n=240  shadow=0.496 modelWRONG n=119 acc=0.521 r=-0.092
+  jlens_random_transport relcomp  frac=0.504 ctrl=0.529 medrank= 156481 n=240  shadow=0.733 modelWRONG n= 61 acc=0.607 r=+0.012
+  jlens_random_transport qmark    frac=0.512 ctrl=0.487 medrank= 170558 n=240  shadow=0.758 modelWRONG n= 56 acc=0.571 r=-0.158
+  jlens_random_transport final    frac=0.529 ctrl=0.487 medrank= 149607 n=240  shadow=0.942 modelWRONG n= 14 acc=0.714 r=-0.065
+  arm3 (diff-in-means)   prequery acc=0.487 scored=240/240 L30
+  arm3 (diff-in-means)   relcomp  acc=0.508 scored=240/240 L30
+  arm3 (diff-in-means)   qmark    acc=0.721 scored=240/240 L30
+  arm3 (diff-in-means)   final    acc=0.617 scored=240/240 L30
+
+== combined
+  jlens                  prequery frac=0.502 ctrl=0.522 medrank=    387 n=400  shadow=0.490 modelWRONG n=197 acc=0.254 r=+0.702
+  jlens                  relcomp  frac=0.752 ctrl=0.505 medrank=    129 n=400  shadow=0.760 modelWRONG n= 93 acc=0.258 r=+0.903
+  jlens                  qmark    frac=0.667 ctrl=0.495 medrank=     93 n=400  shadow=0.748 modelWRONG n= 96 acc=0.104 r=+0.917
+  jlens                  final    frac=0.948 ctrl=0.522 medrank=     21 n=400  shadow=0.938 modelWRONG n= 23 acc=0.609 r=+0.710
+  logitlens              prequery frac=0.502 ctrl=0.487 medrank=  74076 n=400  shadow=0.490 modelWRONG n=197 acc=0.436 r=+0.305
+  logitlens              relcomp  frac=0.690 ctrl=0.510 medrank=    380 n=400  shadow=0.760 modelWRONG n= 93 acc=0.247 r=+0.748
+  logitlens              qmark    frac=0.745 ctrl=0.497 medrank=     98 n=400  shadow=0.748 modelWRONG n= 96 acc=0.198 r=+0.921
+  logitlens              final    frac=0.905 ctrl=0.492 medrank=     15 n=400  shadow=0.938 modelWRONG n= 23 acc=0.304 r=+0.826
+  jlens_random_transport prequery frac=0.500 ctrl=0.497 medrank= 131824 n=400  shadow=0.490 modelWRONG n=197 acc=0.538 r=-0.121
+  jlens_random_transport relcomp  frac=0.512 ctrl=0.497 medrank= 160954 n=400  shadow=0.760 modelWRONG n= 93 acc=0.624 r=+0.020
+  jlens_random_transport qmark    frac=0.510 ctrl=0.475 medrank= 170491 n=400  shadow=0.748 modelWRONG n= 96 acc=0.635 r=-0.185
+  jlens_random_transport final    frac=0.532 ctrl=0.485 medrank= 146436 n=400  shadow=0.938 modelWRONG n= 23 acc=0.652 r=-0.072
+  arm3 (diff-in-means)   prequery acc=0.495 scored=400/400 L30
+  arm3 (diff-in-means)   relcomp  acc=0.515 scored=400/400 L30
+  arm3 (diff-in-means)   qmark    acc=0.725 scored=400/400 L30
+  arm3 (diff-in-means)   final    acc=0.660 scored=400/400 L30
+
+== pre-registered rules
+  R1 replicate: jlens frac - ctrl at relcomp (new) = 0.2375  (>= 0.1 required)  -> REPLICATES
+  R2 band: combined jlens acc on model-wrong records at relcomp = 0.2581 (n=93); band (0.25, 0.45) -> inside band
+
+wrote /home/djjay/code/mats-12-application/results/runs/20260917T193922Z-phase1-step1-report/outputs/step1-report.json
