@@ -1,0 +1,65 @@
+{
+  "slug": "phase1-step5-lr-probe",
+  "started_utc": "2026-09-17T20:37:40.875703+00:00",
+  "argv": [
+    "experiments/phase1/step5_lr_probe.py",
+    "--residual-dir",
+    "/scratch/djjay/mats12/phase1/residuals",
+    "--step2-run",
+    "results/runs/20260917T202900Z-phase1-step2-fact-tokens",
+    "--jobs",
+    "16"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "7c557331d103941e6b9ea37a1d3f767c474be58a",
+    "branch": "research/phase1",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260917T202853Z-phase1-step4-resample/",
+      "?? results/runs/20260917T202900Z-phase1-step2-fact-tokens/",
+      "?? results/runs/20260917T202907Z-phase1-step3-patching/",
+      "?? results/slurm-logs/phase1-step2-587865.out",
+      "?? results/slurm-logs/phase1-step3-587866.out",
+      "?? results/slurm-logs/phase1-step4-587867.out",
+      "?? results/slurm-logs/phase1-step5-587868.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal038",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "587868",
+    "SLURM_JOB_NAME": "mats12-p1s5",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal038",
+    "SLURM_JOB_GPUS": "2"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "residual_dir": "/scratch/djjay/mats12/phase1/residuals",
+    "step2_run": "results/runs/20260917T202900Z-phase1-step2-fact-tokens",
+    "note": "LR vs diff-in-means, leave-one-pair-out on combined held-out; no selection"
+  },
+  "status": "ok",
+  "finished_utc": "2026-09-17T20:46:37.505529+00:00",
+  "outputs": [
+    "step5-lr-probe.json"
+  ]
+}

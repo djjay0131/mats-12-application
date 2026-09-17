@@ -1,0 +1,21 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal043 job: 587883 commit: 6c8e7f3 step2: results/runs/20260917T202900Z-phase1-step2-fact-tokens ===
+[runlog] results/runs/20260917T205754Z-phase1-step5-breakdown  git=6c8e7f31dd1cb2438fda69966e23cfbc65a4e5a4 DIRTY  slurm=587883
+[prequery/CITY] all: LR 0.4775 (400) DiM 0.5075  AB: LR 0.495 (200) DiM 0.725  BA: LR 0.46 (200) DiM 0.29  heldout: LR 0.4938 (160) DiM 0.5188  heldout2: LR 0.4667 (240) DiM 0.5  model_wrong: LR 0.4242 (198) DiM 0.2727  model_right: LR 0.5327 (199) DiM 0.7387
+    by template: T1: 0.4861  T2: 0.4265  T3: 0.5  T4: 0.5  T5: 0.4706  T6: 0.4853
+[relcomp/CITY] all: LR 0.8975 (400) DiM 0.62  AB: LR 0.87 (200) DiM 0.63  BA: LR 0.925 (200) DiM 0.61  heldout: LR 0.8625 (160) DiM 0.6375  heldout2: LR 0.9208 (240) DiM 0.6083  model_wrong: LR 0.8495 (93) DiM 0.5699  model_right: LR 0.9109 (303) DiM 0.637
+    by template: T1: 1.0  T2: 0.9412  T3: 0.8833  T4: 0.9531  T5: 0.8824  T6: 0.7206
+[qmark/CITY] all: LR 0.945 (400) DiM 0.7  AB: LR 0.935 (200) DiM 0.4  BA: LR 0.955 (200) DiM 1.0  heldout: LR 0.95 (160) DiM 0.6875  heldout2: LR 0.9417 (240) DiM 0.7083  model_wrong: LR 0.8878 (98) DiM 0.2245  model_right: LR 0.9666 (299) DiM 0.8629
+    by template: T1: 1.0  T2: 0.9559  T3: 0.95  T4: 0.9688  T5: 1.0  T6: 0.7941
+[final/CITY] all: LR 0.9975 (400) DiM 0.8675  AB: LR 0.995 (200) DiM 0.835  BA: LR 1.0 (200) DiM 0.9  heldout: LR 0.9938 (160) DiM 0.8875  heldout2: LR 1.0 (240) DiM 0.8542  model_wrong: LR 1.0 (24) DiM 0.375  model_right: LR 0.9973 (374) DiM 0.9011
+    by template: T1: 1.0  T2: 1.0  T3: 0.9833  T4: 1.0  T5: 1.0  T6: 1.0
+[city/PERSON] all: LR 0.74 (800) DiM 0.5138  AB: LR 0.7525 (400) DiM 0.5275  BA: LR 0.7275 (400) DiM 0.5  heldout: LR 0.7469 (320) DiM 0.5125  heldout2: LR 0.7354 (480) DiM 0.5146  first_sentence: LR 0.7625 (400) DiM 0.525  second_sentence: LR 0.7175 (400) DiM 0.5025  role_q: LR 0.75 (400) DiM 0.525  role_d: LR 0.73 (400) DiM 0.5025
+    by template: T1: 0.7917  T2: 0.7353  T3: 0.7167  T4: 0.7422  T5: 0.7059  T6: 0.7426
+[person/CITY] all: LR 0.7087 (800) DiM 0.52  AB: LR 0.7075 (400) DiM 0.5225  BA: LR 0.71 (400) DiM 0.5175  heldout: LR 0.7125 (320) DiM 0.5156  heldout2: LR 0.7063 (480) DiM 0.5229  first_sentence: LR 0.5 (400) DiM 0.5  second_sentence: LR 0.9175 (400) DiM 0.54  role_q: LR 0.71 (400) DiM 0.5175  role_d: LR 0.7075 (400) DiM 0.5225
+    by template: T1: 0.7014  T2: 0.7132  T3: 0.7  T4: 0.7031  T5: 0.7132  T6: 0.7206
+[period/PERSON] all: LR 0.9275 (800) DiM 0.525  AB: LR 0.9375 (400) DiM 0.5175  BA: LR 0.9175 (400) DiM 0.5325  heldout: LR 0.9344 (320) DiM 0.5312  heldout2: LR 0.9229 (480) DiM 0.5208  first_sentence: LR 1.0 (400) DiM 1.0  second_sentence: LR 0.855 (400) DiM 0.05  role_q: LR 0.9175 (400) DiM 0.5325  role_d: LR 0.9375 (400) DiM 0.5175
+    by template: T1: 0.9583  T2: 0.8971  T3: 0.9833  T4: 0.9219  T5: 0.8603  T6: 0.9485
+[period/CITY] all: LR 1.0 (800) DiM 0.6062  AB: LR 1.0 (400) DiM 0.61  BA: LR 1.0 (400) DiM 0.6025  heldout: LR 1.0 (320) DiM 0.6094  heldout2: LR 1.0 (480) DiM 0.6042  first_sentence: LR 1.0 (400) DiM 1.0  second_sentence: LR 1.0 (400) DiM 0.2125  role_q: LR 1.0 (400) DiM 0.6025  role_d: LR 1.0 (400) DiM 0.61
+    by template: T1: 1.0  T2: 1.0  T3: 1.0  T4: 1.0  T5: 1.0  T6: 1.0
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T205754Z-phase1-step5-breakdown/outputs/step5-breakdown.json  1588s
+exit=0
