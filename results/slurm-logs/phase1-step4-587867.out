@@ -1,0 +1,61 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal038  job: 587867  commit: 7c55733 ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+=== smoke (2 records/split; run dir deleted) ===
+[runlog] results/runs/20260917T202806Z-phase1-step4-resample  git=7c557331d103941e6b9ea37a1d3f767c474be58a DIRTY  slurm=587867
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1694.67it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  11%|#         | 46/426 [00:00<00:00, 434.53it/s]Loading weights:  28%|##7       | 118/426 [00:00<00:00, 589.58it/s]Loading weights:  43%|####3     | 185/426 [00:00<00:00, 624.99it/s]Loading weights:  58%|#####8    | 248/426 [00:00<00:00, 536.91it/s]Loading weights:  80%|#######9  | 340/426 [00:00<00:00, 651.35it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 652.50it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 137.73it/s]
+[step4] pool=21 single-token objects  load=16.0s
+======================================================================
+  combined jlens     prequery NEWvsOLD mod=0.750 (medrank new 8282) unmod=0.000 | NEWvsALT mod=0.750 | CITY mod=0.750 n=4
+  combined jlens     relcomp  NEWvsOLD mod=1.000 (medrank new 1449) unmod=0.250 | NEWvsALT mod=1.000 | CITY mod=1.000 n=4
+  combined jlens     qmark    NEWvsOLD mod=1.000 (medrank new 68) unmod=0.000 | NEWvsALT mod=0.500 | CITY mod=0.250 n=4
+  combined jlens     final    NEWvsOLD mod=1.000 (medrank new 0) unmod=0.000 | NEWvsALT mod=1.000 | CITY mod=1.000 n=4
+  combined logitlens prequery NEWvsOLD mod=0.750 (medrank new 77006) unmod=0.000 | NEWvsALT mod=0.250 | CITY mod=0.500 n=4
+  combined logitlens relcomp  NEWvsOLD mod=1.000 (medrank new 6119) unmod=0.250 | NEWvsALT mod=0.750 | CITY mod=1.000 n=4
+  combined logitlens qmark    NEWvsOLD mod=1.000 (medrank new 35) unmod=0.000 | NEWvsALT mod=0.500 | CITY mod=0.500 n=4
+  combined logitlens final    NEWvsOLD mod=1.000 (medrank new 0) unmod=0.000 | NEWvsALT mod=1.000 | CITY mod=1.000 n=4
+  combined model     prequery NEWvsOLD mod=1.000 unmod=0.000 n=4
+  combined model     relcomp  NEWvsOLD mod=1.000 unmod=0.250 n=4
+  combined model     qmark    NEWvsOLD mod=1.000 unmod=0.000 n=4
+  combined model     final    NEWvsOLD mod=1.000 unmod=0.000 n=4
+failed records: 0
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T202806Z-phase1-step4-resample/outputs/step4-resample.json
+smoke exit=0 dir=results/runs/20260917T202806Z-phase1-step4-resample
+=== STEP 4: full run ===
+[runlog] results/runs/20260917T202853Z-phase1-step4-resample  git=7c557331d103941e6b9ea37a1d3f767c474be58a DIRTY  slurm=587867
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1655.86it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 20302.63it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 270.46it/s]
+[step4] pool=21 single-token objects  load=3.2s
+[step4] dev 40/40  39s
+[step4] heldout 40/160  74s
+[step4] heldout 80/160  109s
+[step4] heldout 120/160  143s
+[step4] heldout 160/160  178s
+[step4] heldout2 40/240  213s
+[step4] heldout2 80/240  248s
+[step4] heldout2 120/240  282s
+[step4] heldout2 160/240  317s
+[step4] heldout2 200/240  352s
+[step4] heldout2 240/240  387s
+======================================================================
+  combined jlens     prequery NEWvsOLD mod=0.900 (medrank new 9103) unmod=0.035 | NEWvsALT mod=0.450 | CITY mod=0.487 n=400
+  combined jlens     relcomp  NEWvsOLD mod=0.970 (medrank new 618) unmod=0.045 | NEWvsALT mod=0.632 | CITY mod=0.740 n=400
+  combined jlens     qmark    NEWvsOLD mod=0.993 (medrank new 99) unmod=0.000 | NEWvsALT mod=0.767 | CITY mod=0.677 n=400
+  combined jlens     final    NEWvsOLD mod=1.000 (medrank new 0) unmod=0.000 | NEWvsALT mod=0.980 | CITY mod=0.955 n=400
+  combined logitlens prequery NEWvsOLD mod=0.670 (medrank new 87308) unmod=0.035 | NEWvsALT mod=0.273 | CITY mod=0.512 n=400
+  combined logitlens relcomp  NEWvsOLD mod=0.963 (medrank new 1898) unmod=0.052 | NEWvsALT mod=0.642 | CITY mod=0.690 n=400
+  combined logitlens qmark    NEWvsOLD mod=0.978 (medrank new 67) unmod=0.000 | NEWvsALT mod=0.650 | CITY mod=0.738 n=400
+  combined logitlens final    NEWvsOLD mod=1.000 (medrank new 0) unmod=0.000 | NEWvsALT mod=0.940 | CITY mod=0.922 n=400
+  combined model     prequery NEWvsOLD mod=1.000 unmod=0.005 n=400
+  combined model     relcomp  NEWvsOLD mod=0.983 unmod=0.045 n=400
+  combined model     qmark    NEWvsOLD mod=1.000 unmod=0.000 n=400
+  combined model     final    NEWvsOLD mod=1.000 unmod=0.000 n=400
+failed records: 0
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T202853Z-phase1-step4-resample/outputs/step4-resample.json
+step4 exit=0
+=== PHASE 1 STEP 4 COMPLETE rc=0 ===

@@ -1,0 +1,2 @@
+/scratch/djjay/mats12/venv/bin/python experiments/phase1/step4_resample.py
+# cwd: /scratch/djjay/mats12/repo

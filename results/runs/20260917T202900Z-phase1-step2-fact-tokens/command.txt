@@ -1,0 +1,2 @@
+/scratch/djjay/mats12/venv/bin/python experiments/phase1/step2_fact_tokens.py --residual-dir /scratch/djjay/mats12/phase1/residuals
+# cwd: /scratch/djjay/mats12/repo

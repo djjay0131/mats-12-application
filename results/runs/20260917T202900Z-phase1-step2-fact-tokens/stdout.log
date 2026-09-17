@@ -1,0 +1,39 @@
+[runlog] results/runs/20260917T202900Z-phase1-step2-fact-tokens  git=7c557331d103941e6b9ea37a1d3f767c474be58a DIRTY  slurm=587865
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1702.58it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 12414.01it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 308.68it/s]
+[step2] JacobianLens(d_model=2560, n_prompts=1000, source_layers=[0..30] (31 layers)) n_layers=32 load=3.2s
+[step2] dev 40/40  29s
+[step2] saved residuals dev -> /scratch/djjay/mats12/phase1/residuals/dev.pt
+[step2] heldout 40/160  54s
+[step2] heldout 80/160  78s
+[step2] heldout 120/160  102s
+[step2] heldout 160/160  126s
+[step2] saved residuals heldout -> /scratch/djjay/mats12/phase1/residuals/heldout.pt
+[step2] heldout2 40/240  151s
+[step2] heldout2 80/240  175s
+[step2] heldout2 120/240  200s
+[step2] heldout2 160/240  224s
+[step2] heldout2 200/240  249s
+[step2] heldout2 240/240  273s
+[step2] saved residuals heldout2 -> /scratch/djjay/mats12/phase1/residuals/heldout2.pt
+[arm3] prequery CITY   devsel=L30 L30: devLOPO=0.525 ho=0.5062 ho2=0.4875 comb=0.495 ctrl=0.5375
+[arm3] relcomp  CITY   devsel=L31 L30: devLOPO=0.5 ho=0.525 ho2=0.5083 comb=0.515 ctrl=0.52
+[arm3] qmark    CITY   devsel=L31 L30: devLOPO=0.7 ho=0.7312 ho2=0.7208 comb=0.725 ctrl=0.4925
+[arm3] final    CITY   devsel=L31 L30: devLOPO=0.625 ho=0.725 ho2=0.6167 comb=0.66 ctrl=0.5075
+[arm3] city     PERSON devsel=L31 L30: devLOPO=0.5312 ho=0.5312 ho2=0.526 comb=0.5284 ctrl=0.4773
+[arm3] person   CITY   devsel=L29 L30: devLOPO=0.5125 ho=0.5 ho2=0.5042 comb=0.5025 ctrl=0.4763
+[arm3] period   PERSON devsel=L31 L30: devLOPO=0.5938 ho=0.6062 ho2=0.6094 comb=0.608 ctrl=0.4744
+[arm3] period   CITY   devsel=L31 L30: devLOPO=0.7 ho=0.6531 ho2=0.6708 comb=0.6637 ctrl=0.5025
+======================================================================
+fact-position failures: {}
+  combined/jlens/city/PERSON           L30: frac=0.537 ctrl=0.500 n=800   max L27: 0.625
+  combined/jlens/person/CITY           L30: frac=0.295 ctrl=0.520 n=800   max L2: 0.499
+  combined/jlens/period/PERSON         L30: frac=0.501 ctrl=0.511 n=800   max L10: 0.729
+  combined/jlens/period/CITY           L30: frac=0.559 ctrl=0.507 n=800   max L9: 0.871
+  combined/logitlens/city/PERSON       L30: frac=0.519 ctrl=0.492 n=800   max L27: 0.585
+  combined/logitlens/period/CITY       L30: frac=0.588 ctrl=0.517 n=800   max L25: 0.704
+  combined/jlens/relcomp/CITY          L30: frac=0.752 ctrl=0.507 medrank=129 n=400
+  combined/jlens/qmark/CITY            L27: frac=0.665 ctrl=0.497 medrank=93 n=400
+  combined/logitlens/relcomp/CITY      L30: frac=0.693 ctrl=0.510 medrank=380 n=400
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T202900Z-phase1-step2-fact-tokens/outputs/step2-fact-tokens.json

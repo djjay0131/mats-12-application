@@ -1,0 +1,63 @@
+{
+  "slug": "phase1-step2-fact-tokens",
+  "started_utc": "2026-09-17T20:29:00.485039+00:00",
+  "argv": [
+    "experiments/phase1/step2_fact_tokens.py",
+    "--residual-dir",
+    "/scratch/djjay/mats12/phase1/residuals"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "7c557331d103941e6b9ea37a1d3f767c474be58a",
+    "branch": "research/phase1",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260917T202853Z-phase1-step4-resample/",
+      "?? results/slurm-logs/phase1-step2-587865.out",
+      "?? results/slurm-logs/phase1-step3-587866.out",
+      "?? results/slurm-logs/phase1-step4-587867.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal043",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "587865",
+    "SLURM_JOB_NAME": "mats12-p1s2",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal043",
+    "SLURM_JOB_GPUS": "0"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "lens_repo": "neuronpedia/jacobian-lens",
+    "lens_revision": "qwen-n1000",
+    "freeze": "experiments/stage3/freeze.json",
+    "residual_dir": "/scratch/djjay/mats12/phase1/residuals",
+    "note": "fact-token probes at all layers; arm 3 dev-fit LOPO; no held-out selection"
+  },
+  "status": "ok",
+  "finished_utc": "2026-09-17T20:34:05.472112+00:00",
+  "outputs": [
+    "step2-fact-tokens.json",
+    "step2-records.json.gz"
+  ]
+}
