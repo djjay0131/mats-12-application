@@ -206,7 +206,8 @@ def pair_to_records(tok: Any, pair: tt.Pair, prompt_n_tokens: int) -> list[dict]
 
 def build_split(tok: Any, *, lexicons: list[str], n_pairs: int, seed: int,
                 start_index: int, shot: str,
-                vocab_pool: int = 0) -> tuple[list[tt.Pair], list[dict]]:
+                vocab_pool: int = 0, pool_seed: int | None = None,
+                id_prefix: str = "") -> tuple[list[tt.Pair], list[dict]]:
     """Build `n_pairs` pairs, cycling the lexicon across pairs.
 
     Cycling keeps the requested pair counts exact while still covering more
@@ -216,6 +217,12 @@ def build_split(tok: Any, *, lexicons: list[str], n_pairs: int, seed: int,
     per-pair `seed + idx`. That is what makes the shared pool identical for dev
     and held-out, which is in turn what makes "fit mu on dev, apply unchanged to
     held-out" mean anything.
+
+    `pool_seed` (Phase 1, 2026-09-17) overrides that base seed for the POOL
+    ONLY, so a fresh draw under a new `seed` can keep the original six-word
+    pool. `None` keeps the pre-Phase-1 behaviour exactly. `id_prefix` is
+    prepended to every pair_id so a second held-out draw cannot collide with
+    the original ids.
     """
     pairs: list[tt.Pair] = []
     for k in range(n_pairs):
@@ -223,7 +230,9 @@ def build_split(tok: Any, *, lexicons: list[str], n_pairs: int, seed: int,
         idx = start_index + k
         built = tt.build_pairs(tok, n_pairs=1, seed=seed + idx, lexicon=lex,
                                shot=shot, start_index=idx,
-                               vocab_pool=vocab_pool, pool_seed=seed)
+                               vocab_pool=vocab_pool,
+                               pool_seed=(seed if pool_seed is None else pool_seed),
+                               id_prefix=id_prefix)
         pairs.extend(built)
 
     records: list[dict] = []
@@ -324,6 +333,13 @@ def main(argv: list[str] | None = None) -> int:
                          "pairs from one shared pool of this many words. "
                          "0 disables pooling (fresh words per pair) and will "
                          "fail the class-support self-check.")
+    ap.add_argument("--pool-seed", type=int, default=None,
+                    help="seed for the shared vocab pool ONLY (default: --seed). "
+                         "Phase 1 uses this to draw new pairs under a new --seed "
+                         "while keeping the original pool.")
+    ap.add_argument("--id-prefix", default="",
+                    help="prefix for every pair_id/record_id (e.g. 'h2-') so a "
+                         "second draw cannot collide with the original ids")
     ap.add_argument("--min-pairs-per-class", type=int,
                     default=DEFAULT_MIN_PAIRS_PER_CLASS,
                     help="every intermediate class must occur in at least this "
@@ -415,10 +431,12 @@ def main(argv: list[str] | None = None) -> int:
 
     dev_pairs, dev_recs = build_split(
         tok, lexicons=lexicons, n_pairs=args.n_dev, seed=args.seed,
-        start_index=0, shot=args.shot, vocab_pool=args.vocab_pool)
+        start_index=0, shot=args.shot, vocab_pool=args.vocab_pool,
+        pool_seed=args.pool_seed, id_prefix=args.id_prefix)
     ho_pairs, ho_recs = build_split(
         tok, lexicons=lexicons, n_pairs=args.n_heldout, seed=args.seed,
-        start_index=args.n_dev, shot=args.shot, vocab_pool=args.vocab_pool)
+        start_index=args.n_dev, shot=args.shot, vocab_pool=args.vocab_pool,
+        pool_seed=args.pool_seed, id_prefix=args.id_prefix)
 
     assert not (set(p.pair_id for p in dev_pairs) &
                 set(p.pair_id for p in ho_pairs)), "dev/held-out overlap"
@@ -461,6 +479,11 @@ def main(argv: list[str] | None = None) -> int:
               "lexicons": lexicons, "shot": args.shot,
               "vocab_pool": args.vocab_pool,
               "framing": "method evaluation, not circuit discovery"}
+    if args.pool_seed is not None or args.id_prefix:
+        # Only a non-default draw carries these keys, so the byte-identical
+        # regeneration of the original dev/heldout files stays byte-identical.
+        common["pool_seed"] = args.pool_seed
+        common["id_prefix"] = args.id_prefix
     dev_path = os.path.join(args.out, "dev.jsonl")
     ho_path = os.path.join(args.out, "heldout.jsonl")
     dev_hash = write_jsonl(dev_path, DEV_HEADER, dev_recs,
@@ -497,6 +520,8 @@ def main(argv: list[str] | None = None) -> int:
         "seed": args.seed, "model": args.model, "revision": args.revision,
         "lexicons": lexicons, "shot": args.shot,
         "vocab_pool": args.vocab_pool,
+        "pool_seed": (args.seed if args.pool_seed is None else args.pool_seed),
+        "id_prefix": args.id_prefix,
         "vocab_pool_note": (
             "intermediates and their paired objects for every pair are drawn "
             "from one shared pool of this many words, assigned by "

@@ -698,3 +698,135 @@ Jason's own re-derivations cover them.
 ### Hour gate — Jason confirms
 
 - Decision: CONTINUE / CHANGE LOOP / RETURN TO EXPLORE / PIVOT CANDIDATE — *pending*
+
+---
+
+# Post-MATS continuation (Phase 1) — uncounted hours
+
+The application clock closed at tag `mats12-submitted`. Entries below follow
+`llm/plans/continuation-plan.md` and keep the same discipline: decision rules
+written and committed BEFORE a job is queued; freeze untouched; one
+verification-ledger row per claim. Interpretation is Jason's; the agent
+records numbers and which pre-registered branch fired.
+
+## Phase 1, step 1 — fresh held-out draw, scored once at frozen settings
+
+- Date/time: 2026-09-17, written **before** the job is queued.
+- Research stage: **Confirmation** (replication of the Stage 3 held-out
+  result on stimuli that did not exist when the settings were frozen).
+- Branch `research/phase1`. `writeup/main.md`, `experiments/stage3/freeze.json`
+  and every directory under `results/runs/` from the application are not
+  modified by this step.
+
+### Why this experiment and not another
+
+Every application number rests on one held-out draw of 40 pairs. The
+discriminating set was n=32 / n=40. A second draw at the same frozen settings
+is the cheapest test of whether those numbers are properties of the method or
+of that draw, and it is the step in the plan with no new code path in the
+scoring — so it goes first.
+
+### What is fixed (identical to the application run)
+
+- Generator `src/make_dataset.py`, lexicon `real`, shot `zero`, six templates
+  T1–T6, six-city pool. The pool is sampled from `--pool-seed 20260827` — the
+  ORIGINAL seed — so the six cities are the same six (this is what "same
+  six-city pool" requires; the pool is otherwise a function of the seed).
+- Scorer `experiments/stage3/heldout_frozen.py`, unchanged. Positions and
+  layers from `experiments/stage3/freeze.json`: jlens relcomp L30 / qmark L27
+  / final L27 / prequery L25; logitlens L30 / L29 / L30 / L24; random
+  transport at the jlens layers; arm 3 L30 fit on all of dev (dev.jsonl
+  unchanged) and applied unchanged. Label-permutation derangement seed
+  20260827 within split; output shadow (`model_logits`) at every scored
+  position.
+- Eligibility screen `experiments/design-verification/eligibility_screen.py
+  --dataset results/datasets/heldout2.jsonl --frozen-eval`, thresholds
+  PASS ≥ 0.80 / MARGINAL 0.60–0.80 / STOP < 0.60, greedy decoding as before.
+
+### What is new
+
+- Seed **20260917**, `--n-dev 0 --n-heldout 60`: 60 pairs, 240 records,
+  pair indices 0..59 of the seed-20260917 stream (per-pair seeds
+  20260917+idx; the original used 20260827+idx for idx 0..49 — disjoint).
+- `--id-prefix h2-` so record ids cannot collide with the original
+  (`h2-real-zero-000-AAB` …).
+- Output ONLY `results/datasets/heldout2.jsonl` (+ `heldout2-manifest.json`,
+  `heldout2-tokenization_report.json`). `heldout.jsonl` is not touched; the
+  job refuses to run if `heldout2.jsonl` already exists (one draw).
+- Two flags added to `src/make_dataset.py` for this (`--pool-seed`,
+  `--id-prefix`; commit below). Their defaults reproduce the old behaviour;
+  the job's step 0 regenerates the original dev/heldout with default
+  arguments and requires byte-identical sha256 against
+  `results/datasets/dataset-manifest.json` before anything is drawn. If that
+  check fails, nothing is drawn or scored and the step stops.
+- Partition `l40s_normal_q` (per the continuation brief). The application run
+  was on an A30; the GPU name is printed by the job and recorded in each run
+  manifest, and the eligibility caveat about architecture carries over.
+- Report script `experiments/phase1/step1_report.py` (new, analysis only):
+  reads the original run `results/runs/20260830T175149Z-stage3-heldout-frozen`
+  and the new run and tabulates `original`, `new`, `combined` separately.
+
+### Commands (exact)
+
+```
+sbatch experiments/phase1/step1_heldout2.sbatch      # on ARC, from /scratch/djjay/mats12/repo at the commit named below
+python experiments/phase1/step1_report.py \
+    --original results/runs/20260830T175149Z-stage3-heldout-frozen \
+    --new results/runs/<UTC>-stage3-heldout-frozen   # on the VM after rsync
+```
+
+### What is reported, for each of original (n=160), new (n=240), combined
+
+Per arm (jlens, logitlens, jlens_random_transport) at prequery / relcomp /
+qmark / final: direction frac vs its label-permutation control; median rank of
+the correct intermediate; output-shadow frac; lens accuracy on records where
+the model's own preference is wrong, with n; r(lens margin, model margin).
+Arm 3 held-out accuracy per run and pooled by count. Duplicate-prompt screen
+between heldout2 and dev / heldout (see rule R0).
+
+### Pre-registered decision rules
+
+- **R0 (contact).** Any heldout2 record whose prompt string appears in
+  `dev.jsonl` is excluded from every heldout2 tally (arm 3's mu was fit on
+  dev). Any heldout2 record whose prompt appears in `heldout.jsonl` stays in
+  `new` but is dropped from `combined` so no prompt is counted twice. Counts
+  are reported either way.
+- **R1 (replication).** On `new`, jlens direction frac at relcomp exceeds its
+  label-permutation control by ≥ 0.10 → the Stage 3 position result
+  **replicates**. Otherwise → **does not replicate**, and that is the finding;
+  no re-selection of positions or layers is permitted by construction. The
+  qmark gap is reported alongside but does not decide R1 (its original gap
+  was 0.11, inside noise for n=160).
+- **R2 (the band, from the brief).** Combined jlens accuracy on model-wrong
+  records at relcomp outside **0.25–0.45** → flagged plainly in the step
+  note. Inside → "consistent with the application's 0.344 (n=32)".
+- **R3 (the attribution).** If on `new` jlens accuracy on model-wrong records
+  at relcomp is ≥ 0.60 with n ≥ 20, the "lens follows the model" reading is
+  contradicted on fresh data and the step note says so; the application
+  claim is then softened in the Phase 1 summary, not here.
+- Eligibility on heldout2 below 0.60 → STOP for this step: report, do not
+  score the readouts (the sbatch still runs them; the note then marks the
+  readout numbers as not interpretable and the step is redone after Jason
+  decides).
+
+### Pre-registered predictions (agent's, flagged as the agent's)
+
+- new jlens relcomp frac 0.70–0.85, control 0.45–0.55; qmark 0.60–0.75.
+- shadow frac at relcomp 0.75–0.85; r(lens, model) > 0.80 at relcomp and qmark.
+- jlens accuracy on model-wrong records at relcomp 0.20–0.50 (n ≈ 40–60).
+- arm 3 at relcomp near chance (0.45–0.60); at qmark 0.65–0.80.
+- median rank jlens < logitlens at relcomp.
+- eligibility on heldout2 ≥ 0.85 (pair-level, both bindings).
+
+### Held-out contact disclosure
+
+heldout2 does not exist at the time of writing. The generator's stdout prints
+only the aggregate class-support line for the held-out split (no prompts). The
+agent will read `heldout2.jsonl` only inside the scoring job and the report
+script; no prompt is inspected by a human or the agent before the numbers
+are in.
+
+### Result
+
+*(filled after the run; job id, run ids, commit, numbers with n, and which
+branch of R0–R3 fired. Full note: `results/phase1/step1-heldout2.md`.)*
