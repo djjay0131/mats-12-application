@@ -1,6 +1,6 @@
 # System Patterns
 
-Last updated: 2026-08-26
+Last updated: 2026-09-17
 
 How this repository is organised and the conventions that hold it together.
 
@@ -86,8 +86,11 @@ arrive.
 
 ## Governance flow
 
-Adopts `agentic-governance` v0.5; local facts in `llm/governance/governance-delta.md`.
+Adopts `agentic-governance` v0.9; local facts in `llm/governance/governance-delta.md`.
 Issue → branch → PR with a declared governance level → review → merge. No
-direct commits to `main`. Steward merge authority is **INACTIVE**, and branch
-protection is unavailable on this plan (verified 403), so enforcement is
-convention plus the checkers — recorded honestly rather than assumed.
+direct commits to `main`. Steward merge authority is **INACTIVE**. Branch
+protection is **available** now that the repo is public (the 403 recorded on
+2026-08-24 is gone) but is **not configured**; the governance check runs in CI
+on every PR and every push to `main` (`.github/workflows/ci.yml`). So the
+check is enforced, the branch is not — recorded honestly rather than assumed.
+Live readings live in the delta §Platform Enforcement Reality, not here.

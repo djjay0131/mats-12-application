@@ -1,8 +1,11 @@
 # Contributing
 
+Status: Active
+Last updated: 2026-09-17
+
 This repo follows
 [`agentic-governance`](https://github.com/djjay0131/agentic-governance)
-**v0.5**. Policy lives there; project facts live in
+**v0.9**. Policy lives there; project facts live in
 [`llm/governance/governance-delta.md`](llm/governance/governance-delta.md). Nothing here
 restates policy.
 

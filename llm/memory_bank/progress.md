@@ -147,3 +147,41 @@ Gate 1, Aug 24.
   a real PASS rather than a SKIP. PR #7.
 
 **Counted hours: unchanged — governance housekeeping, not research.**
+
+## 2026-09-17 — The governance check now runs itself, and the stale v0.5 claims are corrected
+
+- **`.github/workflows/ci.yml` added.** Job `governance` runs
+  `governance-checks.mjs --layout` on every pull request and every push to
+  `main`, with canon cloned into `$RUNNER_TEMP` pinned to agentic-governance
+  v0.9.0 (`851a50a0692d4409cbd255e3b3be111d863ae264`). Modelled on
+  `agentic-kgcs/.github/workflows/governance-checks.yml`.
+- **This was the root finding of the audit.** The delta has declared a
+  governance check command since onboarding and nothing ever ran it, so
+  "no direct commits to `main`" had no mechanism behind it — and most of the
+  recent history on `main` arrived as direct pushes. Canon is cloned
+  *outside* the workspace because the checker roots its file scan at
+  `git rev-parse --show-toplevel` and would otherwise walk canon's own tree
+  as this repo's content; `fetch-depth: 0` because `adr-status` diffs
+  against the base ref.
+- **`conformance-check.mjs` deliberately left out of CI.** It is a
+  submission gate over application content, not repository hygiene, and its
+  open failures are content facts — including MEC-02 *Before the deadline*,
+  which can never pass again. Requiring it would hold `main` red for reasons
+  no commit can fix. Recorded in the delta §Governance Check Command.
+- **Stale version claims corrected** — `README.md`, `CONTRIBUTING.md`,
+  `activeContext.md` and `systemPatterns.md` each asserted in the present
+  tense that this repo is on v0.5. The pin moved to v0.8 in PR #10 and v0.9
+  in PR #11; only the delta and `CLAUDE.md` had been updated. Dated history
+  (the 2026-09-10 entry above, ADR-0001's v0.2 references, the delta's
+  "Revised 2026-09-10 for v0.5") is left exactly as written.
+- **`Status:` / `Last updated:` headers added** to `README.md` and
+  `CONTRIBUTING.md`, which canon's documentation standards
+  (`llm/governance/architecture-governance.md` §Documentation Standards)
+  require of every major document.
+- `systemPatterns.md` also still claimed branch protection was unavailable
+  on this plan "(verified 403)". The repo is public now and the delta had
+  already corrected that reading on 2026-09-16; the memory bank had not.
+- Verification: `governance-checks.mjs --layout` at the pinned v0.9.0 SHA —
+  4 of 4 passed. PR #12.
+
+**Counted hours: unchanged — governance housekeeping, not research.**
