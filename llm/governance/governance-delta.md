@@ -208,10 +208,13 @@ violation:
 - Research material: `llm/research/`
 - Application material: `llm/application/`
 
-**Not declared, deliberately.** No constitution directory — the role charters
-are vendored under `.claude/agents/`, a tool-contract path. No spec directory
-— the design of record lives in the plans directory (§Design-Authority
-Document).
+**Not declared, deliberately.** No constitution directory — the governance
+role charters are not in this repo at all. They ship with the installed
+`governance@agentic-governance` plugin as the `governance:*` charters; this
+repo vendored copies of four of them under `.claude/agents/` until ADR-0007
+removed them. `.claude/agents/` remains a tool-contract path and still holds
+this project's own nine agents. No spec directory — the design of record
+lives in the plans directory (§Design-Authority Document).
 
 **`llm/plans/`, not `llm/plan/`.** The slot could have been bound to the
 singular path; the canonical name was adopted instead, because the local name

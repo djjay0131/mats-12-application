@@ -16,6 +16,7 @@ commit message.
 | [0004](0004-proposed-jlens-relational-binding-candidate.md) | Consider J-Lens relational-binding evaluation | Superseded | 2026-08-24 |
 | [0005](0005-accept-jlens-relational-binding.md) | Accept the J-Lens relational-binding project; supersede ADR-0002 | Accepted | 2026-08-26 |
 | [0006](0006-proposed-suppress-generation-restatement.md) | Suppress the model restatement of the intermediate before the held-out freeze | Proposed | 2026-08-29 |
+| [0007](0007-drop-vendored-canon-copies.md) | Delete the vendored copies of canonical skills and role charters | Accepted | 2026-09-17 |
 
 ADR-0006 is **Proposed and parked**: the post-query sweep made it unnecessary
 for the primary claim, and Jason ruled on 2026-08-29 not to action it. It is

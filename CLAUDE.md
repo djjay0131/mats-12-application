@@ -161,13 +161,21 @@ ADR-0005. Its verified details are preserved in
 
 ## Agents available
 
-`paper-agent`, `position-paper-agent`, `proposal-agent`, `latex-agent`,
-`review-agent`, `memory-agent`, `knowledge-steward`, `feature-architect`,
-plus the governance executives (`chief-architect`, `chief-reviewer`,
-`chief-product-officer`, `repository-steward`).
+Project agents, defined in this repo under `.claude/agents/`:
+`paper-agent`, `neel-reviewer`, `position-paper-agent`, `proposal-agent`,
+`latex-agent`, `review-agent`, `memory-agent`, `knowledge-steward`,
+`feature-architect`.
 
-Skills: `constellize:*` for memory and feature workflows,
-`governance-establish` / `governance-audit`.
+The governance executives come from the **installed
+`governance@agentic-governance` plugin**, not from this repo: the
+`governance:*` charters — Chief Architect, Chief Reviewer, Chief Product
+Officer, Repository Steward. Name them with the `governance:` prefix. This
+repo vendored copies of the four charters until ADR-0007; an unqualified
+`chief-architect` used to resolve to the stale local copy instead.
+
+Skills: `constellize:*` for memory and feature workflows;
+`/governance:establish` and `/governance:audit` from the plugin;
+`conformance-audit` (local, project-specific — see ADR-0003).
 
 ## Governance
 
@@ -263,9 +271,10 @@ as a derived view.
 
 This repo declares only the paths it uses. An absent slot is not a
 violation; an undeclared path is. This repo declares **no**
-constitution directory (its role charters are vendored under
-`.claude/agents/`, a tool-contract path) and **no** separate spec
-directory (the design of record lives in `llm/plans/`). If a document
+constitution directory (the governance role charters are not in this repo
+at all — they ship with the `governance@agentic-governance` plugin as the
+`governance:*` charters; ADR-0007) and **no** separate spec directory (the
+design of record lives in `llm/plans/`). If a document
 needs a home that is not listed above, do not invent a path: use the
 existing structure it plainly belongs to, or escalate to the
 Repository Steward.
