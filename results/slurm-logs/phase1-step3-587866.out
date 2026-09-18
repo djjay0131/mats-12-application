@@ -1,0 +1,96 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal044  job: 587866  commit: 7c55733 ===
+NVIDIA L40S, 46068 MiB, 595.71.05
+=== smoke (4 records/split, blocks 30,31; run dir deleted) ===
+[runlog] results/runs/20260917T202811Z-phase1-step3-patching  git=7c557331d103941e6b9ea37a1d3f767c474be58a DIRTY  slurm=587866
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1687.85it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   9%|8         | 38/426 [00:00<00:01, 379.87it/s]Loading weights:  26%|##6       | 112/426 [00:00<00:00, 591.21it/s]Loading weights:  44%|####3     | 187/426 [00:00<00:00, 634.57it/s]Loading weights:  59%|#####8    | 251/426 [00:00<00:00, 631.62it/s]Loading weights:  75%|#######5  | 320/426 [00:00<00:00, 648.80it/s]Loading weights:  91%|#########1| 388/426 [00:00<00:00, 658.38it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 654.84it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 117.13it/s]
+[step3] n_layers=32 sweep=2 blocks load=15.8s
+[step3] dev: cached 4 records  19s
+== dev: n=4
+  prequery L30 baseRight=  4/  4 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.990
+  relcomp  L30 baseRight=  4/  4 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.990
+  qmark    L30 baseRight=  4/  4 twin flip=0.000 d=+0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.964
+  final    L30 baseRight=  4/  4 twin flip=1.000 d=-5.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.954
+[step3] heldout: cached 4 records  23s
+== heldout: n=4
+  prequery L30 baseRight=  4/  4 twin flip=0.000 d=-0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.989
+  relcomp  L30 baseRight=  4/  4 twin flip=0.000 d=+0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.997
+  qmark    L30 baseRight=  4/  4 twin flip=0.000 d=+0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.962
+  final    L30 baseRight=  4/  4 twin flip=1.000 d=-2.91 argmaxChg=0.25 | unrelated flip=nan d=+nan | cos=0.960
+[step3] heldout2: cached 4 records  28s
+== heldout2: n=4
+  prequery L30 baseRight=  4/  4 twin flip=0.000 d=-0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.990
+  relcomp  L30 baseRight=  4/  4 twin flip=0.000 d=+0.02 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.991
+  qmark    L30 baseRight=  4/  4 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.966
+  final    L30 baseRight=  4/  4 twin flip=1.000 d=-5.94 argmaxChg=0.00 | unrelated flip=nan d=+nan | cos=0.953
+skipped: {'dev:no-unrelated-donor': 4, 'heldout:no-unrelated-donor': 4, 'heldout2:no-unrelated-donor': 4}
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T202811Z-phase1-step3-patching/outputs/step3-patching.json
+smoke exit=0 dir=results/runs/20260917T202811Z-phase1-step3-patching
+=== STEP 3: full run (dev first, then heldout, heldout2) ===
+[runlog] results/runs/20260917T202907Z-phase1-step3-patching  git=7c557331d103941e6b9ea37a1d3f767c474be58a DIRTY  slurm=587866
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|##########| 2/2 [00:00<00:00, 1596.92it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights: 100%|##########| 426/426 [00:00<00:00, 12843.21it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|##########| 1/1 [00:00<00:00, 287.66it/s]
+[step3] n_layers=32 sweep=32 blocks load=3.5s
+[step3] dev: cached 40 records  9s
+[step3] dev 20/40  531s
+[step3] dev 40/40  1053s
+== dev: n=40
+  prequery L24 baseRight= 40/ 40 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=0.000 d=+0.00 | cos=0.987
+  prequery L25 baseRight= 40/ 40 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.01 | cos=0.988
+  prequery L30 baseRight= 40/ 40 twin flip=0.000 d=-0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.01 | cos=0.987
+  relcomp  L30 baseRight= 40/ 40 twin flip=0.000 d=-0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.01 | cos=0.994
+  qmark    L27 baseRight= 40/ 40 twin flip=0.000 d=-0.21 argmaxChg=0.03 | unrelated flip=0.000 d=-0.10 | cos=0.967
+  qmark    L29 baseRight= 40/ 40 twin flip=0.000 d=-0.07 argmaxChg=0.03 | unrelated flip=0.000 d=-0.04 | cos=0.968
+  qmark    L30 baseRight= 40/ 40 twin flip=0.000 d=-0.00 argmaxChg=0.03 | unrelated flip=0.000 d=-0.00 | cos=0.968
+  final    L27 baseRight= 40/ 40 twin flip=0.975 d=-4.34 argmaxChg=0.05 | unrelated flip=0.500 d=-2.63 | cos=0.951
+  final    L30 baseRight= 40/ 40 twin flip=1.000 d=-4.59 argmaxChg=0.10 | unrelated flip=0.500 d=-2.91 | cos=0.959
+[step3] heldout: cached 160 records  1071s
+[step3] heldout 20/160  1655s
+[step3] heldout 40/160  2238s
+[step3] heldout 60/160  2822s
+[step3] heldout 80/160  3405s
+[step3] heldout 100/160  3989s
+[step3] heldout 120/160  4573s
+[step3] heldout 140/160  5157s
+[step3] heldout 160/160  5741s
+== heldout: n=160
+  prequery L24 baseRight=151/160 twin flip=0.000 d=+0.01 argmaxChg=0.00 | unrelated flip=0.000 d=+0.00 | cos=0.988
+  prequery L25 baseRight=151/160 twin flip=0.000 d=+0.01 argmaxChg=0.01 | unrelated flip=0.000 d=+0.00 | cos=0.989
+  prequery L30 baseRight=151/160 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.00 | cos=0.987
+  relcomp  L30 baseRight=151/160 twin flip=0.000 d=+0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.00 | cos=0.995
+  qmark    L27 baseRight=151/160 twin flip=0.000 d=-0.20 argmaxChg=0.02 | unrelated flip=0.000 d=-0.04 | cos=0.969
+  qmark    L29 baseRight=151/160 twin flip=0.000 d=-0.08 argmaxChg=0.01 | unrelated flip=0.000 d=-0.02 | cos=0.970
+  qmark    L30 baseRight=151/160 twin flip=0.000 d=+0.00 argmaxChg=0.01 | unrelated flip=0.000 d=-0.01 | cos=0.970
+  final    L27 baseRight=151/160 twin flip=0.927 d=-4.52 argmaxChg=0.10 | unrelated flip=0.450 d=-1.93 | cos=0.949
+  final    L30 baseRight=151/160 twin flip=0.934 d=-4.76 argmaxChg=0.11 | unrelated flip=0.470 d=-2.20 | cos=0.957
+[step3] heldout2: cached 240 records  5769s
+[step3] heldout2 20/240  6358s
+[step3] heldout2 40/240  6947s
+[step3] heldout2 60/240  7536s
+[step3] heldout2 80/240  8125s
+[step3] heldout2 100/240  8714s
+[step3] heldout2 120/240  9303s
+[step3] heldout2 140/240  9892s
+[step3] heldout2 160/240  10481s
+[step3] heldout2 180/240  11071s
+[step3] heldout2 200/240  11661s
+[step3] heldout2 220/240  12250s
+[step3] heldout2 240/240  12840s
+== heldout2: n=240
+  prequery L24 baseRight=231/240 twin flip=0.000 d=-0.00 argmaxChg=0.01 | unrelated flip=0.000 d=-0.00 | cos=0.988
+  prequery L25 baseRight=231/240 twin flip=0.000 d=-0.00 argmaxChg=0.01 | unrelated flip=0.000 d=-0.00 | cos=0.989
+  prequery L30 baseRight=231/240 twin flip=0.000 d=-0.00 argmaxChg=0.01 | unrelated flip=0.000 d=-0.01 | cos=0.987
+  relcomp  L30 baseRight=231/240 twin flip=0.000 d=-0.00 argmaxChg=0.00 | unrelated flip=0.000 d=-0.00 | cos=0.995
+  qmark    L27 baseRight=231/240 twin flip=0.009 d=-0.20 argmaxChg=0.02 | unrelated flip=0.004 d=-0.02 | cos=0.971
+  qmark    L29 baseRight=231/240 twin flip=0.000 d=-0.08 argmaxChg=0.01 | unrelated flip=0.004 d=-0.02 | cos=0.971
+  qmark    L30 baseRight=231/240 twin flip=0.000 d=+0.00 argmaxChg=0.01 | unrelated flip=0.000 d=-0.01 | cos=0.971
+  final    L27 baseRight=231/240 twin flip=0.922 d=-4.40 argmaxChg=0.13 | unrelated flip=0.420 d=-1.73 | cos=0.952
+  final    L30 baseRight=231/240 twin flip=0.935 d=-4.64 argmaxChg=0.13 | unrelated flip=0.437 d=-1.94 | cos=0.960
+skipped: {'dev:no-unrelated-donor': 8}
+wrote /scratch/djjay/mats12/repo/results/runs/20260917T202907Z-phase1-step3-patching/outputs/step3-patching.json
+step3 exit=0
+=== PHASE 1 STEP 3 COMPLETE rc=0 ===

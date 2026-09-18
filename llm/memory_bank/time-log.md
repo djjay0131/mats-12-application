@@ -93,3 +93,4 @@ commit-bounded; estimated rows are marked `~`; Jason-stated rows say so.
 | Date | Block | Description | Hours | Basis |
 |---|---|---|---|---|
 | 2026-09-17 | Step 0 | Merge exp/v1-v3-verification to main, tag the submitted state, open research/phase1, continuation plan committed | ~0.5 | Estimated — housekeeping, agent session |
+| 2026-09-17 | Phase 1 | Steps 1–5 pre-registered, run and noted (jobs 587809, 587865–587868, 587883, 587888); phase1-summary.md | ~9 | Estimated — one agent session, wall clock; uncounted |

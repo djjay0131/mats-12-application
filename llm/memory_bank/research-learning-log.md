@@ -1092,4 +1092,20 @@ missed, all too pessimistic about the probe.
 
 ### Result — step 3 (twin patching)
 
-*(filled when job 587866 or the backup 587888 completes.)*
+Falcon 587866, L40S, commit `7c55733`, **3:35:41 / 4:00:00**, exit 0; run
+`20260917T202907Z-phase1-step3-patching` (full 32-block sweep). The backup
+587888 also completed and was deleted unread (Amendment 3). Note:
+`results/phase1/step3-patching.md`. Combined held-out n=400, 382 base-right.
+Twin flip rate at the primary cells: relcomp L30 **0.000**, qmark L27
+**0.005** (L29 / L30 0.000), prequery L24 / L25 / L30 0.000; unrelated donor
+≤ 0.003; cos(twin residuals) 0.97–0.995. Over the whole sweep the maximum
+flip at these three anchors is 0.05 (qmark L16); the only blocks where the
+margin moves are L15–L16 (relcomp −0.46 / −0.53 logits). Final position:
+0.924 / 0.935 at L27 / L30, with the norm-matched unrelated donor at 0.432
+/ 0.450. Rule (agent's): **does not carry** at relcomp, qmark and prequery;
+**carries** at final (with the control attached). Two of five predictions
+missed (qmark and prequery lower than predicted).
+
+### Hour gate — Jason confirms (Phase 1 close)
+
+- Decision: CONTINUE to Phase 2 / other — *pending*

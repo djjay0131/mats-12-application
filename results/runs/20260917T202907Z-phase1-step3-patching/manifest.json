@@ -1,0 +1,59 @@
+{
+  "slug": "phase1-step3-patching",
+  "started_utc": "2026-09-17T20:29:07.779341+00:00",
+  "argv": [
+    "experiments/phase1/step3_patching.py"
+  ],
+  "cwd": "/scratch/djjay/mats12/repo",
+  "git": {
+    "sha": "7c557331d103941e6b9ea37a1d3f767c474be58a",
+    "branch": "research/phase1",
+    "dirty": true,
+    "dirty_files": [
+      "?? results/runs/20260917T202853Z-phase1-step4-resample/",
+      "?? results/runs/20260917T202900Z-phase1-step2-fact-tokens/",
+      "?? results/slurm-logs/phase1-step2-587865.out",
+      "?? results/slurm-logs/phase1-step3-587866.out",
+      "?? results/slurm-logs/phase1-step4-587867.out"
+    ],
+    "note": null
+  },
+  "hostname": "fal044",
+  "platform": "Linux-5.14.0-687.26.1.el9_8.x86_64-x86_64-with-glibc2.34",
+  "slurm": {
+    "SLURM_JOB_ID": "587866",
+    "SLURM_JOB_NAME": "mats12-p1s3",
+    "SLURM_JOB_ACCOUNT": "agents4research",
+    "SLURM_JOB_PARTITION": "l40s_normal_q",
+    "SLURM_JOB_NODELIST": "fal044",
+    "SLURM_JOB_GPUS": "2"
+  },
+  "gpu": {
+    "available": true,
+    "name": "NVIDIA L40S",
+    "count": 1,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "versions": {
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.16.1",
+    "numpy": "2.5.2"
+  },
+  "params": {
+    "seed": 20260827,
+    "model_repo": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "freeze": "experiments/stage3/freeze.json",
+    "note": "twin activation patching at frozen anchors, all blocks; unrelated-donor control"
+  },
+  "status": "ok",
+  "finished_utc": "2026-09-18T00:03:09.502428+00:00",
+  "outputs": [
+    "step3-patching.json",
+    "step3-records.json.gz"
+  ]
+}
