@@ -1,0 +1,73 @@
+name: ci
+
+# Runs the canonical agentic-governance check (delta / ADR index / ADR status /
+# layout) against this repo on every pull request and every push to `main`.
+#
+# Why this file exists: llm/governance/governance-delta.md §Governance Check
+# Command has declared this check since onboarding and nothing ever ran it.
+# CONTRIBUTING.md says "no direct commits to `main`" — with no CI and no branch
+# protection that sentence had no mechanism behind it, and most of the recent
+# history on `main` arrived as direct pushes. This is the mechanism.
+#
+# The checker lives in the public agentic-governance repo, not here, so this
+# job fetches it pinned to a commit SHA for reproducibility. Keep the SHA in
+# sync with the governance version pinned in
+# llm/governance/governance-delta.md (`Governance:` header). Canon is cloned
+# OUTSIDE the workspace, into $RUNNER_TEMP: the script roots its file scan at
+# `git rev-parse --show-toplevel`, so a canon tree checked out anywhere under
+# this repo's toplevel would be walked as if it were this repo's own content.
+#
+# --layout is required, not optional: it asserts that every path declared in
+# §Repository Layout exists and that no source of truth sits under the declared
+# artifacts directory. Without it the two-plane rule is enforced only at
+# onboarding, which is how this repo kept its delta and its ADRs in the data
+# plane for three weeks.
+#
+# Deliberately NOT run here: `node scripts/conformance-check.mjs --gate SUBMIT`,
+# the third command declared in the same delta section. It is a submission gate
+# over the content of the application, not a repository-hygiene check, and its
+# current failures are content facts — an over-length executive summary, missing
+# verification rows, and MEC-02 "Before the deadline", which can never pass
+# again now that 2026-09-04 has gone. Wiring it in as a required check would
+# make `main` permanently red for reasons no commit can fix, which would teach
+# everyone to ignore CI. It stays a manual gate, run before a submission.
+# Rationale: ADR-0003 (conformance regime).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  governance:
+    name: governance
+    runs-on: ubuntu-latest
+    env:
+      GOVERNANCE_REPO: djjay0131/agentic-governance
+      # agentic-governance v0.9.0
+      GOVERNANCE_REF: 851a50a0692d4409cbd255e3b3be111d863ae264
+    steps:
+      - name: Check out repo (full history; adr-status diffs against the base ref)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure origin/main ref is present for the diff
+        run: git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch pinned canonical governance ruleset (outside the workspace)
+        run: |
+          git clone --filter=blob:none --no-checkout \
+            "https://github.com/${GOVERNANCE_REPO}.git" "${RUNNER_TEMP}/governance-src"
+          git -C "${RUNNER_TEMP}/governance-src" checkout --quiet "${GOVERNANCE_REF}"
+
+      - name: Run governance checks
+        run: node "${RUNNER_TEMP}/governance-src/plugin/scripts/governance-checks.mjs" --layout

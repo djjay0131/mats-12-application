@@ -1,6 +1,6 @@
 # Active Context
 
-Last updated: 2026-09-05
+Last updated: 2026-09-17
 
 Current focus, next actions and live risks only. Durable environment facts
 are in `techContext.md`; conventions in `systemPatterns.md`; scope in
@@ -60,9 +60,10 @@ of it — the application form submission is Jason's).
 
 ## Governance layout — migrated 2026-09-10
 
-This repo is on the **agentic-governance v0.5 two-plane layout** (PR
-#7). `llm/` is the control plane; `docs/` is the data plane and holds no
-source of truth. What changes for anyone working here:
+This repo is on the **agentic-governance v0.9 two-plane layout** — adopted
+at v0.5 in PR #7, pin moved to v0.9 in PR #11. `llm/` is the control plane;
+`docs/` is the data plane and holds no source of truth. What changes for
+anyone working here:
 
 - The delta is at `llm/governance/governance-delta.md`, the ADRs at
   `llm/governance/adr/`. Not under `docs/`.

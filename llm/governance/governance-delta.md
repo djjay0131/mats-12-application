@@ -1,7 +1,7 @@
 # Governance Delta: mats-12-application
 
 Status: Active
-Last updated: 2026-09-16
+Last updated: 2026-09-17
 Governance: agentic-governance v0.9
 
 This file localizes the canonical governance in
@@ -130,7 +130,17 @@ onboarding, which is how this repo kept its delta and its ADRs in the data
 plane for three weeks.
 
 The plugin form and the plain-shell form invoke the same canonical portfolio
-check; run whichever resolves. `conformance-check.mjs` is project-specific
+check; run whichever resolves. **CI runs it too** —
+`.github/workflows/ci.yml`, job `governance`, on every pull request and every
+push to `main`, with canon fetched by pinned commit SHA into the runner temp
+directory rather than read from the machine-specific `Canon checkout` above.
+Keep that SHA in step with the `Governance:` header of this file.
+`conformance-check.mjs` is **deliberately not in CI**: it is a submission
+gate over the content of the application, and its open failures are content
+facts — including MEC-02 *Before the deadline*, which cannot pass again now
+that 2026-09-04 has gone. Requiring it would hold `main` red for reasons no
+commit can fix. Run it by hand before a submission. `conformance-check.mjs`
+is project-specific
 and asserts the mechanically-checkable subset of the 121 requirements in
 `llm/application/conformance-register.md` — the register extracted verbatim
 from Neel's application doc, of which 38 are individually disqualifying.
@@ -249,8 +259,9 @@ what it projects.
 
 ## Platform Enforcement Reality
 
-Re-verified against the live API on 2026-09-16, not assumed. Two rows
-changed since the 2026-08-24 reading and are corrected here.
+Re-verified against the live API on 2026-09-16, not assumed; the CI row was
+changed by this repo's own commit on 2026-09-17. Two rows changed since the
+2026-08-24 reading and are corrected here.
 
 - **Branch protection on `main`: NOT CONFIGURED.**
   `GET /repos/djjay0131/mats-12-application/branches/main/protection` now
@@ -262,8 +273,15 @@ changed since the 2026-08-24 reading and are corrected here.
   choice rather than a plan limit, and `GET .../rulesets` returns `[]` for
   the same reason. This is the case ADR-0001 anticipated, recorded rather
   than left aspirational.
-- **Required status checks: NONE.** There is no CI in this repository — no
-  `.github/workflows/` directory exists — so there is nothing to require.
+- **Required status checks: NONE — but a check now exists to require.**
+  As of 2026-09-17 `.github/workflows/ci.yml` runs the canonical governance
+  check (§Governance Check Command, `--layout`) on every pull request and
+  every push to `main`, against canon pinned by commit SHA. It reports under the
+  context name **`governance`**. Nothing *requires* it yet: with protection
+  unconfigured a red run is visible but not blocking. The order matters —
+  a required context added before the workflow has ever reported is treated
+  by GitHub as permanently pending and blocks every merge, so the workflow
+  lands and reports first and the required-check setting follows.
 - **Branch cleanup: `delete_branch_on_merge` is `true`** — verified with
   `gh api repos/djjay0131/mats-12-application -q .delete_branch_on_merge`.
   A repository setting rather than branch protection, so it binds regardless
@@ -275,18 +293,21 @@ changed since the 2026-08-24 reading and are corrected here.
   Chief Architect, Chief Reviewer, Repository Steward and Chief Product
   Officer are **procedural roles, not distinct identities** — nothing at the
   platform layer distinguishes them.
-- **What is actually enforced:** branch deletion on merge, and nothing
-  else. Every other control in this repo is convention, held by the operator
-  and by `scripts/conformance-check.mjs`. The Issue → branch → PR → review →
-  merge flow is honoured, not imposed.
+- **What is actually enforced:** branch deletion on merge, and the
+  governance check, which now runs on its own without anyone remembering to.
+  It is *observed* rather than *blocking* until protection requires it. Every
+  other control in this repo is convention, held by the operator and by
+  `scripts/conformance-check.mjs`. The Issue → branch → PR → review → merge
+  flow is honoured, not imposed.
 - **Hardening path:** the plan blocker is gone — the repo is public, so
   branch protection and rulesets are available for the asking. Going public
   was previously rejected because it would have exposed an in-flight
   application in a process where originality is graded; the repository is
   public now, and this file does not record when or why that changed. What
-  is unchanged is the second objection: protection buys enforcement that is
-  largely theatre on a single-reviewer repo with no CI to require.
-  Configuring it is now a decision, not a purchase.
+  is unchanged is the second objection, and it is now weaker: protection is
+  largely theatre on a single-reviewer repo, but there is a real check to
+  require — `governance` — where before there was none. Configuring it is a
+  decision, not a purchase.
 
 ## Steward Activation Status
 
