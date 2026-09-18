@@ -65,20 +65,33 @@ at v0.5 in PR #7, pin moved to v0.9 in PR #11. `llm/` is the control plane;
 `docs/` is the data plane and holds no source of truth. What changes for
 anyone working here:
 
+- The governance skills and the four executive charters come from the
+  **installed plugin**, not from this repo. Name them qualified:
+  `/governance:establish`, `/governance:audit`, and the `governance:*`
+  charters. The vendored copies were deleted by ADR-0007 — an unqualified
+  `governance-audit` or `chief-architect` used to resolve to a stale local
+  copy that still cited canon's pre-v0.5 `docs/` paths.
+
 - The delta is at `llm/governance/governance-delta.md`, the ADRs at
   `llm/governance/adr/`. Not under `docs/`.
 - The plans directory is `llm/plans/` — plural. `llm/plan/` is gone.
 - Declared paths are in the delta's `## Repository Layout`; the routing rule
   agents must follow is at the end of `CLAUDE.md`. Do not invent a location
   for a new document — answer Q1, then Q2.
-- The check command now requires `--layout`:
-  `node ~/code/agentic-governance/plugin/scripts/governance-checks.mjs --layout`.
+- The check command now requires `--layout`. Run it through the plugin —
+  `node "${CLAUDE_PLUGIN_ROOT}/scripts/governance-checks.mjs" --layout` — or
+  from a plain shell against the `Canon checkout` the delta declares in
+  §Canon Location. Do not re-hardcode the canon path here: the delta permits
+  exactly one machine-specific path per repo, and that is it.
 - `experiments/`, `results/`, `writeup/`, `src/`, `notebooks/`, `scripts/`
   and `context/` did not move and are not going to. They are declared data
   plane.
-- **Open:** this repo has no CI workflow, so nothing runs the check command
-  on push or PR. The layout rule holds by operator discipline only. Recorded
-  rather than pretended away.
+- **Closed 2026-09-17 (PR #12):** the check now runs in CI —
+  `.github/workflows/ci.yml`, job `governance`, on every pull request and
+  every push to `main`, against canon pinned by SHA to v0.9.0. It reports
+  but does not yet block: branch protection is not configured, so the
+  required-status-check setting is still outstanding. The context to require
+  is `governance`.
 - **Open:** ADR-0001 records the v0.2 adoption and stays accurate as
   history. The v0.5 upgrade has no ADR of its own; a back-fill is a
   reasonable candidate if this repo outlives the application.

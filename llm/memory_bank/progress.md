@@ -185,3 +185,44 @@ Gate 1, Aug 24.
   4 of 4 passed. PR #12.
 
 **Counted hours: unchanged — governance housekeeping, not research.**
+
+## 2026-09-17 (later) — The vendored canon copies are gone (ADR-0007)
+
+- **Deleted six files** that duplicated what the installed
+  `governance@agentic-governance` plugin provides:
+  `.claude/skills/governance-establish/SKILL.md` (104 lines here vs 538 in
+  canon), `.claude/skills/governance-audit/SKILL.md` (86 vs 180), and the
+  four executive charters `chief-architect.md` (17 diff lines behind),
+  `chief-reviewer.md` (6), `chief-product-officer.md` (**0** — byte-identical)
+  and `repository-steward.md` (87).
+- **Plugin install verified first.** An earlier attempt to delete these was
+  correctly refused because the plugin was not installed. It is now:
+  `~/.claude/plugins/marketplaces/agentic-governance`, VERSION `0.9.0`, git
+  HEAD `851a50a` (the v0.9.0 tag), providing
+  `plugin/skills/{establish,audit,migrate}` and all four charters, with
+  `governance@agentic-governance: true` in both the user and the repo
+  settings.
+- **The reason is drift and unqualified-name ambiguity, not shadowing.** The
+  earlier justification claimed shadowing and was wrong: plugin skills are
+  namespaced (`governance:establish`), the vendored ones were not
+  (`governance-establish`), and both were addressable at once. The real
+  problem was that an *unqualified* name resolved to the stale local copy —
+  and unqualified is how `CLAUDE.md` named every one of them.
+- **The drift was load-bearing, not cosmetic.** Every vendored charter still
+  cited `docs/architecture-governance.md`, `docs/review-checklist.md`,
+  `docs/l0-fast-track.md` — paths canon abandoned at v0.5. They pointed at
+  nothing.
+- **Kept:** `.claude/skills/conformance-audit/` (genuinely local, ADR-0003),
+  the nine project agents (`paper-agent`, `neel-reviewer`, `latex-agent`,
+  `position-paper-agent`, `proposal-agent`, `memory-agent`,
+  `knowledge-steward`, `feature-architect`, `review-agent`) and the seven
+  `constellize:*` skills.
+- **References repointed** — all three inbound references were in
+  `CLAUDE.md` (§Agents available, lines 164–170), plus two claims that the
+  role charters are "vendored under `.claude/agents/`" in `CLAUDE.md` and the
+  delta §Repository Layout, which the deletion makes false. Grepped the
+  whole tree; nothing else referred to them.
+- Verification: `governance-checks.mjs --layout` at the pinned v0.9.0 SHA —
+  4 of 4 passed. ADR-0007. PR #13.
+
+**Counted hours: unchanged — governance housekeeping, not research.**
