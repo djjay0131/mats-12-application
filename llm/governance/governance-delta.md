@@ -262,55 +262,70 @@ what it projects.
 
 ## Platform Enforcement Reality
 
-Re-verified against the live API on 2026-09-16, not assumed; the CI row was
-changed by this repo's own commit on 2026-09-17. Two rows changed since the
-2026-08-24 reading and are corrected here.
+Re-verified against the live API on 2026-09-17, not assumed. Three rows changed
+today: CI was added by this repo's own commit, and branch protection went from
+unconfigured to configured with a required check.
 
-- **Branch protection on `main`: NOT CONFIGURED.**
-  `GET /repos/djjay0131/mats-12-application/branches/main/protection` now
-  returns **404 — "Branch not protected"**, not the 403 recorded on
-  2026-08-24. The repository is **public** today, so the Pro-plan paywall
-  that produced that 403 no longer applies: branch protection is *available*
-  and simply has not been configured. The practical effect is identical —
-  nothing platform-blocks a direct push to `main` — but the reason is now a
-  choice rather than a plan limit, and `GET .../rulesets` returns `[]` for
-  the same reason. This is the case ADR-0001 anticipated, recorded rather
-  than left aspirational.
-- **Required status checks: NONE — but a check now exists to require.**
-  As of 2026-09-17 `.github/workflows/ci.yml` runs the canonical governance
-  check (§Governance Check Command, `--layout`) on every pull request and
-  every push to `main`, against canon pinned by commit SHA. It reports under the
-  context name **`governance`**. Nothing *requires* it yet: with protection
-  unconfigured a red run is visible but not blocking. The order matters —
-  a required context added before the workflow has ever reported is treated
-  by GitHub as permanently pending and blocks every merge, so the workflow
-  lands and reports first and the required-check setting follows.
+- **Branch protection on `main`: CONFIGURED** (2026-09-17).
+  `GET /repos/djjay0131/mats-12-application/branches/main/protection` returns a
+  live configuration: pull requests required, force pushes and deletions
+  blocked, stale reviews dismissed, conversation resolution required. Two
+  deliberate gaps: `required_approving_review_count` is **0** and
+  `enforce_admins` is **false**, so the owner can merge unreviewed and can
+  bypass the required check. On a single-maintainer repo a required approval
+  would deadlock every PR — GitHub does not permit self-approval — so the gate
+  binds ordinary flow and agents, not the owner.
+
+  History, because the reason changed twice: a **403** on 2026-08-24 (private
+  repo, free plan — a paywall), then a **404** "Branch not protected" on
+  2026-09-16 once the repo became public (available, unconfigured), and now
+  configured. Rulesets remain unused; `GET .../rulesets` returns `[]`.
+
+- **Required status checks: `governance`** — the job in
+  `.github/workflows/ci.yml` running the canonical governance check
+  (§Governance Check Command, `--layout`) against canon pinned by commit SHA,
+  on every pull request and every push to `main`. **A red governance check now
+  blocks a merge.**
+
+  The ordering was load-bearing and is recorded because it is easy to get
+  wrong: a required context added *before* the workflow has ever reported is
+  treated by GitHub as permanently pending and blocks every merge, including
+  the one that would fix it. So the workflow landed first (PR #12), reported
+  green on `main` twice, and the required-check setting followed.
+
 - **Branch cleanup: `delete_branch_on_merge` is `true`** — verified with
   `gh api repos/djjay0131/mats-12-application -q .delete_branch_on_merge`.
-  A repository setting rather than branch protection, so it binds regardless
-  of the above: merged branches are deleted by GitHub without anyone
-  remembering `--delete-branch` (agentic-governance v0.9.0,
+  A repository setting rather than branch protection, so it binds independently
+  of everything above (agentic-governance v0.9.0,
   `llm/governance/branch-protection.md` §Branch Cleanup).
+
 - **Token/identity model:** single owner (`djjay0131`). Pushes during this
   project may originate from a fine-grained PAT scoped to this repo alone.
   Chief Architect, Chief Reviewer, Repository Steward and Chief Product
   Officer are **procedural roles, not distinct identities** — nothing at the
   platform layer distinguishes them.
-- **What is actually enforced:** branch deletion on merge, and the
-  governance check, which now runs on its own without anyone remembering to.
-  It is *observed* rather than *blocking* until protection requires it. Every
-  other control in this repo is convention, held by the operator and by
-  `scripts/conformance-check.mjs`. The Issue → branch → PR → review → merge
-  flow is honoured, not imposed.
-- **Hardening path:** the plan blocker is gone — the repo is public, so
-  branch protection and rulesets are available for the asking. Going public
-  was previously rejected because it would have exposed an in-flight
-  application in a process where originality is graded; the repository is
-  public now, and this file does not record when or why that changed. What
-  is unchanged is the second objection, and it is now weaker: protection is
-  largely theatre on a single-reviewer repo, but there is a real check to
-  require — `governance` — where before there was none. Configuring it is a
-  decision, not a purchase.
+
+- **What is actually enforced:** pull requests, no force pushes, no deletions,
+  conversation resolution, branch deletion on merge, and a **blocking**
+  governance check. That is a real change in kind: until 2026-09-17 every
+  control here was convention, and the repo's own history shows the cost —
+  9 of the 15 commits before CI landed went **directly to `main`**, bypassing
+  the Issue → branch → PR → review → merge flow this file declares. A rule
+  nothing enforced was duly ignored.
+
+  Still convention, held by the operator: everything
+  `scripts/conformance-check.mjs` covers. It is deliberately **not** a required
+  check — its `MEC-02 "Before the deadline"` assertion can never pass again
+  (2026-09-04 has gone), so requiring it would hold `main` permanently red for
+  a reason no commit can fix, which is how a gate gets ignored.
+
+- **Hardening path — what remains.** `enforce_admins` → on would make the
+  required check bind the owner too; not taken, because it also removes the
+  owner's emergency path on a repo with no second maintainer.
+  `required_approving_review_count` → 1 is **blocked, not deferred**: a single
+  maintainer cannot supply a second approver, and GitHub refuses
+  self-approval, so it would deadlock every PR. Both are the same constraint
+  recorded for the L0 fast track, and both are why the steward stays inert.
 
 ## Steward Activation Status
 
