@@ -8,6 +8,7 @@ import gzip, json, sys, time
 import numpy as np, torch
 from pathlib import Path
 from sklearn.linear_model import LogisticRegression, RidgeClassifier
+from sklearn.multiclass import OneVsRestClassifier
 from sklearn.preprocessing import StandardScaler
 
 RES = Path("/scratch/djjay/mats12/phase1/residuals")
@@ -66,7 +67,7 @@ for layer in (30, 15):
     F = X[:, 1, layer].float().numpy()          # relcomp
     print(f"\n== relcomp, block {layer}")
     report("LR lbfgs multinomial C=1 (as step 5)", lopo(F, y, alt, lambda: LogisticRegression(C=1.0, max_iter=500, tol=1e-3)))
-    report("LR liblinear one-vs-rest C=0.05 (different estimator)", lopo(F, y, alt, lambda: LogisticRegression(C=0.05, solver="liblinear", max_iter=500)))
+    report("LR liblinear one-vs-rest C=0.05 (different estimator)", lopo(F, y, alt, lambda: OneVsRestClassifier(LogisticRegression(C=0.05, solver="liblinear", max_iter=500))))
     report("Ridge classifier alpha=100 (different estimator)", lopo(F, y, alt, lambda: RidgeClassifier(alpha=100.0)))
     perm = rng.permutation(len(y)); yp = y[perm]; ap = alt[perm]
     report("NULL: labels permuted across records (expect ~0.5)", lopo(F, yp, ap, lambda: LogisticRegression(C=1.0, max_iter=500, tol=1e-3)))
