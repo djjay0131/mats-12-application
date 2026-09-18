@@ -1,0 +1,9 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+=== node: fal038 job: 588470 commit: 36a5b2c ===
+combined n=400 pairs=100 model-wrong=93  load 1s
+
+== relcomp, block 30
+  LR lbfgs multinomial C=1 (as step 5)                       acc=0.8975 (n=400)  model-wrong acc=0.8495 (n=93)
+  LR liblinear one-vs-rest C=0.05 (different estimator)      acc=0.9850 (n=400)  model-wrong acc=0.9677 (n=93)
+  Ridge classifier alpha=100 (different estimator)           acc=0.9800 (n=400)  model-wrong acc=0.9677 (n=93)
+[2026-09-18T01:09:55.001] error: *** JOB 588470 ON fal038 CANCELLED AT 2026-09-18T01:09:55 DUE TO TIME LIMIT ***

@@ -1,0 +1,86 @@
+== provenance
+  [PASS] step1 scoring manifest git sha starts with fe1ca16: claimed True  recomputed True
+  [PASS] step1 scoring Slurm job id: claimed 587809  recomputed 587809
+  [PASS] step1 scoring run status ok: claimed ok  recomputed ok
+  [PASS] step2 manifest git sha starts with 7c55733: claimed True  recomputed True
+  [PASS] step2 Slurm job id: claimed 587865  recomputed 587865
+  [PASS] step2 run status ok: claimed ok  recomputed ok
+  [PASS] step3 manifest git sha starts with 7c55733: claimed True  recomputed True
+  [PASS] step3 Slurm job id: claimed 587866  recomputed 587866
+  [PASS] step3 run status ok: claimed ok  recomputed ok
+  [PASS] step4 manifest git sha starts with 7c55733: claimed True  recomputed True
+  [PASS] step4 Slurm job id: claimed 587867  recomputed 587867
+  [PASS] step4 run status ok: claimed ok  recomputed ok
+  [PASS] step5 manifest git sha starts with 7c55733: claimed True  recomputed True
+  [PASS] step5 Slurm job id: claimed 587868  recomputed 587868
+  [PASS] step5 run status ok: claimed ok  recomputed ok
+  [PASS] step5 breakdown manifest git sha starts with 6c8e7f3: claimed True  recomputed True
+  [PASS] step5 breakdown Slurm job id: claimed 587883  recomputed 587883
+  [PASS] step5 breakdown run status ok: claimed ok  recomputed ok
+  [PASS] heldout2.jsonl sha256 = manifest: claimed 3a06138a80aaad16e55497060901dc7a8241982b90e1b51b11858bbcf961f779  recomputed 3a06138a80aaad16e55497060901dc7a8241982b90e1b51b11858bbcf961f779
+  [PASS] heldout2 record count: claimed 240  recomputed 240
+  [PASS] heldout2 distinct pairs: claimed 60  recomputed 60
+  [PASS] heldout2 duplicate prompts: claimed 0  recomputed 0
+  [PASS] heldout2 prompts shared with dev: claimed 0  recomputed 0
+  [PASS] heldout2 prompts shared with heldout: claimed 0  recomputed 0
+  [PASS] freeze.json / writeup/main.md / application runs unchanged since mats12-submitted: claimed   recomputed 
+
+== step 1 (recomputed from stage3 records)
+  [PASS] new draw n: claimed 240  recomputed 240
+  [PASS] new jlens relcomp frac: claimed 0.733  recomputed 0.733
+  [PASS] new jlens relcomp ctrl: claimed 0.496  recomputed 0.496
+  [PASS] new jlens relcomp median rank: claimed 132  recomputed 132
+  [PASS] new model-wrong n at relcomp: claimed 61  recomputed 61
+  [PASS] new jlens acc on model-wrong: claimed 0.213  recomputed 0.213
+  [PASS] combined model-wrong n: claimed 93  recomputed 93
+  [PASS] combined jlens acc on model-wrong: claimed 0.258  recomputed 0.258
+  [PASS] original jlens acc on model-wrong (application 0.344): claimed 0.344  recomputed 0.344
+
+== step 2 (recomputed from step2-records.json.gz)
+  [PASS] combined records: claimed 400  recomputed 400
+  [PASS] fact-position failures: claimed 0  recomputed 0
+  [PASS] jlens period->CITY pooled n: claimed 800  recomputed 800
+  [PASS] jlens period->CITY L30: claimed 0.559  recomputed 0.559
+  [PASS] jlens period->CITY L30 ctrl: claimed 0.507  recomputed 0.507
+  [PASS] jlens period->CITY L9: claimed 0.871  recomputed 0.871
+  [PASS] jlens relcomp L30 (step 2 pass): claimed 0.752  recomputed 0.752
+  [PASS] step-2 model-wrong n at relcomp: claimed 93  recomputed 93
+  [PASS] step-2 model-wrong set == step-1 set (record ids): claimed True  recomputed True
+  [PASS] jlens on model-wrong relcomp L30: claimed 0.26  recomputed 0.26
+  [PASS] jlens on model-wrong relcomp L18: claimed 0.634  recomputed 0.634
+  [PASS] jlens on model-wrong: max over blocks is L18: claimed 18  recomputed 18
+  [PASS] jlens relcomp L15 (chance region): claimed 0.53  recomputed 0.53
+
+== step 3 (recomputed from step3-records.json.gz)
+  [PASS] combined n: claimed 400  recomputed 400
+  [PASS] base-right n: claimed 382  recomputed 382
+  [PASS] relcomp/30 twin flip: claimed 0.0  recomputed 0.0
+  [PASS] qmark/27 twin flip: claimed 0.005  recomputed 0.005
+  [PASS] final/30 twin flip: claimed 0.935  recomputed 0.935
+  [PASS] final/30 unrelated flip: claimed 0.45  recomputed 0.45
+  [FAIL] max twin flip over prequery/relcomp/qmark cells: claimed (0.05, 'qmark/16')  recomputed (0.047, 'qmark/16')
+  [PASS] relcomp/16 mean twin delta: claimed -0.53  recomputed -0.53
+  [PASS] every record's twin has the same pair_id: claimed True  recomputed True
+
+== step 4 (recomputed from step4-resample.json records)
+  [PASS] combined n: claimed 400  recomputed 400
+  [PASS] jlens relcomp NEW>OLD modified: claimed 0.97  recomputed 0.97
+  [PASS] jlens relcomp NEW>OLD unmodified: claimed 0.045  recomputed 0.045
+  [PASS] jlens qmark NEW>OLD modified: claimed 0.993  recomputed 0.993
+  [PASS] new object absent from original prompt and token count unchanged, all records: claimed True  recomputed True
+  [PASS] distinct replacement words: claimed 21  recomputed 21
+
+== step 5 (consistency of the summary files; the re-fit is in part 2 on ARC)
+  [PASS] LR relcomp L30: claimed 0.8975  recomputed 0.8975
+  [PASS] LR relcomp L30 model-wrong n: claimed 93  recomputed 93
+  [PASS] LR relcomp L30 model-wrong acc: claimed 0.8495  recomputed 0.8495
+  [PASS] LR relcomp L15 model-wrong acc: claimed 0.98  recomputed 0.98
+  [PASS] DiM relcomp L30 (LOPO on combined): claimed 0.62  recomputed 0.62
+  [PASS] breakdown rows at relcomp: claimed 400  recomputed 400
+  [PASS] breakdown LR all (== main run L30): claimed 0.8975  recomputed 0.8975
+  [PASS] breakdown LR AB: claimed 0.87  recomputed 0.87
+  [PASS] breakdown LR BA: claimed 0.925  recomputed 0.925
+  [PASS] breakdown model-wrong ids == step-1/2 ids: claimed True  recomputed True
+  [PASS] breakdown LR on model-wrong: claimed 0.8495  recomputed 0.8495
+
+TOTAL FAILS: 1
